@@ -304,7 +304,7 @@
 		<echo level="verbose">$runSaxon-B: ${runSaxon-B}</echo>
 		<echo level="verbose">$runSaxon-HE: ${runSaxon-HE}</echo>
 		<echo level="verbose">$runAltovaXML: ${runAltovaXML}</echo>
-		<foreach target="-test-dispatcher" param="CurrentFile" inheritall="true" parallel="true">
+		<foreach target="-test-dispatcher" param="CurrentFile" inheritall="true"><!-- Saxon-B unter Parallels/Windows mag parallel="true" nicht -->
 			<fileset refid="xslt-files_tested"/>
 		</foreach>
 	</target>
