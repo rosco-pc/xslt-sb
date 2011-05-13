@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	Copyright (c) 2010-2011 Stefan Krause
+	
+	Permission is hereby granted, free of charge, to any person obtaining
+	a copy of this software and associated documentation files (the
+	"Software"), to deal in the Software without restriction, including
+	without limitation the rights to use, copy, modify, merge, publish,
+	distribute, sublicense, and/or sell copies of the Software, and to
+	permit persons to whom the Software is furnished to do so, subject to
+	the following conditions:
+	
+	The above copyright notice and this permission notice shall be included
+	in all copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+	CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+	SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<!-- 
+	Lizenz (duale Lizenzierung):
+	
+	Dieses build.xml ist unter einer Creative Commons-Lizenz (http://creativecommons.org/licenses/by/3.0/)
+	lizenziert. Die Weiternutzung ist bei Namensnennung erlaubt.
+	
+	Dieses build.xml ist unter der sogenannten Expat License (einer GPL-kompatiblen MIT License) lizensiert. 
+	Es darf – als Ganzes oder auszugweise – unter Beibehaltung der Copyright-Notiz kopiert, verändert, 
+	veröffentlicht und verbreitet werden. Die Copyright-Notiz steht im Quelltext (oben).
+	
+	Homepage: http://www.expedimentum.org/
+
+-->
+<project name="XSLT-SB" default="test" basedir=".">
+	<description>$Revision$, $Date$</description>
+	<description>erzeugt eine Entwicklungsumgebung, testet die XSLT-SB, erzeugt die Dokumentation und erzeugt Packages</description>
+	<description>build.xml und Apache Ant sind für die Benutzung der XSLT-SB nicht notwendig; sie gehören zur Entwicklungsumgebung</description>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- 	Versionsgeschichte: -->
+	<!-- 		2011-05-13/Rev. 141:	 v0.2.1		Stf		zip ergänzt -->
+	<!-- 		2011-04-25/Rev. 141:	 v0.2		Stf		funktionierende Selbstests -->
+	<!-- 		2010-11-20/Rev. 121:	 v0.1		Stf		initiale Version -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     properties     ___________ -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- properties for the build infrastructure -->
+	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
+	<property name="dist.version" value="0.2.0" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
+	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
+	<property name="dist.test-results" location="${dist.main}${file.separator}test-results" description="Zielverzeichnis für die Testergebnisse"/>
+	<property name="dist.tools" location="${dist.main}${file.separator}tools" description="tools-Verzeichnis"/>
+	<property name="dist.temp" location="${dist.tools}${file.separator}trash" description="temporäres Verzeichnis"/>
+	<property name="dist.packages" location="${dist.main}${file.separator}..${file.separator}..${file.separator}packages" description="Zielverzeichnis für alle Packages"/>
+	<property name="dist.current" location="${dist.packages}${file.separator}xslt-sb_${dist.version}.zip" description="Pfad/Name des entstehenden Zips"/>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- die Quell-Dateien sind hier zur Sicherheit einzeln gelistet -->
+	<fileset 
+		id="xslt-files_untested" 
+		dir="${src}">
+		<include name="files.xsl"/>
+		<include name="internals.xsl"/>
+		<include name="internals.logging.xsl"/>
+		<include name="internals.meta.xsl"/>
+		<include name="internals.stylecheck.xsl"/>
+		<include name="internals.testing.xsl"/>
+		<include name="numbers.xsl"/>
+		<include name="pattern+includes.xsl"/>
+		<include name="standard.xsl"/>
+		<include name="strings.xsl"/>
+	</fileset>
+	<!--  -->
+	<fileset 
+		id="xslt-files_tested" 
+		dir="${src}">
+		<include name="files_tests.xsl"/>
+		<include name="internals_tests.xsl"/>
+		<include name="internals.logging_tests.xsl"/>
+		<include name="internals.meta_tests.xsl"/>
+		<include name="internals.stylecheck.xsl"/>
+		<include name="internals.testing_tests.xsl"/>
+		<include name="numbers.xsl"/>
+		<include name="pattern+includes.xsl"/>
+		<include name="standard.xsl"/>
+		<include name="strings_tests.xsl"/>
+	</fileset>
+	<!--  -->
+	<union id="xslt-files">
+		<fileset refid="xslt-files_tested"/>
+		<fileset refid="xslt-files_untested"/>
+	</union>
+	<!--  -->
+	<fileset 
+		id="misc-files" 
+		dir="${src}">
+		<include name="build.xml"/>
+		<include name="README.txt"/>
+		<include name="LIESMICH.txt"/>
+		<include name="tools${file.separator}xslt-sb.xpr"/>
+	</fileset>
+	<!--  -->
+	<property name="build.XSLStyle.custom-css" location="${src}${file.separator}doc${file.separator}expedimentum.css" description="angepasstes CSS für XSLStyle"/>
+	<basename property="build.XSLStyle.custom-css.name" file="${build.XSLStyle.custom-css}" description="der Dateiname wird an XSLStyle zum Einbinden übergeben"/>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- Download-URLs der Tools -->
+	<property name="tools.XSLStyle.URL" value="http://www.cranesoftwrights.com/resources/xslstyle/Crane-xslstyle-20100817-0240z.zip" description="Download-URL für XSLStyle"/>
+	<property name="tools.XSLStyle.path" location="${dist.tools}${file.separator}XSLStyle" description="Pfad zum XSLStyle-Ordner"/>
+	<property name="tools.XSLStyle.stylesheet-path" location="${tools.XSLStyle.path}${file.separator}xslstyle-docbook.xsl" description="Pfad zum XSLStyle-DocBook-Stylesheet"/>
+	<property name="tools.Saxon_6.URL" value="http://sourceforge.net/projects/saxon/files/saxon6/6.5.5/saxon6-5-5.zip" description="Download-URL für Saxon 6"/>
+	<property name="tools.Saxon_6.path" location="${dist.tools}${file.separator}Saxon_6" description="Pfad zum Ordner von Saxon 6"/>
+	<property name="tools.Saxon_B.URL" value="http://sourceforge.net/projects/saxon/files/Saxon-B/9.1.0.8/saxonb9-1-0-8j.zip" description="Download-URL für Saxon-B"/>
+	<property name="tools.Saxon_B.path" location="${dist.tools}${file.separator}Saxon_B" description="Pfad zum Ordner von Saxon-B"/>
+	<property name="tools.Saxon_HE.URL" value="http://sourceforge.net/projects/saxon/files/Saxon-HE/9.3/saxonhe9-3-0-4j.zip" description="Download-URL für Saxon-HE"/>
+	<property name="tools.Saxon_HE.path" location="${dist.tools}${file.separator}Saxon_HE" description="Pfad zum Ordner von Saxon-HE"/>
+	<property name="tools.Ant-Contrib.URL" value="http://sourceforge.net/projects/ant-contrib/files/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip" description="Download-URL für Ant-Contrib"/>
+	<property name="tools.Ant-Contrib.path" location="${dist.tools}${file.separator}ant-contrib" description="Pfad zum Ant-Contrib-Ordner"/>
+	<property name="tools.AltovaXML.URL" value="http://cdn.sw.altova.com/v2011r2sp1b/en/AltovaXMLCmu2011.exe" description="Download-URL für AltovaXML"/>
+	<!-- <property name="tools.AltovaXML.path" location="C:\Program Files (x86)\Altova\AltovaXML2011" description="Pfad zum Ordner von AltovaXML"/>-->
+	<property name="tools.AltovaXML.path" location="C:\Programme\Altova\AltovaXML2010" description="Pfad zum Ordner von AltovaXML"/>
+	<property name="tools.AltovaXML.exe" location="${tools.AltovaXML.path}\AltovaXML.exe" description="Pfad zur EXE von AltovaXML"/>
+	<property name="tools.IntelSOAE.URL" value="http://software.intel.com/en-us/articles/download-intel-soa-expressway-xslt-20-processor/" description="Download-URL für Intel SOA Expressway XSLT 2.0 Processor"/>
+	<property name="tools.IntelSOAE.path" location="${dist.tools}${file.separator}Intel" description="Pfad zum Ordner von Intel SOA Expressway XSLT 2.0 Processor"/>
+	<property name="tools.IntelSOAE.exe" location="${tools.IntelSOAE.path}\soaexslt2.exe" description="Pfad zur EXE von Intel SOA Expressway XSLT 2.0 Processor"/>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- some other stuff -->
+	<property name="build.Saxon_6.classpath" location="${tools.Saxon_6.path}${file.separator}saxon.jar" description="Pfad zum Saxon-6-JAR"/>
+	<property name="build.Saxon_B.classpath" location="${tools.Saxon_B.path}${file.separator}saxon9.jar" description="Pfad zum Saxon-B-JAR"/>
+	<property name="build.Saxon_HE.classpath" location="${tools.Saxon_HE.path}${file.separator}saxon9he.jar" description="Pfad zum Saxon-HE-JAR"/>
+	<!--  -->
+	<property name="build.ant-contrib.classpath" location="${tools.Ant-Contrib.path}${file.separator}ant-contrib-1.0b3.jar" description="Pfad zum Ant-Contrib-JAR"/>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${build.ant-contrib.classpath}"/>
+		</classpath>
+	</taskdef>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     Erstellen der Doku     ___________ -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="doc" depends="" description="erstellt die HTML-Dokumentation">
+			<!-- die Dateien sind hier zur Sicherheit einzeln gelistet -->
+		<copy file="${build.XSLStyle.custom-css}" todir="${dist.doc}" failonerror="true"/>
+		<xslt destdir="${dist.doc}" style="${tools.XSLStyle.stylesheet-path}" extension=".html" useimplicitfileset="false" force="true">
+			<resources refid="xslt-files"/>
+			<param name="xslstyle-external-css" expression="${build.XSLStyle.custom-css.name}"/>
+			<!-- getestet mit Ant 1.8.2 -->
+			<!-- es gibt hier verschiedenen Probleme:
+				- der Ant-XSLT-Path ohne classpath stolpert über die Processing Instruction im XSLTStyle-Stylesheet
+				- Saxon 9.3 HE produziert leere Ausgabedokumente
+				Saxon 6 war damit das funktionierende Fallback
+			-->
+			<classpath location="${build.Saxon_6.classpath}" />
+		</xslt>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     Erstellen des Tools-Verzeichnisses     ___________ -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="get_tools" depends="-make_dist.temp, get_xslstyle, get_saxon-6, get_saxon-b, get_saxon-he, get_ant-contrib" description="Download von XSLStyle, Saxon, AltovaXML usw. und Ablage im tools-Verzeichnis">
+		<!-- Aufräumen -->
+		<antcall target="-delete_dist.temp"/>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="-make_dist.temp" depends="">
+		<mkdir dir="${dist.temp}"/>
+	</target>
+	<!--  -->
+	<target name="-delete_dist.temp" depends="">
+		<delete dir="${dist.temp}"/>
+	</target>
+	<!--  -->
+	<target name="get_xslstyle" depends="" description="Download der XSLStyle-Stylesheets und Auspacken">
+		<get src="${tools.XSLStyle.URL}" dest="${dist.temp}/xslstyle.zip"/>
+		<unzip src="${dist.temp}/xslstyle.zip" dest="${tools.XSLStyle.path}">
+			<cutdirsmapper dirs="1"/>
+		</unzip>
+	</target>
+	<!--  -->
+	<target name="get_saxon-6" depends="" description="Download von Saxon 6 und Auspacken">
+		<get src="${tools.Saxon_6.URL}" dest="${dist.temp}/saxon_6.zip"/>
+		<unzip src="${dist.temp}/saxon_6.zip" dest="${tools.Saxon_6.path}"/>
+	</target>
+	<!--  -->
+	<target name="get_saxon-b" depends="" description="Download von Saxon-B und Auspacken">
+		<get src="${tools.Saxon_B.URL}" dest="${dist.temp}/saxon_b.zip"/>
+		<unzip src="${dist.temp}/saxon_b.zip" dest="${tools.Saxon_B.path}"/>
+	</target>
+	<!--  -->
+	<target name="get_saxon-he" depends="" description="Download von Saxon-HE und Auspacken">
+		<get src="${tools.Saxon_HE.URL}" dest="${dist.temp}/saxon_he.zip"/>
+		<unzip src="${dist.temp}/saxon_he.zip" dest="${tools.Saxon_HE.path}">
+			<cutdirsmapper dirs="1"/>
+		</unzip>
+	</target>
+	<!--  -->
+	<target name="get_ant-contrib" depends="" description="Download von ant-contrib und Auspacken">
+		<get src="${tools.Ant-Contrib.URL}" dest="${dist.temp}/ant-contrib.zip"/>
+		<unzip src="${dist.temp}/ant-contrib.zip" dest="${tools.Ant-Contrib.path}">
+			<cutdirsmapper dirs="1"/>
+		</unzip>
+	</target>
+	<!--  -->
+	<target name="get_altovaxml" depends="" description="Download von AltovaXML und Auspacken">
+		<get src="http://cdn.sw.altova.com/v2011r2sp1b/en/AltovaXMLCmu2011.exe" dest="${dist.tools}/altova.exe"/>
+		<echo level="warn">--------------------------------------------------------------------</echo>
+		<echo level="warn">Bitte ${dist.temp}/altova.exe</echo>
+		<echo level="warn">starten und die Setup-Prozedur absolvieren</echo>
+		<echo level="warn">Bitte ggfs. die Parameter "tools.AltovaXML.path"</echo>
+		<echo level="warn">(aktuell "${tools.AltovaXML.path}")</echo>
+		<echo level="warn">bzw. "tools.AltovaXML.exe"</echo>
+		<echo level="warn">(aktuell "${tools.AltovaXML.exe}")</echo>
+		<echo level="warn">anpassen.</echo>
+		<echo level="warn">--------------------------------------------------------------------</echo>
+	</target>
+	<!--  -->
+	<target name="get_intelsoae" depends="" description="Download von Intel SOA Expressway XSLT 2.0 Processor">
+		<echo level="warn">--------------------------------------------------------------------</echo>
+		<echo level="warn">Bitte Intel SOA Expressway XSLT 2.0 Processor manuell von </echo>
+		<echo level="warn">${tools.IntelSOAE.URL}</echo>
+		<echo level="warn">herunterladen und unter</echo>
+		<echo level="warn">${tools.IntelSOAE.path}</echo>
+		<echo level="warn">installieren.</echo>
+		<echo level="warn">Bitte ggfs. die Parameter "tools.IntelSOAE.path"</echo>
+		<echo level="warn">(aktuell "${tools.IntelSOAE.path}") bzw.</echo>
+		<echo level="warn">"tools.IntelSOAE.exe"</echo>
+		<echo level="warn">(aktuell "${tools.IntelSOAE.exe}")</echo>
+		<echo level="warn">anpassen.</echo>
+		<echo level="warn">--------------------------------------------------------------------</echo>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     Selbstest der Stylesheets     ___________ -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="test_saxon-b" description="Selbstest mit Saxon-B">
+		<property name="runSaxon-B" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test_saxon-he" description="Selbstest mit Saxon-HE">
+		<property name="runSaxon-HE" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test_altovaxml" description="Selbstest mit AltovaXML">
+		<property name="runAltovaXML" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test_intelsoae" description="Selbstest mit Intel SOAE">
+		<property name="runIntelSOAE" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test" description="Basis-Selbsttests">
+		<property name="runSaxon-HE" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test_standard" description="Standard-Selbsttests (mit ein paar aktuellen XSLT-Prozessoren)">
+		<property name="runSaxon-HE" value="true"/>
+		<property name="runAltovaXML" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test_all" description="Selbstest mit allen XSLT-Prozessoren">
+		<property name="runSaxon-B" value="true"/>
+		<property name="runSaxon-HE" value="true"/>
+		<property name="runAltovaXML" value="true"/>
+		<property name="runIntelSOAE" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="-test">
+		<mkdir dir="${dist.test-results}"/>
+		<!-- ermitteln, welche Prozessoren benutzt werden -->
+		<echo level="verbose">$runSaxon-B: ${runSaxon-B}</echo>
+		<echo level="verbose">$runSaxon-HE: ${runSaxon-HE}</echo>
+		<echo level="verbose">$runAltovaXML: ${runAltovaXML}</echo>
+		<foreach target="-test-dispatcher" param="CurrentFile" inheritall="true" parallel="true">
+			<fileset refid="xslt-files_tested"/>
+		</foreach>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="-test-dispatcher">
+		<!-- verteilt die Tests auf verschiedene XSLT-Prozessoren -->
+		<antcall target="-testOneFileWithSaxon-B"/>
+		<antcall target="-testOneFileWithSaxon-HE"/>
+		<antcall target="-testOneFileWithAltovaXML"/>
+		<!-- TODO: Intel crasht, bevor man mit dem Debuggen beginnen kann ... (2011-05-11, Stf) -->
+		<!--<antcall target="-testOneFileWithIntelSOAE"/>-->
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="-testOneFileWithSaxon-HE" depends="" if="${runSaxon-HE}">
+		<echo level="verbose" message="$CurrentFile is ${CurrentFile}" />
+		<basename property="CurrentFileName" file="${CurrentFile}" suffix=".xsl"/>
+		<echo level="verbose" message="$CurrentFileName is ${CurrentFileName}" />
+		<java fork="true" failonerror="true" classname="net.sf.saxon.Transform">
+			<classpath location="${build.Saxon_HE.classpath}"/>
+			<arg value="-s:${CurrentFile}"/>
+			<arg value="-xsl:${CurrentFile}"/>
+			<arg value="-o:${dist.test-results}${file.separator}saxon-he${file.separator}${CurrentFileName}.html"/>
+			<arg value="-im:internals.self-test"/>
+			<arg value="internals.logging-level=DEBUG"/>
+			<arg value="internals.logging.output-target=both"/>
+			<arg value="internals.logging.write-to-file-style=html"/>
+		</java>
+	</target>
+	<!--  -->
+	<target name="-testOneFileWithSaxon-B" depends="" if="${runSaxon-B}">
+		<echo level="verbose" message="$CurrentFile is ${CurrentFile}" />
+		<basename property="CurrentFileName" file="${CurrentFile}" suffix=".xsl"/>
+		<echo level="verbose" message="$CurrentFileName is ${CurrentFileName}" />
+		<java fork="true" failonerror="true" classname="net.sf.saxon.Transform">
+			<classpath location="${build.Saxon_B.classpath}"/>
+			<arg value="-s:${CurrentFile}"/>
+			<arg value="-xsl:${CurrentFile}"/>
+			<arg value="-o:${dist.test-results}${file.separator}saxon-b${file.separator}${CurrentFileName}.html"/>
+			<arg value="-im:internals.self-test"/>
+			<arg value="internals.logging-level=DEBUG"/>
+			<arg value="internals.logging.output-target=both"/>
+			<arg value="internals.logging.write-to-file-style=html"/>
+		</java>
+	</target>
+	<!--  -->
+	<target name="-testOneFileWithAltovaXML" depends="" if="${runAltovaXML}">
+		<echo level="verbose" message="$CurrentFile is ${CurrentFile}" />
+		<basename property="CurrentFileName" file="${CurrentFile}" suffix=".xsl"/>
+		<echo level="verbose" message="$CurrentFileName is ${CurrentFileName}" />
+		<exec executable="${tools.AltovaXML.exe}" failifexecutionfails="true" errorproperty="AltovaError">
+			<arg line="/xslt2 ${CurrentFile} /in ${CurrentFile} /out ${dist.test-results}${file.separator}altovaxml${file.separator}${CurrentFileName}.html /m internals.self-test -param internals.logging-level=&quot;'DEBUG'&quot; -param internals.logging.output-target=&quot;'both'&quot; -param internals.logging.write-to-file-style=&quot;'html'&quot;"/>
+		</exec>
+		<echo level="debug">[${AltovaError}/${AltovaFail}]</echo>
+		<fail message="Fehler bei der Verarbeitung durch XSLT-Prozessor: ${AltovaError}">
+			<condition>
+				<matches string="${AltovaError}" pattern=".+"/>
+			</condition>
+		</fail>
+	</target>
+	<!--  -->
+	<target name="-testOneFileWithIntelSOAE" depends="" if="${runIntelSOAE}">
+		<echo level="verbose" message="$CurrentFile is ${CurrentFile}" />
+		<basename property="CurrentFileName" file="${CurrentFile}" suffix=".xsl"/>
+		<echo level="verbose" message="$CurrentFileName is ${CurrentFileName}" />
+		<exec executable="${tools.IntelSOAE.exe}" failifexecutionfails="true" >
+			<!--<arg line="${CurrentFile} ${CurrentFile} ${dist.test-results}${file.separator}intel${file.separator}${CurrentFileName}.html internals.logging-level=DEBUG internals.logging.output-target=both internals.logging.write-to-file-style=html"/>-->
+		</exec>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     zippen der Packages     ___________ -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="zip" description="erstellt das Package-Zip">
+		<mkdir dir="${dist.packages}"/>
+		<zip destfile="${dist.current}">
+			<fileset refid="misc-files"/>
+			<union refid="xslt-files"/>
+			<zipfileset dir="${dist.doc}" includes="**" prefix="doc"/>
+		</zip>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+</project>
