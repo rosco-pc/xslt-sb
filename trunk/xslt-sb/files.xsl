@@ -71,8 +71,8 @@ habe ich sie hier eingefügt.-->
 <!ENTITY URL "((&absoluteURL;|&relativeURL;)(#&fragment;)?)">
 
 <!-- __________     andere Entities für Verwendung im Stylesheet     __________ -->
-<!ENTITY XSL-Base-Directory "http:/www.expedimentum.org/example/xslt/XSLT-SB">
-<!ENTITY doc-Base-Directory "http:/www.expedimentum.org/example/xslt/XSLT-SB/doc">
+<!ENTITY XSL-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb">
+<!ENTITY doc-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb/doc">
 ]>
 <xsl:stylesheet
 	version="2.0"

@@ -24,8 +24,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 <!ENTITY cr "&#x0A;">
 <!ENTITY crt "<xsl:text xmlns:xsl='http://www.w3.org/1999/XSL/Transform' disable-output-escaping='yes'>&cr;</xsl:text>">
 <!ENTITY TabString "&#160;&#160;&#160;&#160;&#160;&#160;">
-<!ENTITY XSL-Base-Directory "http:/www.expedimentum.org/example/xslt/XSLT-SB">
-<!ENTITY doc-Base-Directory "http:/www.expedimentum.org/example/xslt/XSLT-SB/doc">
+<!ENTITY XSL-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb">
+<!ENTITY doc-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb/doc">
 ]>
 <xsl:stylesheet
 	version="2.0"
