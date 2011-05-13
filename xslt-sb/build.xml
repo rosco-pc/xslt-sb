@@ -54,7 +54,7 @@
 	<!--  -->
 	<!-- properties for the build infrastructure -->
 	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
-	<property name="dist.version" value="0.2.0" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.version" value="0.2.7" description="Versionsnummer des aktuellen Builds"/>
 	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
 	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
 	<property name="dist.test-results" location="${dist.main}${file.separator}test-results" description="Zielverzeichnis für die Testergebnisse"/>
