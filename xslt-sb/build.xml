@@ -342,6 +342,7 @@
 		<echo level="verbose" message="$CurrentFile is ${CurrentFile}" />
 		<basename property="CurrentFileName" file="${CurrentFile}" suffix=".xsl"/>
 		<echo level="verbose" message="$CurrentFileName is ${CurrentFileName}" />
+		<mkdir dir="${dist.test-results}${file.separator}saxon-b"/><!-- saxon-b erzeugt fehlende Verzeichnisse nicht selbst … -->
 		<java fork="true" failonerror="true" classname="net.sf.saxon.Transform">
 			<classpath location="${build.Saxon_B.classpath}"/>
 			<arg value="-s:${CurrentFile}"/>

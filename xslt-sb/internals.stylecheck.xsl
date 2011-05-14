@@ -361,9 +361,18 @@
 	<!-- __________     intern:internals.Stylecheck.MissingTypes     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet, ob alle Variablen und Parameter getypt sind.</para>
+		<para>Dieses Template testet, ob alle Variablen, Parameter und Funktionen getypt sind.</para>
 		<para>solved-Token: "<code>MissingTypes</code>"</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.8</revnumber>
+				<date>2011-05-14</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Typung von Funktionen hinzugefügt</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.63</revnumber>
 				<date>2009-11-22</date>
@@ -377,11 +386,11 @@
 	</doc:template>
 	<xsl:template name="intern:internals.Stylecheck.MissingTypes">
 		<xsl:param name="Dokument" as="document-node()" required="yes"/>
-		<xsl:for-each select="$Dokument//( xsl:param | xsl:variable )[not(@as)]">
+		<xsl:for-each select="$Dokument//( xsl:param | xsl:variable | xsl:function)[not(@as)]">
 			<xsl:if test="not(xsb:listed(@intern:solved, 'MissingTypes'))">
 				<xsl:call-template name="xsb:internals.Error">
 					<xsl:with-param name="caller">internals.Stylecheck.MissingTypes</xsl:with-param>
-					<xsl:with-param name="message">Ungetypte Variable oder ungetypter Parameter: <xsl:sequence select="intern:render-context-and-parent-as-string(.)"/></xsl:with-param>
+					<xsl:with-param name="message">Ungetypte Variable, ungetypter Parameter oder ungetypte Funktion: <xsl:sequence select="intern:render-context-and-parent-as-string(.)"/></xsl:with-param>
 					<xsl:with-param name="level">INFO</xsl:with-param>
 				</xsl:call-template>
 			</xsl:if>

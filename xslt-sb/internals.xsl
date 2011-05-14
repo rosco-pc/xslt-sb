@@ -1292,7 +1292,7 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:java-available" use-when="function-available('java-uri:new')" xmlns:java-uri="java:java.net.URI" intern:solved="MissingTests">
+	<xsl:function name="xsb:java-available" use-when="function-available('java-uri:new')" xmlns:java-uri="java:java.net.URI" intern:solved="MissingTests" as="xs:boolean">
 		<xsl:sequence select="true()"/>
 	</xsl:function>
 	<doc:function>
@@ -1309,7 +1309,7 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:java-available" use-when="not(function-available('java-uri:new') )" xmlns:java-uri="java:java.net.URI" intern:solved="MissingTests">
+	<xsl:function name="xsb:java-available" use-when="not(function-available('java-uri:new') )" xmlns:java-uri="java:java.net.URI" intern:solved="MissingTests" as="xs:boolean">
 		<xsl:sequence select="false()"/>
 	</xsl:function>
 	<!--  -->
