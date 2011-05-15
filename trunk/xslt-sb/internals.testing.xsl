@@ -46,15 +46,6 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<doc:variable ignore-ns="yes">
-		<para>Hilfsvariable, da dieser Wert häufig benötigt wird.</para>
-	</doc:variable>
-	<xsl:variable name="_internals.testing.current-vendor-hash"
-		as="xs:string" 
-		select="xsb:current-vendor-hash()"/>
-	<!--  -->
-	<!--  -->
-	<!--  -->
 	<doc:doc filename="internals.testing.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
 		<doc:title>Interne Funktionen/Testen von Stylesheets</doc:title>
 		<para>Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von Funktionen und Templates in XSLT-Stylesheets.</para>
@@ -130,6 +121,15 @@
 			</revision>
 		</revhistory>
 	</doc:doc>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<doc:variable ignore-ns="yes">
+		<para>Hilfsvariable, da dieser Wert häufig benötigt wird.</para>
+	</doc:variable>
+	<xsl:variable name="_internals.testing.current-vendor-hash"
+		as="xs:string" 
+		select="xsb:current-vendor-hash()"/>
 	<!--  -->
 	<!--  -->
 	<!-- __________     xsb:internals.test.Function     __________ -->
@@ -414,7 +414,7 @@
 	<doc:function>
 		<doc:param name="test-node"><para>zu testender test-node</para></doc:param>
 		<doc:param name="function-name"><para>qualifizierter Name der Funktion, für die <code>$test-node</code> das erwartete Testergebnis beinhalten soll.</para></doc:param>
-		<para>Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funktionen wie <function>xsb:internals.test.function.withTestItem.BooleanResult</function>.</para>
+		<para xml:id="validate-test-node">Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funktionen wie <function>xsb:internals.test.function.withTestItem.BooleanResult</function>.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.82</revnumber>

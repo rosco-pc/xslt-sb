@@ -11,6 +11,61 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="name">
+                                    <String xml:space="preserve">Dokumentation_erstellen</String>
+                                </field>
+                                <field name="type">
+                                    <String xml:space="preserve">XML</String>
+                                </field>
+                                <field name="url">
+                                    <String xml:space="preserve">../files_tests.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String xml:space="preserve">Selbstest_mit_externen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String xml:space="preserve">XML</String>
+                                </field>
+                                <field name="url">
+                                    <String xml:space="preserve">../files.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String xml:space="preserve">Selbstest_mit_externen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String xml:space="preserve">XML</String>
+                                </field>
+                                <field name="url">
+                                    <String xml:space="preserve">../internals.logging.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String xml:space="preserve">Dokumentation_erstellen</String>
+                                </field>
+                                <field name="type">
+                                    <String xml:space="preserve">XML</String>
+                                </field>
+                                <field name="url">
+                                    <String xml:space="preserve">../internals_tests.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String xml:space="preserve">Dokumentation_erstellen</String>
+                                </field>
+                                <field name="type">
+                                    <String xml:space="preserve">XML</String>
+                                </field>
+                                <field name="url">
+                                    <String xml:space="preserve">../internals.meta.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
                                     <String xml:space="preserve">Selbstest_mit_externen_Tests</String>
                                 </field>
                                 <field name="type">
@@ -44,18 +99,18 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String xml:space="preserve">Selbstest_mit_internen_Tests</String>
+                                    <String xml:space="preserve">Dokumentation_erstellen</String>
                                 </field>
                                 <field name="type">
                                     <String xml:space="preserve">XML</String>
                                 </field>
                                 <field name="url">
-                                    <String xml:space="preserve">../pattern+includes.xsl</String>
+                                    <String xml:space="preserve">../strings_tests.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String xml:space="preserve">Selbstest_mit_internen_Tests</String>
+                                    <String xml:space="preserve">Dokumentation_erstellen</String>
                                 </field>
                                 <field name="type">
                                     <String xml:space="preserve">XML</String>
@@ -66,13 +121,13 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String xml:space="preserve">Selbstest_mit_externen_Tests</String>
+                                    <String xml:space="preserve">Selbstest_mit_internen_Tests</String>
                                 </field>
                                 <field name="type">
                                     <String xml:space="preserve">XML</String>
                                 </field>
                                 <field name="url">
-                                    <String xml:space="preserve">../internals.testing.xsl</String>
+                                    <String xml:space="preserve">../pattern+includes.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -94,29 +149,18 @@
                                     <String xml:space="preserve">XML</String>
                                 </field>
                                 <field name="url">
-                                    <String xml:space="preserve">../internals.meta.xsl</String>
+                                    <String xml:space="preserve">../internals.testing.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String xml:space="preserve">Selbstest_mit_externen_Tests</String>
+                                    <String xml:space="preserve">Dokumentation_erstellen</String>
                                 </field>
                                 <field name="type">
                                     <String xml:space="preserve">XML</String>
                                 </field>
                                 <field name="url">
-                                    <String xml:space="preserve">../internals.logging.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String xml:space="preserve">Selbstest_mit_externen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String xml:space="preserve">XML</String>
-                                </field>
-                                <field name="url">
-                                    <String xml:space="preserve">../files.xsl</String>
+                                    <String xml:space="preserve">../internals.testing_tests.xsl</String>
                                 </field>
                             </scenarioAssociation>
                         </scenarioAssociation-array>
@@ -168,7 +212,7 @@
                                     <Boolean xml:space="preserve">true</Boolean>
                                 </field>
                                 <field name="outputFile">
-                                    <File xml:space="preserve">/Users/stf/Documents/trash/Vezeichnisstruktur/trunk/XSLT-SB/doc/${cfn}.html</File>
+                                    <File xml:space="preserve">doc/${cfn}.html</File>
                                 </field>
                                 <field name="openOtherLocationInBrowser">
                                     <Boolean xml:space="preserve">false</Boolean>

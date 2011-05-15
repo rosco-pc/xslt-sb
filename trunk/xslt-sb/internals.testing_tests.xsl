@@ -140,7 +140,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:template>
-		<para>Dieses Template führt die lokalen Selbst-Tests aus.</para>
+		<para xml:id="internals.testing.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.85</revnumber>

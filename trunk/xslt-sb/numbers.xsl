@@ -132,7 +132,7 @@
 	<!-- __________     xsb:is-roman-numeral     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>Diese Funktion überprüft, ob der angegebene String eine römische Zahl ist.</para>
+		<para xml:id="is-roman-numeral">Diese Funktion überprüft, ob der angegebene String eine römische Zahl ist.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.29</revnumber>
@@ -155,7 +155,7 @@
 	<!-- __________     xsb:roman-numeral-to-integer     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>römische Zahl (String)</para></doc:param>
-		<para>Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der eingegebene Wert keine römische Zahl oder leer, ist das Ergebnis 0.
+		<para xml:id="roman-numeral-to-integer">Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der eingegebene Wert keine römische Zahl oder leer, ist das Ergebnis 0.
 			Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle.</para>
 		<revhistory>
 			<revision>
@@ -200,7 +200,7 @@
 	<!-- __________     xsb:roman-number-char-to-integer     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>römische Ziffer (String)</para></doc:param>
-		<para>Diese Funktion wandelt eine römische Ziffer (eines der Zeichen I, V, X, L, C, D, M) in einen Integer-Wert um. Ist das eingegebene Zeichen 
+		<para xml:id="roman-number-char-to-integer">Diese Funktion wandelt eine römische Ziffer (eines der Zeichen I, V, X, L, C, D, M) in einen Integer-Wert um. Ist das eingegebene Zeichen 
 			keine römische Ziffer oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle.</para>
 		<revhistory>
 			<revision>
@@ -235,7 +235,7 @@
 		<doc:param name="input"><para>zu castender String</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>(Boolean) Erzeugt eine Fehlermeldung, 
 			wenn der eingegebenen String keine gültige <code>xs:decimal</code>-Zahl ist.</para></doc:param>
-		<para>Diese Funktion erzwingt die Umwandlung eines Strings in <code>xs:decimal</code>.</para>
+		<para xml:id="force-cast-to-decimal">Diese Funktion erzwingt die Umwandlung eines Strings in <code>xs:decimal</code>.</para>
 		<para>Ein gültiger String wird mit <function>xs:decimal()</function> umgewandelt. 
 			Die Eingabe einer Leersequenz, eines Leerstring oder eines ungültigen Strings ergibt 0.</para>
 		<revhistory>
@@ -274,7 +274,7 @@
 	<!--  -->
 	<doc:function>
 		<doc:param name="input"><para>zu castender String</para></doc:param>
-		<para>Shortcut für <function>xsb:force-cast-to-decimal($input, true() )</function></para>
+		<para xml:id="force-cast-to-decimal_shortcut">Shortcut für <function>xsb:force-cast-to-decimal($input, true() )</function></para>
 		<revhistory>
 			<revision>
 				<revnumber>0.114</revnumber>
@@ -298,7 +298,7 @@
 		<doc:param name="input"><para>zu castender String</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>(Boolean) Erzeugt eine Fehlermeldung, 
 			wenn der eingegebenen String keine gültige <code>xs:integer</code>-Zahl ist.</para></doc:param>
-		<para>Diese Funktion erzwingt die Umwandlung eines Strings in <code>xs:integer</code>.</para>
+		<para xml:id="force-cast-to-integer">Diese Funktion erzwingt die Umwandlung eines Strings in <code>xs:integer</code>.</para>
 		<para>Ein gültiger String wird mit <function>xsb:force-cast-to-integer()</function> umgewandelt. 
 			Die Eingabe einer Leersequenz, eines Leerstring oder eines ungültigen Strings ergibt 0.</para>
 		<revhistory>
@@ -323,7 +323,7 @@
 	<!--  -->
 	<doc:function>
 		<doc:param name="input"><para>zu castender String</para></doc:param>
-		<para>Shortcut für <function>xsb:force-cast-to-integer($input, true() )</function></para>
+		<para xml:id="force-cast-to-integer_shortcut">Shortcut für <function>xsb:force-cast-to-integer($input, true() )</function></para>
 		<revhistory>
 			<revision>
 				<revnumber>0.114</revnumber>
@@ -372,7 +372,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:template>
-		<para>Dieses Template führt die lokalen Selbst-Tests aus.</para>
+		<para xml:id="numbers.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.50</revnumber>

@@ -121,7 +121,7 @@
 	<!--  -->
 	<!-- __________     xsb:internals.Error     __________ -->
 	<doc:template>
-		<para>Dieses Template überschreibt <link xlink:href="internals.html#internals.Error">das gleichnamige Template</link> aus <code>internals.xsl</code>.</para>
+		<para xml:id="internals.Error">Dieses Template überschreibt <link xlink:href="internals.html#internals.Error">das gleichnamige Template</link> aus <code>internals.xsl</code>.</para>
 		<para>Es gibt zusätzlich den aktuellen Mode aus.</para>
 		<para>Dazu bedient es sich des Templates <function>xsb:mode-name</function>, wobei die <link linkend="mode-name">dort genannten Einschränkungen</link> hier auch gelten.</para>
 		<revhistory>
@@ -320,7 +320,7 @@
 		<xsl:call-template name="xsb:internals.MakeFooter"/>
 	</xsl:template>
 	<doc:template>
-		<para>Dieses Template führt die lokalen Selbst-Tests aus.</para>
+		<para xml:id="pattern-includes.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.116</revnumber>

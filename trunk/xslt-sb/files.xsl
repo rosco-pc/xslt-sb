@@ -210,7 +210,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:is-absolute-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL absolut ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="is-absolute-url">Diese Funktion überprüft, ob die angegebene URL absolut ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
@@ -239,7 +239,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:is-relative-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL relativ ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="is-relative-url">Diese Funktion überprüft, ob die angegebene URL relativ ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>true()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
@@ -268,7 +268,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:is-network-server-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL ausschließlich einen Netzwerk-Server referenziert, d.h. keinen lokalen Teil hat. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="is-network-server-url">Diese Funktion überprüft, ob die angegebene URL ausschließlich einen Netzwerk-Server referenziert, d.h. keinen lokalen Teil hat. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
@@ -298,7 +298,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:url-has-authority()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL einen Authority-Teil hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
+		<para xml:id="url-has-authority">Diese Funktion überprüft, ob die angegebene URL einen Authority-Teil hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
 		<revhistory>
@@ -325,7 +325,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:is-path-only-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL ein Pfad ist, d.h. es wird durch die URL keine Datei referenziert. 
+		<para xml:id="is-path-only-url">Diese Funktion überprüft, ob die angegebene URL ein Pfad ist, d.h. es wird durch die URL keine Datei referenziert. 
 			Kriterium ist, ob die URL entweder (a) einen Netzwerk-Server referenziert oder (b) mit "/", "/." oder "/.." endet oder (c) "." oder ".." ist. 
 			Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
@@ -360,7 +360,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:is-shortcut-only-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL nur aus Pfad-Shortcuts ("/", ".", "..") besteht. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="is-shortcut-only-url">Diese Funktion überprüft, ob die angegebene URL nur aus Pfad-Shortcuts ("/", ".", "..") besteht. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
@@ -390,7 +390,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:is-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob der eingegebene String eine gültige URL gemäß <link xlink:href="http://tools.ietf.org/html/rfc1808">RFC 1808</link> ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="is-url">Diese Funktion überprüft, ob der eingegebene String eine gültige URL gemäß <link xlink:href="http://tools.ietf.org/html/rfc1808">RFC 1808</link> ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>true()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
@@ -438,7 +438,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:url-has-query()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL einen Query-Teil hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
+		<para xml:id="url-has-query">Diese Funktion überprüft, ob die angegebene URL einen Query-Teil hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
 		<revhistory>
@@ -465,7 +465,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:query-from-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion gibt den Query-Teil von einer URL zurück.</para>
+		<para xml:id="query-from-url">Diese Funktion gibt den Query-Teil von einer URL zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
 		<revhistory>
@@ -499,7 +499,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:url-has-fragment()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL einen Fragment-Teil (eine Referenz auf einen Dokumenten-Teil nach einem Hash-Zeichen <code>#</code>) hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
+		<para xml:id="url-has-fragment">Diese Funktion überprüft, ob die angegebene URL einen Fragment-Teil (eine Referenz auf einen Dokumenten-Teil nach einem Hash-Zeichen <code>#</code>) hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
 		<revhistory>
@@ -526,7 +526,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:fragment-from-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion gibt den Fragment-Teil von einer URL zurück.</para>
+		<para xml:id="fragment-from-url">Diese Funktion gibt den Fragment-Teil von einer URL zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
 		<revhistory>
@@ -560,7 +560,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:scheme-from-url()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion gibt den scheme-Teil von einer absoluten URL zurück.</para>
+		<para xml:id="scheme-from-url">Diese Funktion gibt den scheme-Teil von einer absoluten URL zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
 		<revhistory>
@@ -590,7 +590,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:remove-query-and-fragment-from-url     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion entfernt Query- und Fragment-Teil von einer URL.</para>
+		<para xml:id="remove-query-and-fragment-from-url">Diese Funktion entfernt Query- und Fragment-Teil von einer URL.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer Leersequenz gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
@@ -627,7 +627,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:fileName-and-fileExtention-from-url     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion gibt Dateinamen und Dateierweiterung aus einer URL zurück.</para>
+		<para xml:id="fileName-and-fileExtention-from-url">Diese Funktion gibt Dateinamen und Dateierweiterung aus einer URL zurück.</para>
 		<para>Die Eingabe einer Server-URL oder eines Pfades gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
@@ -666,7 +666,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:fileExtention-from-url     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion ermittelt eine eventuelle Dateierweiterung aus einer URL.</para>
+		<para xml:id="fileExtention-from-url">Diese Funktion ermittelt eine eventuelle Dateierweiterung aus einer URL.</para>
 		<para>Da die Interpretation von Dateinamenserweiterungen sehr DOS/Windows-spezifisch ist, wird deren Interpretation nachvollzogen. Beispielsweise ist ".txt" (nur Erweiterung "txt") ein gültiger Dateiname für eine Textdatei.</para>
 		<para>Die Eingabe einer Server-URL oder eines Pfades gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
@@ -703,7 +703,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:url-has-fileExtention()     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene URL einen Dateinamen beinhaltet, und ob dieser Dateiname eine Dateierweiterung hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
+		<para xml:id="url-has-fileExtention">Diese Funktion überprüft, ob die angegebene URL einen Dateinamen beinhaltet, und ob dieser Dateiname eine Dateierweiterung hat. Das Ergebnis ist ein Wahrheitswert (<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Da die Interpretation von Dateinamenserweiterungen sehr DOS/Windows-spezifisch ist, wird deren Interpretation nachvollzogen. Beispielsweise ist ".txt" (nur Erweiterung "txt") ein gültiger Dateiname für eine Textdatei.</para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt <code>false()</code> zurück.</para>
@@ -737,7 +737,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:fileName-from-url     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion ermittelt einen Dateinamen ohne eventuelle Dateierweiterung aus einer URL.</para>
+		<para xml:id="fileName-from-url">Diese Funktion ermittelt einen Dateinamen ohne eventuelle Dateierweiterung aus einer URL.</para>
 		<para>Die Eingabe einer Server-URL oder eines Pfades gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines Dateinamens, der nur aus Punkt+Dateierweiterung besteht (z.B. ".txt"),  gibt einen Leerstring zurück.</para>
@@ -775,7 +775,7 @@ habe ich sie hier eingefügt.-->
 	<!-- __________     xsb:path-from-url     __________ -->
 	<doc:function>
 		<doc:param name="URL"><para>String, der als URL interpretiert wird.</para></doc:param>
-		<para>Diese Funktion ermittelt einen Pfad ohne eventuelle Dateinamen und Dateierweiterung aus einer URL.</para>
+		<para xml:id="path-from-url">Diese Funktion ermittelt einen Pfad ohne eventuelle Dateinamen und Dateierweiterung aus einer URL.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
 		<revhistory>
@@ -803,10 +803,10 @@ habe ich sie hier eingefügt.-->
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!-- __________     misc:file-exist()     __________ -->
+	<!-- __________     misc:file-exists()     __________ -->
 	<doc:function>
 		<doc:param name="absoluteURL"><para>Absoluter Pfad zur zu überprüfenden Datei.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="file-exists">Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Es werden nur lokale Dateien mit absoluten URLs getestet. Dies impliziert, dass auch keine URLs mit einer authority 
 			bearbeitet werden können (hier hält sich die Funktion an die Vorgaben von Java), d.h. bei absoluten URLs, die nicht mit dem 
@@ -869,7 +869,7 @@ habe ich sie hier eingefügt.-->
 	<doc:function>
 		<doc:param name="relativeURL"><para>relativer Pfad zur zu überprüfenden Datei.</para></doc:param>
 		<doc:param name="baseURL"><para>Basis für den relativen Pfad.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="file-exists_relative">Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Die relative URL wird gegenüber der Basis aufgelöst. Es werden nur lokale Dateien getestet, d.h. beginnt die Basis nicht mit dem 
 			Protokoll <code>file:</code> oder verweist auf eine Ressource im Internet (= hat einen authority-Teil), 
@@ -931,7 +931,7 @@ habe ich sie hier eingefügt.-->
 	<!--  -->
 	<doc:function>
 		<doc:param name="absoluteURL"><para>Absoluter Pfad zur zu überprüfenden Datei.</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="file-exists_java">Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para>Es werden nur lokale Dateien mit absoluten URLs getestet.</para>
 		<para><emphasis role="bold">Achtung!</emphasis> Diese Funktion erfordert bei Ausführung Java.</para>
@@ -954,7 +954,7 @@ habe ich sie hier eingefügt.-->
 	<!-- getestet mit Saxon 9.2.0.2 -->
 	<doc:function>
 		<doc:param name="absoluteURL"><para>Pfad zur zu überprüfenden Datei</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="file-exists_saxon9.2">Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para><emphasis role="bold">Achtung!</emphasis> Diese Funktion erfordert bei Ausführung die Saxon-spezifische Erweiterung 
 			<function>saxon:last-modified()</function>, die in Saxon-PE und Saxon-EE (aber nicht in Saxon-HE) ab Version 9.2 vorhanden sind.</para>
@@ -978,7 +978,7 @@ habe ich sie hier eingefügt.-->
 	<!-- getestet mit Saxon 9.1.0.7 -->
 	<doc:function>
 		<doc:param name="absoluteURL"><para>Pfad zur zu überprüfenden Datei</para></doc:param>
-		<para>Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
+		<para xml:id="file-exists_saxon_9.1">Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert 
 			(<code>xs:boolean</code>, <code>true()</code> oder <code>false()</code>). </para>
 		<para><emphasis role="bold">Achtung!</emphasis> Diese Funktion erfordert bei Ausführung die Saxon-spezifische Erweiterung 
 			<function>saxon:file-last-modified()</function>, die in Saxon-B und Saxon-SA bis einschließlich Version 9.1 vorhanden sind.</para>
@@ -1002,7 +1002,7 @@ habe ich sie hier eingefügt.-->
 	<!-- Catch, getestet mit Saxon 8.9.0.4, Saxon-HE 9.2 und Intel 2.0.0.0 -->
 	<doc:function>
 		<doc:param name="absoluteURL"><para>Pfad zur zu überprüfenden Datei</para></doc:param>
-		<para>Diese Funktion wird aufgerufen, wenn weder Java noch Saxon-spezifische Funktionen vorhanden sind.
+		<para xml:id="file-exists_catch">Diese Funktion wird aufgerufen, wenn weder Java noch Saxon-spezifische Funktionen vorhanden sind.
 			In diesem Fall wird die Stylesheet-Verarbeitung abgebrochen, z.B. bei Saxon-B&#160;8.9, Saxon-HE&#160;9.2 und Intel&#160;2.0.</para>
 		<revhistory>
 			<revision>
@@ -1031,7 +1031,7 @@ habe ich sie hier eingefügt.-->
 	<doc:function>
 		<doc:param name="URLwithFileExtension"><para>URL, aus dessen file extension der Mediatype ermittelt werden soll.</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>Soll eine Warnung ausgegeben werden, wenn der Mediatyp nicht ermittelt werden kann?</para></doc:param>
-		<para>Diese Funktion ermittelt aus der Dateierweiterung den Mediatyp (auch <code>MIME-Typ</code> genannt).</para>
+		<para xml:id="mediatype-from-url">Diese Funktion ermittelt aus der Dateierweiterung den Mediatyp (auch <code>MIME-Typ</code> genannt).</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen Dateierweiterung gibt einen Leerstring und – in Abhängigkeit von <code>warn-if-wrong-input</code> – 
@@ -1083,7 +1083,7 @@ habe ich sie hier eingefügt.-->
 	</xsl:function>
 	<doc:function>
 		<doc:param name="URLwithFileExtension"><para>URL, aus dessen file extension der Mediatype ermittelt werden soll.</para></doc:param>
-		<para>Shortcut für <function>xsb:mediatype-from-url($URLwithFileExtension, true())</function>.</para>
+		<para xml:id="mediatype-from-url_shortcut">Shortcut für <function>xsb:mediatype-from-url($URLwithFileExtension, true())</function>.</para>
 		<para></para>
 		<revhistory>
 			<revision>
