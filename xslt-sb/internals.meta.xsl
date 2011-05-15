@@ -109,7 +109,7 @@
 	<!-- __________     intern:function-name()     __________ -->
 	<doc:function>
 		<doc:param name="StringOfAFunctionCall"><para>String, der wie ein Funktionsaufruf aussieht.</para></doc:param>
-		<para>ermittelt den Namen einer Funktion aus einem String, der wie eine Funktion aussieht</para>
+		<para xml:id="function-name">ermittelt den Namen einer Funktion aus einem String, der wie eine Funktion aussieht</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines ungültigen Strings gibt einen Leerstring zurück.</para>
 		<revhistory>
@@ -138,7 +138,7 @@
 	<!-- __________     intern:function-arity()     __________ -->
 	<doc:function>
 		<doc:param name="StringOfAFunctionCall"><para>String, der wie ein Funktionsaufruf aussieht.</para></doc:param>
-		<para>ermittelt die Arity (d.h. die Anzahl der Argumente) einer Funktion</para>
+		<para xml:id="function-arity">ermittelt die Arity (d.h. die Anzahl der Argumente) einer Funktion</para>
 		<para>Die Eingabe eines Leerstringes gibt <code>0</code> zurück.</para>
 		<para>Die Eingabe eines ungültigen Strings gibt <code>0</code> zurück.</para>
 		<revhistory>
@@ -167,7 +167,7 @@
 	<!-- __________     intern:looks-like-a-function-call()     __________ -->
 	<doc:function>
 		<doc:param name="StringOfAFunctionCall"><para>String, der wie ein Funktionsaufruf aussieht.</para></doc:param>
-		<para>Diese Funktion überprüft eine String darauf, ob er wie der Aufruf einer XSLT-/Xpath-Funktion aussieht.
+		<para xml:id="looks-like-a-function-call">Diese Funktion überprüft eine String darauf, ob er wie der Aufruf einer XSLT-/Xpath-Funktion aussieht.
 			Es werden nur zwei Dinge getestet:
 			<orderedlist>
 				<listitem><para>per regulärem Ausdruck wird geprüft, ob der String aus einem Namen + einem geklammerten Ausdruck besteht und</para></listitem>
@@ -200,7 +200,7 @@
 	<!-- __________     intern:castable-as-xs-name()     __________ -->
 	<doc:function>
 		<doc:param name="string"><para>String, der geprüft werden soll.</para></doc:param>
-		<para>Diese Funktion überprüft eine String darauf, ob er als <code>xs:Name</code> gecastest werden kann. Diese Funktion ist notwendig,
+		<para xml:id="castable-as-xs-name">Diese Funktion überprüft eine String darauf, ob er als <code>xs:Name</code> gecastest werden kann. Diese Funktion ist notwendig,
 			weil <code>xs:Name</code> resp. <function>castable as xs:Name</function> nicht von einem Basic-XSLT-Prozessor unterstützt werden.</para>
 		<para>Die Eingabe eines Leerstringes gibt <code>false()</code> zurück.</para>
 		<para>Die Eingabe eines ungültigen Strings gibt <code>false()</code> zurück.</para>
@@ -232,7 +232,7 @@
 	<!-- __________     intern:castable-as-xs-ncname()     __________ -->
 	<doc:function>
 		<doc:param name="string"><para>String, der geprüft werden soll.</para></doc:param>
-		<para>Diese Funktion überprüft eine String darauf, ob er als <code>xs:NCName</code> gecastest werden kann. 
+		<para xml:id="castable-as-xs-ncname">Diese Funktion überprüft eine String darauf, ob er als <code>xs:NCName</code> gecastest werden kann. 
 			Die Überprüfung erfolgt an Hand eines regulären Ausdruckes nach 
 			<link xlink:href="http://www.w3.org/TR/REC-xml/#NT-Name">http://www.w3.org/TR/REC-xml/#NT-Name</link>.</para>
 		<para>Diese Funktion ist notwendig,
@@ -261,7 +261,7 @@
 	<!-- __________     intern:function-argument-string()     __________ -->
 	<doc:function>
 		<doc:param name="StringOfAFunctionCall"><para>String, der wie ein Funktionsaufruf aussieht.</para></doc:param>
-		<para>Diese Funktion gibt aus einem String, der wie ein Funktionsaufruf aussieht, einen String der vermeintlichen Argumente zurück.</para>
+		<para xml:id="function-argument-string">Diese Funktion gibt aus einem String, der wie ein Funktionsaufruf aussieht, einen String der vermeintlichen Argumente zurück.</para>
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines ungültigen Strings (d.h. der String sieht nicht wie eine Funktion aus) gibt einen Leerstring zurück.</para>
 		<revhistory>
@@ -290,7 +290,7 @@
 	<!-- __________     intern:function-arguments()     __________ -->
 	<doc:function>
 		<doc:param name="StringOfAFunctionCall"><para>String, der wie ein Funktionsaufruf aussieht.</para></doc:param>
-		<para>Diese Funktion erzeugt eine Sequence von Strings der Argumente aus einem String, der wie eine Funktion aussieht.</para>
+		<para xml:id="function-arguments">Diese Funktion erzeugt eine Sequence von Strings der Argumente aus einem String, der wie eine Funktion aussieht.</para>
 		<para>Die Eingabe eines Leerstringes gibt eine Leersequenz zurück.</para>
 		<para>Die Eingabe eines ungültigen Strings (d.h. der String sieht nicht wie eine Funktion aus) gibt eine Leersequenz zurück (um <function>&lt;xsl:for-each/&gt;</function> effektiv nutzen zu können).</para>
 		<revhistory>
@@ -359,7 +359,7 @@
 	<!-- __________     intern:replace-nested-brackets-with-dashes()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>String, der wie ein Funktionsargument aussieht (wird nicht validiert).</para></doc:param>
-		<para>Diese Funktion ist eine Hilfsfubktion, die nur existiert, weil rekursive Aufrufe notwendig waren. Details sind nicht interssant.</para>
+		<para xml:id="replace-nested-brackets-with-dashes">Diese Funktion ist eine Hilfsfunktion, die nur existiert, weil rekursive Aufrufe notwendig waren. Details sind nicht interssant.</para>
 		<para>Die Eingabe eines Leerstringes oder eine Leersequenz gibt einen Leerstring zurück.</para>
 		<revhistory>
 			<revision>

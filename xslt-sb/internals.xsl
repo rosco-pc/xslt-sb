@@ -154,7 +154,7 @@
 	<doc:param ignore-ns="yes">
 		<para>gültige Werte: »<code>ja</code>«, »<code>nein</code>«, »<code>yes</code>«, »<code>no</code>«, »<code>0</code>«, »<code>1</code>« 
 			und andere verbale Wahrheitswerte, die 
-			<function><link linkend="internals.parse-string-to-boolean">xsb:parse-string-to-boolean()</link></function> versteht</para>
+			<function><link linkend="parse-string-to-boolean">xsb:parse-string-to-boolean()</link></function> versteht</para>
 		<para>Fehlermeldungen können einen Level entsprechend den Log4j-Stufen 
 			»<code>ALL</code>« > »<code>TRACE</code>« > »<code>DEBUG</code>« > »<code>INFO</code>« > »<code>WARN</code>« > »<code>ERROR</code>« > »<code>FATAL</code>«
 			haben (siehe Template <link linkend="internals.Error"><function>xsb:internals.Error</function></link>). Bei »<code>ERROR</code>« wird die Verarbeitung 
@@ -811,7 +811,7 @@
 	<!-- __________     intern:render-context-and-parent-as-string()     __________ -->
 	<doc:function>
 		<doc:param name="context"><para>Kontextknoten vom Typ <code>node()</code>, kann also vom Typ <code>element()</code>, <code>attribute()</code>, <code>text()</code>, <code>comment()</code> usw. sein</para></doc:param>
-		<para>Diese Funktion erzeugt aus dem Kontext eines Knotens und dessen Elternknoten einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. 
+		<para xml:id="render-context-and-parent-as-string">Diese Funktion erzeugt aus dem Kontext eines Knotens und dessen Elternknoten einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. 
 			Kann z.B. zur Erläuterung bei Fehlermeldungen eingesetzt werden.</para>
 		<revhistory>
 			<revision>
@@ -852,7 +852,7 @@
 	<!-- __________     xsb:render-context-as-string()     __________ -->
 	<doc:function>
 		<doc:param name="context"><para>Kontextknoten vom Typ <code>node()</code>, kann also vom Typ <code>element()</code>, <code>attribute()</code>, <code>text()</code>, <code>comment()</code> usw. sein</para></doc:param>
-		<para>Diese Funktion erzeugt aus dem Kontext eines Knotens einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. 
+		<para xml:id="render-context-as-string">Diese Funktion erzeugt aus dem Kontext eines Knotens einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. 
 			Kann z.B. zur Erläuterung bei Fehlermeldungen eingesetzt werden.</para>
 		<revhistory>
 			<revision>
@@ -918,7 +918,7 @@
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>(Boolean) Erzeugt eine Fehlermeldung, wenn der eingegebene String 
 			nicht in der Liste der gültigen Werte enthalten ist.</para></doc:param>
-		<para xml:id="internals.parse-string-to-boolean">Diese Funktion wandelt eine String-Eingabe in einen Boolean-Wert um. 
+		<para xml:id="parse-string-to-boolean">Diese Funktion wandelt eine String-Eingabe in einen Boolean-Wert um. 
 			Sie kennt dabei mehr Begriffe als <function>boolean()</function>, z.B. »<code>ja</code>«/»<code>nein</code>«.</para>
 		<revhistory>
 			<revision>
@@ -964,7 +964,7 @@
 	<!--  -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>Shortcut für <function><link linkend="internals.parse-string-to-boolean">xsb:parse-string-to-boolean($input, true())</link></function>.</para>
+		<para xml:id="parse-string-to-boolean_shortcut">Shortcut für <function><link linkend="parse-string-to-boolean">xsb:parse-string-to-boolean($input, true())</link></function>.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.36</revnumber>
@@ -986,7 +986,7 @@
 	<!-- __________     intern:render-level-to-pretext     __________ -->
 	<doc:function>
 		<doc:param name="level"><para>Eingabe (String)</para></doc:param>
-		<para>Erzeugt zu den verbalen Fehlerwerten 
+		<para xml:id="render-level-to-pretext">Erzeugt zu den verbalen Fehlerwerten 
 			»<code>ALL</code>« > »<code>TRACE</code>« > »<code>DEBUG</code>« > »<code>INFO</code>« > »<code>WARN</code>« > »<code>ERROR</code>« > »<code>FATAL</code>«
 			einen String, der bei <code><link linkend="internals.Error">xsb:internals.Error</link></code> und verwandten Templates als <code>preText</code> verwendet werden kann.</para>
 		<para>Wird ein ungültiger Wert übergeben, wird der Wert für ALL gewählt.</para>
@@ -1021,7 +1021,7 @@
 	<doc:function>
 		<doc:param name="input1"><para>Eingabe (ohne Typ)</para></doc:param>
 		<doc:param name="input2"><para>Eingabe (ohne Typ)</para></doc:param>
-		<para>Diese Funktion vergleicht zwei beliebig getypte Werte und gibt bei Idendität <code>true()</code> zurück, d.h. der Vergleich
+		<para xml:id="is">Diese Funktion vergleicht zwei beliebig getypte Werte und gibt bei Idendität <code>true()</code> zurück, d.h. der Vergleich
 			ist eine Kombination aus <function>eq</function> und <function>deep-equal()</function>.</para>
 		<para>Im Unterschied zum XPath-Operator <function>is</function> können auch <code>atomic values</code> verglichen werden.</para>
 		<revhistory>
@@ -1070,7 +1070,7 @@
 		<doc:param name="context"><para>Eingabeknoten</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>Erzeugt eine Fehlermeldung, wenn für den eingegebenen 
 			Knoten keine gültige Art ermittelt werden kann. Da die Tests vollständig sind, dürfet dieser Fehler nie auftreten.</para></doc:param>
-		<para xml:id="internals.node-kind">Diese Funktion ermittelt die Art eines <code>node()</code>, d.h. sie gibt je nach übergebenen Knoten einen der Werte 
+		<para xml:id="node-kind">Diese Funktion ermittelt die Art eines <code>node()</code>, d.h. sie gibt je nach übergebenen Knoten einen der Werte 
 			»<code>document-node</code>«, »<code>element</code>«, »<code>attribute</code>«, »<code>text</code>«, 
 			»<code>comment</code>«, »<code>processing-instruction</code>« oder »<code>namespace</code>« zurück. 
 			Schlagen all Versuche zur Ermittlung fehl, wird der Wert <code>#undefined</code> zurückgegeben (Mir ist kein entsprechender Input-node() bekannt).</para>
@@ -1117,7 +1117,7 @@
 	<!--  -->
 	<doc:function>
 		<doc:param name="context"><para>Eingabeknoten (ohne Typ)</para></doc:param>
-		<para>Shortcut für <function><link linkend="internals.node-kind">xsb:node-kind($context, true())</link></function></para>
+		<para xml:id="node-kind_shortcut">Shortcut für <function><link linkend="node-kind">xsb:node-kind($context, true())</link></function></para>
 		<revhistory>
 			<revision>
 				<revnumber>0.61</revnumber>
@@ -1136,13 +1136,13 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
+	<!-- __________     xsb:logging-level     __________ -->
 	<doc:function>
 		<doc:param name="verbal-logging-level"><para>Eingabeknoten (ohne Typ)</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>Erzeugt eine Fehlermeldung, wenn der eingegebenen String nicht 
 			»<code>ALL</code>« > »<code>TRACE</code>« > »<code>DEBUG</code>« > »<code>INFO</code>« > »<code>WARN</code>« > »<code>ERROR</code>« > »<code>FATAL</code>«
 			ist.</para></doc:param>
-		<para xml:id="internals.logging-level">Diese Funktion wandelt die verbalen Logging-Level 
+		<para xml:id="logging-level">Diese Funktion wandelt die verbalen Logging-Level 
 			»<code>ALL</code>« > »<code>TRACE</code>« > »<code>DEBUG</code>« > »<code>INFO</code>« > »<code>WARN</code>« > »<code>ERROR</code>« > »<code>FATAL</code>«
 			in korrspondierende Integer-Werte von 0 bis 6 um.</para>
 		<para>Bei einer ungültigen Eingabe wird »4« (entspricht »<code>WARN</code>«) zurückgegeben.</para>
@@ -1183,7 +1183,7 @@
 	<!--  -->
 	<doc:function>
 		<doc:param name="verbal-logging-level"><para>Eingabeknoten (ohne Typ)</para></doc:param>
-		<para>Shortcut für <function><link linkend="internals.logging-level">xsb:logging-level($verbal-logging-level, true() )</link></function>.</para>
+		<para xml:id="logging-level_shortcut">Shortcut für <function><link linkend="logging-level">xsb:logging-level($verbal-logging-level, true() )</link></function>.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.114</revnumber>
@@ -1202,7 +1202,7 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
+	<!-- __________     xsb:vendor-hash     __________ -->
 	<doc:function>
 		<doc:param name="product-name"><para>Wert der entsprechenden System-Eigenschaft (String)</para></doc:param>
 		<doc:param name="product-version"><para>Wert der entsprechenden System-Eigenschaft (String)</para></doc:param>
@@ -1258,7 +1258,7 @@
 			(muss ggfs. von String umgewandelt werden, etwa mit xsb:parse-string-to-boolean())</para></doc:param>
 		<doc:param name="warn-if-wrong-input"><para>Erzeugt eine Fehlermeldung, wenn der eingegebene String 
 			nicht in der Liste der gültigen Werte enthalten ist. (Boolean)</para></doc:param>
-		<para>Shortcut für <function><link linkend="vendor-hash">xsb:vendor-hash($product-name, $product-version, $java-available, true())</link></function>.</para>
+		<para xml:id="vendor-hash_shortcut">Shortcut für <function><link linkend="vendor-hash">xsb:vendor-hash($product-name, $product-version, $java-available, true())</link></function>.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.141</revnumber>
@@ -1278,8 +1278,11 @@
 		<xsl:param name="is-schema-aware" as="xs:boolean"/>
 		<xsl:sequence select="xsb:vendor-hash($product-name, $product-version, $java-available, $is-schema-aware, true() )"/>
 	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:java-available     __________ -->
 	<doc:function>
-		<para>Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht.</para>
+		<para xml:id="java-available">Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.141</revnumber>
@@ -1296,7 +1299,7 @@
 		<xsl:sequence select="true()"/>
 	</xsl:function>
 	<doc:function>
-		<para>Diese Funktion ermittelt – zusammen mit der vorhergehenden – ob Java auf dem ausführenden System zur Verfügung steht.</para>
+		<para xml:id="java-available_2">Diese Funktion ermittelt – zusammen mit der vorhergehenden – ob Java auf dem ausführenden System zur Verfügung steht.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.141</revnumber>
@@ -1314,7 +1317,7 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
+	<!-- __________     xsb:current-vendor-hash     __________ -->
 	<doc:function>
 		<para xml:id="current-vendor-hash">Diese Funktion ermittelt den Vendor-Hash für das aktuelle System.</para>
 		<revhistory>

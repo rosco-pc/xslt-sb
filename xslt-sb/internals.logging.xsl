@@ -293,7 +293,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Dispatcher     __________ -->
 	<doc:template>
-		<para>Dieses Template verteilt die Nachrichten an die passenden Ausgabe-Templates. Parameter werden über 
+		<para xml:id="internals.logging.Dispatcher">Dieses Template verteilt die Nachrichten an die passenden Ausgabe-Templates. Parameter werden über 
 			<code>tunnel="yes"</code> durchgereicht (getunnelt).</para>
 		<para>Dieses zwischengeschaltete Template vermeidet außerdem, dass die Umwandlung in Tunnel-Parameter
 			innerhalb von <link linkend="internals.logging.Output"><function>internal:internals.logging.Output</function></link> 
@@ -359,7 +359,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Write-to-console     __________ -->
 	<doc:template>
-		<para>Dieses Template gibt die Nachricht auf der Konsole aus. Parameter werden über 
+		<para xml:id="internals.logging.Write-to-console">Dieses Template gibt die Nachricht auf der Konsole aus. Parameter werden über 
 			<code>tunnel="yes"</code> an das Template <function>intern:internals.logging.Render-to-string</function> 
 			durchgereicht (getunnelt).</para>
 		<para>Das Template wird normalerweise von <function>intern:internals.logging.Output</function> aufgerufen.</para>
@@ -393,7 +393,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Write-to-file-as-comment     __________ -->
 	<doc:template>
-		<para>Dieses Template gibt die Nachricht als Kommentar in den Output-Stream 
+		<para xml:id="internals.logging.Write-to-file-as-comment">Dieses Template gibt die Nachricht als Kommentar in den Output-Stream 
 			(in der Regel: die Ergebnis-Datei) aus. Parameter werden über <code>tunnel="yes"</code> 
 			an das <function>Template intern:internals.logging.Render-to-string</function> durchgereicht (getunnelt).</para>
 		<para>Das Template wird normalerweise von <function>intern:internals.logging.Output</function> aufgerufen.</para>
@@ -427,7 +427,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Write-to-file-as-element     __________ -->
 	<doc:template>
-		<para>Dieses Template gibt die Nachricht als XML-Element in den Output-Stream 
+		<para xml:id="internals.logging.Write-to-file-as-element">Dieses Template gibt die Nachricht als XML-Element in den Output-Stream 
 			(in der Regel: die Ergebnis-Datei) aus. Parameter werden über <code>tunnel="yes"</code> 
 			an das <function>Template intern:internals.logging.Render-to-xml</function> durchgereicht (getunnelt).</para>
 		<para>Das Template wird normalerweise von <function>intern:internals.logging.Output</function> aufgerufen.</para>
@@ -465,7 +465,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Write-to-file-as-html     __________ -->
 	<doc:template>
-		<para>Dieses Template gibt die Nachricht als HTML-Elemente in den Output-Stream 
+		<para xml:id="internals.logging.Write-to-file-as-html">Dieses Template gibt die Nachricht als HTML-Elemente in den Output-Stream 
 			(in der Regel: die Ergebnis-Datei) aus. Parameter werden über <code>tunnel="yes"</code> 
 			an das <function>Template intern:internals.logging.Render-to-html</function> durchgereicht (getunnelt).</para>
 		<para>Das Template wird normalerweise von <function>intern:internals.logging.Output</function> aufgerufen.</para>
@@ -498,7 +498,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Write-to-file-as-text     __________ -->
 	<doc:template>
-		<para>Dieses Template gibt die Nachricht als Text in den Output-Stream (in der Regel: die Ergebnis-Datei) aus. 
+		<para xml:id="internals.logging.Write-to-file-as-text">Dieses Template gibt die Nachricht als Text in den Output-Stream (in der Regel: die Ergebnis-Datei) aus. 
 			Parameter werden über <code>tunnel="yes"</code> an das <function>Template intern:internals.logging.Render-to-string</function> 
 			durchgereicht (getunnelt).</para>
 		<para>Das Template wird normalerweise von <function>intern:internals.logging.Output</function> aufgerufen.</para>
@@ -536,7 +536,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Render-to-string     __________ -->
 	<doc:template>
-		<para>Dieses Template rendert die Message-Parameter als Text. 
+		<para xml:id="internals.logging.Render-to-string">Dieses Template rendert die Message-Parameter als Text. 
 			Parameter werden über <code>tunnel="yes"</code> empfangen (getunnelt).</para>
 		<para>Werden keine Parameter übergeben, wird eine <code>empty sequence</code> zurückgegeben.</para>
 		<para><emphasis role="bold">Hook</emphasis>: kann zum Umformatieren überschrieben werden.</para>
@@ -760,7 +760,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.Render-to-html     __________ -->
 	<doc:template>
-		<para>Dieses Template rendert die Message-Parameter als HTML-Elemente. 
+		<para xml:id="internals.logging.Render-to-html">Dieses Template rendert die Message-Parameter als HTML-Elemente. 
 			Parameter werden über <code>tunnel="yes"</code> empfangen (getunnelt).</para>
 		<para><emphasis role="bold">Hook</emphasis>: kann zum Umformatieren überschrieben werden.</para>
 		<!-- Content -->
@@ -993,7 +993,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.logging.MakeThead.HTML     __________ -->
 	<doc:template>
-		<para>Dieses Template erzeugt eine Zeile mit dem Tabellenkopf für die Ausgabe als HTML. 
+		<para xml:id="internals.logging.MakeThead.HTML">Dieses Template erzeugt eine Zeile mit dem Tabellenkopf für die Ausgabe als HTML. 
 			Die Signatur des Templates entspricht einem normalen Logging-Eintrag (mit Ausnahme von
 			<code>log-entry.timeStamp</code>, das hier <code>xs:string</code> ist), die übergebenen 
 			Werte werden in die Spaltenüberschriften geschrieben. Werden keine Werte übergeben, 
@@ -1024,7 +1024,7 @@
 				<authorinitials>Stf</authorinitials>
 				<revdescription>
 					<para conformance="beta">Status: beta</para>
-					<para>als selbständiges Template neben der Logging-Infrakstruktur umgeschrieben</para>
+					<para>als selbständiges Template neben der Logging-Infrastruktur umgeschrieben</para>
 				</revdescription>
 			</revision>
 			<revision>

@@ -1041,7 +1041,7 @@
 		</test>
 	</intern:testliste>
 	<doc:template>
-		<para>Dieses Template führt die lokalen Selbst-Tests aus.</para>
+		<para xml:id="files.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.74</revnumber>

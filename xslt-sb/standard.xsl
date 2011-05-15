@@ -48,16 +48,19 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	<xsl:import href="files.xsl"/>
 	<xsl:import href="files_tests.xsl"/>
 	<!--  -->
-	<xsl:import href="internals.xsl"/>
-	<xsl:import href="internals_tests.xsl"/>
+	<xsl:import href="internals.logging.xsl"/>
+	<xsl:import href="internals.logging_tests.xsl"/>
+	<!--  -->
+	<xsl:import href="internals.meta.xsl"/>
+	<xsl:import href="internals.meta_tests.xsl"/>
+	<!--  -->
+	<xsl:import href="internals.stylecheck.xsl"/>
 	<!--  -->
 	<xsl:import href="internals.testing.xsl"/>
 	<xsl:import href="internals.testing_tests.xsl"/>
 	<!--  -->
-	<xsl:import href="internals.logging.xsl"/>
-	<xsl:import href="internals.logging_tests.xsl"/>
-	<!--  -->
-	<xsl:import href="internals.stylecheck.xsl"/>
+	<xsl:import href="internals.xsl"/>
+	<xsl:import href="internals_tests.xsl"/>
 	<!--  -->
 	<xsl:import href="numbers.xsl"/>
 	<!--  -->
@@ -81,7 +84,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</author>
 		</para>
 		<para>Homepage: <link xlink:href="http://www.expedimentum.org/">http://www.expedimentum.org/</link></para>
-		<para><emphasis role="bold">Hinweise:</emphasis></para>
+		<!--  -->
+		<para xml:id="hinweise"><emphasis role="bold">Hinweise:</emphasis></para>
 		<para>Die Stylesheets folgen dem Paradigma von "Convention over Configuration", 
 			d.h. soweit sinnvoll, wird mit Voreinstellungen gearbeitet, die aber übeschrieben werden können.</para>
 		<para>Ungültige Eingaben werden soweit wie möglich abgefangen und – unter Ausgabe einer Warnung – durch sinnvolle Werte ersetzt. 
@@ -103,7 +107,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				<member>mature: Funktion bzw. Template ist seit mindestens einem Jahr Teil der Bibliothek und alle benutzen Funktionen/Templates haben den Status "mature"</member>
 			</simplelist>
 			Produktiv sollten nur mit "mature" gekennzeichnete Funktionen und Templates eingesetzt werden.</para>
-		<para><emphasis role="bold">Namenskonventionen:</emphasis></para>
+		<!--  -->
+		<para xml:id="namenskonventionen"><emphasis role="bold">Namenskonventionen:</emphasis></para>
 		<para>Es werden zwei Namespaces verwendet: <code>http://www.expedimentum.org/XSLT/SB</code> mit dem Präfix <code>xsb:</code> und 
 			<code>http://www.expedimentum.org/XSLT/SB/intern</code> mit dem Präfix <code>intern:</code>. 
 			Daneben kommen für spezielle Funktionen (wie der Aufruf von Java oder saxon-spezifischen Funktionen) weitere Namespaces zum Einsatz. Generell gilt: Funktionen und Templates, 
@@ -123,11 +128,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<para>Lokale Variablen werden mit einem kurzen, sprechenden Namen bezeichnet, z.B. "<code>$temp</code>".</para>
 		<para>Getunnelte Parameter werden mit der Endung "<code>.tunneld</code>" versehen, z.B. "<code>$log-entry.write-to-console.tunneld</code>".</para>
 		<para>Getunnelte Parameter werden im empfangenden Stylesheet deklariert.</para>
-		<para><emphasis render="bold">Typung</emphasis></para>
+		<!--  -->
+		<para xml:id="typung"><emphasis render="bold">Typung</emphasis></para>
 		<para>Ergebnisse von Funktionen und Templates werden – soweit möglich – getypt. Die Rückgabe einer empty sequence wird vermieden, 
 			vielmehr werden dem Typ entsprechend 0, Leerstring o.ä. zurückgegeben.</para>
 		<para>An Funktionen oder Templates übergebene Parameter sollen  – soweit möglich – empty sequences als Eingabe akzeptieren, um eine einfache Benutzbarkeit zu erreichen.</para>
-		<para><emphasis render="bold">Tests</emphasis></para>
+		<!--  -->
+		<para xml:id="tests"><emphasis render="bold">Tests</emphasis></para>
 		<para>Templates und Funktionen werden – soweit möglich – getestet. Dazu gibt es am Ende jeden Stylesheets Test-Abschnitte oder externe Test-Stylesheets (nach dem Namensschema <code>xxxxx_tests.xsl</code>).</para>
 		<para>Die Tests haben zwei Aufgaben: einerseits weisen sie das richtige Funktionieren der Templates/Funktionen nach, andererseits stellen sie bei späteren Änderungen
 			an den Templates/Funktionen sicher, das die ursprüngliche Funktionalität nicht geändert wird.</para>
@@ -135,6 +142,22 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<para>Jede Funktion wird mindestens pro Argument mit einem erwartetem Positiv-/<code>true()</code>-Wert, einem erwarteten Negativ-/<code>false()</code>-Wert,
 			einem Leerstring/0-Wert und der <code>empty sequence</code> getestet.</para>
 		<para>Bei jeder Stylesheet-Datei werden die Tests in einem Template mit dem Namen <code>intern:${Dateiname_ohne_Erweiterung}.self-test</code> zusammengefasst.</para>
+		<!--  -->
+		<para xml:id="dokumentation"><emphasis render="bold">Dokumentation</emphasis></para>
+		<para>Alle Funktionen und Templates sowie deren Parameter werden – soweit sinnvoll – dokumentiert. Die Dokumentation umfasst eine kurze Beschreibung
+			der Funktionalität und eventueller Parameter.</para>
+		<para>Zur Dokumentation wird XSLStyle™ mit DocBook verwendet. Hinweise zur Installation und Bedienung finden sich u.a. auf
+			<link xlink:href="http://blog.expedimentum.com/2009/xslt-dokumentation-mit-xslstyle%E2%84%A2/">blog.expedimentum.com</link>.</para>
+		<para>Zu jeder Funktion und jedem Template muss es in der Dokumentation ein para-Element mit einem xml:id-Attribut geben,
+			dessen Wert der lokale Name der Funktion ist. XSLStyle™ erzeugt daraus in der HTML-Dokumentation Anker, so dass die Funktions-/Template-Beschreibungen
+			direkt von außen verlinkt werden können.</para>
+		<!--  -->
+		<para xml:id="build.xml"><emphasis render="bold">build.xml</emphasis></para>
+		<para>Zur XSLT-SB gehört eine <code>build.xml</code> für <link xlink:href="http://ant.apache.org/">Apache Ant</link>. Dieses Skript führt Routineaufgaben
+			wie die Erstellung der Dokumentation, den Selbsttest der Stylesheets mit unterschiedlichen XSLT-Prozessoren und das Zippen von Distributionen
+			für den Download durch. Außerdem können externe Tools wie Saxon-HE oder XSLStyle™ installiert werden.</para>
+		<para>Für die Benutzung der XSLT-SB ist Ant aber nicht notwendig, die Stylesheets können direkt in eigene Projekte eingebunden werden.</para>
+		<!--  -->
 		<para xml:id="standard.license" role="license"><emphasis role="bold">Lizenz (duale Lizenzierung)</emphasis></para>
 		<para role="license">Die XSLT-SB und alle dazugehörigen Stylesheets und Dokumentationen sind unter einer Creative Commons-Lizenz 
 			(<link xlink:href="http://creativecommons.org/licenses/by/3.0/">CC-BY&#160;3.0</link>) lizenziert. 
@@ -220,6 +243,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<!-- fremde Selbsttests (in alphabetischer Reihenfolge der Dateinamen) -->
 		<xsl:call-template name="intern:files.self-test"/>
 		<xsl:call-template name="intern:internals.logging.self-test"/>
+		<xsl:call-template name="intern:internals.meta.self-test"/>
 		<xsl:call-template name="intern:internals.stylecheck.self-test"/>
 		<xsl:call-template name="intern:internals.testing.self-test"/>
 		<xsl:call-template name="intern:internals.self-test"/>
@@ -232,7 +256,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	<!--  -->
 	<!--  -->
 	<doc:template>
-		<para>Dieses Template führt die lokalen Selbst-Tests aus.</para>
+		<para xml:id="standard.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.50</revnumber>

@@ -118,7 +118,7 @@
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
 		<doc:param name="compare-to"><para>Vergleichswert (String)</para></doc:param>
-		<para>Verarbeitet Eingabe und Vergleichswert mit <function>normalize-space()</function> und <function>lower-case()</function> und vergleicht dann Eingabe und Vergleichswert. Dadurch werden kleine Differenzen ignoriert.</para>
+		<para xml:id="lax-string-compare">Verarbeitet Eingabe und Vergleichswert mit <function>normalize-space()</function> und <function>lower-case()</function> und vergleicht dann Eingabe und Vergleichswert. Dadurch werden kleine Differenzen ignoriert.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.53</revnumber>
@@ -142,7 +142,7 @@
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
 		<doc:param name="default"><para>Standardwert (String)</para></doc:param>
-		<para>gibt einen übergebenen Standardwert aus, wenn der übergeben String leer ist oder nur Whitespace enthält, sonst den String selbst</para>
+		<para xml:id="return-default-if-empty">gibt einen übergebenen Standardwert aus, wenn der übergeben String leer ist oder nur Whitespace enthält, sonst den String selbst</para>
 		<para>Wenn der übergebene Standardwert eine Leersequenz ist, wird ein Leerstring zurückgegeben.</para>
 		<revhistory>
 			<revision>
@@ -173,7 +173,7 @@
 	<!-- __________     xsb:trim-left()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>entfernt führenden Whitespace</para>
+		<para xml:id="trim-left">entfernt führenden Whitespace</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.53</revnumber>
@@ -203,7 +203,7 @@
 	<!-- __________     xsb:trim-right()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>entfernt Whitespace am Ende</para>
+		<para xml:id="trim-right">entfernt Whitespace am Ende</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.53</revnumber>
@@ -233,7 +233,7 @@
 	<!-- __________     xsb:trim()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>entfernt Whitespace am Anfang und am Ende. Im Unterschied zu <function>normalize-space()</function> wird Whitespace in der Mitte nicht berücksichtigt.</para>
+		<para xml:id="trim">entfernt Whitespace am Anfang und am Ende. Im Unterschied zu <function>normalize-space()</function> wird Whitespace in der Mitte nicht berücksichtigt.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.53</revnumber>
@@ -255,7 +255,7 @@
 	<!-- __________     xsb:normalize-paragraphs()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>ersetzt mehrfache Zeilenwechsel durch einen einzelnen Zeilenwechsel. Im Unterschied zu <function>normalize-space()</function> wird ein Zeilenwechsel aber erhalten.</para>
+		<para xml:id="normalize-paragraphs">ersetzt mehrfache Zeilenwechsel durch einen einzelnen Zeilenwechsel. Im Unterschied zu <function>normalize-space()</function> wird ein Zeilenwechsel aber erhalten.</para>
 		<para>rekursiver Algorithmus: die Funktion ruft sich solange selbst auf, bis keine mehrfachen Zeilenwechsel in der Eingabe vorhanden sind.</para>
 		<para>Da die Eingabe sinnvoll eine Leersequenz sein kann, ist die Rückgabe einer Leersequenze erlaubt.</para>
 		<revhistory>
@@ -296,7 +296,7 @@
 	<doc:function>
 		<doc:param name="list"><para>Leerzeichen-getrennte Liste von String-Token</para></doc:param>
 		<doc:param name="item"><para>String-Token, auf dessen Existenz getestet werden soll</para></doc:param>
-		<para>Diese Funktion überprüft, ob in einer Leerzeichen-getrennten Liste ein bestimmter Eintrag vorhanden ist.</para>
+		<para xml:id="listed">Diese Funktion überprüft, ob in einer Leerzeichen-getrennten Liste ein bestimmter Eintrag vorhanden ist.</para>
 		<para>Die Eingabe eines Leerstrings oder einer Leersequenz als Parameter <code>list</code> ergibt <code>false()</code>.</para>
 		<para>Die Eingabe eines Leerstrings oder einer Leersequenz als Parameter <code>item</code> ergibt <code>false()</code>.</para>
 		<revhistory>
@@ -327,7 +327,7 @@
 		<doc:param name="tested-string"><para>getesteter String</para></doc:param>
 		<doc:param name="string-before"><para>String, der vor dem getesteten String eingefügt werden soll</para></doc:param>
 		<doc:param name="string-after"><para>String, der nach dem getesteten String eingefügt werden soll</para></doc:param>
-		<para>Diese Funktion fügt vor und nach dem zu testenden String die übergebenen Strings ein, wenn der zu testende String nicht leer ist.</para>
+		<para xml:id="return-composed-string-if-not-empty">Diese Funktion fügt vor und nach dem zu testenden String die übergebenen Strings ein, wenn der zu testende String nicht leer ist.</para>
 		<para>Mit dieser Funktion wird die Erzeugung von bedingten Texten vereinfacht, bspw. das Einfügen von Kommata oder Doppelpunkten nach einem Text.</para>
 		<revhistory>
 			<revision>
@@ -359,7 +359,7 @@
 	<!-- __________     xsb:encode-for-id()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para>wandelt einen eingegebenen String in eine xs:ID um, indem verbotene Zeichen ersetzt werden</para>
+		<para xml:id="encode-for-id">wandelt einen eingegebenen String in eine xs:ID um, indem verbotene Zeichen ersetzt werden</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.124</revnumber>

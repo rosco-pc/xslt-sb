@@ -138,7 +138,7 @@
 	<!--  -->
 	<!-- __________     intern:internals.Stylecheck     __________ -->
 	<doc:template>
-		<para>Dieses Template ist der zentrale Einstieg zur Realisierung der Style-Checks.</para>
+		<para xml:id="internals.Stylecheck">Dieses Template ist der zentrale Einstieg zur Realisierung der Style-Checks.</para>
 		<para>Es wird auf die zu untersuchende XSL-Datei und eventuelle Test-Stylesheets angewendet.</para>
 		<para>Test-Stylesheets beinhalten nur die Tests zu einem Stylesheet.
 			Sie haben den selben Dateinamen wie das zu testende Stylesheet, ergänzt um <code>_tests</code>
@@ -293,10 +293,10 @@
 		</xsl:template>
 	<!--  -->
 	<!--  -->
-	<!-- __________     intern:internals.Stylecheck.call-template-test.Function     __________ -->
+	<!-- __________     intern:internals.Stylecheck.CallTemplateTestFunction     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template überprüft die Syntax von Funktionstests mit <function>xsl:call-template name="xsb:internals.test.Function"</function>.</para>
+		<para xml:id="internals.Stylecheck.CallTemplateTestFunction">Dieses Template überprüft die Syntax von Funktionstests mit <function>xsl:call-template name="xsb:internals.test.Function"</function>.</para>
 		<para>Konkret getestet wird, ob der Inhalt der Parameter <code>caller</code> und <code>actual-value</code> übereinstimmt (weil sonst falsche,
 			verwirrende Fehlermeldungen angezeigt werden.)</para>
 		<para>solved-Token: "<code>CallTemplateTestFunction</code>"</para>
@@ -329,7 +329,7 @@
 	<!-- __________     intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet den Aufruf von Funktionstests mit <function>xsb:internals.test.function.withTestItem.BooleanResult"</function>, 
+		<para xml:id="internals.Stylecheck.CallTemplateTestFunctionWithTestItem">Dieses Template testet den Aufruf von Funktionstests mit <function>xsb:internals.test.function.withTestItem.BooleanResult"</function>, 
 			<function>xsb:internals.test.function.withTestItem.StringResult"</function> usw..</para>
 		<para>solved-Token: "<code>CallTemplateTestFunction</code>"</para>
 		<revhistory>
@@ -361,7 +361,7 @@
 	<!-- __________     intern:internals.Stylecheck.MissingTypes     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet, ob alle Variablen, Parameter und Funktionen getypt sind.</para>
+		<para xml:id="internals.Stylecheck.MissingTypes">Dieses Template testet, ob alle Variablen, Parameter und Funktionen getypt sind.</para>
 		<para>solved-Token: "<code>MissingTypes</code>"</para>
 		<revhistory>
 			<revision>
@@ -401,7 +401,7 @@
 	<!-- __________     intern:internals.Stylecheck.EmptySequenceAllowed     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet, ob Funktionen oder Templates eine <code>empty sequence</code> als Resultat liefern dürfen.</para>
+		<para xml:id="internals.Stylecheck.EmptySequenceAllowed">Dieses Template testet, ob Funktionen oder Templates eine <code>empty sequence</code> als Resultat liefern dürfen.</para>
 		<para>Hintergrund: Funktionen und Templates sollten einen definierten Rückgabewert haben, also z.B. "0" oder 
 			den Leerstring ("") statt einer Leersequenz. Damit werden Typ-Fehler im aufrufenden Code reduziert.</para>
 		<para>solved-Token: "<code>EmptySequenceAllowed</code>"</para>
@@ -434,7 +434,7 @@
 	<!-- __________     intern:internals.Stylecheck.MissingTests     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet, ob alle Funktionen mit Test versehen sind.</para>
+		<para xml:id="internals.Stylecheck.MissingTests">Dieses Template testet, ob alle Funktionen mit Test versehen sind.</para>
 		<para>solved-Token: "<code>MissingTests</code>"</para>
 		<revhistory>
 			<revision>
@@ -492,7 +492,7 @@
 	<!-- __________     intern:internals.Stylecheck.RequiredParameter     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet, ob bei Template-Parametern das required-Attribute gesetzt ist.</para>
+		<para xml:id="internals.Stylecheck.RequiredParameter">Dieses Template testet, ob bei Template-Parametern das required-Attribute gesetzt ist.</para>
 		<para>solved-Token: "<code>RequiredParameter</code>"</para>
 		<revhistory>
 			<revision>
@@ -523,9 +523,19 @@
 	<!-- __________     intern:internals.Stylecheck.DocumentationTests     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para>Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation.</para>
+		<para xml:id="internals.Stylecheck.DocumentationTests">Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation.</para>
+		<para>Die Dokumentation mit XSLStyle™ und DocBook wird in <link xlink:href="standard.html#dokumentation">standard.html</link> erläutert.</para>
 		<para>solved-Token: "<code>TODO: solved-Token für intern:internals.Stylecheck.DocumentationTests definieren und einarbeiten</code>"</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.11</revnumber>
+				<date>2011-05-15</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Test auf @xml:id hinzugefügt</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.111</revnumber>
 				<date>2010-07-11</date>
@@ -546,7 +556,7 @@
 					   ( (local-name(.) eq 'function') and (local-name($possible-doc) eq 'function') )
 					or ( (local-name(.) eq 'template') and (local-name($possible-doc) eq 'template') )
 					) ">
-					<!-- fehlende Dokumentation -->
+					<!-- fehlende Dokumentation für Parameter -->
 					<xsl:for-each select="xsl:param">
 						<xsl:if test="not($possible-doc/doc:param[@name eq current()/@name])">
 							<xsl:call-template name="xsb:internals.Error">
@@ -589,7 +599,23 @@
 							</xsl:call-template>
 						</xsl:otherwise>
 					</xsl:choose>
+					<!-- fehlendes xml:id-Attribut -->
+					<xsl:choose>
+						<!-- passt genau -->
+						<xsl:when test="$possible-doc/para[@xml:id eq substring-after(current()/@name, ':') ]"/>
+						<!-- es gibt einen passenden para, aber der hier heißt aus irgendeinem Grund anders -->
+						<xsl:when test="$Dokument//para[@xml:id eq substring-after(current()/@name, ':') ] and $possible-doc/para[starts-with(@xml:id, substring-after(current()/@name, ':') ) ]"/>
+						<!-- sonst Fehlermeldung -->
+						<xsl:otherwise>
+							<xsl:call-template name="xsb:internals.Error">
+								<xsl:with-param name="caller">internals.Stylecheck.DocumentationTests</xsl:with-param>
+								<xsl:with-param name="message">kein para-Element mit @xml:id="<xsl:sequence select="substring-after(current()/@name, ':')"/>" für <xsl:sequence select="intern:render-context-and-parent-as-string(.)"/></xsl:with-param>
+								<xsl:with-param name="level">INFO</xsl:with-param>
+							</xsl:call-template>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:when>
+				<!-- Dokumentation fehlt ganz -->
 				<xsl:otherwise>
 					<xsl:call-template name="xsb:internals.Error">
 						<xsl:with-param name="caller">internals.Stylecheck.DocumentationTests</xsl:with-param>
@@ -605,7 +631,7 @@
 	<!-- __________     intern:internals.Stylecheck.ListTO_DOs     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para intern:solved="ListTO_DOs">Dieses Template listet Texte und Kommentare, die "TODO" enthalten. Die Groß-/Kleinschreibung wird nicht berücksichtigt.</para>
+		<para xml:id="internals.Stylecheck.ListTO_DOs" intern:solved="ListTO_DOs">Dieses Template listet Texte und Kommentare, die "TODO" enthalten. Die Groß-/Kleinschreibung wird nicht berücksichtigt.</para>
 		<para>solved-Token: "<code intern:solved="ListTO_DOs">ListTO_DOs</code>"</para>
 		<revhistory>
 			<revision>
@@ -658,7 +684,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:template>
-		<para>Dieses Template führt die lokalen Selbst-Tests aus.</para>
+		<para xml:id="internals.stylecheck.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.63</revnumber>
