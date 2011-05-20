@@ -1,0 +1,20 @@
+#summary Überblick der Funktionen von 'strings.xsl'
+#labels Documentation
+
+= Über `strings.xsl` =
+
+Dieses Stylesheet enthält Funktionen für Strings und Texte.
+
+Das Stylesheet selbst ist dokumentiert.
+
+= Liste der Funktionen =
+
+||xsb:encode-for-id(input as xs:string?) || wandelt einen eingegebenen String in eine xs:ID um, indem verbotene Zeichen ersetzt werden||
+||xsb:lax-string-compare(input as xs:string?; compare-to as xs:string?) || Verarbeitet Eingabe und Vergleichswert mit normalize-space() und lower-case() und vergleicht dann Eingabe und Vergleichswert. Dadurch werden kleine Differenzen ignoriert.||
+||xsb:listed(list as xs:string?; item as xs:string?) || Diese Funktion überprüft, ob in einer Leerzeichen-getrennten Liste ein bestimmter Eintrag vorhanden ist.||
+||xsb:normalize-paragraphs(input as xs:string?) || ersetzt mehrfache Zeilenwechsel durch einen einzelnen Zeilenwechsel. Im Unterschied zu normalize-space() wird ein Zeilenwechsel aber erhalten.||
+||xsb:return-composed-string-if-not-empty(string-before as xs:string?; tested-string as xs:string?; string-after as xs:string?) || Diese Funktion fügt vor und nach dem zu testenden String die übergebenen Strings ein, wenn der zu testende String nicht leer ist.||
+||xsb:return-default-if-empty(input as xs:string?; default as xs:string?) || gibt einen übergebenen Standardwert aus, wenn der übergeben String leer ist oder nur Whitespace enthält, sonst den String selbst||
+||xsb:trim(input as xs:string?) || entfernt Whitespace am Anfang und am Ende. Im Unterschied zu normalize-space() wird Whitespace in der Mitte nicht berücksichtigt.||
+||xsb:trim-left(input as xs:string?) || entfernt führenden Whitespace||
+||xsb:trim-right(input as xs:string?) || entfernt Whitespace am Ende||
