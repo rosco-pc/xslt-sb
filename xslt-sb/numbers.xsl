@@ -72,10 +72,10 @@
 				<para>Dokumentation: <link xlink:href="&doc-Base-Directory;/numbers.html">&doc-Base-Directory;/numbers.html</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/numbers_tests.xsl">&XSL-Base-Directory;/numbers_tests.xsl</link></para>
+				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/numbers.xsl">&XSL-Base-Directory;/numbers.xsl</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/numbers_tests.html">&doc-Base-Directory;/numbers_tests.html</link></para>
+				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/numbers.html">&doc-Base-Directory;/numbers.html</link></para>
 			</listitem>
 			<listitem>
 				<para>XSLT-SB: <link xlink:href="&XSL-Base-Directory;/">&XSL-Base-Directory;/</link></para>

@@ -43,7 +43,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:doc filename="internals.meta.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
-		<doc:title>Interne Funktionen/Meta-Funktionen</doc:title>
+		<doc:title>Meta-Funktionen</doc:title>
 		<para>Dieses Stylesheet enthält interne Templates und Funktionen zur Untersuchung von XSLT-Dateien.</para>
 		<para>Sie sind das Ergebnis von ein paar Experimenten zur Analyse von Stylesheets und sehr, sehr alpha.</para>
 		<para>Autor: <author>

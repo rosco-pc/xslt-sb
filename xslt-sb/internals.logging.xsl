@@ -49,7 +49,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:doc filename="internals.logging.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
-		<doc:title>Interne Funktionen/Logging</doc:title>
+		<doc:title>Logging-System</doc:title>
 		<para>Dieses Stylesheet stellt ein API für das Logging zur Verfügung. Die Templates sind nicht zur direkten Benutzung gedacht; vielmehr sollen
 			externe Wrapper dieses API nutzen. Dadurch kann der Logging-Unterbau ggfs. ausgetauscht werden.</para>
 		<para>Autor: <author>
