@@ -1,0 +1,28 @@
+#summary Überblick der Funktionen und Templates von `internals.stylecheck.xsl`
+#labels Dokumentation
+
+= `internals.stylecheck.xsl` =
+
+Stylesheet: `internals.stylecheck.xsl`
+
+Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf gängige Probleme zu testen.
+Eine Spezialität dieses Stylesheets sind die `intern:solved`-Attribute. Sie können Token enthalten, die Stylesheet-Elemente von Tests ausschließen.
+
+_Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
+
+= Liste der benannten Templates =
+
+|| *I* || *intern:internals.Stylecheck* ||   || Dieses Template ist der zentrale Einstieg zur Realisierung der Style-Checks. ||
+||   || *intern:internals.Stylecheck.CallTemplateTestFunction* (_required_ Dokument _as_ document-node()) ||   || Dieses Template überprüft die Syntax von Funktionstests mit `xsl:call-template name="xsb:internals.test.Function"`. ||
+||   || *intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet den Aufruf von Funktionstests mit `xsb:internals.test.function.withTestItem.BooleanResult"`, `xsb:internals.test.function.withTestItem.StringResult"` usw.. ||
+||   || *intern:internals.Stylecheck.DocumentationTests* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation. ||
+||   || *intern:internals.Stylecheck.EmptySequenceAllowed* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet, ob Funktionen oder Templates eine `empty sequence` als Resultat liefern dürfen. ||
+||   || *intern:internals.Stylecheck.ListTO_DOs* (_required_ Dokument _as_ document-node()) ||   || Dieses Template listet Texte und Kommentare, die "TODO" enthalten. Die Groß-/Kleinschreibung wird nicht berücksichtigt. ||
+||   || *intern:internals.Stylecheck.MissingTests* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet, ob alle Funktionen mit Test versehen sind. ||
+||   || *intern:internals.Stylecheck.MissingTypes* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet, ob alle Variablen, Parameter und Funktionen getypt sind. ||
+||   || *intern:internals.Stylecheck.RequiredParameter* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet, ob bei Template-Parametern das required-Attribute gesetzt ist. ||
+||   || *intern:internals.stylecheck.self-test* ||   || Dieses Template führt die lokalen Selbst-Tests aus. ||
+
+_Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
+
+_Seite erstellt am 22.05.2011_
