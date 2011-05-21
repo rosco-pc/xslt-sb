@@ -187,7 +187,46 @@
 		<!--  -->
 		<!--  -->
 		<!--  -->
+		<intern:testliste xml:id="numeric_tests">
+			<!--
+			<test>
+				<value></value>
+				<intern:dummy></intern:dummy>
+			</test>
+			-->
+			<test>
+				<value>0</value>
+				<intern:dummy>0</intern:dummy>
+			</test>
+			<test>
+				<value>1234567</value>
+				<intern:dummy>1.234567E6</intern:dummy>
+			</test>
+		</intern:testliste>
+		<!--  -->
+		<xsl:variable name="numericElements" as="element()+" select="document( '' )//intern:testliste[@xml:id='numeric_tests']/test"/>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:internals.test.function.withTestItem.NumericResult     __________ -->
+		<!-- (d.h. es wird nicht intern:dummy() getestet, sondern xsb:internals.test.function.withTestItem.NumericResult) -->
+		<xsl:for-each select="$numericElements">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">intern:dummy</xsl:with-param>
+				<xsl:with-param name="actual-value" select="intern:dummy(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!--  -->
 	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:function name="intern:dummy" as="xs:double" intern:solved="">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:sequence select="xs:double($input)"/>
+	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->

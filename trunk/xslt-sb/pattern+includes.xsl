@@ -252,7 +252,7 @@
 		<para>Dieses Template gibt bei der Ermittlung des aktuellen Modes einen Fehler aus, wenn kein passendes Template
 			für <code>intern:detect</code>-Elemente gefunden wurde.</para>
 	</doc:template>
-	<xsl:template match="intern:detect" mode="#all">
+	<xsl:template match="intern:detect" mode="#all" priority="-0.2">
 		<xsl:sequence select=" '#not_detected' "/>
 		<xsl:call-template name="xsb:internals.Error">
 			<xsl:with-param name="caller">xsb:detect-mode</xsl:with-param>
@@ -295,7 +295,7 @@
 			</revision>
 		</revhistory>
 	</doc:template>
-	<xsl:template match="*" mode="#all" priority="-0.5">
+	<xsl:template match="*" mode="#all" priority="-1">
 		<xsl:call-template name="xsb:internals.Error">
 			<xsl:with-param name="level">ERROR</xsl:with-param>
 			<xsl:with-param name="message">Element nicht berücksichtigt</xsl:with-param>

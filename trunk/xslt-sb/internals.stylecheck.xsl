@@ -49,7 +49,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:doc filename="internals.stylecheck.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
-		<doc:title>Interne Funktionen/StyleCheck</doc:title>
+		<doc:title>StyleCheck</doc:title>
 		<para>Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf gängige Probleme zu testen.</para>
 		<para>Eine Spezialität dieses Stylesheets sind die <code>intern:solved</code>-Attribute. Sie können Token enthalten, die Stylesheet-Elemente von Tests ausschließen.</para>
 		<para>Autor: <author>

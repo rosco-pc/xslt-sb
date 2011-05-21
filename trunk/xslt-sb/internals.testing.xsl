@@ -47,7 +47,7 @@
 	<!--  -->
 	<!--  -->
 	<doc:doc filename="internals.testing.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
-		<doc:title>Interne Funktionen/Testen von Stylesheets</doc:title>
+		<doc:title>Testen von Stylesheets</doc:title>
 		<para>Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von Funktionen und Templates in XSLT-Stylesheets.</para>
 		<para>Test können im Stylesheet selbst oder in einem externen Test-Stylesheet (nach dem Namensschema <code>xxxxx_tests.xsl</code>) eingebunden werden.</para>
 		<itemizedlist>
@@ -402,9 +402,10 @@
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
 				<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
-				<!-- Um einen Abbruch bei einem gescheiterten Cast auf xs:double (z.B. Leerstring) zu vermeiden, wird auf string gecastet -->
-				<xsl:with-param name="actual-value" select="string( $actual-value )"/>
-				<xsl:with-param name="reference-value" select="string( $test-node/*[name()=$function-name]/text() )"/>
+				<!-- 2010: Um einen Abbruch bei einem gescheiterten Cast auf xs:double (z.B. Leerstring) zu vermeiden, wird auf string gecastet -->
+				<!-- 2011-05-18: number() umgeht das cast-Problem, und da $actual-value ein xs:double (ohne"?") ist, gibt es kauch keine Verwirrungen mit Leersequenzen -->
+				<xsl:with-param name="actual-value" select="$actual-value"/>
+				<xsl:with-param name="reference-value" select="number( $test-node/*[name()=$function-name]/text() )"/>
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
