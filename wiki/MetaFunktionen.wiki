@@ -1,0 +1,26 @@
+#summary Überblick der Funktionen und Templates von `internals.meta.xsl`
+#labels Dokumentation
+
+= `internals.meta.xsl` =
+
+Stylesheet: `internals.meta.xsl`
+
+Dieses Stylesheet enthält interne Templates und Funktionen zur Untersuchung von XSLT-Dateien.
+Sie sind das Ergebnis von ein paar Experimenten zur Analyse von Stylesheets und sehr, sehr alpha.
+
+_Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
+
+= Liste der Funktionen =
+
+|| *C* || *intern:castable-as-xs-name*(string _as_ xs:string?) ||   || Diese Funktion überprüft eine String darauf, ob er als `xs:Name` gecastest werden kann. Diese Funktion ist notwendig, weil `xs:Name` resp. `castable as xs:Name` nicht von einem Basic-XSLT-Prozessor unterstützt werden. ||
+||   || *intern:castable-as-xs-ncname*(string _as_ xs:string?) ||   || Diese Funktion überprüft eine String darauf, ob er als `xs:NCName` gecastest werden kann. Die Überprüfung erfolgt an Hand eines regulären Ausdruckes nach `http://www.w3.org/TR/REC-xml/#NT-Name`. ||
+|| *F* || *intern:function-argument-string*(StringOfAFunctionCall _as_ xs:string?) ||   || Diese Funktion gibt aus einem String, der wie ein Funktionsaufruf aussieht, einen String der vermeintlichen Argumente zurück. ||
+||   || *intern:function-arguments*(StringOfAFunctionCall _as_ xs:string?) ||   || Diese Funktion erzeugt eine Sequence von Strings der Argumente aus einem String, der wie eine Funktion aussieht. ||
+||   || *intern:function-arity*(StringOfAFunctionCall _as_ xs:string?) ||   || ermittelt die Arity (d.h. die Anzahl der Argumente) einer Funktion ||
+||   || *intern:function-name*(StringOfAFunctionCall _as_ xs:string?) ||   || ermittelt den Namen einer Funktion aus einem String, der wie eine Funktion aussieht ||
+|| *L* || *intern:looks-like-a-function-call*(StringOfAFunctionCall _as_ xs:string?) ||   || Diese Funktion überprüft eine String darauf, ob er wie der Aufruf einer XSLT-/Xpath-Funktion aussieht. Es werden nur zwei Dinge getestet:   per regulärem Ausdruck wird geprüft, ob der String aus einem Namen + einem geklammerten Ausdruck besteht und  per Simulation von `castable as xs:Name` wird geprüft, ob der vermeintliche Funktionsname ein XML-Name ist. Die Simulation ist notwendig, weil der Typ `xs:Name` nicht von einem Basic-XSLT-Prozessor unterstützt wird.     ||
+|| *R* || *intern:replace-nested-brackets-with-dashes*(input _as_ xs:string?) ||   || Diese Funktion ist eine Hilfsfunktion, die nur existiert, weil rekursive Aufrufe notwendig waren. Details sind nicht interssant. ||
+
+_Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
+
+_Seite erstellt am 22.05.2011_
