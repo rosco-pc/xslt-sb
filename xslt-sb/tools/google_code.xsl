@@ -65,17 +65,17 @@
 		<itemizedlist>
 			<title>Original-URLs</title>
 			<listitem>
-				<para>Stylesheet: <link xlink:href="&XSL-Base-Directory;/pattern+includes.xsl">&XSL-Base-Directory;/tools/generate_documentation_for_google_code.xsl</link></para>
+				<para>Stylesheet: <link xlink:href="&XSL-Base-Directory;/tools/google_code.xsl">&XSL-Base-Directory;/tools/google_code.xsl</link></para>
 			</listitem>
+			<!--<listitem>
+				<para>Dokumentation: <link xlink:href="&doc-Base-Directory;/tools/google_code.html">&doc-Base-Directory;/generate_documentation_for_google_code.html</link></para>
+			</listitem>-->
 			<listitem>
-				<para>Dokumentation: <link xlink:href="&doc-Base-Directory;/pattern+includes.html">&doc-Base-Directory;/generate_documentation_for_google_code.html</link></para>
+				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/tools/google_code.xsl">&XSL-Base-Directory;/tools/google_code.xsl</link></para>
 			</listitem>
-			<listitem>
-				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/pattern+includes.xsl">&XSL-Base-Directory;/tools/generate_documentation_for_google_code.xsl</link></para>
-			</listitem>
-			<listitem>
-				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/pattern+includes.html">&doc-Base-Directory;/generate_documentation_for_google_code.html</link></para>
-			</listitem>
+			<!--<listitem>
+				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/tools/google_code.html">&doc-Base-Directory;/generate_documentation_for_google_code.html</link></para>
+			</listitem>-->
 			<listitem>
 				<para>XSLT-SB: <link xlink:href="&XSL-Base-Directory;/">&XSL-Base-Directory;/</link></para>
 			</listitem>
@@ -404,9 +404,25 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<doc:function>
+		<doc:param name="uri"><para>URI zum Stylesheet, das verlinkt werden soll.</para></doc:param>
+		<para xml:id="wikilink">erzeugt einen Wikilink (für Google Code). Dazu wird im Stylesheet <code>$uri</code> //doc:doc/doc:title ausgelesen.</para>
+		<para>Bei einer leeren <code>$uri</code> wird eine Leersequenz zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-22</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="intern:wikilink" as="xs:string?">
 		<xsl:param name="uri" as="xs:anyURI?"/>
-		<xsl:variable name="file" select="xsb:fileName-and-fileExtention-from-url($uri)"/>
+		<xsl:variable name="file" as="xs:string?" select="xsb:fileName-and-fileExtention-from-url($uri)"/>
 		<xsl:choose>
 			<xsl:when test="not(normalize-space($file) )"/>
 			<xsl:when test="doc-available($uri)">
@@ -424,13 +440,44 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<doc:function>
+		<doc:param name="Stylesheet-Title"><para>Titel des Stylesheets, wird in der Regel mit <code>intern:doc-title</code> ermittelt</para></doc:param>
+		<para xml:id="wikipage-name">Ermittelt den Titel eines Stylesheets. Es kommen verschiedene Regeln zum Einsatz, um aus dem Titel einen gültigen WikiFile-Name zu ermitteln..</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-22</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="intern:wikipage-name" as="xs:string?">
-		<xsl:param name="Text" as="xs:string?"/>
-		<xsl:sequence select="translate(xsb:encode-for-id($Text), '-', '')"/>
+		<xsl:param name="Stylesheet-Title" as="xs:string?"/>
+		<xsl:sequence select="translate(xsb:encode-for-id($Stylesheet-Title), '-', '')"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<doc:function>
+		<doc:param name="uri"><para>URI zum Stylesheet, zu dem der Titel ermittelt werden soll.</para></doc:param>
+		<para xml:id="doc-title">Ermittelt den Titel eines Stylesheets. Dazu wird im Stylesheet <code>$uri</code> //doc:doc/doc:title ausgelesen.</para>
+		<para>Bei einer leeren <code>$uri</code> wird eine Leersequenz zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-22</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="intern:doc-title" as="xs:string?">
 		<xsl:param name="uri" as="xs:string?"/>
 		<xsl:if test="doc-available($uri)">
@@ -440,9 +487,24 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:function name="intern:wikifile-name" as="xs:string">
+	<doc:function>
+		<doc:param name="uri"><para>URI zum Stylesheet, zu dem der Google-Code-Wiki-Dateiname ermittelt werden soll.</para></doc:param>
+		<para xml:id="wikifile-name">Ermittelt den Dateinamen im Google-Code-Wiki.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-22</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:wikifile-name" as="xs:string?">
 		<xsl:param name="uri" as="xs:anyURI?"/>
-		<xsl:sequence select="concat(intern:wikipage-name(intern:doc-title($uri) ), '.wiki')"/>
+		<xsl:sequence select="if (normalize-space($uri) ) then concat(intern:wikipage-name(intern:doc-title($uri) ), '.wiki') else ()"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -476,7 +538,138 @@
 		</revhistory>
 	</doc:template>
 	<xsl:template name="intern:google_code.self-test">
-	
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     Tests     __________ -->
+		<intern:testliste xml:id="StringTests">
+			<test>
+				<value></value>
+				<intern:wikipage-name></intern:wikipage-name>
+			</test>
+			<test>
+				<value>StyleCheck</value>
+				<intern:wikipage-name>StyleCheck</intern:wikipage-name>
+			</test>
+			<test>
+				<value>Meta-Funktionen</value>
+				<intern:wikipage-name>MetaFunktionen</intern:wikipage-name>
+			</test>
+			<test>
+				<value>Dateien und Dateisystem</value>
+				<intern:wikipage-name>Dateien_und_Dateisystem</intern:wikipage-name>
+			</test>
+		</intern:testliste>
+		<!--  -->
+		<intern:testliste xml:id="FileTests">
+			<test>
+				<value></value>
+				<intern:doc-title></intern:doc-title>
+				<intern:wikifile-name></intern:wikifile-name>
+				<intern:wikilink></intern:wikilink>
+			</test>
+			<test>
+				<value>../files.xsl</value>
+				<intern:doc-title>Dateien und Dateisystem</intern:doc-title>
+				<intern:wikifile-name>Dateien_und_Dateisystem.wiki</intern:wikifile-name>
+				<intern:wikilink>[Dateien_und_Dateisystem]</intern:wikilink>
+			</test>
+			<test>
+				<value>../internals.logging.xsl</value>
+				<intern:doc-title>Logging-System</intern:doc-title>
+				<intern:wikifile-name>LoggingSystem.wiki</intern:wikifile-name>
+				<intern:wikilink>[LoggingSystem]</intern:wikilink>
+			</test>
+			<test>
+				<value>../internals.meta.xsl</value>
+				<intern:doc-title>Meta-Funktionen</intern:doc-title>
+				<intern:wikifile-name>MetaFunktionen.wiki</intern:wikifile-name>
+				<intern:wikilink>[MetaFunktionen]</intern:wikilink>
+			</test>
+			<test>
+				<value>../internals.stylecheck.xsl</value>
+				<intern:doc-title>StyleCheck</intern:doc-title>
+				<intern:wikifile-name>StyleCheck.wiki</intern:wikifile-name>
+				<intern:wikilink>[StyleCheck]</intern:wikilink>
+			</test>
+			<test>
+				<value>../internals.testing.xsl</value>
+				<intern:doc-title>Testen von Stylesheets</intern:doc-title>
+				<intern:wikifile-name>Testen_von_Stylesheets.wiki</intern:wikifile-name>
+				<intern:wikilink>[Testen_von_Stylesheets]</intern:wikilink>
+			</test>
+			<test>
+				<value>../internals.xsl</value>
+				<intern:doc-title>Interne Funktionen</intern:doc-title>
+				<intern:wikifile-name>Interne_Funktionen.wiki</intern:wikifile-name>
+				<intern:wikilink>[Interne_Funktionen]</intern:wikilink>
+			</test>
+			<test>
+				<value>../numbers.xsl</value>
+				<intern:doc-title>Zahlen und Rechnen</intern:doc-title>
+				<intern:wikifile-name>Zahlen_und_Rechnen.wiki</intern:wikifile-name>
+				<intern:wikilink>[Zahlen_und_Rechnen]</intern:wikilink>
+			</test>
+			<test>
+				<value>../strings.xsl</value>
+				<intern:doc-title>Strings und Texte</intern:doc-title>
+				<intern:wikifile-name>Strings_und_Texte.wiki</intern:wikifile-name>
+				<intern:wikilink>[Strings_und_Texte]</intern:wikilink>
+			</test>
+		</intern:testliste>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- damit es etwas übersichtlicher wird -->
+		<xsl:variable name="seqStringTests" as="element()+" select="document( '' )//intern:testliste[@xml:id='StringTests']/test"/>
+		<xsl:variable name="seqFileTests" as="element()+" select="document( '' )//intern:testliste[@xml:id='FileTests']/test"/>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:wikipage-name     __________ -->
+		<xsl:for-each select="$seqStringTests">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">intern:wikipage-name</xsl:with-param>
+				<xsl:with-param name="actual-value" select="intern:wikipage-name(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:wikifile-name     __________ -->
+		<xsl:for-each select="$seqFileTests">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">intern:wikifile-name</xsl:with-param>
+				<xsl:with-param name="actual-value" select="intern:wikifile-name(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:doc-title     __________ -->
+		<xsl:for-each select="$seqFileTests">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">intern:doc-title</xsl:with-param>
+				<xsl:with-param name="actual-value" select="intern:doc-title(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:wikilink     __________ -->
+		<xsl:for-each select="$seqFileTests">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">intern:wikilink</xsl:with-param>
+				<xsl:with-param name="actual-value" select="intern:wikilink(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!--  -->
 	</xsl:template>
 	<!--  -->
 	<!--  -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-	Copyright (c) 2007-2010 Thomas Meinike
+	Copyright (c) 2007-2011 Thomas Meinike, Stefan Krause
 	
 	Permission is hereby granted, free of charge, to any person obtaining
 	a copy of this software and associated documentation files (the
@@ -27,6 +27,9 @@
 <!ENTITY TabString "&#160;&#160;&#160;&#160;&#160;&#160;">
 <!ENTITY XSL-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb">
 <!ENTITY doc-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb/doc">
+<!ENTITY xsdecimalINF "<para>Ein lästiges Problem ist, dass <code>xs:decimal</code> nicht die Werte <code>-INF</code> und <code>INF</code> abbilden kann. Die aktuelle Implementierung (Revision <code>0.2.25</code>) wirft in diesen Fällen ein Exception (Verarbeitung wird mit Fehler abgebrochen). Eine zukünftige Lösung könnte darin bestehen, das Ergebnis dynamisch auf <code>xs:double</code> oder <code>xs:decimal</code> zu casten.</para>">
+<!ENTITY internMax-internRound "<para>Die Anzahl der Iterationen resp. Genauigkeit wird von <function><link linkend='max_var'>$intern:max</link></function> 
+			und <function><link linkend='iround_var'>$intern:iround</link></function> beeinflusst.</para>">
 ]>
 <xsl:stylesheet
 	version="2.0"
@@ -41,37 +44,63 @@
 	exclude-result-prefixes="doc docv xsb intern"
 	extension-element-prefixes="saxon"
 	>
-	<!-- TODO: Rundung bei rekursiven Funktionsaufrufen prüfen, ggfs. in intern:*- und xsb:*-Funktionen aufteilen (zumindest bei xsb:pow) -->
 	<!--  -->
 	<!--  -->
-	<xsl:import href="internals.stylecheck.xsl"/>
+	<!--  -->
+	<xsl:import href="internals.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
 	<doc:doc filename="math.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
 		<doc:title>Mathematische Funktionen</doc:title>
-		<para>Dieses Stylesheet enthält mathematische Funktionen.</para>
-		<para>Autor: <author>
+		<para>Dieses Stylesheet liefert mathematische Konstanten und berechnet mathematische Funktionen.</para>
+		<para>Die trigonometrischen und Exponential-Funktionen von <link xlink:href="http://www.w3.org/TR/xpath-functions-30/#trigonometry">XPath&#160;3.0</link>
+			wurden – mit Ausnahme der Arcus-Funktionen (<function>asin()</function>, <function>acos()</function>, <function>atan()</function>, <function>atan2()</function>) – 
+			implementiert, allerdings ohne den Standard bezüglich Typung, Leersequenzen usw. vollständig zu implementieren.
+			Daneben gibt es weitere »praktische« Funktionen wie <code><link linkend="fact">xsb:fact</link></code> (Fakultät).</para>
+		<para>Autoren: <author>
 			<honorific>Dr</honorific>
 			<firstname>Thomas</firstname>
 			<surname>Meinike</surname>
+		</author> (<link xlink:href="http://datenverdrahten.de/">http://datenverdrahten.de/</link>) und 
+		<author>
+			<firstname>Stefan</firstname>
+			<surname>Krause</surname>
 			</author>
 		</para>
-		<para>Homepage: <link xlink:href="http://datenverdrahten.de/">http://datenverdrahten.de/</link></para>
+		<para>Die Benennung der Funktionen folgt den Vorgaben von XPath 3.0 
+			(vgl. <link xlink:href="http://www.w3.org/TR/xpath-functions-30/">http://www.w3.org/TR/xpath-functions-30/</link>).</para>
+		<para>Viele Funktionen gibt es in zwei Varianten: eine im Namensraum <code>xsb:</code> und eine im Namensraum <code>intern:</code>.
+			Die Funktionen im Namensraum <code>xsb:</code> liefern gerundete Ergebnisse (siehe <function><link linkend="round_var">intern:round</link></function>),
+			die Funktionen im Namensraum <code>intern:</code> liefern mit <function><link linkend="iround">intern:iround</link></function>
+			gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit
+			intern mit genaueren Werten gerechnet werden kann.</para>
+		<para>Die meisten Funktionen liefern <code>xs:decimal</code>. Hier habe ich mich der Einfachheit halber zu Gunsten
+			der höheren Präzision (und gegen den größeren Wertumfang) entschieden.</para>
+		&xsdecimalINF;
+		<para>Die Parameter der Funktionen im Namensraum <code>xsb:</code> sind – soweit nicht anders erforderlich –
+			ungetypt, um keine Casts bei der Parameterübergabe zu erzwingen.</para>
+		<para>Die Parameter der Funktionen im Namensraum <code>intern:</code> sind in der Regel auf 
+			<code>xs:decimal</code> oder <code>xs:integer</code> getypt.</para>
 		<para xml:id="math.hinweise"><emphasis role="bold">Hinweise:</emphasis></para>
+		<para>Die Berechnung mancher Funktionen (wie <link linkend="nroot"><function>xsb:nroot</function></link> oder <link linkend="log"><function>xsb:log</function></link>) 
+			erfolgt über Näherungen und Reihenentwicklungen. Die Algorithmen sind nicht in Bezug auf Geschwindigkeit und Genauigkeit optimiert, d.h. es kann
+			zu unerwartet langen Ausführungszeiten und falschen Ergebnissen kommen. Vor dem Einsatz dieser Funktionen in kritischen
+			Anwendungen sind unbedingt umfangreiche Tests erforderlich.</para>
 		<para>Bei der Berechnung der Funktionen können zwei Fehlertypen auftreten:
 			<itemizedlist>
 				<listitem>
-					<para>mathematische Fehler: das Ergebnis einer Funktion ist für <code>xs:double</code> nicht definiert 
-						(bspw. <code>ln(-2)</code> oder <code>sqrt(-2)</code>). In diesem Fall wird <code>NaN</code> (für <emphasis>not a number</emphasis>) ausgegeben.</para>
+					<para>mathematische Fehler: das Ergebnis einer Funktion ist für den eingegebenen Wert nicht definiert 
+						(bspw. <code>log(-2)</code> oder <code>sqrt(-2)</code>). In diesem Fall wird die Verarbeitung abgebrochen.</para>
 				</listitem>
 				<listitem>
 					<para>technischer Fehler: die Software bzw. der Algorithmus ist nicht für die Verarbeitung einer bestimmten Eingabe geeignet
-						(bspw. benötigt <code>xsb:pow</code> als Exponenten eine nichtnegative Ganzzahl). In diesem Fall bricht das Stylesheet die Verarbeitung ab.</para>
-					<para>(Dieses Problem hätte zwar mit einer genaueren Typung umgangen werden können, aber Basic XSLT-Prozessoren unterstützen nicht alle Datentypen.)</para>
+						(bspw. benötigt <code>intern:power</code> als Exponenten eine nichtnegative Ganzzahl). In diesem Fall bricht das Stylesheet die Verarbeitung ab.</para>
+					<para>(Dieses Problem hätte zwar mit einer genaueren Typung umgangen werden können, aber Basic XSLT-Prozessoren unterstützen nicht alle Datentypen (wie <code>xs:nonNegativeInteger</code>).)</para>
 				</listitem>
 			</itemizedlist>
 		</para>
+		<para>Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von <link xlink:href="http://www.wolframalpha.com/">WolframAlpha</link> ermittelt.</para>
 		<para role="license"><emphasis role="bold">Lizenz (duale Lizenzierung):</emphasis></para>
 		<para role="license">Dieses Stylesheet und die dazugehörige Dokumentation sind unter einer Creative Commons-Lizenz (<link xlink:href="http://creativecommons.org/licenses/by/3.0/">CC-BY&#160;3.0</link>)
 			lizenziert. Die Weiternutzung ist bei Namensnennung erlaubt.</para>
@@ -87,10 +116,10 @@
 				<para>Dokumentation: <link xlink:href="&doc-Base-Directory;/math.html">&doc-Base-Directory;/math.html</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/math.xsl">&XSL-Base-Directory;/math.xsl</link></para>
+				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/math.xsl">&XSL-Base-Directory;/math_tests.xsl</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/math.html">&doc-Base-Directory;/math.html</link></para>
+				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/math.html">&doc-Base-Directory;/math_tests.html</link></para>
 			</listitem>
 			<listitem>
 				<para>XSLT-SB: <link xlink:href="&XSL-Base-Directory;/">&XSL-Base-Directory;/</link></para>
@@ -101,13 +130,22 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+					<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+						<para>Umstellung von <code>xs:double</code> auf <code>xs:decimal</code>, Optimierungen, Anpassungen</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
 				<authorinitials>Stf</authorinitials>
 					<revdescription>
 					<para conformance="draft">Status: draft</para>
-						<para>initiale Version auf der Grundlage der Bibliothek von Thomas Meinike
-							(Original-URL <link xlink:href="http://datenverdrahten.de/xslt2/tm_mathlib.xsl">http://datenverdrahten.de/xslt2/tm_mathlib.xsl</link>)</para>
+					<para>initiale Version auf der Grundlage der Bibliothek von Thomas Meinike
+						(Original-URL <link xlink:href="http://datenverdrahten.de/xslt2/tm_mathlib.xsl">http://datenverdrahten.de/xslt2/tm_mathlib.xsl</link>)</para>
 				</revdescription>
 			</revision>
 		</revhistory>
@@ -116,32 +154,160 @@
 	<!--  -->
 	<!--  -->
 	<!-- ====================     Konstanten     ==================== -->
-	<!--  -->
-	<!--  -->
+	<doc:variable>
+		<para xml:id="max_var">Anzahl der Glieder für Reihenentwicklungen</para>
+		<para>Die maximale Zahl von Iterationen und damit die Genauigkeit der Reihenentwicklungen lässt sich über den Wert der Variable <code><link linkend="max_var">$intern:max</link></code> steuern.</para>
+		<para>In der Regel konvergieren die Reihenglieder gegen 0, und die Reihenbildung wird abgebrochen, wenn das Reihenglied, gerundet mit 
+			<function><link linkend="iround">intern:iround</link></function>, zu Null wird.</para>
+		<para><code><link linkend="max_var">$intern:max</link></code> kann herabgesetzt werden, um zu Lasten der Genauigkeit eine schnellere Berechnung zu erzielen 
+			(ggfs. in Verbindung mit einer Herabsetzung von <code><link linkend="round_var">$intern:round</link></code> bzw. <code><link linkend="iround_var">$intern:iround</link></code>).</para>
+		<para>Außerdem sorgt diese Variable für einen Abbruch der Reihenbildung, falls aus irgendeinem Grund (etwa Rundungsungenauigkeiten) 
+			der Algorithmus nicht konvergiert.</para>
+	</doc:variable>
+	<xsl:variable name="intern:max" as="xs:integer" select="80"/>
 	<!--  -->
 	<doc:variable>
-		<para>Wert von Pi als globale Variable (Konstante)</para>
-		<!-- TODO: Müssten dass nach der Logik von XPath nicht Funktionen aka xsb:pi() sein?-->
+		<para xml:id="round_var">Stellen für Ergebnis-Rundung</para>
+		<para>Am Ende der Berechnung werden die Ergebnisse auf diese Anzahl der Stellen gerundet. Default: 16</para>
+		<para>Der Defaultwert ergibt sich aus der Anforderung, dass jeder standardkonforme XSLT-Prozessor mindestens 18 Digits
+			unterstützen muss, vgl. <link xlink:href="http://www.w3.org/TR/xmlschema-2/#decimal">XML Schema Part 2: Datatypes Second Edition</link>.
+			Da es bei mehrstufigen Berechnungen zu Rundungsfehlern kommen kann, ist die Anzahl der signifikanten Stellen ein Kompromiss. 
+			Ich habe mich für 16 Stellen entschieden, weil damit die meisten Tests erfolgreich verlaufen, nur <function>xsb:cot(3)</function>
+			(unter Saxon) und <function>xsb:exp(100)</function> (unter Saxon und AltovaXML) liefern falsche Ergebnisse (wobwi Saxon den Wert
+			als 16 Nachkommastellen, AltovaXML aber als 15 Nachkommastellen interpretiert).</para>
 	</doc:variable>
-	<xsl:variable name="xsb:pi" as="xs:double" select="3.141592653589793"/>
+	<xsl:variable name="intern:round" as="xs:integer" select="15"/>
 	<!--  -->
 	<doc:variable>
-		<para>natürlicher Logarithmus von 10 (Konstante)</para>
+		<para xml:id="iround_var">Stellen für interne Ergebnis-Rundung</para>
+		<para>Am Ende der Berechnung werden die Ergebnisse auf diese Anzahl der Stellen gerundet. Default: 32 (das Doppelte von <code>intern:round</code>)</para>
+		<para>Hinweis: Intern müssen XSLT-Prozessoren nicht mit dieser Auflösung rechnen.</para>
 	</doc:variable>
+	<xsl:variable name="intern:iround" as="xs:integer" select="32"/>
 	<!--  -->
-	<xsl:variable name="intern:ln10" as="xs:double" select="2.302585092994046"/>
-	<doc:variable>
-		<para>Anzahl der Glieder für Reihenentwicklungen</para>
-		<para>Die Genauigkeit der Reihenentwicklungen lässt sich über den Wert der Variable <code>$intern:max</code> steuern. Ein guter Wert ist TODO: Was sind sinnvolle werte?</para>
-	</doc:variable>
-	<xsl:variable name="intern:max" as="xs:integer" select="200"/>
 	<!--  -->
-	<doc:variable>
-		<para>Stellen für Ergebnis-Rundung</para>
-		<para>Am Ende der Berechnung werden die Ergebnisse auf diese Anzahl der Stellen gerundet. Default: 8</para>
-		<!-- TODO: wie viele Stellen umfasst mathematisch sauber eine sinnvolle Genauigkeit? 8, wie vorgegeben? 14, um noch runden zu können? -->
-	</doc:variable>
-	<xsl:variable name="intern:round" as="xs:integer" select="8"/>
+	<!--  -->
+	<!-- ====================     Konstanten als Funktionen    ==================== -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:pi     __________ -->
+	<doc:function>
+		<para xml:id="pi">Konstante Pi mit 3,14159265358979323846264338327950288419716939937511…</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:pi" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:sequence select="3.14159265358979323846264338327950288419716939937511"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:tau     __________ -->
+	<doc:function>
+		<para xml:id="tau">Konstante Tau mit 2 * Pi = 6,28318530717958647692528676655900576839433879875021…</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:tau" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:sequence select="6.28318530717958647692528676655900576839433879875021"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:e     __________ -->
+	<doc:function>
+		<para xml:id="e">Konstante e (Eulersche Zahl) mit 2,718281828459045235360287471353…</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:e" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:sequence select="2.718281828459045235360287471352662497757247093699959574967"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:ln2     __________ -->
+	<doc:function>
+		<para xml:id="ln2">natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:ln2" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:sequence select="0.69314718055994530941723212145817656807550013436025525412"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:ln10     __________ -->
+	<doc:function>
+		<para xml:id="ln10">natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:ln10" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:sequence select="2.302585092994045684017991454684364207601101488628772976033"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:sqrt2     __________ -->
+	<doc:function>
+		<para xml:id="sqrt2">Wurzel aus 2 mit 1,4142135623730950488… (Konstante)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:sqrt2" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:sequence select="1.414213562373095048801688724209698078569671875376948073"/>
+	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -165,17 +331,25 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:fact" as="xs:double">
-		<xsl:param name="n" as="xs:integer"/>
+	<xsl:function name="xsb:fact" as="xs:integer">
+		<xsl:param name="n" as="xs:anyAtomicType"/>
+		<xsl:variable name="n_" as="xs:integer" select="xs:integer($n)"/>
 		<xsl:choose>
-			<xsl:when test="$n ge 0">
-				<xsl:sequence select="if($n le 1) then 1 else $n * xsb:fact($n - 1)"/>
+			<xsl:when test="$n_ gt 1">
+				<xsl:sequence select="$n_ * xsb:fact($n_ - 1)"/>
+			</xsl:when>
+			<xsl:when test="$n_ eq 1">
+				<xsl:sequence select="1"/>
+			</xsl:when>
+			<xsl:when test="$n_ eq 0">
+				<xsl:sequence select="1"/>
 			</xsl:when>
 			<xsl:otherwise>
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
 					<xsl:with-param name="caller">xsb:fact</xsl:with-param>
 					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: ist »<xsl:sequence select="$n"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe »<xsl:sequence select="$n"/>«. Die Fakultät ist für Zahlen kleiner Null nicht definiert, Verarbeitung abgebrochen.</xsl:with-param>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -185,10 +359,18 @@
 	<!-- __________     xsb:pow     __________ -->
 	<doc:function>
 		<doc:param name="basis"><para>Basis</para></doc:param>
-		<doc:param name="exponent"><para>Exponent, nichtnegative Ganzzahl</para></doc:param>
-		<para xml:id="pow">Potenz basis^exponent für nichtnegative ganzzahlige Exponenten</para>
-		<para>Die Eingabe einer ungültigen Zahl als Exponent (kleiner 0) führt zum Abbruch (mit Fehlermeldung)</para>
+		<doc:param name="exponent"><para>Exponent</para></doc:param>
+		<para xml:id="pow">berechnet die Potenz basis^exponent</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Aufteilung in <function>xsb:pow</function> und <function>intern:pow</function>, Lösung für negative Exponenten</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -200,19 +382,96 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:pow" as="xs:double">
-		<xsl:param name="basis" as="xs:double"/>
-		<xsl:param name="exponent" as="xs:integer"/>
+	<xsl:function name="xsb:pow" as="xs:decimal">
+		<xsl:param name="basis" as="xs:anyAtomicType"/>
+		<xsl:param name="exponent" as="xs:anyAtomicType"/>
 		<xsl:choose>
-			<xsl:when test="$exponent ge 0">
-				<xsl:sequence select="if($exponent eq 0) then 1 else $basis * xsb:pow($basis, $exponent - 1)"/>
+			<!-- ganzzahlige Exponenten können per Multiplikation bearbeitet werden -->
+			<xsl:when test="round($exponent) eq xs:decimal($exponent)">
+				<xsl:sequence select="intern:round(intern:power(xs:decimal($basis), xs:integer($exponent) ) )"/>
+			</xsl:when>
+			<!-- gebrochene Exponenten werden näherungsweise bearbeitet -->
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:pow(xs:decimal($basis), xs:decimal($exponent) ) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:pow     __________ -->
+	<doc:function>
+		<doc:param name="basis"><para>Basis</para></doc:param>
+		<doc:param name="exponent"><para>Exponent</para></doc:param>
+		<para xml:id="pow_i">berechnet die Potenz basis^exponent</para>
+		<para>Bei ganzzahligen Exponenten wird die multiplikative Variante mit <function><link linkend="power">intern:power()</link></function>
+			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:pow" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="basis" as="xs:decimal"/>
+		<xsl:param name="exponent" as="xs:decimal"/>
+		<xsl:choose>
+			<xsl:when test="$exponent gt 0">
+				<xsl:sequence select="intern:exp($exponent * intern:log($basis) )"/>
+			</xsl:when>
+			<xsl:when test="$exponent eq 0">
+				<xsl:sequence select="1"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:pow</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: Exponent ist »<xsl:sequence select="$exponent"/>«, muss aber Ganzzahl größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
-				</xsl:call-template>
+				<xsl:sequence select="intern:iround(1 div intern:pow($basis, abs($exponent) ) )"/>
+			</xsl:otherwise>
+		</xsl:choose>	
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:power     __________ -->
+	<doc:function>
+		<doc:param name="basis"><para>Basis</para></doc:param>
+		<doc:param name="exponent"><para>Exponent, Ganzzahl</para></doc:param>
+		<para xml:id="power">berechnet die Potenz basis^exponent für ganzzahlige Exponenten (multiplikative Methode)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Berücksichtigung negativer Exponenten</para>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>0.2.12</revnumber>
+				<date>2011-05-21</date>
+				<authorinitials>TM</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:power" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="basis" as="xs:decimal"/>
+		<xsl:param name="exponent" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="$exponent gt 0">
+				<xsl:sequence select="xs:decimal($basis * intern:iround(intern:power($basis, $exponent - 1) ) )"/>
+			</xsl:when>
+			<xsl:when test="$exponent eq 0">
+				<xsl:sequence select="1"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:iround(1 div intern:power($basis, abs($exponent) ) )"/>
 			</xsl:otherwise>
 		</xsl:choose>	
 	</xsl:function>
@@ -221,8 +480,7 @@
 	<!-- __________     xsb:exp     __________ -->
 	<doc:function>
 		<doc:param name="exponent"><para>Exponent der e-Funktion</para></doc:param>
-		<para xml:id="exp">Exponential-Funktion e^exponent (Reihenentwicklung)</para>
-		<para>Die Genauigkeit der Reihenentwicklungen lässt sich über den Wert der Variable <code>$intern:max</code> steuern.</para>
+		<para xml:id="exp">Exponential-Funktion e^exponent</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
@@ -235,9 +493,129 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:exp" as="xs:double">
-		<xsl:param name="exponent" as="xs:double"/>
-		<xsl:sequence select="round-half-to-even(sum( (for $n in (0 to $intern:max) return (xsb:pow($exponent, $n) div xsb:fact($n) ) )[not(string(.) = ('NaN', 'INF') )] ), $intern:round)"/>
+	<xsl:function name="xsb:exp" as="xs:decimal">
+		<xsl:param name="exponent" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:exp($exponent) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:exp     __________ -->
+	<doc:function>
+		<doc:param name="exponent"><para>Exponent der e-Funktion</para></doc:param>
+		<para xml:id="exp_i">Exponential-Funktion e^exponent</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:exp" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="exponent" as="xs:decimal"/>
+		<!-- k ist Hilfsvariable, um e^x in einem kleineren Wertebereich und damit genauer zu berechnen -->
+		<xsl:variable name="k" as="xs:integer" select="xs:integer(floor(($exponent) div intern:ln2() ) )"/>
+		<xsl:sequence select="intern:power(2, $k) * intern:exp-iterator(xs:decimal($exponent) - $k * intern:ln2(), 1, 1, 1, 1)"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:exp-iterator     __________ -->
+	<doc:function>
+		<doc:param name="exponent"><para>Exponent der e-Funktion</para></doc:param>
+		<doc:param name="vortrag"><para>Vortrag der Reihenbildung, wird mit 1 initialisiert</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit 1 initialisiert</para></doc:param>
+		<doc:param name="pow-vortrag"><para>Vortrag der Potenz, wird mit 1 initialisiert</para></doc:param>
+		<doc:param name="fact-vortrag"><para>Vortrag der Fakultät, wird mit 1 initialisiert</para></doc:param>
+		<para xml:id="exp-iterator">Iterator zur Berechnung der e-Funktion (Reihenbildung)</para>
+		&internMax-internRound;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:exp-iterator" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="exponent" as="xs:decimal"/>
+		<xsl:param name="vortrag" as="xs:decimal"/><!-- wird mit 1 initialisiert -->
+		<xsl:param name="iteration" as="xs:integer"/><!-- wird mit 1 initialisiert -->
+		<xsl:param name="pow-vortrag" as="xs:decimal"/><!-- wird mit 1 initialisiert --><!-- pow-vortrag, um nicht jedesmal die rekursive intern:pow-Funktion aufrufen zu müssen -->
+		<xsl:param name="fact-vortrag" as="xs:integer"/><!-- wird mit 1 initialisiert --><!-- fact-vortrag, um nicht jedesmal die rekursive xsb:fact-Funktion aufrufen zu müssen -->
+		<!--  -->
+		<xsl:variable name="aktuellePow" as="xs:decimal" select="$pow-vortrag * $exponent"/>
+		<xsl:variable name="aktuelleFact" as="xs:integer" select="$fact-vortrag * $iteration"/>
+		<xsl:variable name="lokalesErgebnis" as="xs:decimal" select="$aktuellePow div $aktuelleFact"/>
+		<xsl:variable name="vorlaeufigesErgebnis" as="xs:decimal" select="$vortrag + $lokalesErgebnis"/>
+		<xsl:choose>
+			<xsl:when test="($iteration le $intern:max) and (round-half-to-even($lokalesErgebnis, $intern:iround) ne 0)">
+				<xsl:sequence select="intern:exp-iterator($exponent, $vorlaeufigesErgebnis, $iteration + 1, $aktuellePow, $aktuelleFact )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$vortrag"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:exp10     __________ -->
+	<doc:function>
+		<doc:param name="exponent"><para>Exponent</para></doc:param>
+		<para xml:id="exp10">Exponential-Funktion 10^exponent (Zehnerpotenzen)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:exp10" as="xs:decimal">
+		<xsl:param name="exponent" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:exp10(xs:decimal($exponent) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:exp10     __________ -->
+	<doc:function>
+		<doc:param name="exponent"><para>Exponent</para></doc:param>
+		<para xml:id="exp10">berechnet die Potenz zur Basis 10</para>
+		<para>Bei ganzzahligen Exponenten wird die multiplikative Variante mit <function><link linkend="power">intern:power()</link></function>
+			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:exp10" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="exponent" as="xs:decimal"/>
+		<xsl:choose>
+			<xsl:when test="round($exponent) eq xs:decimal($exponent)">
+				<xsl:sequence select="intern:power(10, xs:integer($exponent) )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:exp($exponent * intern:ln10() )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -247,30 +625,14 @@
 		<para xml:id="sin">Sinus-Funktion (Reihenentwicklung)</para>
 		<revhistory>
 			<revision>
-				<revnumber>0.2.12</revnumber>
-				<date>2011-05-21</date>
-				<authorinitials>TM</authorinitials>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
 				<revdescription>
 					<para conformance="beta">Status: beta</para>
-					<para>initiale Version</para>
+					<para>umgeschrieben auf <function>intern:sinus-iterator()</function></para>
 				</revdescription>
 			</revision>
-		</revhistory>
-	</doc:function>
-	<xsl:function name="xsb:sin" as="xs:double">
-		<xsl:param name="arg" as="xs:double"/>
-		<xsl:variable name="x" as="xs:double" select="if($arg ge 2 * $xsb:pi) then ($arg - floor($arg div (2 * $xsb:pi) ) * 2 * $xsb:pi) else
-			(if ($arg le -2 * $xsb:pi) then ($arg + floor($arg div (-2 * $xsb:pi) ) * 2 * $xsb:pi) else $arg)"/>
-		<xsl:variable name="sum_seq" as="xs:double+" select="for $n in (0 to $intern:max) return (xsb:pow(-1, $n) * xsb:pow($x, 2 * $n + 1) div xsb:fact(2 * $n + 1) )"/>
-		<xsl:sequence select="round-half-to-even(sum($sum_seq), $intern:round)"/>
-	</xsl:function>
-	<!--  -->
-	<!--  -->
-	<!-- __________     xsb:cos     __________ -->
-	<doc:function>
-		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
-		<para xml:id="cos">Cosinus-Funktion (Reihenentwicklung)</para>
-		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -282,13 +644,312 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:cos" as="xs:double">
-		<xsl:param name="arg" as="xs:double"/>
-		<xsl:variable name="x" as="xs:double" select="if ($arg ge 2 * $xsb:pi) then ($arg - floor($arg div (2 * $xsb:pi) ) * 2 * $xsb:pi) else
-			(if ($arg le -2 * $xsb:pi) then ($arg + floor($arg div (-2 * $xsb:pi)) * 2 * $xsb:pi) else $arg)"/>
-		<xsl:variable name="sum_seq" as="xs:double+" select="for $n in (0 to $intern:max) return number(xsb:pow(-1, $n) * xsb:pow($x, 2 * $n) div xsb:fact(2 * $n) )"/>
-		<xsl:sequence select="round-half-to-even(sum($sum_seq), $intern:round)"/>
+	<xsl:function name="xsb:sin" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:sin(xs:decimal($arg) ) )"/>
 	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:sin     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="sin_i">berechnet den Sinus</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:sin" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:sequence select="intern:iround(intern:sinus-iterator(intern:normalize-rad(xs:decimal($arg) ), 0, 0) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:sinus-iterator     __________ -->
+	<doc:function>
+		<doc:param name="NormalisiertesArgument"><para>Winkel im Bogenmaß, normalisiert auf den Bereich zwischen <code>- 2 * Pi</code> und <code>2 * Pi</code></para></doc:param>
+		<doc:param name="vortrag"><para>Vortrag</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit 0 initialisiert</para></doc:param>
+		<para xml:id="sinus-iterator">Iterator zur Berechnung des Sinus</para>
+		&internMax-internRound;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:sinus-iterator" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="NormalisiertesArgument" as="xs:decimal"/>
+		<xsl:param name="vortrag" as="xs:decimal"/>
+		<xsl:param name="iteration" as="xs:integer"/>
+		<xsl:variable name="lokalesResultat" as="xs:decimal" select="intern:power(-1, $iteration) * intern:power($NormalisiertesArgument, 2 * $iteration + 1) div xsb:fact(2 * $iteration + 1)"/>
+		<xsl:choose>
+			<xsl:when test="($iteration le $intern:max) and (intern:iround($lokalesResultat) ne 0)">
+				<xsl:sequence select="intern:sinus-iterator($NormalisiertesArgument, $vortrag + $lokalesResultat, $iteration +1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$vortrag + $lokalesResultat"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:cos     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="cos">berechnet den Cosinus</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>umgeschrieben auf <function>intern:cosinus-iterator()</function></para>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>0.2.12</revnumber>
+				<date>2011-05-21</date>
+				<authorinitials>TM</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:cos" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:cos(xs:decimal($arg) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:cos     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="cos_i">berechnet den Cosinus</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:cos" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:sequence select="intern:iround(intern:cosinus-iterator(intern:normalize-rad($arg), 0, 0) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:cosinus-iterator     __________ -->
+	<doc:function>
+		<doc:param name="NormalisiertesArgument"><para>Winkel im Bogenmaß, normalisiert auf den Bereich zwischen <code>- 2 * Pi</code> und <code>2 * Pi</code></para></doc:param>
+		<doc:param name="vortrag"><para>Vortrag</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit 0 initialisiert</para></doc:param>
+		<para xml:id="cosinus-iterator">Iterator zur Berechnung des Kosinus</para>
+		&internMax-internRound;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:cosinus-iterator" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="NormalisiertesArgument" as="xs:decimal"/>
+		<xsl:param name="vortrag" as="xs:decimal"/>
+		<xsl:param name="iteration" as="xs:integer"/>
+		<xsl:variable name="lokalesResultat" as="xs:decimal" select="intern:power(-1, $iteration) * intern:power($NormalisiertesArgument, 2 * $iteration) div xsb:fact(2 * $iteration)"/>
+		<xsl:choose>
+			<xsl:when test="($iteration le $intern:max) and (intern:iround($lokalesResultat) ne 0)">
+				<xsl:sequence select="intern:cosinus-iterator($NormalisiertesArgument, $vortrag + $lokalesResultat, $iteration +1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$vortrag + $lokalesResultat"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:normalize-rad     __________ -->
+	<doc:function>
+		<doc:param name="rad"><para>Winkel im Bogenmaß</para></doc:param>
+		<para xml:id="normalize-rad">rechnet Winkel auf den Bereich von <code>- 2 * Pi</code> bis <code>2 * Pi</code> um</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:normalize-rad" as="xs:decimal">
+		<xsl:param name="rad" as="xs:decimal"/>
+		<xsl:variable name="_rad" as="xs:decimal" select="xs:decimal($rad)"/>
+		<xsl:sequence select="xs:decimal(
+				 if ($_rad ge  xsb:tau() ) then ($_rad - floor($_rad div ( xsb:tau() ) ) * xsb:tau() ) else
+				(if ($_rad le -xsb:tau() ) then ($_rad + floor($_rad div (-xsb:tau() ) ) * xsb:tau() ) else 
+				     $_rad)
+			)"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:tan     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="tan">berchnet den Tangens</para>
+		&xsdecimalINF;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:tan" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:tan(xs:decimal($arg) ) )"/>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="tan">berchnet den Tangens</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:tan" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:variable name="sin" as="xs:decimal" select="intern:sin($arg)"/>
+		<xsl:variable name="cos" as="xs:decimal" select="intern:cos($arg)"/>
+		<xsl:choose>
+			<xsl:when test="($cos eq 0) and ($sin ge 0)">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('intern:tan', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ergebnis soll INF sein, kann aber nicht ausgegeben werden.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test="($cos eq 0) and ($sin lt 0)">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('intern:tan', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ergebnis soll -INF sein, kann aber nicht ausgegeben werden.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$sin div $cos"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:cot     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="cot">berechnet den Cotangens</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:cot" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:cot(xs:decimal($arg) ) )"/>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
+		<para xml:id="cot">berechnet den Cotangens</para>
+		&xsdecimalINF;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:cot" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:variable name="sin" as="xs:decimal" select="intern:sin($arg)"/>
+		<xsl:variable name="cos" as="xs:decimal" select="intern:cos($arg)"/>
+		<xsl:choose>
+			<xsl:when test="($sin eq 0) and ($cos ge 0)">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('intern:cot', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ergebnis soll INF sein, kann aber nicht ausgegeben werden.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test="($sin eq 0) and ($cos lt 0)">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('intern:cot', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ergebnis soll -INF sein, kann aber nicht ausgegeben werden.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$cos div $sin"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
 	<!--  -->
 	<!--  -->
 	<!-- __________     xsb:deg-to-rad     __________ -->
@@ -307,9 +968,32 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:deg-to-rad" as="xs:double">
-		<xsl:param name="deg" as="xs:double"/>
-		<xsl:value-of select="$deg * $xsb:pi div 180"/>
+	<xsl:function name="xsb:deg-to-rad" as="xs:decimal">
+		<xsl:param name="deg" as="xs:anyAtomicType"/>
+		<xsl:value-of select="intern:round(intern:deg-to-rad(xs:decimal($deg) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:deg-to-rad     __________ -->
+	<doc:function>
+		<doc:param name="deg"><para>Eingabe im Gradmaß</para></doc:param>
+		<para xml:id="deg-to-rad">wandelt Gradmaß in Bogenmaß um</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.12</revnumber>
+				<date>2011-05-21</date>
+				<authorinitials>TM</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:deg-to-rad" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="deg" as="xs:decimal"/>
+		<xsl:value-of select="xs:decimal($deg) * xsb:pi() div 180"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -329,9 +1013,31 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:rad-to-deg" as="xs:double">
-		<xsl:param name="rad" as="xs:double"/>
-		<xsl:value-of select="$rad * 180 div $xsb:pi"/>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:rad-to-deg     __________ -->
+	<xsl:function name="xsb:rad-to-deg" as="xs:decimal">
+		<xsl:param name="rad" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:rad-to-deg(xs:decimal($rad) ) )"/>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="rad"><para>Eingabe im Bogenmaß</para></doc:param>
+		<para xml:id="rad-to-deg">rechnet Bogenmaß in Gradmaß um</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.12</revnumber>
+				<date>2011-05-21</date>
+				<authorinitials>TM</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:rad-to-deg" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="rad" as="xs:decimal"/>
+		<xsl:sequence select="xs:decimal($rad) * 180 div xsb:pi()"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -351,24 +1057,49 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:sqrt" as="xs:double">
-		<xsl:param name="arg" as="xs:double"/>
+	<xsl:function name="xsb:sqrt" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:choose>
-			<xsl:when test="$arg ge 0">
-				<xsl:value-of select="xsb:nroot($arg, 2)"/>
+			<xsl:when test="xs:decimal($arg) ge 0">
+				<xsl:value-of select="xsb:nroot(xs:decimal($arg), 2)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="number('NaN')"/>
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:sqrt</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$arg"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:function>
+	<!-- __________     intern:sqrt     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabewert</para></doc:param>
+		<para xml:id="sqrt_i">berechnet die Quadratwurzel, Shortcut für <function>intern:nroot($arg, 2)</function></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.12</revnumber>
+				<date>2011-05-21</date>
+				<authorinitials>TM</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:sqrt" as="xs:decimal">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:value-of select="intern:nroot($arg, 2)"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!-- __________     xsb:nroot     __________ -->
 	<doc:function>
-		<doc:param name="arg"><para>Argument</para></doc:param>
-		<doc:param name="wurzelexponent"><para>Wurzelexponent</para></doc:param>
-		<para xml:id="nroot">berechnet die n-te (n = Wurzelexponent) Wurzel</para>
+		<doc:param name="wurzelbasis"><para>Wurzelbasis (Radikand)</para>; muss größer Null sein</doc:param>
+		<doc:param name="wurzelexponent"><para>Wurzelexponent; muss eine natürliche Zahl sein</para></doc:param>
+		<para xml:id="nroot">berechnet die n-te Wurzel (n = Wurzelexponent)</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
@@ -382,26 +1113,66 @@
 		</revhistory>
 	</doc:function>
 	<!-- n-te Wurzel -->
-	<xsl:function name="xsb:nroot" as="xs:double">
-		<xsl:param name="arg" as="xs:double"/>
+	<xsl:function name="xsb:nroot" as="xs:decimal">
+		<xsl:param name="wurzelbasis" as="xs:anyAtomicType"/>
 		<xsl:param name="wurzelexponent" as="xs:integer"/>
-		<xsl:if test="$arg ge 0 and $wurzelexponent ge 1">
-			<xsl:sequence select="intern:root-iterator($wurzelexponent, $arg, 0, $arg)"/>
-		</xsl:if>
-		<xsl:if test="($arg lt 0) or ($wurzelexponent lt 1)">
-			<!-- ToDo: hier hätte ich lieber einen Abbruch, weil das ja nicht undefiniert ist, sondern nicht vom Algorithmus abgedeckt ist (Stf, 2011-05-17) -->
-			<xsl:value-of select="number('NaN')"/>
-		</xsl:if>
+		<xsl:sequence select="intern:round(intern:nroot($wurzelbasis, $wurzelexponent) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:nroot     __________ -->
+	<doc:function>
+		<doc:param name="wurzelbasis"><para>Wurzelbasis (Radikand)</para>; muss größer Null sein</doc:param>
+		<doc:param name="wurzelexponent"><para>Wurzelexponent; muss eine natürliche Zahl sein</para></doc:param>
+		<para xml:id="nroot_i">berechnet die n-te Wurzel (n = Wurzelexponent)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:nroot" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="wurzelbasis" as="xs:decimal"/>
+		<xsl:param name="wurzelexponent" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="xs:decimal($wurzelbasis) ge 0 and $wurzelexponent ge 1">
+				<xsl:sequence select="intern:root-iterator($wurzelexponent, $wurzelbasis, 0, $wurzelbasis, 0)"/>
+			</xsl:when>
+			<xsl:when test="xs:decimal($wurzelbasis) lt 0">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:nroot</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$wurzelbasis"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:nroot</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe: Wurzelexponent ist »<xsl:sequence select="$wurzelexponent"/>«, muss aber größer/gleich 1 sein. Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!-- __________     intern:root-iterator     __________ -->
 	<doc:function>
-		<doc:param name="n"><para>ToDo</para></doc:param>
-		<doc:param name="x"><para>ToDo</para></doc:param>
-		<doc:param name="y"><para>ToDo</para></doc:param>
-		<doc:param name="yn"><para>ToDo</para></doc:param>
+		<doc:param name="n"><para>Wurzelexponent</para></doc:param>
+		<doc:param name="x"><para>Wurzelbasis (Radikand)</para></doc:param>
+		<doc:param name="y"><para>Vortrag; wird mit 0 initialisiert</para></doc:param>
+		<doc:param name="yn"><para>Vortrag; wird mit Wurzelbasis initialisiert</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit 0 initialisiert</para></doc:param>
 		<para xml:id="root-iterator">iterative Wurzelberechnung nach dem Heron-Verfahren</para>
+		&internMax-internRound;
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
@@ -414,28 +1185,29 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="intern:root-iterator" as="xs:double">
+	<xsl:function name="intern:root-iterator" as="xs:decimal" intern:solved="MissingTests">
 		<xsl:param name="n" as="xs:integer"/>
-		<xsl:param name="x" as="xs:double"/>
-		<xsl:param name="y" as="xs:double"/>
-		<xsl:param name="yn" as="xs:double"/>
+		<xsl:param name="x" as="xs:decimal"/>
+		<xsl:param name="y" as="xs:decimal"/>
+		<xsl:param name="yn" as="xs:decimal"/>
+		<xsl:param name="iteration" as="xs:integer"/><!-- wird normalerweise mit 0 initialisiert -->
 		<xsl:choose>
-			<xsl:when test="abs($y - $yn) gt 1E-8">
-				<xsl:variable name="akt_y" select="$yn" as="xs:double"/>
-				<xsl:variable name="akt_yn" select="1 div $n * ( ( ($n - 1) * $akt_y) + ($x div xsb:pow($akt_y, $n - 1) ) )" as="xs:double"/>
-				<xsl:sequence select="intern:root-iterator($n, $x, $akt_y, $akt_yn)"/>
+			<xsl:when test="(intern:iround($y - $yn) ne 0) and ($iteration lt $intern:max)">
+				<xsl:variable name="akt_y" as="xs:decimal" select="$yn"/>
+				<xsl:variable name="akt_yn" as="xs:decimal" select="(1 div $n * ( ( ($n - 1) * $akt_y) + ($x div intern:power($akt_y, $n - 1) ) ) )"/>
+				<xsl:sequence select="intern:root-iterator($n, $x, $akt_y, $akt_yn, $iteration + 1)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="round-half-to-even($yn, $intern:round)"/>
+				<xsl:sequence select="$yn"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!-- __________     xsb:ln     __________ -->
+	<!-- __________     xsb:log     __________ -->
 	<doc:function>
 		<doc:param name="arg"><para>Argument</para></doc:param>
-		<para xml:id="ln">berechnet den natürlichen Logarithmus</para>
+		<para xml:id="log">berechnet den natürlichen Logarithmus</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
@@ -448,29 +1220,156 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:ln" as="xs:double">
-		<xsl:param name="arg" as="xs:double"/>
+	<xsl:function name="xsb:log" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:log(xs:decimal($arg) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:log     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument</para></doc:param>
+		<para xml:id="log_i">berechnet den natürlichen Logarithmus (Logarithmus zur Basis <code>e</code>)</para>
+		<para>Da der Algorithmus von <function><link linkend="log-iterator">intern:log-iterator</link></function> besonders gut für Argumente
+			zwischen <function>1/sqrt(2)</function> und <function>sqrt(2)</function> konvergiert, werden die Argumente in diesen Bereich transformiert.
+			Zuerst wird mit <function><link linkend="log-m-iterator">intern:log-m-iterator</link></function> ein passender Faktor <code>m</code> ermittelt.
+			Das gesuchte Ergebnis ergibt sich über die Beziehung <function>log(x) = 2 * m * log(sqrt(2)) + log((2^ -m) * x)</function>.</para>
+		&xsdecimalINF;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:log" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
 		<xsl:choose>
-			<xsl:when test="$arg gt 0">
-				<xsl:variable name="argm" as="xs:double" select="$arg - 1"/>
-				<xsl:variable name="argp" as="xs:double" select="$arg + 1"/>
-				<xsl:variable name="sum_seq" as="xs:double*" select="for $n in (1 to 4 * $intern:max)[. mod 2 = 1] return (xsb:pow($argm, $n) div ($n * xsb:pow($argp, $n) ) )[string(.) ne ('NaN')]"/>
-				<xsl:sequence select="round-half-to-even(2 * sum($sum_seq), $intern:round)"/>
+			<xsl:when test="xs:decimal($arg) gt 0">
+				<!-- intern:log-iterator konvergiert besser, wenn $arg zwischen 1 div sqrt(2) und sqrt(2) liegt -->
+				<!-- Umformung: log(x) = 2 * m * log(sqrt(2)) + log((2^-m)*x) -->
+				<xsl:variable name="m" as="xs:integer" select="intern:log-m-iterator($arg, 0)"/>
+				<xsl:variable name="logsqrt2" as="xs:decimal" select="0.346573590279972654708616060729088284037750067180127627060"/>
+				<xsl:variable name="newArg" as="xs:decimal" select="intern:power(2, - $m ) * $arg"/>
+				<xsl:sequence select="2 * $m * $logsqrt2 + intern:log-iterator($newArg -1, $newArg +1, 0, 0, 1)"/>
 			</xsl:when>
-			<xsl:when test="$arg eq 0">
-				<xsl:value-of select="number('-INF')"/>
+			<xsl:when test="xs:decimal($arg) eq 0">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('intern:log', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ergebnis soll -INF sein, kann aber nicht ausgegeben werden.</xsl:with-param>
+				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="number('NaN')"/>
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:log</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe »<xsl:sequence select="$arg"/>«. Für Zahlen kleiner Null ist log(x) nicht definiert, Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!-- __________     xsb:lg     __________ -->
+	<!-- __________     intern:log-m-iterator     __________ -->
+	<doc:function>
+		<doc:param name="x"><para>Argument der <function>log()</function>-Funktion</para></doc:param>
+		<doc:param name="m"><para>Vortrag; wird mit 0 initialisiert</para></doc:param>
+		<para xml:id="log-m-iterator">ermittelt einen Faktor, um intern:log-iterator
+			in einem Bereich mit günstiger Konvergenz ausführen zu können.</para>
+		<para>Details siehe <function><link linkend="log_i">intern:log()</link></function></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:log-m-iterator" as="xs:integer">
+		<xsl:param name="x" as="xs:decimal"/>
+		<xsl:param name="m" as="xs:integer"/><!-- wird mit 0 initialisiert -->
+		<xsl:variable name="untereGrenze" as="xs:decimal" select="0.707106781186547524400844362104849039284835937688474036588"/><!-- 1 div intern:sqrt2() -->
+		<xsl:variable name="Referenz" as="xs:decimal" select="intern:power(2, - $m) * $x"/>
+		<xsl:choose>
+			<xsl:when test="$Referenz lt $untereGrenze">
+				<xsl:sequence select="intern:log-m-iterator($x, $m - 1)"/>
+			</xsl:when>
+			<xsl:when test="($Referenz ge $untereGrenze ) and ($Referenz le intern:sqrt2() )">
+				<xsl:sequence select="$m"/>
+			</xsl:when>
+			<!-- obere Grenze -->
+			<xsl:when test="$Referenz gt intern:sqrt2()">
+				<xsl:sequence select="intern:log-m-iterator($x, $m + 1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="0"/>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">intern:log-m-iterator</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Entschuldigung, das hätte nicht passieren dürfen! intern:log-m-iterator(<xsl:sequence select="$x"/>, <xsl:sequence select="$m"/>) konnte kein gültiges Ergebnis ermitteln (interner Logik-Fehler), Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:log-iterator     __________ -->
+	<doc:function>
+		<doc:param name="argm"><para>ursprüngliches Argument + 1</para></doc:param>
+		<doc:param name="argp"><para>ursprüngliches Argument - 1</para></doc:param>
+		<doc:param name="vortrag"><para>zur Übergabe des Ergebnisses aus den vorherigen Iterationen; wird mit 0 initialisiert</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit 0 initialisiert</para></doc:param>
+		<doc:param name="n-iteration"><para>weiterer Zähler; wird mit 1 initialisiert</para></doc:param>
+		<para xml:id="log-iterator">Iteration zur Ermittlung des natürlichen Logarithmus</para>
+		&internMax-internRound;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:log-iterator" as="xs:decimal" intern:solved="MissingTests">
+		<!-- arg - 1 -->
+		<xsl:param name="argm" as="xs:decimal"/>
+		<!-- arg + 1 -->
+		<xsl:param name="argp" as="xs:decimal"/>
+		<xsl:param name="vortrag" as="xs:decimal"/><!-- wird mit 0 initialisiert -->
+		<xsl:param name="iteration" as="xs:integer"/><!-- wird mit 0 initialisiert -->
+		<xsl:param name="n-iteration" as="xs:integer"/><!-- wird mit 1 initialisiert -->
+		<xsl:variable name="lokalesErgebnis" as="xs:decimal" select="intern:power($argm, $n-iteration) div ($n-iteration * intern:power($argp, $n-iteration) )"/>
+		<xsl:choose>
+			<xsl:when test="($iteration le ($intern:max) ) and (round-half-to-even($lokalesErgebnis, $intern:iround) ne 0)"><!-- intern:iround() führte hier zu einer Verfälschung des Ergebnisses, deshalb round-half-to-even() -->
+				<xsl:sequence select="intern:log-iterator($argm, $argp, $vortrag + $lokalesErgebnis, $iteration +1, $n-iteration +2)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="2 * $vortrag"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:log10     __________ -->
 	<doc:function>
 		<doc:param name="arg"><para>Argument</para></doc:param>
-		<para xml:id="lg">berechnet den dekadischen Logarithmus</para>
+		<para xml:id="log10">berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
@@ -483,17 +1382,50 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:lg" as="xs:double">
-		<xsl:param name="arg" as="xs:double"/>
+	<xsl:function name="xsb:log10" as="xs:decimal">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:log10(xs:decimal($arg) ) )"></xsl:sequence>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:log10     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument</para></doc:param>
+		<para xml:id="log10_i">berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus)</para>
+		&xsdecimalINF;
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:log10" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
 		<xsl:choose>
-			<xsl:when test="$arg gt 0">
-				<xsl:value-of select="round-half-to-even(xsb:ln($arg) div $intern:ln10, $intern:round)"/>
+			<xsl:when test="xs:decimal($arg) gt 0">
+				<xsl:value-of select="intern:iround(intern:log($arg) div intern:ln10() )"/>
 			</xsl:when>
-			<xsl:when test="$arg eq 0">
-				<xsl:value-of select="number('-INF')"/>
+			<xsl:when test="xs:decimal($arg) eq 0">
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('intern:log10', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ergebnis soll -INF sein, kann aber nicht ausgegeben werden.</xsl:with-param>
+				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="number('NaN')"/>
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:log10</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe »<xsl:sequence select="$arg"/>«. Für Zahlen kleiner Null ist lg(x) nicht definiert, Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -504,6 +1436,15 @@
 		<doc:param name="n"><para>Argument (positive natürliche Zahl)</para></doc:param>
 		<para xml:id="fibonacci">berechnet Fibonacci-Zahlen</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Neue Implementierung auf der Grundlage von <link linkend="fibonacci-sequence"><function>xsb:fibonacci-sequence</function></link></para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -517,370 +1458,150 @@
 	</doc:function>
 	<xsl:function name="xsb:fibonacci" as="xs:integer">
 		<xsl:param name="n" as="xs:integer"/>
+		<xsl:value-of select="xsb:fibonacci-sequence($n)[last()]"></xsl:value-of>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:fibonacci-sequence     __________ -->
+	<doc:function>
+		<doc:param name="n"><para>Argument (positive natürliche Zahl)</para></doc:param>
+		<para xml:id="fibonacci-sequence">berechnet Fibonacci-Reihen</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:fibonacci-sequence" as="xs:integer+">
+		<xsl:param name="n" as="xs:integer"/>
 		<xsl:choose>
-			<xsl:when test="$n eq 0">0</xsl:when>
-			<xsl:when test="$n eq 1">1</xsl:when>
+			<xsl:when test="$n eq 0"><xsl:sequence select="0"/></xsl:when>
+			<xsl:when test="$n eq 1"><xsl:sequence select="0, 1"/></xsl:when>
 			<xsl:when test="$n ge 2">
-				<xsl:sequence select="xsb:fibonacci($n - 2) + xsb:fibonacci($n - 1)"/>
+				<xsl:sequence select="intern:fibonacci-sequence($n, (0, 1) )"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="xs:integer(number('NaN') )"/>
+				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nie ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:fibonacci-sequence</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$n"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="n"><para>Argument (positive natürliche Zahl), Anzahl der anzuhängenden Fibonacci-Zahlen (- 1, weil die Startsequenz in der Regel (0, 1) ist)</para></doc:param>
+		<doc:param name="vortrag"><para>Sequenz von Fibonacci-Zahlen</para></doc:param>
+		<para xml:id="fibonacci-sequence_2">berechnet rekursiv Fibonacci-Reihen, in dem an eine vorhandene Reihe die Summe aus vorletztem und letztem Item angefügt wird.</para>
+		<para>Die Initalisierung erfolgt in der Regel über <function><link linkend="fibonacci-sequence">xsb:fibonacci-sequence($n as xs:integer)</link></function>, 
+			so das hier auf Typechecks verzichtet werden kann (was einer höheren Ausführungsgeschwindigkeit zu gute kommt).</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:fibonacci-sequence" as="xs:integer+" intern:solved="MissingTests">
+		<xsl:param name="n" as="xs:integer"/>
+		<xsl:param name="vortrag" as="xs:integer*"/>
+		<xsl:choose>
+			<xsl:when test="$n gt 1">
+				<xsl:sequence select="intern:fibonacci-sequence($n - 1, ($vortrag, ($vortrag[last() - 1] + $vortrag[last()]) ) )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$vortrag"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
-	<!-- ====================     Tests     ==================== -->
-	<!--  -->
-	<!--  -->
-	<!--  -->
-	<doc:template>
-		<para>Dieses Template ist der Einstiegspunkt in die Selbst-Tests. Es loggt die Systemparameter und ruft die Test-Routinen 
-		der lokalen und eingebundenen Templates und Funktionen auf.</para>
+	<!-- __________     intern:round     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>zu rundende Zahl</para></doc:param>
+		<para xml:id="round">rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB</para>
 		<revhistory>
 			<revision>
-				<revnumber>0.2.12</revnumber>
-				<date>2011-05-21</date>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
 				<revdescription>
-					<para>initiale Version</para>
 					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
 				</revdescription>
 			</revision>
 		</revhistory>
-	</doc:template>
-	<xsl:template match="/" mode="internals.self-test">
-		<xsl:call-template name="xsb:internals.MakeHeader"/>
-		<xsl:call-template name="intern:internals.Stylecheck"/>
-		<xsl:call-template name="intern:math.self-test"/>
-		<xsl:call-template name="xsb:internals.MakeFooter"/>
-	</xsl:template>
+	</doc:function>
+	<xsl:function name="intern:round" as="xs:decimal">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:sequence select="round-half-to-even($arg, $intern:round)"/>
+	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
-	<intern:testliste xml:id="MathTests">
-		<test>
-			<!-- 0 (Null) -->
-			<value>0</value>
-			<xsb:fact>1</xsb:fact>
-			<xsb:pow>1</xsb:pow>
-			<xsb:exp>1</xsb:exp>
-			<xsb:sin>0</xsb:sin>
-			<xsb:cos>1</xsb:cos>
-			<xsb:deg-to-rad>0</xsb:deg-to-rad>
-			<xsb:rad-to-deg>0</xsb:rad-to-deg>
-			<xsb:sqrt>0</xsb:sqrt>
-			<xsb:nroot>NaN</xsb:nroot>
-			<xsb:ln>-INF</xsb:ln>
-			<xsb:lg>-INF</xsb:lg>
-			<xsb:fibonacci>0</xsb:fibonacci>
-		</test>
-		<test>
-			<!-- 1 -->
-			<value>1</value>
-			<xsb:fact>1</xsb:fact>
-			<xsb:pow>2</xsb:pow>
-			<xsb:exp>2.71828182845905</xsb:exp>
-			<xsb:sin>0.841470984807897</xsb:sin>
-			<xsb:cos>0.54030230586814</xsb:cos>
-			<xsb:deg-to-rad>0.017453292519943295</xsb:deg-to-rad>
-			<xsb:rad-to-deg>57.29577951308232</xsb:rad-to-deg>
-			<xsb:sqrt>1</xsb:sqrt>
-			<xsb:nroot>2</xsb:nroot>
-			<xsb:ln>0</xsb:ln>
-			<xsb:lg>0</xsb:lg>
-			<xsb:fibonacci>1</xsb:fibonacci>
-		</test>
-		<test>
-			<!-- 2 -->
-			<value>2</value>
-			<xsb:fact>2</xsb:fact>
-			<xsb:pow>4</xsb:pow>
-			<xsb:exp>7.38905609893065</xsb:exp>
-			<xsb:sin>0.909297426825682</xsb:sin>
-			<xsb:cos>-0.416146836547142</xsb:cos>
-			<xsb:deg-to-rad>0.03490658503988659</xsb:deg-to-rad>
-			<xsb:rad-to-deg>114.59155902616465</xsb:rad-to-deg>
-			<xsb:sqrt>1.414213562373095</xsb:sqrt>
-			<xsb:nroot>1.414213562373095</xsb:nroot>
-			<xsb:ln>0.693147180559945</xsb:ln>
-			<xsb:lg>0.301029995663981</xsb:lg>
-			<xsb:fibonacci>1</xsb:fibonacci>
-		</test>
-		<test>
-			<!-- 3 -->
-			<value>3</value>
-			<xsb:fact>6</xsb:fact>
-			<xsb:pow>8</xsb:pow>
-			<xsb:exp>20.08553692318765</xsb:exp>
-			<xsb:sin>0.141120008059867</xsb:sin>
-			<xsb:cos>-0.989992496600445</xsb:cos>
-			<xsb:deg-to-rad>0.05235987755982988</xsb:deg-to-rad>
-			<xsb:rad-to-deg>171.88733853924697</xsb:rad-to-deg>
-			<xsb:sqrt>1.732050807568877</xsb:sqrt>
-			<xsb:nroot>1.259921049894873</xsb:nroot>
-			<xsb:ln>1.09861228866811</xsb:ln>
-			<xsb:lg>0.477121254719662</xsb:lg>
-			<xsb:fibonacci>2</xsb:fibonacci>
-		</test>
-		<test intern:skip="xsb:fact xsb:pow xsb:nroot xsb:fibonacci">
-			<!-- Pi -->
-			<value>3.141592653589793</value>
-			<xsb:fact/>
-			<xsb:pow/>
-			<xsb:exp>23.14069263277925</xsb:exp>
-			<xsb:sin>0</xsb:sin>
-			<xsb:cos>-1</xsb:cos>
-			<xsb:deg-to-rad>0.05483113556160754</xsb:deg-to-rad>
-			<xsb:rad-to-deg>180</xsb:rad-to-deg>
-			<xsb:sqrt>1.772453850905516</xsb:sqrt>
-			<xsb:nroot/>
-			<xsb:ln>1.1447298858494</xsb:ln>
-			<xsb:lg>0.497149872694134</xsb:lg>
-			<xsb:fibonacci/>
-		</test>
-		<test>
-			<!-- 10 -->
-			<value>10</value>
-			<xsb:fact>3628800</xsb:fact>
-			<xsb:pow>1024</xsb:pow>
-			<xsb:exp>22026.46579480667</xsb:exp>
-			<xsb:sin>-0.54402111088937</xsb:sin>
-			<xsb:cos>-0.839071529076452</xsb:cos>
-			<xsb:deg-to-rad>0.17453292519943295</xsb:deg-to-rad>
-			<xsb:rad-to-deg>572.9577951308232</xsb:rad-to-deg>
-			<xsb:sqrt>3.16227766016838</xsb:sqrt>
-			<xsb:nroot>1.071773462536293</xsb:nroot>
-			<xsb:ln>2.302585092994046</xsb:ln>
-			<xsb:lg>1</xsb:lg>
-			<xsb:fibonacci>55</xsb:fibonacci>
-		</test>
-		<test intern:skip="xsb:fibonacci">
-			<!-- 100 -->
-			<value>100</value>
-			<xsb:fact>9.33262154439441E157</xsb:fact>
-			<xsb:pow>1.2676506002282294e+30</xsb:pow>
-			<xsb:exp>2.688117141816077e+43</xsb:exp>
-			<xsb:sin>-0.506365641109759</xsb:sin>
-			<xsb:cos>0.862318872287684</xsb:cos>
-			<xsb:deg-to-rad>1.7453292519943295</xsb:deg-to-rad>
-			<xsb:rad-to-deg>5729.5779513082325</xsb:rad-to-deg>
-			<xsb:sqrt>10</xsb:sqrt>
-			<xsb:nroot>1.006955550056719</xsb:nroot>
-			<xsb:ln>4.605170185988092</xsb:ln>
-			<xsb:lg>2</xsb:lg>
-			<xsb:fibonacci>354224848179261997056</xsb:fibonacci>
-		</test>
-	</intern:testliste>
-	<!-- für Funktionen mit zwei Argumenten gibt es hier eine zweite Testliste -->
-	<intern:testliste xml:id="MathTests2">
-		<test>
-			<!-- 0 (Null) -->
-			<value>0</value>
-			<xsb:pow>0</xsb:pow>
-			<xsb:nroot>0</xsb:nroot>
-		</test>
-		<test>
-			<!-- 1 -->
-			<value>1</value>
-			<xsb:pow>1</xsb:pow>
-			<xsb:nroot>1</xsb:nroot>
-		</test>
-		<test>
-			<!-- 2 -->
-			<value>2</value>
-			<xsb:pow>16</xsb:pow>
-			<xsb:nroot>1.148698354997035</xsb:nroot>
-		</test>
-		<test>
-			<!-- 3 -->
-			<value>3</value>
-			<xsb:pow>81</xsb:pow>
-			<xsb:nroot>1.245730939615517</xsb:nroot>
-		</test>
-		<test>
-			<!-- 10 -->
-			<value>10</value>
-			<xsb:pow>10000</xsb:pow>
-			<xsb:nroot>1.584893192461114</xsb:nroot>
-		</test>
-		<test>
-			<!-- 100 -->
-			<value>100</value>
-			<xsb:pow>100000000</xsb:pow>
-			<xsb:nroot>2.51188643150958</xsb:nroot>
-		</test>
-	</intern:testliste>
-	<!--  -->
-	<!--  -->
-	<!--  -->
-	<doc:template>
-		<para xml:id="math.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
+	<!-- __________     intern:iround     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>zu rundende Zahl</para></doc:param>
+		<para xml:id="iround">rundet Zahlen für interne Zwecke</para>
 		<revhistory>
 			<revision>
-				<revnumber>0.2.12</revnumber>
-				<date>2011-05-21</date>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
 				<revdescription>
-					<para>initiale Version</para>
 					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
 				</revdescription>
 			</revision>
 		</revhistory>
-	</doc:template>
-	<xsl:template name="intern:math.self-test">
-		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="seqMathTests" as="element()+" select="document( '' )//intern:testliste[@xml:id='MathTests']/test"/>
-		<xsl:variable name="seqMathTests2" as="element()+" select="document( '' )//intern:testliste[@xml:id='MathTests2']/test"/>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:fact     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:if test="not(xsb:listed(@intern:skip, 'xsb:fact') )">
-				<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-					<xsl:with-param name="test-node" select="."/>
-					<xsl:with-param name="function-name">xsb:fact</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:fact(./value/text())"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:pow     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:if test="not(xsb:listed(@intern:skip, 'xsb:pow') )">
-				<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-					<xsl:with-param name="test-node" select="."/>
-					<xsl:with-param name="function-name">xsb:pow</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:pow(2, ./value/text())"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:for-each>
-		<xsl:for-each select="$seqMathTests2">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:pow</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:pow(./value/text(),4)"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:sin     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:sin</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:sin(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:cos     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:cos</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:cos(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:deg-to-rad     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:deg-to-rad</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:deg-to-rad(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:rad-to-deg     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:rad-to-deg</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:rad-to-deg(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:sqrt     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:sqrt</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:sqrt(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:nroot()     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:if test="not(xsb:listed(@intern:skip, 'xsb:nroot') )">
-				<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-					<xsl:with-param name="test-node" select="."/>
-					<xsl:with-param name="function-name">xsb:nroot</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:nroot(2, ./value/text())"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:for-each>
-		<xsl:for-each select="$seqMathTests2">
-			<xsl:if test="not(xsb:listed(@intern:skip, 'xsb:nroot') )">
-				<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-					<xsl:with-param name="test-node" select="."/>
-					<xsl:with-param name="function-name">xsb:nroot</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:nroot(./value/text(), 5)"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:ln     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:ln</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:ln(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:lg     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:lg</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:lg(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:fibonacci     __________ -->
-		<xsl:for-each select="$seqMathTests[not(xsb:listed(@intern:skip, 'xsb:fibonacci') )]">
-			<xsl:if test="not(xsb:listed(@intern:skip, 'xsb:fibonacci') )">
-				<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-					<xsl:with-param name="test-node" select="."/>
-					<xsl:with-param name="function-name">xsb:fibonacci</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:fibonacci(./value/text())"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!-- __________     xsb:exp     __________ -->
-		<xsl:for-each select="$seqMathTests">
-			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
-				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">xsb:exp</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:exp(./value/text())"/>
-			</xsl:call-template>
-		</xsl:for-each>
-		<!--  -->
-		<!--  -->
-		<!--  -->
-	</xsl:template>
+	</doc:function>
+	<xsl:function name="intern:iround" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:decimal"/>
+		<xsl:sequence select="round-half-to-even($arg, $intern:iround)"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:format-INF-caller     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der aufrufenden Funktion</para></doc:param>
+		<doc:param name="caller"><para>Name der aufrufenden Funktion</para></doc:param>
+		<para xml:id="format-INF-caller">formatiert einen String für die Fehlerausgabe</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:format-INF-caller" as="xs:string" intern:solved="MissingTests">
+		<xsl:param name="caller" as="xs:string"/>
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:variable name="arg_rounded" as="xs:anyAtomicType" select="round-half-to-even($arg, 7)"/>
+		<xsl:choose>
+			<xsl:when test="$arg eq $arg_rounded">
+				<xsl:sequence select="concat($caller, '(', string($arg), ')')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="concat($caller, '(', string($arg_rounded), '…)')"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->

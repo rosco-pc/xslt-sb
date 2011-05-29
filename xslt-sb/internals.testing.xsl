@@ -383,6 +383,15 @@
 				wird auf <code>string</code> gecastet und dann die String-Werte verglichen.</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.0.25</revnumber>
+				<date>2011-05-25</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>cast von reference-value auf type von actual-value eingebaut</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.94</revnumber>
 				<date>2010-05-30</date>
 				<authorinitials>Stf</authorinitials>
@@ -397,16 +406,22 @@
 		<!-- $test-node muss ein intern:test-element sein -->
 		<xsl:param name="test-node" as="element()" required="yes"/>
 		<xsl:param name="function-name" as="xs:string" required="yes"/>
-		<!-- es wird ausgenutzt, dass xs:integer, xs:decimal usw. stillschweigend auf xs:double gecastet werden -->
-		<xsl:param name="actual-value" as="xs:double" required="yes"/>
+		<xsl:param name="actual-value" required="yes"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
-			<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
-				<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
-				<!-- 2010: Um einen Abbruch bei einem gescheiterten Cast auf xs:double (z.B. Leerstring) zu vermeiden, wird auf string gecastet -->
-				<!-- 2011-05-18: number() umgeht das cast-Problem, und da $actual-value ein xs:double (ohne"?") ist, gibt es kauch keine Verwirrungen mit Leersequenzen -->
-				<xsl:with-param name="actual-value" select="$actual-value"/>
-				<xsl:with-param name="reference-value" select="number( $test-node/*[name()=$function-name]/text() )"/>
-			</xsl:call-template>
+			<xsl:choose>
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+					<xsl:call-template name="xsb:internals.testing.SkippedTests">
+						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
+						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
+						<xsl:with-param name="actual-value" select="$actual-value"/>
+						<xsl:with-param name="reference-value" select="xsb:cast($test-node/*[name()=$function-name]/text(), xsb:type-annotation($actual-value) )"/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
 	<!--  -->
@@ -477,6 +492,7 @@
 	<!--  -->
 	<doc:template>
 		<doc:param name="caller"><para>Name und ggfs. arity der Funktion, für die der Test übersprungen wurde.</para></doc:param>
+		<doc:param name="level"><para>Level für die Fehlerausgabe, Vorgabe: WARN</para></doc:param>
 		<para xml:id="internals.testing.SkippedTests">Ausgabe einer Warnung für übersprungene Tests</para>
 		<para>Bestimmte Funktionen erfordern Erweiterungen wie JAVA oder prozessorspezifische Funktionen, d.h. sie arbeiten nicht
 			mit allen XSLT-Prozessoren zusammen. Andere Funktionen scheitern an prozessorspezifischen Inkompatibilitäten.</para>
@@ -500,10 +516,11 @@
 	</doc:template>
 	<xsl:template name="xsb:internals.testing.SkippedTests">
 		<xsl:param name="caller" as="xs:string" required="yes"/>
+		<xsl:param name="level" as="xs:string" required="no">WARN</xsl:param>
 		<xsl:call-template name="xsb:internals.Error">
 			<xsl:with-param name="caller" select="$caller"/>
 			<xsl:with-param name="message">ein oder mehrere Tests wurden übersprungen</xsl:with-param>
-			<xsl:with-param name="level">WARN</xsl:with-param>
+			<xsl:with-param name="level" select="$level"/>
 		</xsl:call-template>
 	</xsl:template>
 	<!--  -->
