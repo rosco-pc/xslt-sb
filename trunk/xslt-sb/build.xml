@@ -73,11 +73,8 @@
 		<include name="internals.xsl"/>
 		<include name="internals.logging.xsl"/>
 		<include name="internals.meta.xsl"/>
-		<include name="internals.stylecheck.xsl"/>
 		<include name="internals.testing.xsl"/>
-		<include name="numbers.xsl"/>
-		<include name="pattern+includes.xsl"/>
-		<include name="standard.xsl"/>
+		<include name="math.xsl"/>
 		<include name="strings.xsl"/>
 	</fileset>
 	<!--  -->
@@ -90,6 +87,7 @@
 		<include name="internals.meta_tests.xsl"/>
 		<include name="internals.stylecheck.xsl"/>
 		<include name="internals.testing_tests.xsl"/>
+		<include name="math_tests.xsl"/>
 		<include name="numbers.xsl"/>
 		<include name="pattern+includes.xsl"/>
 		<include name="standard.xsl"/>
@@ -108,6 +106,7 @@
 		<include name="README.txt"/>
 		<include name="LIESMICH.txt"/>
 		<include name="tools${file.separator}xslt-sb.xpr"/>
+		<include name="tools${file.separator}google-code.xpr"/>
 	</fileset>
 	<!--  -->
 	<property name="build.XSLStyle.custom-css" location="${src}${file.separator}doc${file.separator}expedimentum.css" description="angepasstes CSS für XSLStyle"/>

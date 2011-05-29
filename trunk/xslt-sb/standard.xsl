@@ -62,6 +62,9 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	<xsl:import href="internals.xsl"/>
 	<xsl:import href="internals_tests.xsl"/>
 	<!--  -->
+	<xsl:import href="math.xsl"/>
+	<xsl:import href="math_tests.xsl"/>
+	<!--  -->
 	<xsl:import href="numbers.xsl"/>
 	<!--  -->
 	<xsl:import href="strings.xsl"/>
@@ -247,6 +250,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<xsl:call-template name="intern:internals.stylecheck.self-test"/>
 		<xsl:call-template name="intern:internals.testing.self-test"/>
 		<xsl:call-template name="intern:internals.self-test"/>
+		<xsl:call-template name="intern:math.self-test"/>
 		<xsl:call-template name="intern:numbers.self-test"/>
 		<xsl:call-template name="intern:strings.self-test"/>
 		<!-- Abgesang -->

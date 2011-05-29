@@ -660,6 +660,261 @@
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
+		<!-- __________     xsb:type-annotation(2)     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation('1.23', false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation('1.23', false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:string' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:integer(3), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:integer(3), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:integer' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(number(3.1), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(number(3.1), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:double' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:double(3.1), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:double(3.1), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:double' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:decimal(3.1), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:decimal(3.1), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:decimal' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:float(3.1), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:float(3.1), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:float' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:date('2011-05-29'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:date('2011-05-29'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:date' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:dateTime('2011-05-29T23:06:57.253+02:00'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:dateTime('2011-05-29T23:06:57.253+02:00'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:dateTime' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:time('23:06:57'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:time('23:06:57'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:time' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(doc('')/xsl:stylesheet/@version, false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(doc('')/xsl:stylesheet/@version, false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:untypedAtomic' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:hexBinary('AF'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:hexBinary('AF'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:hexBinary' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:base64Binary('AFA0'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:base64Binary('AFA0'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:base64Binary' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:duration('P0Y0M6DT0H00M'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:duration('P0Y0M6DT0H00M'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:duration' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(true(), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(true(), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:boolean' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:dayTimeDuration('P10D'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:dayTimeDuration('P10D'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:dayTimeDuration' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(QName('a', 'b'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(QName('a', 'b'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:QName' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:anyURI('a'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:anyURI('a'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:anyURI' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gYear('1976'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gYear('1976'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gYear' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gMonth('--10'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gMonth('--10'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gMonth' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gDay('---10'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gDay('---10'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gDay' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gMonthDay('--05-29'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gMonthDay('--05-29'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gMonthDay' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gYearMonth('2011-05'), false())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gYearMonth('2011-05'), false())"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gYearMonth' "/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:type-annotation(1)     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation('1.23')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation('1.23')"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:string' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:integer(3) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:integer(3) )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:integer' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(number(3.1) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(number(3.1) )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:double' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:double(3.1) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:double(3.1) )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:double' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:decimal(3.1) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:decimal(3.1) )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:decimal' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:float(3.1) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:float(3.1) )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:float' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:date('2011-05-29') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:date('2011-05-29') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:date' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:dateTime('2011-05-29T23:06:57.253+02:00') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:dateTime('2011-05-29T23:06:57.253+02:00') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:dateTime' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:time('23:06:57') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:time('23:06:57') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:time' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(doc('')/xsl:stylesheet/@version )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(doc('')/xsl:stylesheet/@version )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:untypedAtomic' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:hexBinary('AF') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:hexBinary('AF') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:hexBinary' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:base64Binary('AFA0') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:base64Binary('AFA0') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:base64Binary' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:duration('P0Y0M6DT0H00M') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:duration('P0Y0M6DT0H00M') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:duration' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(true() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(true() )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:boolean' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:dayTimeDuration('P10D') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:dayTimeDuration('P10D') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:dayTimeDuration' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(QName('a', 'b') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(QName('a', 'b') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:QName' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:QName('xsb:e') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:QName('xsb:e') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:QName' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:anyURI('a') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:anyURI('a') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:anyURI' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gYear('1976') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gYear('1976') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gYear' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gMonth('--10') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gMonth('--10') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gMonth' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gDay('---10') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gDay('---10') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gDay' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gMonthDay('--05-29') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gMonthDay('--05-29') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gMonthDay' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xs:gYearMonth('2011-05') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xs:gYearMonth('2011-05') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gYearMonth' "/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:cast()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cast(1.23, 'xs:string') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cast(1.23, 'xs:string') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:string' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cast('1.23', 'xs:decimal') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cast('1.23', 'xs:decimal') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:decimal' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cast('1234', 'xs:gYear') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cast('1234', 'xs:gYear') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:gYear' "/>
+		</xsl:call-template>
+		<!-- das gibt einen Fehler
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cast('xsb:e', 'xs:QName') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cast('a', 'xs:QName') )"/>
+			<xsl:with-param name="reference-value" as="xs:string" select=" 'xs:QName' "/>
+		</xsl:call-template>-->
+		<!--  -->
+		<!--  -->
 		<!--  -->
 	</xsl:template>
 	<!--  -->

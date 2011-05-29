@@ -86,6 +86,12 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark><function>xsb:type-annotation</function> und <function>xsb:cast</function> hinzugefügt.</revremark>
+			</revision>
+			<revision>
 				<revnumber>0.2.0</revnumber>
 				<date>2011-05-14</date>
 				<authorinitials>Stf</authorinitials>
@@ -675,7 +681,27 @@
 		<xsl:param name="logging-level" as="xs:string" required="no">DEBUG</xsl:param>
 		<xsl:call-template name="xsb:internals.Logging">
 			<xsl:with-param name="log-entry.write-preText" select="true()"/>
-			<xsl:with-param name="log-entry.text">Liste der "system properties":</xsl:with-param>
+			<xsl:with-param name="log-entry.text">Laufzeitumgebung:</xsl:with-param>
+			<xsl:with-param name="log-entry.level" select="$logging-level"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.Logging">
+			<xsl:with-param name="log-entry.write-preText" select="true()"/>
+			<xsl:with-param name="log-entry.text">current-date(): <xsl:sequence select="current-date()"/></xsl:with-param>
+			<xsl:with-param name="log-entry.level" select="$logging-level"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.Logging">
+			<xsl:with-param name="log-entry.write-preText" select="true()"/>
+			<xsl:with-param name="log-entry.text">current-time(): <xsl:sequence select="current-time()"/></xsl:with-param>
+			<xsl:with-param name="log-entry.level" select="$logging-level"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.Logging">
+			<xsl:with-param name="log-entry.write-preText" select="true()"/>
+			<xsl:with-param name="log-entry.text">os.name: <xsl:sequence select="system-property( 'os.name' )"/></xsl:with-param>
+			<xsl:with-param name="log-entry.level" select="$logging-level"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.Logging">
+			<xsl:with-param name="log-entry.write-preText" select="true()"/>
+			<xsl:with-param name="log-entry.text">os.version: <xsl:sequence select="system-property( 'os.version' )"/></xsl:with-param>
 			<xsl:with-param name="log-entry.level" select="$logging-level"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.Logging">
@@ -1180,7 +1206,7 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
+	<!-- __________     xsb:logging-level     __________ -->
 	<doc:function>
 		<doc:param name="verbal-logging-level"><para>Eingabeknoten (ohne Typ)</para></doc:param>
 		<para xml:id="logging-level_shortcut">Shortcut für <function><link linkend="logging-level">xsb:logging-level($verbal-logging-level, true() )</link></function>.</para>
@@ -1231,6 +1257,8 @@
 		<xsl:param name="is-schema-aware" as="xs:boolean"/>
 		<xsl:param name="warn-if-wrong-input" as="xs:boolean"/>
 		<xsl:choose>
+			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^PE 9.3')">Saxon-PE_9.3</xsl:when>
+			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE 9.3')">Saxon-EE_9.3</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^HE 9.3')">Saxon-HE_9.3</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and $java-available">Saxon-PE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and not($java-available)">Saxon-HE_9.2</xsl:when>
@@ -1334,6 +1362,178 @@
 	</doc:function>
 	<xsl:function name="xsb:current-vendor-hash" as="xs:string" intern:solved="MissingTests">
 		<xsl:value-of select="xsb:vendor-hash(system-property( 'xsl:product-name' ), system-property( 'xsl:product-version' ), xsb:java-available(), xsb:parse-string-to-boolean(system-property( 'xsl:is-schema-aware' )) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:type-annotation     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabeknoten (ohne Typ)</para></doc:param>
+		<doc:param name="warn-if-wrong-input"><para>Erzeugt eine Fehlermeldung, wenn der Typ nicht ermittelt werden kann.
+			Da die Tests vollständig sind und zumindest <code>xs:untypedAtomic</code> immer das Ergebnis sein sollte, dürfet dieser Fehler nie auftreten.</para></doc:param>
+		<para xml:id="type-annotation">ermittelt den Typ eines Atomic Values</para>
+		<para>Dazu wird das Argument mit einer Reihe von <function>instance of …</function> geprüft. Geprüft werden diejenigen Typen, die ein Basic-XSLT-Prozessor
+			laut XSLT-Standard unterstützen muss (vgl. <link xlink:href="http://www.w3.org/TR/xslt20/#built-in-types">3.13 Built-in Types</link>). Das sind
+			<code>xs:double</code>, <code>xs:decimal</code>, <code>xs:integer</code>, <code>xs:float</code>, <code>xs:dateTime</code>, <code>xs:date</code>, 
+			<code>xs:time</code>, <code>xs:boolean</code>, <code>xs:yearMonthDuration</code>, <code>xs:dayTimeDuration</code>, <code>xs:duration</code>, 
+			<code>xs:string</code>, <code>xs:QName</code>, <code>xs:anyURI</code>, <code>xs:gYearMonth</code>, <code>xs:gMonthDay</code>, <code>xs:gYear</code>, 
+			<code>xs:gMonth</code>, <code>xs:gDay</code>, <code>xs:base64Binary</code>, <code>xs:hexBinary</code>, <code>xs:untypedAtomic</code> und <code>xs:anyAtomicType</code>.</para>
+		<para>Achtung: Die XSLT-Prozessor-Hersteller sind nicht verpflichtet, intern den jeweils »richtigen« Typ zu verwenden, $arg kann auch von einem beliebigen Subtyp sein
+			(vgl. <link xlink:href="http://markmail.org/message/4duzqlie5chiizrv">hier</link>).</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:type-annotation" as="xs:string">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:param name="warn-if-wrong-input" as="xs:boolean"/>
+		<xsl:choose>
+			<xsl:when test="$arg instance of xs:double">xs:double</xsl:when>
+			<!-- Decimal + Subtype Integer -->
+			<xsl:when test="$arg instance of xs:integer">xs:integer</xsl:when>
+			<xsl:when test="$arg instance of xs:decimal">xs:decimal</xsl:when>
+			<!--  -->
+			<xsl:when test="$arg instance of xs:float">xs:float</xsl:when>
+			<xsl:when test="$arg instance of xs:dateTime">xs:dateTime</xsl:when>
+			<xsl:when test="$arg instance of xs:date">xs:date</xsl:when>
+			<xsl:when test="$arg instance of xs:time">xs:time</xsl:when>
+			<xsl:when test="$arg instance of xs:boolean">xs:boolean</xsl:when>
+			<!-- Duration + Subtypes -->
+			<xsl:when test="$arg instance of xs:yearMonthDuration">xs:yearMonthDuration</xsl:when>
+			<xsl:when test="$arg instance of xs:dayTimeDuration">xs:dayTimeDuration</xsl:when>
+			<xsl:when test="$arg instance of xs:duration">xs:duration</xsl:when>
+			<!-- String (keine Subtypes bei Basic-XSLT-Prozessor) -->
+			<xsl:when test="$arg instance of xs:string">xs:string</xsl:when>
+			<!--  -->
+			<xsl:when test="$arg instance of xs:QName">xs:QName</xsl:when>
+			<xsl:when test="$arg instance of xs:anyURI">xs:anyURI</xsl:when>
+			<xsl:when test="$arg instance of xs:gYearMonth">xs:gYearMonth</xsl:when>
+			<xsl:when test="$arg instance of xs:gMonthDay">xs:gMonthDay</xsl:when>
+			<xsl:when test="$arg instance of xs:gYear">xs:gYear</xsl:when>
+			<xsl:when test="$arg instance of xs:gMonth">xs:gMonth</xsl:when>
+			<xsl:when test="$arg instance of xs:gDay">xs:gDay</xsl:when>
+			<xsl:when test="$arg instance of xs:base64Binary">xs:base64Binary</xsl:when>
+			<xsl:when test="$arg instance of xs:hexBinary">xs:hexBinary</xsl:when>
+			<xsl:when test="$arg instance of xs:untypedAtomic">xs:untypedAtomic</xsl:when>
+			<xsl:when test="$arg instance of xs:anyAtomicType">xs:anyAtomicType</xsl:when>
+			<xsl:otherwise>
+				<!-- das ist dann wohl ein Programmierfehler -->
+				<xsl:sequence select=" '#undefined' "/>
+				<xsl:if test="$warn-if-wrong-input">
+					<xsl:call-template name="xsb:internals.FunctionError">
+						<xsl:with-param name="caller">xsb:type-annotation</xsl:with-param>
+						<xsl:with-param name="message">Typ des Argumentes konnte nicht ermittelt werden, "#undefined" als Ergebnis zurückgegeben.</xsl:with-param>
+						<xsl:with-param name="level">ERROR</xsl:with-param>
+					</xsl:call-template>
+				</xsl:if>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:type-annotation     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabeknoten (ohne Typ)</para></doc:param>
+		<para xml:id="type-annotation_2">Shortcut für <function>xsb:type-annotation($arg, true() )</function></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:type-annotation" as="xs:string">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="xsb:type-annotation($arg, true() )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:cast     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Eingabeknoten (ohne Typ)</para></doc:param>
+		<doc:param name="as"><para>Typ, auf den gecastet werden soll</para></doc:param>
+		<para xml:id="cast">wandelt einen Atomic Value beliebigen Types in einen Atomic Value mit Typ entsprechend dem Parameter "<code>as</code>" um</para>
+		<para>Unterstützt werden diejenigen Typen, die ein Basic-XSLT-Prozessor laut XSLT-Standard unterstützen muss 
+			(vgl. <link xlink:href="http://www.w3.org/TR/xslt20/#built-in-types">3.13 Built-in Types</link>):
+			<code>xs:double</code>, <code>xs:decimal</code>, <code>xs:integer</code>, <code>xs:float</code>, <code>xs:dateTime</code>, <code>xs:date</code>, 
+			<code>xs:time</code>, <code>xs:boolean</code>, <code>xs:yearMonthDuration</code>, <code>xs:dayTimeDuration</code>, <code>xs:duration</code>, 
+			<code>xs:string</code>, <code>xs:QName</code>, <code>xs:anyURI</code>, <code>xs:gYearMonth</code>, <code>xs:gMonthDay</code>, <code>xs:gYear</code>, 
+			<code>xs:gMonth</code>, <code>xs:gDay</code>, <code>xs:base64Binary</code>, <code>xs:hexBinary</code>, <code>xs:untypedAtomic</code> mit Ausnahme
+			von <code>xs:anyAtomicType</code> (weil ein Cast dahin nicht möglich ist).</para>
+		<para>Laut Standard kann nicht auf <code>xs:QName</code> gecastet werden, da dieser Cast ein statisches <emphasis role="bold">String Literal</emphasis>
+			erfordert und deshalb nicht mit dynamisch zu evaluierenden Variablen bzw. Parametern funktioniert. Details siehe im XPath-Standard, 
+			<link xlink:href="http://www.w3.org/TR/xpath20/#id-cast">Punkt 4.a.</link>, und 
+			<link xlink:href="http://www.w3.org/TR/xpath20/#ERRXPTY0004">err:XPTY0004</link>.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.25</revnumber>
+				<date>2011-05-29</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:cast" intern:solved="MissingTests" as="xs:anyAtomicType"><!-- indirekte Tests erkennt Stylecheck (noch) nicht, Stf, 2011-05-29 -->
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:param name="as" as="xs:string"/>
+		<xsl:choose>
+			<xsl:when test="$as eq 'xs:double' "><xsl:sequence select="xs:double($arg)"/></xsl:when>
+			<!-- Decimal + Subtype Integer -->
+			<xsl:when test="$as eq 'xs:decimal' "><xsl:sequence select="xs:decimal($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:integer' "><xsl:sequence select="xs:integer($arg)"/></xsl:when>
+			<!--  -->
+			<xsl:when test="$as eq 'xs:float' "><xsl:sequence select="xs:float($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:dateTime' "><xsl:sequence select="xs:dateTime($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:date' "><xsl:sequence select="xs:date($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:time' "><xsl:sequence select="xs:time($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:boolean' "><xsl:sequence select="xs:boolean($arg)"/></xsl:when>
+			<!-- Duration + Subtypes -->
+			<xsl:when test="$as eq 'xs:yearMonthDuration' "><xsl:sequence select="xs:yearMonthDuration($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:dayTimeDuration' "><xsl:sequence select="xs:dayTimeDuration($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:duration' "><xsl:sequence select="xs:duration($arg)"/></xsl:when>
+			<!-- String (keine Subtypes bei Basic-XSLT-Prozessor) -->
+			<xsl:when test="$as eq 'xs:string' "><xsl:sequence select="xs:string($arg)"/></xsl:when>
+			<!--<xsl:when test="$as eq 'xs:QName' "><xsl:sequence select="xs:QName($arg)"/></xsl:when>-->
+			<xsl:when test="$as eq 'xs:QName' ">
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:cast</xsl:with-param>
+					<xsl:with-param name="message">[err:XPTY0004] ein Cast auf xs:QName ist nur mit einem String _Literal_ als Argument zulässig, nicht mit einer dynamisch zu evaluierenden Variablen, vgl. http://www.w3.org/TR/xpath20/#id-cast, Nr. 4.a.</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:when test="$as eq 'xs:anyURI' "><xsl:sequence select="xs:anyURI($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:gYearMonth' "><xsl:sequence select="xs:gYearMonth($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:gMonthDay' "><xsl:sequence select="xs:gMonthDay($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:gYear' "><xsl:sequence select="xs:gYear($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:gMonth' "><xsl:sequence select="xs:gMonth($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:gDay' "><xsl:sequence select="xs:gDay($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:base64Binary' "><xsl:sequence select="xs:base64Binary($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:hexBinary' "><xsl:sequence select="xs:hexBinary($arg)"/></xsl:when>
+			<xsl:when test="$as eq 'xs:untypedAtomic' "><xsl:sequence select="xs:untypedAtomic($arg)"/></xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$arg"/>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:cast</xsl:with-param>
+					<xsl:with-param name="message">Typ »<xsl:sequence select="$as"/>« wird nicht unterstützt.</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
