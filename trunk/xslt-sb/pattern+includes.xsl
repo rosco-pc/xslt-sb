@@ -121,7 +121,7 @@
 	<!--  -->
 	<!-- __________     xsb:internals.Error     __________ -->
 	<doc:template>
-		<para xml:id="internals.Error">Dieses Template überschreibt <link xlink:href="internals.html#internals.Error">das gleichnamige Template</link> aus <code>internals.xsl</code>.</para>
+		<para xml:id="internals.Error.pattern">Dieses Template überschreibt <link xlink:href="internals.html#internals.Error">das gleichnamige Template</link> aus <code>internals.xsl</code>.</para>
 		<para>Es gibt zusätzlich den aktuellen Mode aus.</para>
 		<para>Dazu bedient es sich des Templates <function>xsb:mode-name</function>, wobei die <link linkend="mode-name">dort genannten Einschränkungen</link> hier auch gelten.</para>
 		<revhistory>

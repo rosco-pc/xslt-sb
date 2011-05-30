@@ -686,6 +686,11 @@
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.Logging">
 			<xsl:with-param name="log-entry.write-preText" select="true()"/>
+			<xsl:with-param name="log-entry.text">Datei: <xsl:sequence select="tokenize(base-uri(), '[/\\]')[last()]"/></xsl:with-param>
+			<xsl:with-param name="log-entry.level" select="$logging-level"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.Logging">
+			<xsl:with-param name="log-entry.write-preText" select="true()"/>
 			<xsl:with-param name="log-entry.text">current-date(): <xsl:sequence select="current-date()"/></xsl:with-param>
 			<xsl:with-param name="log-entry.level" select="$logging-level"/>
 		</xsl:call-template>

@@ -172,11 +172,9 @@
 		<para>Der Defaultwert ergibt sich aus der Anforderung, dass jeder standardkonforme XSLT-Prozessor mindestens 18 Digits
 			unterstützen muss, vgl. <link xlink:href="http://www.w3.org/TR/xmlschema-2/#decimal">XML Schema Part 2: Datatypes Second Edition</link>.
 			Da es bei mehrstufigen Berechnungen zu Rundungsfehlern kommen kann, ist die Anzahl der signifikanten Stellen ein Kompromiss. 
-			Ich habe mich für 16 Stellen entschieden, weil damit die meisten Tests erfolgreich verlaufen, nur <function>xsb:cot(3)</function>
-			(unter Saxon) und <function>xsb:exp(100)</function> (unter Saxon und AltovaXML) liefern falsche Ergebnisse (wobwi Saxon den Wert
-			als 16 Nachkommastellen, AltovaXML aber als 15 Nachkommastellen interpretiert).</para>
+			Ich habe mich für 16 Stellen entschieden, weil damit die meisten Tests erfolgreich verlaufen (Details siehe Testergebnisse).</para>
 	</doc:variable>
-	<xsl:variable name="intern:round" as="xs:integer" select="15"/>
+	<xsl:variable name="intern:round" as="xs:integer" select="16"/>
 	<!--  -->
 	<doc:variable>
 		<para xml:id="iround_var">Stellen für interne Ergebnis-Rundung</para>
