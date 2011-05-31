@@ -54,7 +54,7 @@
 	<!--  -->
 	<!-- properties for the build infrastructure -->
 	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
-	<property name="dist.version" value="0.2.11" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.version" value="0.2.28" description="Versionsnummer des aktuellen Builds"/>
 	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
 	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
 	<property name="dist.test-results" location="${dist.main}${file.separator}test-results" description="Zielverzeichnis für die Testergebnisse"/>
@@ -82,11 +82,11 @@
 		id="xslt-files_tested" 
 		dir="${src}">
 		<include name="files_tests.xsl"/>
-		<include name="internals_tests.xsl"/>
 		<include name="internals.logging_tests.xsl"/>
 		<include name="internals.meta_tests.xsl"/>
 		<include name="internals.stylecheck.xsl"/>
 		<include name="internals.testing_tests.xsl"/>
+		<include name="internals_tests.xsl"/>
 		<include name="math_tests.xsl"/>
 		<include name="numbers.xsl"/>
 		<include name="pattern+includes.xsl"/>
@@ -284,6 +284,12 @@
 	<target name="test_standard" description="Standard-Selbsttests (mit ein paar aktuellen XSLT-Prozessoren)">
 		<property name="runSaxon-HE" value="true"/>
 		<property name="runAltovaXML" value="true"/>
+		<antcall target="-test"/>
+	</target>
+	<!--  -->
+	<target name="test_saxon" description="Selbstest mit den Saxon-Prozessoren">
+		<property name="runSaxon-B" value="true"/>
+		<property name="runSaxon-HE" value="true"/>
 		<antcall target="-test"/>
 	</target>
 	<!--  -->

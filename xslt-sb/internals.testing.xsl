@@ -406,7 +406,7 @@
 		<!-- $test-node muss ein intern:test-element sein -->
 		<xsl:param name="test-node" as="element()" required="yes"/>
 		<xsl:param name="function-name" as="xs:string" required="yes"/>
-		<xsl:param name="actual-value" required="yes"/>
+		<xsl:param name="actual-value" required="yes" as="xs:anyAtomicType"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:choose>
 				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
