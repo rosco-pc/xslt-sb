@@ -1,8 +1,8 @@
 === Zusammenfassung ===
-Die XSLT-Standard-Bibliothek (XSLT-SB) beinhaltet n�tzliche, immer wieder 
+Die XSLT-Standard-Bibliothek (XSLT-SB) beinhaltet nützliche, immer wieder 
 gebrauchte Funktionen und Templates. Gleichzeitig dient sie als beispielhafte
 Inplementierung bestimmter Techniken. Sie wendet sich als Beispielsammlung 
-vor allem an deutschsprachige Entwickler, um f�r diese die Einstiegsh�rden
+vor allem an deutschsprachige Entwickler, um für diese die Einstiegshürden
 zu senken.
 
 
@@ -14,6 +14,11 @@ gestartet werden.
 
 === Revision ===
 $Revision$, $Date$
+
+--- Änderungen in 0.2.28 ---
+* math.xsl hinzugefügt
+* tools/google_code hinzugefügt
+* kleinere Bugfixes
 
 
 === Lizenz (duale Lizenzierung) ===
@@ -39,11 +44,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-Die XSLT-SB und alle dazugeh�rigen Stylesheets und Dokumentationen 
+Die XSLT-SB und alle dazugehörigen Stylesheets und Dokumentationen 
 sind unter einer Creative Commons-Lizenz (CC-BY 3.0, 
 http://creativecommons.org/licenses/by/3.0/) lizenziert.
 Die Weiternutzung ist bei Namensnennung erlaubt.
 
 
 === bekannte Probleme ===
-* IntelSOAE st�rzt beim Ausf�hren aller Test ab.
+* IntelSOAE stürzt beim Ausführen aller Test ab (die ist ein Problem
+  der letzten veröffentlichten Version 2.0.0.0 und möglicherweise in
+  späteren Releases behoben).

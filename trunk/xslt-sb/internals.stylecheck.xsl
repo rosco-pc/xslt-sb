@@ -87,6 +87,15 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.27</revnumber>
+				<date>2011-05-30</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>intern:internals.Stylecheck.CheckMisplacedIntern hinzugefügt</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.0</revnumber>
 				<date>2011-05-14</date>
 				<authorinitials>Stf</authorinitials>
@@ -290,7 +299,10 @@
 		<xsl:call-template name="intern:internals.Stylecheck.ListTO_DOs">
 			<xsl:with-param name="Dokument" as="document-node()" select="$stylesheet-node"/>
 		</xsl:call-template>
-		</xsl:template>
+		<xsl:call-template name="intern:internals.Stylecheck.CheckMisplacedIntern">
+			<xsl:with-param name="Dokument" as="document-node()" select="$stylesheet-node"/>
+		</xsl:call-template>
+	</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!-- __________     intern:internals.Stylecheck.CallTemplateTestFunction     __________ -->
@@ -453,7 +465,7 @@
 		<xsl:for-each select="$Dokument//xsl:function[not(xsb:listed(@intern:solved, 'MissingTests'))]">
 			<xsl:variable name="FunktionsName" as="xs:string" select="./@name"/>
 			<xsl:variable name="FunktionsArity" as="xs:integer" select="count(./xsl:param)"/>
-			<!-- TODO: Anzahl Tests bei ...withTestItem... ermitteln. Da das Argument von withTestItem eine Varianle oder ein XPath sein kann, sind zur Lösung higher order functions oder eine evaluate()-Funktion notwendig, deshalb wohl erst mit XSLT 2.1+ möglich -->
+			<!-- TODO: Anzahl Tests bei ...withTestItem... ermitteln. Da das Argument von withTestItem eine Variante oder ein XPath sein kann, sind zur Lösung higher order functions oder eine evaluate()-Funktion notwendig, deshalb wohl erst mit XSLT 2.1+ möglich -->
 			<xsl:choose>
 				<!-- keine Tests -->
 				<xsl:when test="not(
@@ -529,8 +541,17 @@
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
 		<para xml:id="internals.Stylecheck.DocumentationTests">Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation.</para>
 		<para>Die Dokumentation mit XSLStyle™ und DocBook wird in <link xlink:href="standard.html#dokumentation">standard.html</link> erläutert.</para>
-		<para>solved-Token: "<code>TODO: solved-Token für intern:internals.Stylecheck.DocumentationTests definieren und einarbeiten</code>"</para>
+		<para>solved-Token: "<code>DocTest</code>"</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.27</revnumber>
+				<date>2011-05-30</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Solved-Token "DocTest" hinzugefügt</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.11</revnumber>
 				<date>2011-05-15</date>
@@ -561,7 +582,7 @@
 					or ( (local-name(.) eq 'template') and (local-name($possible-doc) eq 'template') )
 					) ">
 					<!-- fehlende Dokumentation für Parameter -->
-					<xsl:for-each select="xsl:param">
+					<xsl:for-each select="xsl:param[not(xsb:listed(@intern:solved, 'DocTest'))]">
 						<xsl:if test="not($possible-doc/doc:param[@name eq current()/@name])">
 							<xsl:call-template name="xsb:internals.Error">
 								<xsl:with-param name="caller">internals.Stylecheck.DocumentationTests</xsl:with-param>
@@ -621,11 +642,13 @@
 				</xsl:when>
 				<!-- Dokumentation fehlt ganz -->
 				<xsl:otherwise>
-					<xsl:call-template name="xsb:internals.Error">
-						<xsl:with-param name="caller">internals.Stylecheck.DocumentationTests</xsl:with-param>
-						<xsl:with-param name="message">xsl:<xsl:sequence select="local-name(.)"/> ohne Dokumentation: //<xsl:sequence select="xsb:render-context-as-string(.)"/></xsl:with-param>
-						<xsl:with-param name="level">INFO</xsl:with-param>
-					</xsl:call-template>
+					<xsl:if test="not(xsb:listed(@intern:solved, 'DocTest'))">
+						<xsl:call-template name="xsb:internals.Error">
+							<xsl:with-param name="caller">internals.Stylecheck.DocumentationTests</xsl:with-param>
+							<xsl:with-param name="message">xsl:<xsl:sequence select="local-name(.)"/> ohne Dokumentation: //<xsl:sequence select="xsb:render-context-as-string(.)"/></xsl:with-param>
+							<xsl:with-param name="level">INFO</xsl:with-param>
+						</xsl:call-template>
+					</xsl:if>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:for-each>
@@ -665,6 +688,37 @@
 					</xsl:with-param>
 				</xsl:call-template>
 			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:internals.Stylecheck.CheckMisplacedIntern     __________ -->
+	<doc:template>
+		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
+		<para xml:id="internals.Stylecheck.CheckMisplacedIntern" intern:solved="ListTO_DOs">tested, ob im Stylesheet <code>intern:*</code>-Elemente innerhalb
+			von matching oder named templates stehen, da diese fälschlicherweise in das Ausgabedokument geschrieben werden könnten.</para>
+		<para>solved-Token: "<code>MisplacedIntern</code>" (kann am Element selbst oder an einem Eltern-Element stehen)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.27</revnumber>
+				<date>2011-05-30</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:template>
+	<xsl:template name="intern:internals.Stylecheck.CheckMisplacedIntern">
+		<xsl:param name="Dokument" as="document-node()" required="yes"/>
+		<xsl:for-each select="$Dokument//xsl:template//intern:*[not(ancestor::xsl:variable)][not(xsb:listed(ancestor-or-self::*/@intern:solved, 'MisplacedIntern') )]">
+			<xsl:call-template name="xsb:internals.Error">
+				<xsl:with-param name="level">WARN</xsl:with-param>
+				<xsl:with-param name="caller">internals.Stylecheck.CheckMisplacedIntern</xsl:with-param>
+				<xsl:with-param name="message">//<xsl:sequence select="xsb:render-context-as-string(.)"/> innerhalb von xsl:template, wird möglicherweise in das Ausgabedokument geschrieben</xsl:with-param>
+				<xsl:with-param name="show-context" select="false()"/>
+			</xsl:call-template>
 		</xsl:for-each>
 	</xsl:template>
 	<!--  -->

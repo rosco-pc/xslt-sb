@@ -139,6 +139,22 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<intern:testliste xml:id="numeric_tests">
+		<!--
+		<test>
+			<value></value>
+			<intern:dummy></intern:dummy>
+		</test>
+		-->
+		<test>
+			<value>0</value>
+			<intern:dummy>0</intern:dummy>
+		</test>
+		<test>
+			<value>1234567</value>
+			<intern:dummy>1.234567E6</intern:dummy>
+		</test>
+	</intern:testliste>
 	<doc:template>
 		<para xml:id="internals.testing.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
@@ -185,25 +201,6 @@
 			<xsl:with-param name="reference-value" select="true()"/>
 		</xsl:call-template>
 		<!--  -->
-		<!--  -->
-		<!--  -->
-		<intern:testliste xml:id="numeric_tests">
-			<!--
-			<test>
-				<value></value>
-				<intern:dummy></intern:dummy>
-			</test>
-			-->
-			<test>
-				<value>0</value>
-				<intern:dummy>0</intern:dummy>
-			</test>
-			<test>
-				<value>1234567</value>
-				<intern:dummy>1.234567E6</intern:dummy>
-			</test>
-		</intern:testliste>
-		<!--  -->
 		<xsl:variable name="numericElements" as="element()+" select="document( '' )//intern:testliste[@xml:id='numeric_tests']/test"/>
 		<!--  -->
 		<!--  -->
@@ -223,7 +220,7 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:function name="intern:dummy" as="xs:double" intern:solved="">
+	<xsl:function name="intern:dummy" as="xs:double" intern:solved="MissingTests DocTest">
 		<xsl:param name="input" as="xs:string?"/>
 		<xsl:sequence select="xs:double($input)"/>
 	</xsl:function>

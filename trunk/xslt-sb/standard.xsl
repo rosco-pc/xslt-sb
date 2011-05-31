@@ -245,11 +245,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<xsl:call-template name="intern:standard.self-test"/>
 		<!-- fremde Selbsttests (in alphabetischer Reihenfolge der Dateinamen) -->
 		<xsl:call-template name="intern:files.self-test"/>
+		<xsl:call-template name="intern:internals.self-test"/>
 		<xsl:call-template name="intern:internals.logging.self-test"/>
 		<xsl:call-template name="intern:internals.meta.self-test"/>
 		<xsl:call-template name="intern:internals.stylecheck.self-test"/>
 		<xsl:call-template name="intern:internals.testing.self-test"/>
-		<xsl:call-template name="intern:internals.self-test"/>
 		<xsl:call-template name="intern:math.self-test"/>
 		<xsl:call-template name="intern:numbers.self-test"/>
 		<xsl:call-template name="intern:strings.self-test"/>

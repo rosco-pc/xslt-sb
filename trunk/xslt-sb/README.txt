@@ -12,6 +12,11 @@ You can start a new project by copy & paste from pattern+includes.xsl.
 === Revision ===
 $Revision$, $Date$
 
+--- Changes in 0.2.28 ---
+* added math.xsl
+* added tools/google_code
+* some minor bugs fixed
+
 
 === Licence (dual licencing) ===
 Copyright (c) 2010-2011 Stefan Krause, http://www.expedimentum.org/

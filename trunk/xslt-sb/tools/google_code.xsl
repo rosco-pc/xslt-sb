@@ -113,6 +113,7 @@
 		'../internals.stylecheck.xsl',
 		'../internals.testing.xsl',
 		'../internals.xsl',
+		'../math.xsl',
 		'../numbers.xsl',
 		'../strings.xsl'
 		) ) "/>
@@ -193,7 +194,7 @@
 		<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri($stylesheet) )"/>
 		<xsl:text>`</xsl:text>&crt;
 		&crt;
-		<xsl:apply-templates select="$stylesheet//doc:doc/para[not( (@role eq 'license') or matches(., '^(Autor:|Homepage:)') )]" mode="parse_docbook"/>
+		<xsl:apply-templates select="$stylesheet//doc:doc/para[not( (@role eq 'license') or matches(., '^(Autor:|Autoren:|Homepage:)') )]" mode="parse_docbook"/>
 		&crt;
 		<xsl:text>_Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._</xsl:text>
 		&crt;
@@ -255,6 +256,18 @@
 							<xsl:apply-templates select="$stylesheet//para[@xml:id eq substring-after(current()/@name, ':')]/node()" mode="parse_docbook"/>
 						</xsl:with-param>
 					</xsl:call-template>
+					<xsl:if test="($stylesheet//para[@xml:id eq substring-after(current()/@name, ':')])[2]">
+						<xsl:call-template name="xsb:internals.Error">
+							<xsl:with-param name="level">WARN</xsl:with-param>
+							<xsl:with-param name="message">
+								<xsl:text>Mehrfache //@xml:id[. eq "</xsl:text>
+								<xsl:sequence select="substring-after(current()/@name, ':')"/>
+								<xsl:text>"] (in </xsl:text>
+								<xsl:value-of select="concat(xsb:fileName-and-fileExtention-from-url(base-uri() ), ')')"/>
+							</xsl:with-param>
+							<xsl:with-param name="show-context" select="false()"/>
+						</xsl:call-template>
+					</xsl:if>
 				</xsl:for-each>
 			</xsl:for-each-group>
 		</xsl:if>

@@ -19,10 +19,11 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 || *I* || *xsb:internals.test.Function* (_required_ caller _as_ xs:string; _required_ actual-value; _required_ reference-value) ||   || Dieses Template dient zum Testen einer Funktion. Es nimmt den Namen der Funktion sowie Ist- und Soll-Wert entgegen und vergleicht sie. Je nach Ergebnis wird ein Bericht an das Logging-System ausgegeben. ||
 ||   || *xsb:internals.test.function.withTestItem.BooleanResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:boolean) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
-||   || *xsb:internals.test.function.withTestItem.NumericResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:double) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
+||   || *xsb:internals.test.function.withTestItem.NumericResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:anyAtomicType) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
 ||   || *xsb:internals.test.function.withTestItem.StringResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:string?) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
-||   || *xsb:internals.testing.SkippedTests* (_required_ caller _as_ xs:string) ||   || Ausgabe einer Warnung für übersprungene Tests ||
+||   || *xsb:internals.testing.SkippedTests* (_required_ caller _as_ xs:string; _optional_ level _as_ xs:string) ||   || Ausgabe einer Warnung für übersprungene Tests ||
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 22.05.2011_
+_Seite erstellt am 31.05.2011_
+

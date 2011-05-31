@@ -15,6 +15,7 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 || *I* || *intern:internals.Stylecheck* ||   || Dieses Template ist der zentrale Einstieg zur Realisierung der Style-Checks. ||
 ||   || *intern:internals.Stylecheck.CallTemplateTestFunction* (_required_ Dokument _as_ document-node()) ||   || Dieses Template überprüft die Syntax von Funktionstests mit `xsl:call-template name="xsb:internals.test.Function"`. ||
 ||   || *intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet den Aufruf von Funktionstests mit `xsb:internals.test.function.withTestItem.BooleanResult"`, `xsb:internals.test.function.withTestItem.StringResult"` usw.. ||
+||   || *intern:internals.Stylecheck.CheckMisplacedIntern* (_required_ Dokument _as_ document-node()) ||   || tested, ob im Stylesheet `intern:*`-Elemente innerhalb von matching oder named templates stehen, da diese fälschlicherweise in das Ausgabedokument geschrieben werden könnten. ||
 ||   || *intern:internals.Stylecheck.DocumentationTests* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation. ||
 ||   || *intern:internals.Stylecheck.EmptySequenceAllowed* (_required_ Dokument _as_ document-node()) ||   || Dieses Template testet, ob Funktionen oder Templates eine `empty sequence` als Resultat liefern dürfen. ||
 ||   || *intern:internals.Stylecheck.ListTO_DOs* (_required_ Dokument _as_ document-node()) ||   || Dieses Template listet Texte und Kommentare, die "TODO" enthalten. Die Groß-/Kleinschreibung wird nicht berücksichtigt. ||
@@ -25,4 +26,5 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 22.05.2011_
+_Seite erstellt am 31.05.2011_
+

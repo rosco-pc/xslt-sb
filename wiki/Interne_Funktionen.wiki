@@ -11,7 +11,8 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 = Liste der Funktionen =
 
-|| *C* || *xsb:current-vendor-hash*() ||   || Diese Funktion ermittelt den Vendor-Hash für das aktuelle System. ||
+|| *C* || *xsb:cast*(arg _as_ xs:anyAtomicType; as _as_ xs:string) ||   || wandelt einen Atomic Value beliebigen Types in einen Atomic Value mit Typ entsprechend dem Parameter "`as`" um ||
+||   || *xsb:current-vendor-hash*() ||   || Diese Funktion ermittelt den Vendor-Hash für das aktuelle System. ||
 || *I* || *xsb:is*(input1; input2) ||   || Diese Funktion vergleicht zwei beliebig getypte Werte und gibt bei Idendität `true()` zurück, d.h. der Vergleich ist eine Kombination aus `eq` und `deep-equal()`. ||
 || *J* || *xsb:java-available*() ||   || Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht. ||
 ||   || *xsb:java-available*() ||   || Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht. ||
@@ -24,6 +25,8 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 || *R* || *intern:render-context-and-parent-as-string*(context _as_ node()?) ||   || Diese Funktion erzeugt aus dem Kontext eines Knotens und dessen Elternknoten einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. Kann z.B. zur Erläuterung bei Fehlermeldungen eingesetzt werden. ||
 ||   || *intern:render-level-to-pretext*(level _as_ xs:string?) ||   || Erzeugt zu den verbalen Fehlerwerten »`ALL`« > »`TRACE`« > »`DEBUG`« > »`INFO`« > »`WARN`« > »`ERROR`« > »`FATAL`« einen String, der bei ``xsb:internals.Error`` und verwandten Templates als `preText` verwendet werden kann. ||
 ||   || *xsb:render-context-as-string*(context _as_ node()?) ||   || Diese Funktion erzeugt aus dem Kontext eines Knotens einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. Kann z.B. zur Erläuterung bei Fehlermeldungen eingesetzt werden. ||
+|| *T* || *xsb:type-annotation*(arg _as_ xs:anyAtomicType; warn-if-wrong-input _as_ xs:boolean) ||   || ermittelt den Typ eines Atomic Values ||
+||   || *xsb:type-annotation*(arg _as_ xs:anyAtomicType) ||   || ermittelt den Typ eines Atomic Values ||
 || *V* || *xsb:vendor-hash*(product-name _as_ xs:string?; product-version _as_ xs:string?; java-available _as_ xs:boolean; is-schema-aware _as_ xs:boolean; warn-if-wrong-input _as_ xs:boolean) ||   || Diese Funktion ermittelt aus den übergebenen System-Parameter einen Hashwert, der z.B. für Vergleiche verwendet werden kann ||
 ||   || *xsb:vendor-hash*(product-name _as_ xs:string?; product-version _as_ xs:string?; java-available _as_ xs:boolean; is-schema-aware _as_ xs:boolean) ||   || Diese Funktion ermittelt aus den übergebenen System-Parameter einen Hashwert, der z.B. für Vergleiche verwendet werden kann ||
 
@@ -39,4 +42,5 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 22.05.2011_
+_Seite erstellt am 31.05.2011_
+

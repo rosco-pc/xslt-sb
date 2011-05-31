@@ -589,7 +589,7 @@
 	<!-- __________     intern:exp10     __________ -->
 	<doc:function>
 		<doc:param name="exponent"><para>Exponent</para></doc:param>
-		<para xml:id="exp10">berechnet die Potenz zur Basis 10</para>
+		<para xml:id="exp10_i">berechnet die Potenz zur Basis 10</para>
 		<para>Bei ganzzahligen Exponenten wird die multiplikative Variante mit <function><link linkend="power">intern:power()</link></function>
 			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
 		<revhistory>
@@ -844,7 +844,7 @@
 	</xsl:function>
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
-		<para xml:id="tan">berchnet den Tangens</para>
+		<para xml:id="tan_i">berchnet den Tangens</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.25</revnumber>
@@ -907,7 +907,7 @@
 	</xsl:function>
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
-		<para xml:id="cot">berechnet den Cotangens</para>
+		<para xml:id="cot_i">berechnet den Cotangens</para>
 		&xsdecimalINF;
 		<revhistory>
 			<revision>
@@ -976,7 +976,7 @@
 	<!-- __________     intern:deg-to-rad     __________ -->
 	<doc:function>
 		<doc:param name="deg"><para>Eingabe im Gradmaß</para></doc:param>
-		<para xml:id="deg-to-rad">wandelt Gradmaß in Bogenmaß um</para>
+		<para xml:id="deg-to-rad_i">wandelt Gradmaß in Bogenmaß um</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
@@ -1020,7 +1020,7 @@
 	</xsl:function>
 	<doc:function>
 		<doc:param name="rad"><para>Eingabe im Bogenmaß</para></doc:param>
-		<para xml:id="rad-to-deg">rechnet Bogenmaß in Gradmaß um</para>
+		<para xml:id="rad-to-deg_i">rechnet Bogenmaß in Gradmaß um</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.12</revnumber>
