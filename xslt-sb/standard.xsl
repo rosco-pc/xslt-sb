@@ -88,7 +88,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</para>
 		<para>Homepage: <link xlink:href="http://www.expedimentum.org/">http://www.expedimentum.org/</link></para>
 		<!--  -->
-		<para xml:id="hinweise"><emphasis role="bold">Hinweise:</emphasis></para>
+		<para xml:id="Benutzung"><emphasis role="bold">Benutzung</emphasis></para>
+		<para>Die Stylesheets der XSLT-SB können per <code>xsl:import</code> bzw. <code>xsl:include</code> direkt in eigene Stylesheets eingebunden werden.
+			Die meisten Stylesheets binden weitere Stylesheets ein. Die Import-Hierarchie (und damit eine Liste der jeweils benötigten Stylesheets) wird am
+			Anfang der HTML-Dokumentation (unter »Import/include tree«) ausgegeben. So kann man beispielsweise in <link xlink:href="math.html"><code>math.html</code></link>
+			nachlesen, dass <code>internals.xsl</code>, <code>internals.logging.xsl</code> und <code>strings.xsl</code> benötigt werden.</para>
+		<para>Die Test-Stylesheets (z.B. »<code>math_tests.xsl</code>«) werden zum Einsatz der Bibliothek nicht benötigt.</para>
+		<para xml:id="allgemeines"><emphasis role="bold">Allgemeines</emphasis></para>
 		<para>Die Stylesheets folgen dem Paradigma von "Convention over Configuration", 
 			d.h. soweit sinnvoll, wird mit Voreinstellungen gearbeitet, die aber übeschrieben werden können.</para>
 		<para>Ungültige Eingaben werden soweit wie möglich abgefangen und – unter Ausgabe einer Warnung – durch sinnvolle Werte ersetzt. 
@@ -96,10 +102,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<para>Per Standard werden dafür folgende Fehlerlevel verwendet:
 			<simplelist>
 				<member><code>WARN</code>: Falsche Parameterwerte, ungültige Eingabewerte, es konnte zur Fehlerbehebung ein Standardwert zurückgegeben werden</member>
-				<member><code>ERROR</code>: falsche Benutzung der XSB, Programmierfehler: in der Regel Abbruch der Verarbeitung</member>
+				<member><code>ERROR</code>: falsche Benutzung der XSLT-SB, Programmierfehler: in der Regel Abbruch der Verarbeitung</member>
 				<member><code>FATAL</code> (sofortiger Abbruch der Verarbeitung): 
 					a) Fehler hat eventuell externe Auswirkungen/Seiteneffekte, z.B. falsche Ermittlung eines Dateinamens, 
-					b) Fataler Fehler innerhalb der XSB</member>
+					b) Fataler Fehler innerhalb der XSLT-SB</member>
 			</simplelist>
 		</para>
 		<para>Diese Bibliothek ist "work in progress". Templates und Funktionen entstehen nicht systematisch, sondern nach Bedarf. 
@@ -111,11 +117,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			</simplelist>
 			Produktiv sollten nur mit "mature" gekennzeichnete Funktionen und Templates eingesetzt werden.</para>
 		<!--  -->
-		<para xml:id="namenskonventionen"><emphasis role="bold">Namenskonventionen:</emphasis></para>
+		<para xml:id="namenskonventionen"><emphasis role="bold">Namenskonventionen</emphasis></para>
 		<para>Es werden zwei Namespaces verwendet: <code>http://www.expedimentum.org/XSLT/SB</code> mit dem Präfix <code>xsb:</code> und 
 			<code>http://www.expedimentum.org/XSLT/SB/intern</code> mit dem Präfix <code>intern:</code>. 
 			Daneben kommen für spezielle Funktionen (wie der Aufruf von Java oder saxon-spezifischen Funktionen) weitere Namespaces zum Einsatz. Generell gilt: Funktionen und Templates, 
-			die ausschließlich zum internen Gebrauch innerhalb der XSB gedacht sind, haben das Präfix <code>intern:</code>, alle anderen das Präfix <code>xsb:</code>. Natürlich
+			die ausschließlich zum internen Gebrauch innerhalb der XSLT-SB gedacht sind, haben das Präfix <code>intern:</code>, alle anderen das Präfix <code>xsb:</code>. Natürlich
 			gibt es immer einen Graubereich, so dass sich sicher leicht Inkonsistenzen finden lassen.
 		</para>
 		<para>Für Templates, Funktionen, Parameter und Variablen werden möglichst sprechende Namen gewählt, möglichst in Anlehnung an 
@@ -132,12 +138,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<para>Getunnelte Parameter werden mit der Endung "<code>.tunneld</code>" versehen, z.B. "<code>$log-entry.write-to-console.tunneld</code>".</para>
 		<para>Getunnelte Parameter werden im empfangenden Stylesheet deklariert.</para>
 		<!--  -->
-		<para xml:id="typung"><emphasis render="bold">Typung</emphasis></para>
+		<para xml:id="typung"><emphasis role="bold">Typung</emphasis></para>
 		<para>Ergebnisse von Funktionen und Templates werden – soweit möglich – getypt. Die Rückgabe einer empty sequence wird vermieden, 
 			vielmehr werden dem Typ entsprechend 0, Leerstring o.ä. zurückgegeben.</para>
 		<para>An Funktionen oder Templates übergebene Parameter sollen  – soweit möglich – empty sequences als Eingabe akzeptieren, um eine einfache Benutzbarkeit zu erreichen.</para>
 		<!--  -->
-		<para xml:id="tests"><emphasis render="bold">Tests</emphasis></para>
+		<para xml:id="tests"><emphasis role="bold">Tests</emphasis></para>
 		<para>Templates und Funktionen werden – soweit möglich – getestet. Dazu gibt es am Ende jeden Stylesheets Test-Abschnitte oder externe Test-Stylesheets (nach dem Namensschema <code>xxxxx_tests.xsl</code>).</para>
 		<para>Die Tests haben zwei Aufgaben: einerseits weisen sie das richtige Funktionieren der Templates/Funktionen nach, andererseits stellen sie bei späteren Änderungen
 			an den Templates/Funktionen sicher, das die ursprüngliche Funktionalität nicht geändert wird.</para>
@@ -146,7 +152,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			einem Leerstring/0-Wert und der <code>empty sequence</code> getestet.</para>
 		<para>Bei jeder Stylesheet-Datei werden die Tests in einem Template mit dem Namen <code>intern:${Dateiname_ohne_Erweiterung}.self-test</code> zusammengefasst.</para>
 		<!--  -->
-		<para xml:id="dokumentation"><emphasis render="bold">Dokumentation</emphasis></para>
+		<para xml:id="dokumentation"><emphasis role="bold">Dokumentation</emphasis></para>
 		<para>Alle Funktionen und Templates sowie deren Parameter werden – soweit sinnvoll – dokumentiert. Die Dokumentation umfasst eine kurze Beschreibung
 			der Funktionalität und eventueller Parameter.</para>
 		<para>Zur Dokumentation wird XSLStyle™ mit DocBook verwendet. Hinweise zur Installation und Bedienung finden sich u.a. auf
@@ -155,11 +161,17 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			dessen Wert der lokale Name der Funktion ist. XSLStyle™ erzeugt daraus in der HTML-Dokumentation Anker, so dass die Funktions-/Template-Beschreibungen
 			direkt von außen verlinkt werden können.</para>
 		<!--  -->
-		<para xml:id="build.xml"><emphasis render="bold">build.xml</emphasis></para>
+		<para xml:id="entwicklungsumgebung"><emphasis role="bold">Entwicklungsumgebung</emphasis></para>
+		<para>Die XSLT-SB wurde mit <link xlink:href="http://www.oxygenxml.com/">OxygenXML</link> entwickelt. Im Verzeichnis <code>tools</code> liegt die passende XPR-(Projekt-)Datei. Natürlich können die
+			Stylesheets selbst aber in jeder beliebigen XSLT-2.0-Umgebung eingesetzt werden.</para>
 		<para>Zur XSLT-SB gehört eine <code>build.xml</code> für <link xlink:href="http://ant.apache.org/">Apache Ant</link>. Dieses Skript führt Routineaufgaben
 			wie die Erstellung der Dokumentation, den Selbsttest der Stylesheets mit unterschiedlichen XSLT-Prozessoren und das Zippen von Distributionen
-			für den Download durch. Außerdem können externe Tools wie Saxon-HE oder XSLStyle™ installiert werden.</para>
+			für den Download durch. Außerdem können externe Tools wie Saxon-HE oder XSLStyle™ installiert werden. Wie unter Ant üblich können die verfügbaren
+			Targets (Befehle) mit <code>ant -p</code> angezeigt werden. Für nahezu alle Targets sind zusätzliche Programme nötig, die einmalig mit
+			<code>ant get_tools</code> installiert werden müssen. Falls auch mit <link xlink:href="http://www.altova.com/altovaxml.html">AltovaXML</link> getestet
+			werden soll, muss dieses von Hand installiert und der Pfad in <code>build.xml</code> eingetragen werden.</para>
 		<para>Für die Benutzung der XSLT-SB ist Ant aber nicht notwendig, die Stylesheets können direkt in eigene Projekte eingebunden werden.</para>
+		<para>Schließlich gibt es mit <code>tools/google_code.xsl</code> ein Hilfs-Stylesheet zur Erstellung von Seiten für das Google-Code-Wiki.</para>
 		<!--  -->
 		<para xml:id="standard.license" role="license"><emphasis role="bold">Lizenz (duale Lizenzierung)</emphasis></para>
 		<para role="license">Die XSLT-SB und alle dazugehörigen Stylesheets und Dokumentationen sind unter einer Creative Commons-Lizenz 
@@ -195,6 +207,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			</listitem>
 		</itemizedlist>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.30</revnumber>
+				<date>2011-06-05</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark>Dokumentation ergänzt</revremark>
+			</revision>
 			<revision>
 				<revnumber>0.2.0</revnumber>
 				<date>2011-05-14</date>
