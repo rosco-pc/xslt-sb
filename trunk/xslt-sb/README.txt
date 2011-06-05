@@ -12,6 +12,10 @@ You can start a new project by copy & paste from pattern+includes.xsl.
 === Revision ===
 $Revision$, $Date$
 
+--- Changes in 0.2.31 ---
+* moved tests from standard.xsl to standard_tests.xsl
+* improved documentation
+
 --- Changes in 0.2.28 ---
 * added math.xsl
 * added tools/google_code

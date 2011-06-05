@@ -6,24 +6,27 @@
 Stylesheet: `internals.testing.xsl`
 
 Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von Funktionen und Templates in XSLT-Stylesheets.
+
 Test können im Stylesheet selbst oder in einem externen Test-Stylesheet (nach dem Namensschema `xxxxx_tests.xsl`) eingebunden werden.
+
 In der XSLT-SB kommen beide Techniken zum Einsatz, wobei es keine festen Regeln gibt. In der Praxis wird man meist mit Tests innerhalb des Stylesheets anfangen und diese bei einem bestimmten Umfang auslagern.
+
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
 
 = Liste der Funktionen =
 
-|| *V* || *intern:validate-test-node*(test-node _as_ element(); function-name _as_ xs:string) ||   || Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funktionen wie `xsb:internals.test.function.withTestItem.BooleanResult`. ||
+|| *V* || *intern:validate-test-node*({{{test-node}}} _as_ {{{element()}}}; {{{function-name}}} _as_ {{{xs:string}}}) ||   || Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funktionen wie `xsb:internals.test.function.withTestItem.BooleanResult`. ||
 
 = Liste der benannten Templates =
 
-|| *I* || *xsb:internals.test.Function* (_required_ caller _as_ xs:string; _required_ actual-value; _required_ reference-value) ||   || Dieses Template dient zum Testen einer Funktion. Es nimmt den Namen der Funktion sowie Ist- und Soll-Wert entgegen und vergleicht sie. Je nach Ergebnis wird ein Bericht an das Logging-System ausgegeben. ||
-||   || *xsb:internals.test.function.withTestItem.BooleanResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:boolean) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
-||   || *xsb:internals.test.function.withTestItem.NumericResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:anyAtomicType) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
-||   || *xsb:internals.test.function.withTestItem.StringResult* (_required_ test-node _as_ element(); _required_ function-name _as_ xs:string; _required_ actual-value _as_ xs:string?) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
-||   || *xsb:internals.testing.SkippedTests* (_required_ caller _as_ xs:string; _optional_ level _as_ xs:string) ||   || Ausgabe einer Warnung für übersprungene Tests ||
+|| *I* || *xsb:internals.test.Function* (_required_ {{{caller}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}}; _required_ {{{reference-value}}}) ||   || Dieses Template dient zum Testen einer Funktion. Es nimmt den Namen der Funktion sowie Ist- und Soll-Wert entgegen und vergleicht sie. Je nach Ergebnis wird ein Bericht an das Logging-System ausgegeben. ||
+||   || *xsb:internals.test.function.withTestItem.BooleanResult* (_required_ {{{test-node}}} _as_ {{{element()}}}; _required_ {{{function-name}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}} _as_ {{{xs:boolean}}}) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
+||   || *xsb:internals.test.function.withTestItem.NumericResult* (_required_ {{{test-node}}} _as_ {{{element()}}}; _required_ {{{function-name}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}} _as_ {{{xs:anyAtomicType}}}) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
+||   || *xsb:internals.test.function.withTestItem.StringResult* (_required_ {{{test-node}}} _as_ {{{element()}}}; _required_ {{{function-name}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}} _as_ {{{xs:string?}}}) ||   || Dieses Template unterstützt das `Testen von Funktionen mit Testlisten`, indem es einen `Testknoten` für das Template `xsb:internals.test.Function` aufbereitet. ||
+||   || *xsb:internals.testing.SkippedTests* (_required_ {{{caller}}} _as_ {{{xs:string}}}; _optional_ {{{level}}} _as_ {{{xs:string}}}) ||   || Ausgabe einer Warnung für übersprungene Tests ||
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 31.05.2011_
+_Seite erstellt am 05.06.2011_
 

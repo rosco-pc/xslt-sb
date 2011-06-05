@@ -7,17 +7,18 @@ Stylesheet: `numbers.xsl`
 
 Dieses Stylesheet enthält Funktionen rund um Zahlen und Rechenoperationen.
 
+
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
 
 = Liste der Funktionen =
 
-|| *F* || *xsb:force-cast-to-decimal*(input _as_ xs:string?; warn-if-wrong-input _as_ xs:boolean) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
-||   || *xsb:force-cast-to-decimal*(input _as_ xs:string?) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
-||   || *xsb:force-cast-to-integer*(input _as_ xs:string?; warn-if-wrong-input _as_ xs:boolean) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
-||   || *xsb:force-cast-to-integer*(input _as_ xs:string?) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
-|| *I* || *xsb:is-roman-numeral*(input _as_ xs:string?) ||   || Diese Funktion überprüft, ob der angegebene String eine römische Zahl ist. ||
-|| *R* || *xsb:roman-number-char-to-integer*(input _as_ xs:string?) ||   || Diese Funktion wandelt eine römische Ziffer (eines der Zeichen I, V, X, L, C, D, M) in einen Integer-Wert um. Ist das eingegebene Zeichen keine römische Ziffer oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
-||   || *xsb:roman-numeral-to-integer*(input _as_ xs:string?) ||   || Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der eingegebene Wert keine römische Zahl oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
+|| *F* || *xsb:force-cast-to-decimal*({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
+||   || *xsb:force-cast-to-decimal*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
+||   || *xsb:force-cast-to-integer*({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
+||   || *xsb:force-cast-to-integer*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
+|| *I* || *xsb:is-roman-numeral*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion überprüft, ob der angegebene String eine römische Zahl ist. ||
+|| *R* || *xsb:roman-number-char-to-integer*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion wandelt eine römische Ziffer (eines der Zeichen I, V, X, L, C, D, M) in einen Integer-Wert um. Ist das eingegebene Zeichen keine römische Ziffer oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
+||   || *xsb:roman-numeral-to-integer*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der eingegebene Wert keine römische Zahl oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
 
 = Liste der benannten Templates =
 
@@ -25,5 +26,5 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 31.05.2011_
+_Seite erstellt am 05.06.2011_
 

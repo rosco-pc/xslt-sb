@@ -42,6 +42,7 @@
 	<!--  -->
 	<!--  -->
 	<!-- 	Versionsgeschichte: -->
+	<!-- 		2011-06-05/Rev. 31 :	 v0.2.31	Stf		google_code.xsl ergänzt -->
 	<!-- 		2011-05-13/Rev. 141:	 v0.2.1		Stf		zip ergänzt -->
 	<!-- 		2011-04-25/Rev. 141:	 v0.2		Stf		funktionierende Selbstests -->
 	<!-- 		2010-11-20/Rev. 121:	 v0.1		Stf		initiale Version -->
@@ -54,9 +55,10 @@
 	<!--  -->
 	<!-- properties for the build infrastructure -->
 	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
-	<property name="dist.version" value="0.2.28" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.version" value="0.2.31" description="Versionsnummer des aktuellen Builds"/>
 	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
 	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
+	<property name="dist.google-doc" location="${dist.main}${file.separator}..${file.separator}..${file.separator}wiki" description="Zielverzeichnis für die Wiki-Seiten für Google Code"/>
 	<property name="dist.test-results" location="${dist.main}${file.separator}test-results" description="Zielverzeichnis für die Testergebnisse"/>
 	<property name="dist.tools" location="${dist.main}${file.separator}tools" description="tools-Verzeichnis"/>
 	<property name="dist.temp" location="${dist.tools}${file.separator}trash" description="temporäres Verzeichnis"/>
@@ -75,6 +77,7 @@
 		<include name="internals.meta.xsl"/>
 		<include name="internals.testing.xsl"/>
 		<include name="math.xsl"/>
+		<include name="standard.xsl"/>
 		<include name="strings.xsl"/>
 	</fileset>
 	<!--  -->
@@ -90,7 +93,7 @@
 		<include name="math_tests.xsl"/>
 		<include name="numbers.xsl"/>
 		<include name="pattern+includes.xsl"/>
-		<include name="standard.xsl"/>
+		<include name="standard_tests.xsl"/>
 		<include name="strings_tests.xsl"/>
 	</fileset>
 	<!--  -->
@@ -106,7 +109,7 @@
 		<include name="README.txt"/>
 		<include name="LIESMICH.txt"/>
 		<include name="tools${file.separator}xslt-sb.xpr"/>
-		<include name="tools${file.separator}google-code.xpr"/>
+		<include name="tools${file.separator}google_code.xsl"/>
 	</fileset>
 	<!--  -->
 	<property name="build.XSLStyle.custom-css" location="${src}${file.separator}doc${file.separator}expedimentum.css" description="angepasstes CSS für XSLStyle"/>
@@ -191,38 +194,38 @@
 		<delete dir="${dist.temp}"/>
 	</target>
 	<!--  -->
-	<target name="get_xslstyle" depends="" description="Download der XSLStyle-Stylesheets und Auspacken">
+	<target name="get_xslstyle" depends="-make_dist.temp" description="Download der XSLStyle-Stylesheets und Auspacken">
 		<get src="${tools.XSLStyle.URL}" dest="${dist.temp}/xslstyle.zip"/>
 		<unzip src="${dist.temp}/xslstyle.zip" dest="${tools.XSLStyle.path}">
 			<cutdirsmapper dirs="1"/>
 		</unzip>
 	</target>
 	<!--  -->
-	<target name="get_saxon-6" depends="" description="Download von Saxon 6 und Auspacken">
+	<target name="get_saxon-6" depends="-make_dist.temp" description="Download von Saxon 6 und Auspacken">
 		<get src="${tools.Saxon_6.URL}" dest="${dist.temp}/saxon_6.zip"/>
 		<unzip src="${dist.temp}/saxon_6.zip" dest="${tools.Saxon_6.path}"/>
 	</target>
 	<!--  -->
-	<target name="get_saxon-b" depends="" description="Download von Saxon-B und Auspacken">
+	<target name="get_saxon-b" depends="-make_dist.temp" description="Download von Saxon-B und Auspacken">
 		<get src="${tools.Saxon_B.URL}" dest="${dist.temp}/saxon_b.zip"/>
 		<unzip src="${dist.temp}/saxon_b.zip" dest="${tools.Saxon_B.path}"/>
 	</target>
 	<!--  -->
-	<target name="get_saxon-he" depends="" description="Download von Saxon-HE und Auspacken">
+	<target name="get_saxon-he" depends="-make_dist.temp" description="Download von Saxon-HE und Auspacken">
 		<get src="${tools.Saxon_HE.URL}" dest="${dist.temp}/saxon_he.zip"/>
 		<unzip src="${dist.temp}/saxon_he.zip" dest="${tools.Saxon_HE.path}">
 			<cutdirsmapper dirs="1"/>
 		</unzip>
 	</target>
 	<!--  -->
-	<target name="get_ant-contrib" depends="" description="Download von ant-contrib und Auspacken">
+	<target name="get_ant-contrib" depends="-make_dist.temp" description="Download von ant-contrib und Auspacken">
 		<get src="${tools.Ant-Contrib.URL}" dest="${dist.temp}/ant-contrib.zip"/>
 		<unzip src="${dist.temp}/ant-contrib.zip" dest="${tools.Ant-Contrib.path}">
 			<cutdirsmapper dirs="1"/>
 		</unzip>
 	</target>
 	<!--  -->
-	<target name="get_altovaxml" depends="" description="Download von AltovaXML und Auspacken">
+	<target name="get_altovaxml" depends="-make_dist.temp" description="Download von AltovaXML und Auspacken">
 		<get src="http://cdn.sw.altova.com/v2011r2sp1b/en/AltovaXMLCmu2011.exe" dest="${dist.tools}/altova.exe"/>
 		<echo level="warn">--------------------------------------------------------------------</echo>
 		<echo level="warn">Bitte ${dist.temp}/altova.exe</echo>
@@ -235,7 +238,7 @@
 		<echo level="warn">--------------------------------------------------------------------</echo>
 	</target>
 	<!--  -->
-	<target name="get_intelsoae" depends="" description="Download von Intel SOA Expressway XSLT 2.0 Processor">
+	<target name="get_intelsoae" depends="-make_dist.temp" description="Download von Intel SOA Expressway XSLT 2.0 Processor">
 		<echo level="warn">--------------------------------------------------------------------</echo>
 		<echo level="warn">Bitte Intel SOA Expressway XSLT 2.0 Processor manuell von </echo>
 		<echo level="warn">${tools.IntelSOAE.URL}</echo>
@@ -321,7 +324,7 @@
 		<antcall target="-testOneFileWithSaxon-B"/>
 		<antcall target="-testOneFileWithSaxon-HE"/>
 		<antcall target="-testOneFileWithAltovaXML"/>
-		<!-- TODO: Intel crasht, bevor man mit dem Debuggen beginnen kann ... (2011-05-11, Stf) -->
+		<!-- TODO: Intel crasht, bevor man mit dem Debuggen beginnen kann ... (2011-05-11, Stf); auf neuen Build warten (2011-06-05, Stf)-->
 		<!--<antcall target="-testOneFileWithIntelSOAE"/>-->
 	</target>
 	<!--  -->
@@ -397,6 +400,22 @@
 			<union refid="xslt-files"/>
 			<zipfileset dir="${dist.doc}" includes="**" prefix="doc"/>
 		</zip>
+	</target>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     Erstellen der Doku für das Google-Code-Wiki     ___________ -->
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<target name="google-doc" description="erstellt die Seiten für das Google-Code-Wiki">
+		<java fork="true" failonerror="true" classname="net.sf.saxon.Transform">
+			<classpath location="${build.Saxon_HE.classpath}"/>
+			<arg value="-xsl:${dist.tools}${file.separator}google_code.xsl"/>
+			<arg value="-s:${dist.tools}${file.separator}google_code.xsl"/><!-- ist irrelevant -->
+			<arg value="-o:${dist.google-doc}${file.separator}Index.wiki"/>
+			<arg value="internals.logging.output-target=console"/>
+		</java>
 	</target>
 	<!--  -->
 	<!--  -->

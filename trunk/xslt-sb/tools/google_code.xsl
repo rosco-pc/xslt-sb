@@ -115,6 +115,7 @@
 		'../internals.xsl',
 		'../math.xsl',
 		'../numbers.xsl',
+		'../standard.xsl',
 		'../strings.xsl'
 		) ) "/>
 	<!--  -->
@@ -236,10 +237,13 @@
 							<xsl:text>*</xsl:text>
 							<xsl:text>(</xsl:text>
 							<xsl:for-each select="xsl:param">
+								<xsl:text>{{{</xsl:text>
 								<xsl:value-of select="@name"/>
+								<xsl:text>}}}</xsl:text>
 								<xsl:if test="normalize-space(@as)">
-									<xsl:text> _as_ </xsl:text>
+									<xsl:text> _as_ {{{</xsl:text>
 									<xsl:value-of select="normalize-space(@as)"/>
+									<xsl:text>}}}</xsl:text>
 								</xsl:if>
 								<xsl:if test="position() lt last()">
 									<xsl:text>; </xsl:text>
@@ -253,7 +257,7 @@
 							</xsl:if>
 						</xsl:with-param>
 						<xsl:with-param name="col4">
-							<xsl:apply-templates select="$stylesheet//para[@xml:id eq substring-after(current()/@name, ':')]/node()" mode="parse_docbook"/>
+							<xsl:apply-templates select="$stylesheet//para[@xml:id eq substring-after(current()/@name, ':')]/node()" mode="parse_docbook-line"/>
 						</xsl:with-param>
 					</xsl:call-template>
 					<xsl:if test="($stylesheet//para[@xml:id eq substring-after(current()/@name, ':')])[2]">
@@ -304,10 +308,13 @@
 										<xsl:when test="@required eq 'yes' ">_required_ </xsl:when>
 										<xsl:otherwise>_optional_ </xsl:otherwise>
 									</xsl:choose>
+									<xsl:text>{{{</xsl:text>
 									<xsl:value-of select="@name"/>
+									<xsl:text>}}}</xsl:text>
 									<xsl:if test="normalize-space(@as)">
-										<xsl:text> _as_ </xsl:text>
+										<xsl:text> _as_ {{{</xsl:text>
 										<xsl:value-of select="normalize-space(@as)"/>
+										<xsl:text>}}}</xsl:text>
 									</xsl:if>
 									<xsl:if test="position() lt last()">
 										<xsl:text>; </xsl:text>
@@ -322,7 +329,7 @@
 							</xsl:if>
 						</xsl:with-param>
 						<xsl:with-param name="col4">
-							<xsl:apply-templates select="$stylesheet//para[@xml:id eq substring-after(current()/@name, ':')]/node()" mode="parse_docbook"/>
+							<xsl:apply-templates select="$stylesheet//para[@xml:id eq substring-after(current()/@name, ':')]/node()" mode="parse_docbook-line"/>
 						</xsl:with-param>
 					</xsl:call-template>
 				</xsl:for-each>
@@ -351,17 +358,18 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<!-- ====================     mode parse_docbook     ==================== -->
+	<!-- ====================     mode parse_docbook / parse_docbook-line    ==================== -->
 	<!--  -->
 	<!--  -->
 	<!--  -->
 	<xsl:template match="intern:detect" mode="parse_docbook">parse_docbook</xsl:template>
+	<xsl:template match="intern:detect" mode="parse_docbook-line">parse_docbook-line</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="*" mode="parse_docbook">
+	<xsl:template match="*" mode="parse_docbook parse_docbook-line">
 		<xsl:call-template name="xsb:internals.Error">
-			<xsl:with-param name="level">INFO</xsl:with-param>
+			<xsl:with-param name="level">WARN</xsl:with-param>
 			<xsl:with-param name="message">
 				<xsl:text>Element nicht berücksichtigt. (in </xsl:text>
 				<xsl:value-of select="concat(xsb:fileName-and-fileExtention-from-url(base-uri() ), ')')"/>
@@ -374,18 +382,34 @@
 	<!--  -->
 	<!--  -->
 	<xsl:template match="para" mode="parse_docbook">
-		<xsl:apply-templates mode="#current"/>&crt;
+		<xsl:apply-templates mode="#current"/>&crt;&crt;
 	</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="listitem/para" mode="parse_docbook">
+	<xsl:template match="itemizedlist" mode="parse_docbook">
+		&crt;
+		<xsl:apply-templates mode="#current"/>
+		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="itemizedlist/listitem" mode="parse_docbook">
+		<xsl:text>* </xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="listitem/para" mode="parse_docbook parse_docbook-line">
 		<xsl:apply-templates mode="#current"/>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="link|ulink" mode="parse_docbook">
+	<xsl:template match="link|ulink" mode="parse_docbook parse_docbook-line">
 		<xsl:text>`</xsl:text>
 		<xsl:apply-templates mode="#current"/>
 		<xsl:text>`</xsl:text>
@@ -393,7 +417,7 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="code|function" mode="parse_docbook">
+	<xsl:template match="code|function" mode="parse_docbook parse_docbook-line">
 		<xsl:text>`</xsl:text>
 		<xsl:apply-templates mode="#current"/>
 		<xsl:text>`</xsl:text>
@@ -401,11 +425,19 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="text()" mode="parse_docbook">
+	<xsl:template match="emphasis[@role eq 'bold']" mode="parse_docbook parse_docbook-line">
+		<xsl:text>*</xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		<xsl:text>*</xsl:text>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="text()" mode="parse_docbook parse_docbook-line">
 		<xsl:if test="matches(., '^\s')">
 			<xsl:text> </xsl:text>
 		</xsl:if>
-		<xsl:value-of select="normalize-space(.)"/>
+		<xsl:value-of select="replace(normalize-space(.), '\*', '{{{*}}}')"/>
 		<xsl:if test="matches(., '\s$')">
 			<xsl:text> </xsl:text>
 		</xsl:if>
@@ -494,7 +526,15 @@
 	<xsl:function name="intern:doc-title" as="xs:string?">
 		<xsl:param name="uri" as="xs:string?"/>
 		<xsl:if test="doc-available($uri)">
-			<xsl:sequence select="doc($uri)//doc:doc/doc:title"/>
+			<xsl:choose>
+				<!-- Sonderfall für schönere Seitennamen -->
+				<xsl:when test="xsb:fileName-and-fileExtention-from-url($uri) eq 'standard.xsl'">
+					<xsl:sequence select=" 'XSLT_SB' "/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:sequence select="doc($uri)//doc:doc/doc:title"/>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 	</xsl:function>
 	<!--  -->
@@ -622,6 +662,12 @@
 				<intern:doc-title>Zahlen und Rechnen</intern:doc-title>
 				<intern:wikifile-name>Zahlen_und_Rechnen.wiki</intern:wikifile-name>
 				<intern:wikilink>[Zahlen_und_Rechnen]</intern:wikilink>
+			</test>
+			<test>
+				<value>../standard.xsl</value>
+				<intern:doc-title>XSLT_SB</intern:doc-title>
+				<intern:wikifile-name>XSLT_SB.wiki</intern:wikifile-name>
+				<intern:wikilink>[XSLT_SB]</intern:wikilink>
 			</test>
 			<test>
 				<value>../strings.xsl</value>

@@ -41,34 +41,15 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<!-- ====================     Auflistung der Dateien der XSLT-SB     ==================== -->
+	<!-- ====================     Einbindung der Dateien der XSLT-SB (ohne reine Test-Stylesheets)    ==================== -->
 	<!--  -->
 	<!--  -->
-	<!--  -->
-	<xsl:import href="files.xsl"/>
-	<xsl:import href="files_tests.xsl"/>
-	<!--  -->
-	<xsl:import href="internals.logging.xsl"/>
-	<xsl:import href="internals.logging_tests.xsl"/>
-	<!--  -->
-	<xsl:import href="internals.meta.xsl"/>
-	<xsl:import href="internals.meta_tests.xsl"/>
 	<!--  -->
 	<xsl:import href="internals.stylecheck.xsl"/>
 	<!--  -->
-	<xsl:import href="internals.testing.xsl"/>
-	<xsl:import href="internals.testing_tests.xsl"/>
-	<!--  -->
-	<xsl:import href="internals.xsl"/>
-	<xsl:import href="internals_tests.xsl"/>
-	<!--  -->
 	<xsl:import href="math.xsl"/>
-	<xsl:import href="math_tests.xsl"/>
 	<!--  -->
 	<xsl:import href="numbers.xsl"/>
-	<!--  -->
-	<xsl:import href="strings.xsl"/>
-	<xsl:import href="strings_tests.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -92,7 +73,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<para>Die Stylesheets der XSLT-SB können per <code>xsl:import</code> bzw. <code>xsl:include</code> direkt in eigene Stylesheets eingebunden werden.
 			Die meisten Stylesheets binden weitere Stylesheets ein. Die Import-Hierarchie (und damit eine Liste der jeweils benötigten Stylesheets) wird am
 			Anfang der HTML-Dokumentation (unter »Import/include tree«) ausgegeben. So kann man beispielsweise in <link xlink:href="math.html"><code>math.html</code></link>
-			nachlesen, dass <code>internals.xsl</code>, <code>internals.logging.xsl</code> und <code>strings.xsl</code> benötigt werden.</para>
+			nachlesen, dass <code>internals.xsl</code>, <code>internals.logging.xsl</code> und <code>strings.xsl</code> benötigt werden. (Saxon beschwert sich 
+			ab Version 9.3 über das mehrfache Einbinden von Stylesheets, dies ist aber kein Fehler, sondern ein ignorierbarer Hinweis.)</para>
 		<para>Die Test-Stylesheets (z.B. »<code>math_tests.xsl</code>«) werden zum Einsatz der Bibliothek nicht benötigt.</para>
 		<para xml:id="allgemeines"><emphasis role="bold">Allgemeines</emphasis></para>
 		<para>Die Stylesheets folgen dem Paradigma von "Convention over Configuration", 
@@ -100,21 +82,21 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		<para>Ungültige Eingaben werden soweit wie möglich abgefangen und – unter Ausgabe einer Warnung – durch sinnvolle Werte ersetzt. 
 		Diese Warnung kann abgeschaltet werden, das muss aber explizit erfolgen.</para>
 		<para>Per Standard werden dafür folgende Fehlerlevel verwendet:
-			<simplelist>
-				<member><code>WARN</code>: Falsche Parameterwerte, ungültige Eingabewerte, es konnte zur Fehlerbehebung ein Standardwert zurückgegeben werden</member>
-				<member><code>ERROR</code>: falsche Benutzung der XSLT-SB, Programmierfehler: in der Regel Abbruch der Verarbeitung</member>
-				<member><code>FATAL</code> (sofortiger Abbruch der Verarbeitung): 
+			<itemizedlist>
+				<listitem><code>WARN</code>: Falsche Parameterwerte, ungültige Eingabewerte, es konnte zur Fehlerbehebung ein Standardwert zurückgegeben werden</listitem>
+				<listitem><code>ERROR</code>: falsche Benutzung der XSLT-SB, Programmierfehler: in der Regel Abbruch der Verarbeitung</listitem>
+				<listitem><code>FATAL</code> (sofortiger Abbruch der Verarbeitung): 
 					a) Fehler hat eventuell externe Auswirkungen/Seiteneffekte, z.B. falsche Ermittlung eines Dateinamens, 
-					b) Fataler Fehler innerhalb der XSLT-SB</member>
-			</simplelist>
+					b) Fataler Fehler innerhalb der XSLT-SB</listitem>
+			</itemizedlist>
 		</para>
 		<para>Diese Bibliothek ist "work in progress". Templates und Funktionen entstehen nicht systematisch, sondern nach Bedarf. 
 			Entsprechend ihrer Reife werden sie mit einem der Stati "alpha", "beta", "mature" versehen. Dabei werden folgende Kriterien zu Grunde gelegt:
-			<simplelist>
-				<member>alpha: Tests erfolgreich mit Saxon</member>
-				<member>beta: Tests erfolgreich mit Saxon sowie AltovaXML oder Intel, außerdem haben alle aufgerufenen Funktionen/Templates den Status "beta"</member>
-				<member>mature: Funktion bzw. Template ist seit mindestens einem Jahr Teil der Bibliothek und alle benutzen Funktionen/Templates haben den Status "mature"</member>
-			</simplelist>
+			<itemizedlist>
+				<listitem>alpha: Tests erfolgreich mit Saxon</listitem>
+				<listitem>beta: Tests erfolgreich mit Saxon sowie AltovaXML oder Intel, außerdem haben alle aufgerufenen Funktionen/Templates den Status "beta"</listitem>
+				<listitem>mature: Funktion bzw. Template ist seit mindestens einem Jahr Teil der Bibliothek und alle benutzen Funktionen/Templates haben den Status "mature"</listitem>
+			</itemizedlist>
 			Produktiv sollten nur mit "mature" gekennzeichnete Funktionen und Templates eingesetzt werden.</para>
 		<!--  -->
 		<para xml:id="namenskonventionen"><emphasis role="bold">Namenskonventionen</emphasis></para>
@@ -194,10 +176,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				<para>Dokumentation: <link xlink:href="&doc-Base-Directory;/standard.html">&doc-Base-Directory;/standard.html</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/standard.xsl">&XSL-Base-Directory;/standard.xsl</link></para>
+				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/standard.xsl">&XSL-Base-Directory;/standard_tests.xsl</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/standard.html">&doc-Base-Directory;/standard.html</link></para>
+				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/standard.html">&doc-Base-Directory;/standard_tests.html</link></para>
 			</listitem>
 			<listitem>
 				<para>XSLT-SB: <link xlink:href="&XSL-Base-Directory;/">&XSL-Base-Directory;/</link></para>
@@ -207,6 +189,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			</listitem>
 		</itemizedlist>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.31</revnumber>
+				<date>2011-06-05</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark>Tests ausgelagert</revremark>
+			</revision>
 			<revision>
 				<revnumber>0.2.30</revnumber>
 				<date>2011-06-05</date>
@@ -248,52 +236,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<!-- ====================     Tests     ==================== -->
+	<!-- ====================     keine Funktionen oder Templates     ==================== -->
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<doc:template>
-		<para>Dieses Template ist der Einstiegspunkt in die Selbst-Tests. Es loggt die Systemparameter und ruft die Test-Routinen 
-			der lokalen und eingebundenen Templates und Funktionen auf.</para>
-	</doc:template>
-	<xsl:template match="/" mode="internals.self-test">
-		<xsl:call-template name="xsb:internals.MakeHeader"/>
-		<xsl:call-template name="intern:internals.Stylecheck"/>
-		<!-- eigener Selbsttest -->
-		<xsl:call-template name="intern:standard.self-test"/>
-		<!-- fremde Selbsttests (in alphabetischer Reihenfolge der Dateinamen) -->
-		<xsl:call-template name="intern:files.self-test"/>
-		<xsl:call-template name="intern:internals.self-test"/>
-		<xsl:call-template name="intern:internals.logging.self-test"/>
-		<xsl:call-template name="intern:internals.meta.self-test"/>
-		<xsl:call-template name="intern:internals.stylecheck.self-test"/>
-		<xsl:call-template name="intern:internals.testing.self-test"/>
-		<xsl:call-template name="intern:math.self-test"/>
-		<xsl:call-template name="intern:numbers.self-test"/>
-		<xsl:call-template name="intern:strings.self-test"/>
-		<!-- Abgesang -->
-		<xsl:call-template name="xsb:internals.MakeFooter"/>
-	</xsl:template>
-	<!--  -->
-	<!--  -->
-	<!--  -->
-	<doc:template>
-		<para xml:id="standard.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
-		<revhistory>
-			<revision>
-				<revnumber>0.50</revnumber>
-				<date>2009-10-11</date>
-				<authorinitials>Stf</authorinitials>
-				<revdescription>
-					<para>initiale Version</para>
-					<para conformance="beta">Status: beta</para>
-				</revdescription>
-			</revision>
-		</revhistory>
-	</doc:template>
-	<xsl:template name="intern:standard.self-test">
-		<!-- keine lokalen Templates oder Funktionen vorhanden -->
-	</xsl:template>
+
 	<!--  -->
 	<!--  -->
 	<!--  -->
