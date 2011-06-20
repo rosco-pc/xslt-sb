@@ -48,8 +48,12 @@
 	<!--  -->
 	<doc:doc filename="internals.testing.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
 		<doc:title>Testen von Stylesheets</doc:title>
-		<para>Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von Funktionen und Templates in XSLT-Stylesheets.</para>
-		<para>Test können im Stylesheet selbst oder in einem externen Test-Stylesheet (nach dem Namensschema <code>xxxxx_tests.xsl</code>) eingebunden werden.</para>
+		<para xml:id="internals.testing.main">Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von XSLT-Stylesheets.</para>
+		<para>Grundidee ist, einzelne Funktionen und Templates mit definierten Argumenten aufzurufen und die Rückgabewerte mit erwarteten Werten zu vergleichen.
+			Dieses Stylesheet stellt Funktionen und Templates bereit, die diesen Prozess vereinfachen.</para>
+		<para>Ein einzelner Test besteht aus dem Aufruf einer Funktion bzw. eines Templates und dem Vergleich des Ergebnisses mit einem Vorgabewert.
+			Üblicherweise wird man mehrere Tests in einem Test-Template zusammenfassen, das dann unabhängig vom zu testenden Stylesheet aufgerufen wird.</para>
+		<para>Test-Templates können in das zu testende Stylesheet selbst oder in externe Test-Stylesheets eingebunden werden.</para>
 		<itemizedlist>
 			<title>Vorteile interner Tests sind:</title>
 			<listitem><para>Tests sind unmittelbar mit dem zu testenden Code in einer Datei verbunden.</para></listitem>
@@ -66,7 +70,16 @@
 				in <code><link xlink:href="internals.testing.html">internals.testing.xsl</link></code> eingebunden wird. Die Tests für <code>strings.xsl</code> wurden
 				deshalb nach <code><link xlink:href="strings_tests.html">strings_tests.xsl</link></code> ausgelagert.</para></listitem>
 		</itemizedlist>
-		<para>In der XSLT-SB kommen beide Techniken zum Einsatz, wobei es keine festen Regeln gibt. In der Praxis wird man meist mit Tests innerhalb des Stylesheets anfangen und diese bei einem bestimmten Umfang auslagern.</para>
+		<para>In der XSLT-SB kommen beide Techniken zum Einsatz, wobei es keine festen Regeln gibt. In der Praxis wird man meist mit Tests innerhalb des 
+			Stylesheets anfangen und diese bei einem bestimmten Umfang oder bei Abschluss der Entwicklung auslagern.</para>
+		<para>Wegen der engen Verknüpfung der Test-Infrastruktur mit <link xlink:href="internals.stylecheck.html#internals.Stylecheck"><function>internals.Stylecheck</function></link>
+			(welches das zu testenden Stylesheet als Eingabedokument erwartet) werden innerhalb der XSLT-SB die Tests durch eine Transformation
+			des zu testenden Stylesheets mit dem Test-Stylesheet (das im Fall interner Test-Templates das zu testende Stylesheet selbst ist) im Mode
+			<code>internals.self-test</code> ausgeführt. Externe Test-Stylesheets müssen wegen dieser Verknüfung nach dem Namensschema 
+			<code>xxxxx_tests.xsl</code> (wobei »xxxxx« für den Namen – ohne Erweiterung – des zu testenden Stylesheets steht) benannt werden. Verzichtet
+			man auf den Einsatz von <code>Stylecheck</code>, können die Tests in beliebigen XSLT-Dateien abgelegt werden.</para>
+		<para>Die Verwendung der Testumgebung ist dem Einsatz von <function>Stylecheck</function> ähnlich und erfolgt innerhalb der
+			XSLT-SB meist gemeinsam, so dass bei Fragen ggfs. auch ein Blick <link xlink:href="internals.stylecheck.html#internals.stylecheck.main">dorthin</link> lohnt.</para>
 		<para>Autor: <author>
 			<firstname>Stefan</firstname>
 			<surname>Krause</surname>
@@ -142,6 +155,15 @@
 			entgegen und vergleicht sie. Je nach Ergebnis wird ein Bericht an das Logging-System ausgegeben.</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Fehlerausgabe: Typ bei xs:anyAtomicValue ergänzt</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.57</revnumber>
 				<date>2009-10-25</date>
 				<authorinitials>Stf</authorinitials>
@@ -168,7 +190,21 @@
 			<xsl:otherwise>
 				<xsl:call-template name="xsb:internals.Error">
 					<xsl:with-param name="caller" select="$caller"/>
-					<xsl:with-param name="message">FEHLER (erwartet  »<xsl:value-of select="$reference-value"/>«, geliefert »<xsl:value-of select="$actual-value"/>«)</xsl:with-param>
+					<xsl:with-param name="message">
+						<xsl:text>FEHLER (erwartet  »</xsl:text>
+						<xsl:value-of select="$reference-value"/>
+						<xsl:if test="$reference-value instance of xs:anyAtomicType">
+							<xsl:text>« as </xsl:text>
+							<xsl:value-of select="xsb:type-annotation($reference-value)"/>
+						</xsl:if>
+						<xsl:text>, geliefert »</xsl:text>
+						<xsl:value-of select="$actual-value"/>
+						<xsl:if test="$actual-value instance of xs:anyAtomicType">
+							<xsl:text>« as </xsl:text>
+							<xsl:value-of select="xsb:type-annotation($actual-value)"/>
+						</xsl:if>
+						<xsl:text>)</xsl:text>
+					</xsl:with-param>
 					<xsl:with-param name="level">ERROR</xsl:with-param>
 					<xsl:with-param name="show-context" select="false()"/>
 				</xsl:call-template>

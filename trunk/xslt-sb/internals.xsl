@@ -1053,9 +1053,22 @@
 		<doc:param name="input1"><para>Eingabe (ohne Typ)</para></doc:param>
 		<doc:param name="input2"><para>Eingabe (ohne Typ)</para></doc:param>
 		<para xml:id="is">Diese Funktion vergleicht zwei beliebig getypte Werte und gibt bei Idendität <code>true()</code> zurück, d.h. der Vergleich
-			ist eine Kombination aus <function>eq</function> und <function>deep-equal()</function>.</para>
+			ist eine Kombination aus <function>eq</function> und <function>deep-equal()</function> mit höherer Empfindlichkeit und einigen Sonderfällen.</para>
 		<para>Im Unterschied zum XPath-Operator <function>is</function> können auch <code>atomic values</code> verglichen werden.</para>
+		<para>Sind die Eingabewerte nicht vom gleichen Typ, ist das Ergebnis <code>false()</code>.</para>
+		<para>Werden <code>-0.0e0</code> und <code>+0.0e0</code> verglichen, und unterstützt der jeweilie Typ diesen Unterschied, ist das Ergebnis <code>false()</code>.</para>
+		<para>Werden <code>NaN</code> und <code>NaN</code> verglichen, ist das Ergebnis <code>true()</code>.</para>
+		<para>Werden zwei Leersequenzen verglichen, ist das Ergebnis <code>true()</code>.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>Unterscheidung von -0.0e0 und +0.0e0 eingefügt</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.139</revnumber>
 				<date>2011-04-24</date>
@@ -1088,6 +1101,27 @@
 			<!-- node() -->
 			<xsl:when test="($input1 instance of node()) and ($input2 instance of node())">
 				<xsl:sequence select="$input1 is $input2"/>
+			</xsl:when>
+			<xsl:when test="($input1 instance of xs:anyAtomicType) and ($input2 instance of xs:anyAtomicType)">
+				<xsl:choose>
+					<xsl:when test="(xsb:type-annotation($input1) ne xsb:type-annotation($input2))">
+						<xsl:sequence select="false()"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:choose>
+							<!-- Sonderfall -0.0e0 vs. +0.0e0 -->
+							<xsl:when test="($input1 castable as xs:double) and ($input2 castable as xs:double) and
+											(xsb:type-annotation($input1) eq xsb:type-annotation($input2)) and
+											(xs:double($input1) eq 0) and (xs:double($input2) eq 0)">
+							<xsl:sequence select="string($input1) eq string($input2)"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<!-- deep-equal() statt eq, damit NaN, NaN zu true() wird -->
+								<xsl:sequence select="deep-equal($input1, $input2)"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select="deep-equal($input1, $input2)"/>

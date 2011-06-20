@@ -46,7 +46,7 @@
 	>
 	<!--  -->
 	<xsl:import href="internals.stylecheck.xsl"/>
-	<xsl:import href="math.xsl"/>
+	<xsl:import href="math2.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -242,6 +242,8 @@
 			<xsb:tan>1.557407724654902230506974807458360173087250772381520038384</xsb:tan>
 			<xsb:cot>0.642092615934330703006419986594265620230278113918171379101</xsb:cot>
 			<intern:log-m-iterator>0</intern:log-m-iterator>
+			<xsb:atan>0.785398163397448309615660845819875721049292349843776455244</xsb:atan>
+			<xsb:atan2>0.463647609000806116214256231461214402028537054286120263811</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test intern:skip="xsb:fact xsb:fibonacci xsb:nroot xsb:tan">
 			<!-- Pi/2 -->
@@ -266,6 +268,8 @@
 			<xsb:tan>INF</xsb:tan>
 			<xsb:cot>0</xsb:cot>
 			<intern:log-m-iterator>1</intern:log-m-iterator>
+			<xsb:atan>1.00388482185388721414842394491713228829210446059487057473</xsb:atan>
+			<xsb:atan2>0.665773750028353863590517708512175209194269875620066408542</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test>
 			<!-- 2 -->
@@ -290,6 +294,8 @@
 			<xsb:tan>-2.18503986326151899164330610231368254343201774622766316456</xsb:tan>
 			<xsb:cot>-0.45765755436028576375027741043204727642848632923167432964</xsb:cot>
 			<intern:log-m-iterator>1</intern:log-m-iterator>
+			<xsb:atan>1.1071487177940905030170654601785370400700476454014326467</xsb:atan>
+			<xsb:atan2>0.785398163397448309615660845819875721049292349843776455244</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test>
 			<!-- 3 -->
@@ -314,6 +320,8 @@
 			<xsb:tan>-0.14254654307427780529563541053391349322609228490180464763</xsb:tan>
 			<xsb:cot intern:skip="Saxon-PE_9.3 Saxon-HE_9.3 AltovaXML_CE_2010.3sp1 Saxon-B_9.1 Saxon-EE_9.3">-7.01525255143453346942855137952647657829310335209635383816</xsb:cot>
 			<intern:log-m-iterator>2</intern:log-m-iterator>
+			<xsb:atan>1.249045772398254425829917077281090123077829404129896719055</xsb:atan>
+			<xsb:atan2>0.982793723247329067985710611014666014496877453631628556761</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test intern:skip="xsb:fact xsb:fibonacci xsb:nroot xsb:cot">
 			<!-- Pi -->
@@ -338,6 +346,8 @@
 			<xsb:tan>0</xsb:tan>
 			<xsb:cot>-INF</xsb:cot>
 			<intern:log-m-iterator>2</intern:log-m-iterator>
+			<xsb:atan>1.262627255678911683444322083605698343508947670424383596974</xsb:atan>
+			<xsb:atan2>1.003884821853887214148423944917132288292104460594870574729</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test intern:skip="xsb:fact xsb:fibonacci xsb:nroot xsb:cot">
 			<!-- Tau -->
@@ -362,6 +372,8 @@
 			<xsb:tan>0</xsb:tan>
 			<xsb:cot>INF</xsb:cot>
 			<intern:log-m-iterator>3</intern:log-m-iterator>
+			<xsb:atan>1.412965136506737759063712949856932518493513459088501850072</xsb:atan>
+			<xsb:atan2>1.262627255678911683444322083605698343508947670424383596974</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test>
 			<!-- 10 -->
@@ -387,6 +399,8 @@
 			<xsb:tan>0.648360827459086671259124933009808676816874342983724975634</xsb:tan>
 			<xsb:cot>1.542351045356920048277469355682429311320667206401962490919</xsb:cot>
 			<intern:log-m-iterator>3</intern:log-m-iterator>
+			<xsb:atan>1.471127674303734591852875571761730851855306377183238262472</xsb:atan>
+			<xsb:atan2>1.373400766945015860861271926444961148650999595899700808970</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test>
 			<!-- 100 -->
@@ -411,11 +425,13 @@
 			<xsb:tan>-0.58721391515692907667780963564458789425876598687291954413</xsb:tan>
 			<xsb:cot>-1.70295691942646921609873145955728386284991896360177739850</xsb:cot>
 			<intern:log-m-iterator>7</intern:log-m-iterator>
+			<xsb:atan>1.56079666010823138102498157543047189353721534714317627086</xsb:atan>
+			<xsb:atan2>1.550798992821746086170568494738154954149351501001044426582</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 	</intern:testliste>
 	<!-- nicht alle Funktionen axzeptieren Null als Eingabe -->
 	<intern:testliste xml:id="MathTestsNull">
-		<test intern:skip="xsb:cot xsb:log xsb:log10">
+		<test intern:skip="xsb:cot">
 			<!-- 0 (Null) -->
 			<value>0</value>
 			<xsb:fact>1</xsb:fact>
@@ -437,6 +453,8 @@
 			<xsb:exp10>1</xsb:exp10>
 			<xsb:tan>0</xsb:tan>
 			<xsb:cot>INF</xsb:cot>
+			<xsb:atan>0</xsb:atan>
+			<xsb:atan2>0</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 	</intern:testliste>
 	<!-- nicht alle Funktionen axzeptieren negative Zahlen als Eingabe -->
@@ -455,6 +473,8 @@
 			<xsb:exp10>0.000000000000000000000000000000000000000001</xsb:exp10>
 			<xsb:tan>-2.29138799243748608885455387439788153851442850194729645344</xsb:tan>
 			<xsb:cot>-0.43641670607527289605711673823895793299115845885203998977</xsb:cot>
+			<xsb:atan>-1.54699130060982667577745363628196067741930455660382242403</xsb:atan>
+			<xsb:atan2>-1.52321322351791322342928897562326592463202570509422094488</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test>
 			<!-- -5 -->
@@ -470,6 +490,8 @@
 			<xsb:exp10>0.00001</xsb:exp10>
 			<xsb:tan>3.380515006246585636982705879447343908709569208285459877177</xsb:tan>
 			<xsb:cot>0.295812915532745540427767168082485286068234795481534895337</xsb:cot>
+			<xsb:atan>-1.37340076694501586086127192644496114865099959589970080897</xsb:atan>
+			<xsb:atan2>-1.19028994968253173292773377482931833760117898602945207291</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test intern:skip="xsb:cot">
 			<!-- -Pi -->
@@ -485,6 +507,8 @@
 			<xsb:exp10>0.000721784159074727743612993983349810056457751540559222952</xsb:exp10>
 			<xsb:tan>0</xsb:tan>
 			<xsb:cot>-INF</xsb:cot>
+			<xsb:atan>-1.26262725567891168344432208360569834350894767042438359697</xsb:atan>
+			<xsb:atan2>-1.00388482185388721414842394491713228829210446059487057473</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test intern:skip='xsb:tan'>
 			<!-- -Pi/2 -->
@@ -501,6 +525,8 @@
 			<xsb:exp10>0.026866041001136132108405983359849317421437525218955605181</xsb:exp10>
 			<xsb:tan>-INF</xsb:tan>
 			<xsb:cot>0</xsb:cot>
+			<xsb:atan>-1.00388482185388721414842394491713228829210446059487057473</xsb:atan>
+			<xsb:atan2>-0.66577375002835386359051770851217520919426987562006640854</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 		<test>
 			<!-- -1 -->
@@ -516,6 +542,8 @@
 			<xsb:exp10>0.1</xsb:exp10>
 			<xsb:tan>-1.55740772465490223050697480745836017308725077238152003838</xsb:tan>
 			<xsb:cot>-0.64209261593433070300641998659426562023027811391817137910</xsb:cot>
+			<xsb:atan>-0.78539816339744830961566084581987572104929234984377645524</xsb:atan>
+			<xsb:atan2>-0.46364760900080611621425623146121440202853705428612026381</xsb:atan2><!-- y-Wert, für x=2 -->
 		</test>
 	</intern:testliste>
 	<!-- für Funktionen mit zwei Argumenten gibt es hier eine zweite Testliste -->
@@ -526,6 +554,7 @@
 			<xsb:pow>0</xsb:pow>
 			<xsb:nroot>0</xsb:nroot>
 			<intern:nroot>0</intern:nroot>
+			<xsb:atan2>-1.57079632679489661923132169163975144209858469968755291049</xsb:atan2><!-- x-Wert, für y=-1 -->
 		</test>
 		<test>
 			<!-- 1 -->
@@ -533,6 +562,7 @@
 			<xsb:pow>1</xsb:pow>
 			<xsb:nroot>1</xsb:nroot>
 			<intern:nroot>1</intern:nroot>
+			<xsb:atan2>-0.78539816339744830961566084581987572104929234984377645524</xsb:atan2><!-- x-Wert, für y=-1 -->
 		</test>
 		<test>
 			<!-- 2 -->
@@ -540,6 +570,7 @@
 			<xsb:pow>16</xsb:pow>
 			<xsb:nroot>1.14869835499703500679862694677792758944385088909779750551</xsb:nroot>
 			<intern:nroot>1.14869835499703500679862694677792758944385088909779750551</intern:nroot>
+			<xsb:atan2>-0.46364760900080611621425623146121440202853705428612026381</xsb:atan2><!-- x-Wert, für y=-1 -->
 		</test>
 		<test>
 			<!-- 3 -->
@@ -547,6 +578,7 @@
 			<xsb:pow>81</xsb:pow>
 			<xsb:nroot>1.245730939615517325966680336640305080939309993068779811046</xsb:nroot>
 			<intern:nroot>1.245730939615517325966680336640305080939309993068779811046</intern:nroot>
+			<xsb:atan2>-0.32175055439664219340140461435866131902075529555765619143</xsb:atan2><!-- x-Wert, für y=-1 -->
 		</test>
 		<test>
 			<!-- 10 -->
@@ -554,6 +586,7 @@
 			<xsb:pow>10000</xsb:pow>
 			<xsb:nroot>1.584893192461113485202101373391507013269442133825039068316</xsb:nroot>
 			<intern:nroot>1.584893192461113485202101373391507013269442133825039068316</intern:nroot>
+			<xsb:atan2>-0.09966865249116202737844611987802059024327832250431464802</xsb:atan2><!-- x-Wert, für y=-1 -->
 		</test>
 		<test>
 			<!-- 100 -->
@@ -561,6 +594,7 @@
 			<xsb:pow>100000000</xsb:pow>
 			<xsb:nroot>2.511886431509580111085032067799327394158518100782475428679</xsb:nroot>
 			<intern:nroot>2.511886431509580111085032067799327394158518100782475428679</intern:nroot>
+			<xsb:atan2>-0.00999966668666523820634011620927954856136935254437663963</xsb:atan2><!-- x-Wert, für y=-1 -->
 		</test>
 	</intern:testliste>
 	<!--  -->
@@ -621,7 +655,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:pow</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:pow(2, ./value/text())"/>
+						<xsl:with-param name="actual-value" select="xsb:pow(2, xs:decimal(./value/text()))"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -630,7 +664,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:pow</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:pow(./value/text(),4)"/>
+				<xsl:with-param name="actual-value" select="xsb:pow(xs:decimal(./value/text() ), 4)"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -640,7 +674,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">intern:normalize-rad</xsl:with-param>
-				<xsl:with-param name="actual-value" select="intern:normalize-rad(./value/text() )"/>
+				<xsl:with-param name="actual-value" select="intern:normalize-rad(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -650,7 +684,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:sin</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:sin(./value/text())"/>
+				<xsl:with-param name="actual-value" select="xsb:sin(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -660,7 +694,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:cos</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:cos(./value/text())"/>
+				<xsl:with-param name="actual-value" select="xsb:cos(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -678,7 +712,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:tan</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:tan(./value/text())"/>
+						<xsl:with-param name="actual-value" select="xsb:tan(xs:decimal(./value/text() ) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -698,7 +732,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:cot</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:cot(./value/text())"/>
+						<xsl:with-param name="actual-value" select="xsb:cot(xs:decimal(./value/text() ) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -710,7 +744,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:deg-to-rad</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:deg-to-rad(./value/text())"/>
+				<xsl:with-param name="actual-value" select="xsb:deg-to-rad(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -730,7 +764,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:sqrt</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:sqrt(./value/text())"/>
+				<xsl:with-param name="actual-value" select="xsb:sqrt(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -740,7 +774,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">intern:sqrt</xsl:with-param>
-				<xsl:with-param name="actual-value" select="intern:sqrt(./value/text())"/>
+				<xsl:with-param name="actual-value" select="intern:sqrt(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -758,7 +792,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:nroot</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:nroot(2, ./value/text())"/>
+						<xsl:with-param name="actual-value" select="xsb:nroot(xs:decimal(2), xs:integer(./value/text() ) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -775,7 +809,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:nroot</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:nroot(./value/text(), 5)"/>
+						<xsl:with-param name="actual-value" select="xsb:nroot(xs:decimal(xs:decimal(./value/text() ) ), 5)"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -795,7 +829,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:log</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:log(./value/text())"/>
+						<xsl:with-param name="actual-value" select="xsb:log(xs:decimal(./value/text() ) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -815,7 +849,7 @@
 					<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 						<xsl:with-param name="test-node" select="."/>
 						<xsl:with-param name="function-name">xsb:log10</xsl:with-param>
-						<xsl:with-param name="actual-value" select="xsb:log10(./value/text())"/>
+						<xsl:with-param name="actual-value" select="xsb:log10(xs:decimal(./value/text()))"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -885,7 +919,7 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:exp</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:exp(./value/text())"/>
+				<xsl:with-param name="actual-value" select="xsb:exp(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -905,13 +939,634 @@
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:exp10</xsl:with-param>
-				<xsl:with-param name="actual-value" select="xsb:exp10(./value/text())"/>
+				<xsl:with-param name="actual-value" select="xsb:exp10(xs:decimal(./value/text() ) )"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
 		<!--  -->
+		<!-- __________     xsb:atan     __________ -->
+		<xsl:for-each select="$seqMathTestsNeg, $seqMathTestsNull, $seqMathTests">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">xsb:atan</xsl:with-param>
+				<xsl:with-param name="actual-value" select="xsb:atan(xs:decimal(./value/text() ) )"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:atan2     __________ -->
+		<xsl:for-each select="$seqMathTestsNeg, $seqMathTestsNull, $seqMathTests">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">xsb:atan2</xsl:with-param>
+				<xsl:with-param name="actual-value" select="xsb:atan2(xs:decimal(./value/text() ), xs:decimal(2) )"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<xsl:for-each select="$seqMathTests2">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.NumericResult.rounded">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">xsb:atan2</xsl:with-param>
+				<xsl:with-param name="actual-value" select="xsb:atan2(xs:decimal(-1), xs:decimal(./value/text() ) )"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!-- und ein paar Spezialwerte, siehe http://www.w3.org/TR/xpath-functions-30/#func-atan2 -->
+		<!-- 1 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+0.0e0, +0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+0.0e0, +0.0e0)"/>
+			<xsl:with-param name="reference-value" select="+0.0e0"/>
+		</xsl:call-template>
+		<!-- 2 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.0e0, +0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.0e0, +0.0e0)"/>
+			<xsl:with-param name="reference-value" select="-0.0e0"/>
+		</xsl:call-template>
+		<!-- 3 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(number(+0.0e0), number(-0.0e0) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(number(+0.0e0), number(-0.0e0) )"/>
+			<xsl:with-param name="reference-value" select="intern:round(xsb:pi() )"/>
+		</xsl:call-template>
+		<!-- 4 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.0e0, -0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.0e0, -0.0e0)"/>
+			<xsl:with-param name="reference-value" select="- intern:round(xsb:pi() )"/>
+		</xsl:call-template>
+		<!-- 5 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-1, +0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-1, +0.0e0)"/>
+			<xsl:with-param name="reference-value" select="- intern:round(xsb:pi() div 2)"/>
+		</xsl:call-template>
+		<!-- 6 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+1, +0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+1, +0.0e0)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xsb:pi() div 2)"/>
+		</xsl:call-template>
+		<!-- 7 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.0e0, -1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.0e0, -1)"/>
+			<xsl:with-param name="reference-value" select="- intern:round(xsb:pi() )"/>
+		</xsl:call-template>
+		<!-- 8 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+0.0e0, -1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+0.0e0, -1)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xsb:pi() )"/>
+		</xsl:call-template>
+		<!-- 9 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.0e0, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.0e0, 1)"/>
+			<xsl:with-param name="reference-value" select="-0.0e0"/>
+		</xsl:call-template>
+		<!-- 10 -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+0.0e0, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+0.0e0, 1)"/>
+			<xsl:with-param name="reference-value" select="+0.0e0"/>
+		</xsl:call-template>
+		<!-- 5' -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.5, +0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.5, +0.0e0)"/>
+			<xsl:with-param name="reference-value" select="- intern:round(xsb:pi() div 2)"/>
+		</xsl:call-template>
+		<!-- 6' -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+0.5, +0.0e0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+0.5, +0.0e0)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xsb:pi() div 2)"/>
+		</xsl:call-template>
+		<!-- 7' -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.0e0, -0.5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.0e0, -0.5)"/>
+			<xsl:with-param name="reference-value" select="- intern:round(xsb:pi() )"/>
+		</xsl:call-template>
+		<!-- 8' -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+0.0e0, -0.5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+0.0e0, -0.5)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xsb:pi() )"/>
+		</xsl:call-template>
+		<!-- 9' -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(-0.0e0, 0.5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(-0.0e0, 0.5)"/>
+			<xsl:with-param name="reference-value" select="-0.0e0"/>
+		</xsl:call-template>
+		<!-- 10' -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:atan2(+0.0e0, 0.5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:atan2(+0.0e0, 0.5)"/>
+			<xsl:with-param name="reference-value" select="+0.0e0"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     und noch ein paar Tests zur Stabilität der Typung     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:pow(xs:integer(3), xs:integer(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:pow(xs:integer(3), xs:integer(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:integer' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:pow(xs:integer(3), xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:pow(xs:integer(3), xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:integer' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:pow(xs:decimal(3), xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:pow(xs:decimal(3), xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:pow(xs:double(3), xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:pow(xs:double(3), xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:log(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:log(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:log(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:log(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:log(xs:float(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:log(xs:float(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:float' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:root-iterator(xs:integer(2), xs:decimal(4), 0, xs:decimal(4), 0) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:root-iterator(xs:integer(2), xs:decimal(4), 0, xs:decimal(4), 0) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:root-iterator(xs:integer(2), xs:double(4), 0, xs:double(4), 0) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:root-iterator(xs:integer(2), xs:double(4), 0, xs:double(4), 0) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:nroot(xs:double(3), xs:integer(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:nroot(xs:double(3), xs:integer(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:nroot(xs:decimal(3), xs:integer(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:nroot(xs:decimal(3), xs:integer(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sqrt(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sqrt(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sqrt(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sqrt(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:sqrt(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:sqrt(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:sqrt(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:sqrt(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:exp(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:exp(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:exp(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:exp(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:exp(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:exp(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:exp(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:exp(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:fact(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:fact(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:fact(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:fact(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:fact(xs:integer(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:fact(xs:integer(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:integer' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sin(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sin(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sin(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sin(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cos(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cos(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cos(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cos(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cos(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cos(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:tan(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:tan(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cot(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cot(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:cot(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:cot(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan2(xs:double(3), xs:double(1) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan2(xs:double(3), xs:double(1) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan2(xs:decimal(3), xs:decimal(2) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan2(xs:decimal(3), xs:decimal(2) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan2(xs:double(3), xs:decimal(1) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan2(xs:double(3), xs:decimal(1) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan2(xs:decimal(3), xs:double(2) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan2(xs:decimal(3), xs:double(2) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sgn(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sgn(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sgn(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sgn(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:sgn(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:sgn(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(intern:sgn(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:sgn(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+			
+			
+			
+			
+			
+		<!-- <xsl:message select="xsb:rad-to-deg(intern:wf-arctan(0.5) )"></xsl:message>
+		<xsl:message select="0.463647609000806116214256231461214402028537054286120263811"></xsl:message>
+		<xsl:message select="xsb:rad-to-deg(intern:wf-arctan(-10.0) )"></xsl:message>
+		<xsl:message select="-1.47112767430373459185287557176173085185530637718323826247"/>-->
+		
+		<!-- intern:sgn() -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:double('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:double('NaN'))"/>
+			<xsl:with-param name="reference-value" select="xs:double('NaN')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:double('-INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:double('-INF'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(-1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:decimal(-10))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:decimal(-10))"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(-1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:double('-0.0e0'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:double('-0.0e0'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(-1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:double('+0.0e0'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:double('+0.0e0'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:float(0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:float(0))"/>
+			<xsl:with-param name="reference-value" select="xs:float(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:integer(10))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:integer(10))"/>
+			<xsl:with-param name="reference-value" select="xs:integer(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:sgn(xs:double('INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:sgn(xs:double('INF'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<!-- xsb:sgn() -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:double('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('NaN'))"/>
+			<xsl:with-param name="reference-value" select="xs:double('NaN')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:double('-INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('-INF'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(-1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:integer(-10))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:integer(-10))"/>
+			<xsl:with-param name="reference-value" select="xs:integer(-1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:double('-0.0e0'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('-0.0e0'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(0)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:double('+0.0e0'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('+0.0e0'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(0)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:int(0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:int(0))"/>
+			<xsl:with-param name="reference-value" select="xs:int(0)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:double(10))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double(10))"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sgn(xs:double('INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('INF'))"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		
+		<!--  -->
+		<!--  -->
 		<!--  -->
 	</xsl:template>
+	
+	<!--<xsl:function name="intern:arcsin" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:iround(intern:arcussinus-iterator(intern:normalize-rad($arg ), 0, 0) )"/>
+	</xsl:function>-->
+	
+	<!--<xsl:function name="intern:arcussinus-iterator" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="NormalisiertesArgument" as="xs:anyAtomicType"/>
+		<xsl:param name="vortrag" as="xs:anyAtomicType"/><!-\- wird mit 0 initialisiert -\->
+		<xsl:param name="iteration" as="xs:integer"/><!-\- wird mit 0 initialisiert -\->
+		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="(intern:fact(2 * $iteration) div 
+			(intern:power(4, $iteration) * intern:power(intern:fact($iteration), 2) * (2 * $iteration + 1) ) ) *
+			intern:power($NormalisiertesArgument, 2 * $iteration + 1)"/>
+		<!-\-<xsl:message select="$lokalesResultat"></xsl:message>-\->
+		<xsl:choose>
+			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat) ne 0)">
+				<xsl:sequence select="intern:arcussinus-iterator($NormalisiertesArgument, $vortrag + $lokalesResultat, $iteration +1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$vortrag + $lokalesResultat"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	-->
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--<xsl:function name="intern:atan" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:iround(intern:arcustangens-iterator(intern:normalize-rad($arg ), 0, 0) )"/>
+	</xsl:function>-->
+	
+	<!--<xsl:function name="intern:arcustangens-iterator" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="NormalisiertesArgument" as="xs:anyAtomicType"/>
+		<xsl:param name="vortrag" as="xs:anyAtomicType"/><!-\- wird mit 0 initialisiert -\->
+		<xsl:param name="iteration" as="xs:integer"/><!-\- wird mit 0 initialisiert -\->
+		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="intern:power(-1, $iteration) div (2 * $iteration + 1) * intern:power($NormalisiertesArgument, 2 * $iteration + 1)"/>
+		<xsl:message select="$lokalesResultat"></xsl:message>
+		<xsl:choose>
+			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat) ne 0)">
+				<xsl:sequence select="intern:arcustangens-iterator($NormalisiertesArgument, $vortrag + $lokalesResultat, $iteration +1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$vortrag + $lokalesResultat"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>-->
+	
+	
+	<xsl:function name="xsb:atan" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:atan($arg) )"/>
+	</xsl:function>
+	
+	<xsl:function name="intern:atan" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:atan-iterator($arg, intern:pow(1 + ($arg * $arg), -0.5 ), 1, intern:sqrt(1 + ($arg * $arg) ), 0, 1)"/>
+	</xsl:function>
+	
+	<xsl:function name="intern:atan-iterator" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:param name="an" as="xs:anyAtomicType"/>
+		<xsl:param name="bn" as="xs:anyAtomicType"/><!-- wird mit 1 initialisiert -->
+		<xsl:param name="konstanterDivisor" as="xs:anyAtomicType"/><!-- wird mit intern:sqrt(1 + intern:power($arg, 2) ) initialisiert -->
+		<xsl:param name="letztesResultat" as="xs:anyAtomicType"/><!-- wird mit irgendwas, z.B. 0, initialisiert -->
+		<xsl:param name="iteration" as="xs:integer"/><!-- wird mit 1 initialisiert -->
+		<xsl:variable name="anplus1" as="xs:anyAtomicType" select="intern:iround(0.5 * ($an + $bn) )"/>
+		<xsl:variable name="bnplus1" as="xs:anyAtomicType" select="intern:iround(intern:sqrt($anplus1 * $bn) )"/>
+		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="intern:iround($arg div ($konstanterDivisor * $anplus1 ) )"/>
+		<xsl:choose>
+			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat - $letztesResultat) ne 0)">
+				<xsl:sequence select="intern:atan-iterator($arg, $anplus1, $bnplus1, $konstanterDivisor, $lokalesResultat, $iteration + 1 )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$lokalesResultat"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	
+	<xsl:function name="xsb:atan2" as="xs:anyAtomicType">
+		<xsl:param name="y" as="xs:anyAtomicType"/>
+		<xsl:param name="x" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:atan2($y, $x) )"/>
+	</xsl:function>
+	
+	<xsl:function name="intern:atan2" as="xs:anyAtomicType">
+		<xsl:param name="y" as="xs:anyAtomicType"/>
+		<xsl:param name="x" as="xs:anyAtomicType"/>
+		<!-- ToDo: -INF und INF als Parameter berücksichtigen (so dann in XPath 3.0 berücksichtigt)  -->
+		<xsl:choose>
+			<!-- Sonderfälle laut Standard (http://www.w3.org/TR/xpath-functions-30/#func-atan2) werden explizit behandelt -->
+			<!-- Die Ziffern in den Kommentaren beziehen sich auf die Beispiele im Standard -->
+			<xsl:when test="$y eq 0">
+				<xsl:variable name="sy" as="xs:double" select="intern:sgn($y)"/>
+				<xsl:variable name="sx" as="xs:double" select="intern:sgn($x)"/>
+				<xsl:choose>
+					<xsl:when test="$x eq 0">
+						<xsl:choose>
+							<!-- 1 -->
+							<xsl:when test="$sy eq +1 and $sx eq +1">
+								<xsl:sequence select="+0.0e0"/>
+							</xsl:when>
+							<!-- 2 -->
+							<xsl:when test="$sy eq -1 and $sx eq +1">
+								<xsl:sequence select="-0.0e0"/>
+							</xsl:when>
+							<!-- 3 -->
+							<xsl:when test="$sy eq +1 and $sx eq -1">
+								<xsl:sequence select="xsb:pi()"/>
+							</xsl:when>
+							<!-- 4 -->
+							<xsl:when test="$sy eq -1 and $sx eq -1">
+								<xsl:sequence select="- xsb:pi()"/>
+							</xsl:when>
+							<xsl:otherwise>ToDo:Atan2-003</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:choose>
+							<!-- 7 -->
+							<xsl:when test="$sy eq -1 and $x lt 0">
+								<xsl:sequence select="- xsb:pi()"/>
+							</xsl:when>
+							<!-- 8 -->
+							<xsl:when test="$sy eq +1 and $x lt 0">
+								<xsl:sequence select="xsb:pi()"/>
+							</xsl:when>
+							<!-- 9 -->
+							<xsl:when test="$sy eq -1 and $x gt 0">
+								<xsl:sequence select="-0.0e0"/>
+							</xsl:when>
+							<!-- 10 -->
+							<xsl:when test="$sy eq +1 and $x gt 0">
+								<xsl:sequence select="+0.0e0"/>
+							</xsl:when>
+							<xsl:otherwise>ToDo:Atan2-002</xsl:otherwise>
+						</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:when test="$x eq 0">
+				<xsl:choose>
+					<!-- 5 -->
+					<xsl:when test="$y lt 0">
+						<xsl:sequence select="- (xsb:pi() div 2)"/>
+					</xsl:when>
+					<!-- 6 -->
+					<xsl:otherwise>
+						<xsl:sequence select="xsb:pi() div 2"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="2 * intern:atan((intern:sqrt($x * $x + $y * $y) - $x) div $y)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	
+	<xsl:function name="xsb:sgn" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="$arg eq 0">
+				<xsl:sequence select="xsb:cast(0, xsb:type-annotation($arg))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:sgn($arg)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	
+	
+	<xsl:function name="intern:sgn" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:variable name="temp" as="xs:double">
+			<xsl:choose>
+				<xsl:when test="not($arg castable as xs:double)"><xsl:sequence select="number('NaN') "/></xsl:when>
+				<xsl:when test="number($arg) eq number('-INF')"><xsl:sequence select="-1"/></xsl:when>
+				<xsl:when test="number($arg) eq number('INF')"><xsl:sequence select="1"/></xsl:when>
+				<xsl:when test="number($arg) gt 0"><xsl:sequence select="1"/></xsl:when>
+				<xsl:when test="number($arg) lt 0"><xsl:sequence select="-1"/></xsl:when>
+				<xsl:when test="number($arg) eq 0">
+					<xsl:choose>
+						<xsl:when test="starts-with(string($arg), '-')"><xsl:sequence select="-1"/></xsl:when>
+						<xsl:otherwise><xsl:sequence select="1"/></xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise><!-- ToDo: harte Fehlermeldung: logischer Fehler innerhalb der XSLT-SB --><xsl:sequence select="number('NaN')"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:sequence select="xsb:cast($temp, xsb:type-annotation($arg))"/>
+	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->
