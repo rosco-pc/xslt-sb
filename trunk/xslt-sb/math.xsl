@@ -1335,8 +1335,8 @@
 	<doc:function>
 		<doc:param name="argm"><para>ursprüngliches Argument + 1</para></doc:param>
 		<doc:param name="argp"><para>ursprüngliches Argument - 1</para></doc:param>
-		<doc:param name="vortrag"><para>zur Übergabe des Ergebnisses aus den vorherigen Iterationen; wird mit 0 initialisiert</para></doc:param>
-		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit 0 initialisiert</para></doc:param>
+		<doc:param name="vortrag"><para>zur Übergabe des Ergebnisses aus den vorherigen Iterationen; wird mit <code>0</code> initialisiert</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit <code>0</code> initialisiert</para></doc:param>
 		<doc:param name="n-iteration"><para>weiterer Zähler; wird mit 1 initialisiert</para></doc:param>
 		<para xml:id="log-iterator">Iteration zur Ermittlung des natürlichen Logarithmus</para>
 		&internMax-internRound;
@@ -1602,6 +1602,283 @@
 				<xsl:sequence select="concat($caller, '(', string($arg_rounded), '…)')"/>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:atan()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der <function>xsb:atan()</function>-Funktion</para></doc:param>
+		<para xml:id="atan">ermittelt den Arkustangens (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:atan" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:atan($arg) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:atan()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der <function>intern:atan()</function>-Funktion</para></doc:param>
+		<para xml:id="atan_i">ermittelt den Arkustangens (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:atan" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:atan-iterator($arg, intern:pow(1 + ($arg * $arg), -0.5 ), 1, intern:sqrt(1 + ($arg * $arg) ), 0, 1)"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:atan-iterator()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument (numerischer Wert)</para></doc:param>
+		<doc:param name="an"><para>zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit <function>intern:pow(1 + ($arg * $arg), -0.5 )</function> initialisiert</para></doc:param>
+		<doc:param name="bn"><para>zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit <code>1</code> initialisiert</para></doc:param>
+		<doc:param name="konstanterDivisor"><para>zur Optimierung, wird mit <function>intern:sqrt(1 + ($arg * $arg) )</function> initialisiert</para></doc:param>
+		<doc:param name="letztesResultat"><para>zur Ermittlung des Iteration-Abbruches, wird mit einem beliebigen Wert wie <code>0</code> initialisiert.</para></doc:param>
+		<doc:param name="iteration"><para>Zähler für Anzahl der Iterationen; wird mit <code>0</code> initialisiert</para></doc:param>
+		<para xml:id="atan-iterator">Iteration zur Ermittlung des Arkustangens</para>
+		<para>Der Algorithmus folgt <link xlink:href="http://mathworld.wolfram.com/InverseTangent.html">http://mathworld.wolfram.com/InverseTangent.html</link>, Gleichungen Nr. 44 bis 48.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:atan-iterator" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:param name="an" as="xs:anyAtomicType"/>
+		<xsl:param name="bn" as="xs:anyAtomicType"/><!-- wird mit 1 initialisiert -->
+		<xsl:param name="konstanterDivisor" as="xs:anyAtomicType"/><!-- wird mit intern:sqrt(1 + intern:power($arg, 2) ) initialisiert -->
+		<xsl:param name="letztesResultat" as="xs:anyAtomicType"/><!-- wird mit irgendwas, z.B. 0, initialisiert -->
+		<xsl:param name="iteration" as="xs:integer"/><!-- wird mit 1 initialisiert -->
+		<xsl:variable name="anplus1" as="xs:anyAtomicType" select="intern:iround(0.5 * ($an + $bn) )"/>
+		<xsl:variable name="bnplus1" as="xs:anyAtomicType" select="intern:iround(intern:sqrt($anplus1 * $bn) )"/>
+		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="intern:iround($arg div ($konstanterDivisor * $anplus1 ) )"/>
+		<xsl:choose>
+			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat - $letztesResultat) ne 0)">
+				<xsl:sequence select="intern:atan-iterator($arg, $anplus1, $bnplus1, $konstanterDivisor, $lokalesResultat, $iteration + 1 )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$lokalesResultat"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:atan2()     __________ -->
+	<doc:function>
+		<doc:param name="y"><para>y-Wert (numerisch)</para></doc:param>
+		<doc:param name="x"><para>x-Wert (numerisch)</para></doc:param>
+		<para xml:id="atan2">berechnet <function>atan2(y, x) im Bogenmaß</function></para>
+		<para>Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden
+			<link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-atan2">XPath-3.0-Standard</link> zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:atan2" as="xs:anyAtomicType">
+		<xsl:param name="y" as="xs:anyAtomicType"/>
+		<xsl:param name="x" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:round(intern:atan2($y, $x) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:atan2()     __________ -->
+	<doc:function>
+		<doc:param name="y"><para>y-Wert (numerisch)</para></doc:param>
+		<doc:param name="x"><para>x-Wert (numerisch)</para></doc:param>
+		<para xml:id="atan2_i">berechnet <function>atan2(y, x) im Bogenmaß</function></para>
+		<para>Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden
+			<link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-atan2">XPath-3.0-Standard</link> zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:atan2" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="y" as="xs:anyAtomicType"/>
+		<xsl:param name="x" as="xs:anyAtomicType"/>
+		<!-- ToDo: -INF und INF als Parameter berücksichtigen (so dann in XPath 3.0 berücksichtigt)  -->
+		<xsl:choose>
+			<!-- Sonderfälle laut Standard (http://www.w3.org/TR/xpath-functions-30/#func-atan2) werden explizit behandelt -->
+			<!-- Die Ziffern in den Kommentaren beziehen sich auf die Beispiele im Standard -->
+			<xsl:when test="$y eq 0">
+				<xsl:variable name="sy" as="xs:double" select="intern:sgn($y)"/>
+				<xsl:variable name="sx" as="xs:double" select="intern:sgn($x)"/>
+				<xsl:choose>
+					<xsl:when test="$x eq 0">
+						<xsl:choose>
+							<!-- 1 -->
+							<xsl:when test="$sy eq +1 and $sx eq +1">
+								<xsl:sequence select="+0.0e0"/>
+							</xsl:when>
+							<!-- 2 -->
+							<xsl:when test="$sy eq -1 and $sx eq +1">
+								<xsl:sequence select="-0.0e0"/>
+							</xsl:when>
+							<!-- 3 -->
+							<xsl:when test="$sy eq +1 and $sx eq -1">
+								<xsl:sequence select="xsb:pi()"/>
+							</xsl:when>
+							<!-- 4 -->
+							<xsl:when test="$sy eq -1 and $sx eq -1">
+								<xsl:sequence select="- xsb:pi()"/>
+							</xsl:when>
+							<xsl:otherwise>ToDo:Atan2-003</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:choose>
+							<!-- 7 -->
+							<xsl:when test="$sy eq -1 and $x lt 0">
+								<xsl:sequence select="- xsb:pi()"/>
+							</xsl:when>
+							<!-- 8 -->
+							<xsl:when test="$sy eq +1 and $x lt 0">
+								<xsl:sequence select="xsb:pi()"/>
+							</xsl:when>
+							<!-- 9 -->
+							<xsl:when test="$sy eq -1 and $x gt 0">
+								<xsl:sequence select="-0.0e0"/>
+							</xsl:when>
+							<!-- 10 -->
+							<xsl:when test="$sy eq +1 and $x gt 0">
+								<xsl:sequence select="+0.0e0"/>
+							</xsl:when>
+							<xsl:otherwise>ToDo:Atan2-002</xsl:otherwise>
+						</xsl:choose>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:when test="$x eq 0">
+				<xsl:choose>
+					<!-- 5 -->
+					<xsl:when test="$y lt 0">
+						<xsl:sequence select="- (xsb:pi() div 2)"/>
+					</xsl:when>
+					<!-- 6 -->
+					<xsl:otherwise>
+						<xsl:sequence select="xsb:pi() div 2"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="2 * intern:atan((intern:sqrt($x * $x + $y * $y) - $x) div $y)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:sgn()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument, numerischer Wert</para></doc:param>
+		<para xml:id="sgn">gibt je nach Vorzeichen und Wert des Arguments <code>-1</code>, <code>0</code> oder <code>+1</code> zurück</para>
+		<para>Im Unterschied zu <link linkend="sgn_i"><function>intern:sgn()</function></link> wird bei <code>0</code> der Wert <code>0</code> zurückgegeben:
+			Werte kleiner <code>0</code> ergeben <code>-1</code>, Werte gleich <code>0</code> ergeben <code>0</code> und Werte größer <code>0</code> ergeben <code>+1</code>.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:sgn" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="($arg castable as xs:double) and ($arg eq 0)">
+				<xsl:sequence select="xsb:cast(0, xsb:type-annotation($arg))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:sgn($arg)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:sgn()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument, numerischer Wert</para></doc:param>
+		<para xml:id="sgn_i">gibt je nach Vorzeichen des Arguments <code>-1</code> oder <code>+1</code> zurück</para>
+		<para>Im Unterschied zu <link linkend="sgn"><function>xsb:sgn()</function></link> wird bei <code>0</code> ein positiver oder negativer Wert zurückgegeben: Werte kleiner <code>0</code>
+			und <code>-0.0e0</code> ergeben <code>-1</code>, Werte größer <code>0</code> und <code>(+)0.0e0</code> ergeben <code>+1</code>.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-20</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:sgn" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:variable name="temp" as="xs:double">
+			<xsl:choose>
+				<xsl:when test="not($arg castable as xs:double)"><xsl:sequence select="number('NaN') "/></xsl:when>
+				<xsl:when test="number($arg) eq number('-INF')"><xsl:sequence select="-1"/></xsl:when>
+				<xsl:when test="number($arg) eq number('INF')"><xsl:sequence select="1"/></xsl:when>
+				<xsl:when test="number($arg) gt 0"><xsl:sequence select="1"/></xsl:when>
+				<xsl:when test="number($arg) lt 0"><xsl:sequence select="-1"/></xsl:when>
+				<xsl:when test="number($arg) eq 0">
+					<xsl:choose>
+						<xsl:when test="starts-with(string($arg), '-')"><xsl:sequence select="-1"/></xsl:when>
+						<xsl:otherwise><xsl:sequence select="1"/></xsl:otherwise>
+					</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise><!-- ToDo: harte Fehlermeldung: logischer Fehler innerhalb der XSLT-SB --><xsl:sequence select="number('NaN')"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:sequence select="xsb:cast($temp, xsb:type-annotation($arg))"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
