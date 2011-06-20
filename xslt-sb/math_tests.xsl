@@ -46,7 +46,7 @@
 	>
 	<!--  -->
 	<xsl:import href="internals.stylecheck.xsl"/>
-	<xsl:import href="math2.xsl"/>
+	<xsl:import href="math.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -1070,6 +1070,7 @@
 		<!--  -->
 		<!--  -->
 		<!--  -->
+		<!--  -->
 		<!-- __________     und noch ein paar Tests zur Stabilität der Typung     __________ -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:type-annotation(xsb:pow(xs:integer(3), xs:integer(3) ) )</xsl:with-param>
@@ -1231,6 +1232,7 @@
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan(xs:decimal(3) ) )"/>
 			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
 		</xsl:call-template>
+		<!-- xsb:atan2(y,x) -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:type-annotation(xsb:atan2(xs:double(3), xs:double(1) ) )</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan2(xs:double(3), xs:double(1) ) )"/>
@@ -1251,16 +1253,7 @@
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:atan2(xs:decimal(3), xs:double(2) ) )"/>
 			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
 		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:type-annotation(xsb:sgn(xs:double(3) ) )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sgn(xs:double(3) ) )"/>
-			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:type-annotation(xsb:sgn(xs:decimal(3) ) )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sgn(xs:decimal(3) ) )"/>
-			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
-		</xsl:call-template>
+		<!-- intern:sgn() -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:type-annotation(intern:sgn(xs:double(3) ) )</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:sgn(xs:double(3) ) )"/>
@@ -1271,17 +1264,6 @@
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:sgn(xs:decimal(3) ) )"/>
 			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
 		</xsl:call-template>
-			
-			
-			
-			
-			
-		<!-- <xsl:message select="xsb:rad-to-deg(intern:wf-arctan(0.5) )"></xsl:message>
-		<xsl:message select="0.463647609000806116214256231461214402028537054286120263811"></xsl:message>
-		<xsl:message select="xsb:rad-to-deg(intern:wf-arctan(-10.0) )"></xsl:message>
-		<xsl:message select="-1.47112767430373459185287557176173085185530637718323826247"/>-->
-		
-		<!-- intern:sgn() -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">intern:sgn(xs:double('NaN'))</xsl:with-param>
 			<xsl:with-param name="actual-value" select="intern:sgn(xs:double('NaN'))"/>
@@ -1324,6 +1306,16 @@
 		</xsl:call-template>
 		<!-- xsb:sgn() -->
 		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sgn(xs:double(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sgn(xs:double(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:sgn(xs:decimal(3) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:sgn(xs:decimal(3) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:sgn(xs:double('NaN'))</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('NaN'))"/>
 			<xsl:with-param name="reference-value" select="xs:double('NaN')"/>
@@ -1363,210 +1355,10 @@
 			<xsl:with-param name="actual-value" select="xsb:sgn(xs:double('INF'))"/>
 			<xsl:with-param name="reference-value" select="xs:double(1)"/>
 		</xsl:call-template>
-		
 		<!--  -->
 		<!--  -->
 		<!--  -->
 	</xsl:template>
-	
-	<!--<xsl:function name="intern:arcsin" as="xs:anyAtomicType" intern:solved="MissingTests">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:iround(intern:arcussinus-iterator(intern:normalize-rad($arg ), 0, 0) )"/>
-	</xsl:function>-->
-	
-	<!--<xsl:function name="intern:arcussinus-iterator" as="xs:anyAtomicType" intern:solved="MissingTests">
-		<xsl:param name="NormalisiertesArgument" as="xs:anyAtomicType"/>
-		<xsl:param name="vortrag" as="xs:anyAtomicType"/><!-\- wird mit 0 initialisiert -\->
-		<xsl:param name="iteration" as="xs:integer"/><!-\- wird mit 0 initialisiert -\->
-		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="(intern:fact(2 * $iteration) div 
-			(intern:power(4, $iteration) * intern:power(intern:fact($iteration), 2) * (2 * $iteration + 1) ) ) *
-			intern:power($NormalisiertesArgument, 2 * $iteration + 1)"/>
-		<!-\-<xsl:message select="$lokalesResultat"></xsl:message>-\->
-		<xsl:choose>
-			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat) ne 0)">
-				<xsl:sequence select="intern:arcussinus-iterator($NormalisiertesArgument, $vortrag + $lokalesResultat, $iteration +1)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="$vortrag + $lokalesResultat"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>
-	-->
-	
-	
-	
-	
-	
-	
-	
-	
-	<!--<xsl:function name="intern:atan" as="xs:anyAtomicType" intern:solved="MissingTests">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:iround(intern:arcustangens-iterator(intern:normalize-rad($arg ), 0, 0) )"/>
-	</xsl:function>-->
-	
-	<!--<xsl:function name="intern:arcustangens-iterator" as="xs:anyAtomicType" intern:solved="MissingTests">
-		<xsl:param name="NormalisiertesArgument" as="xs:anyAtomicType"/>
-		<xsl:param name="vortrag" as="xs:anyAtomicType"/><!-\- wird mit 0 initialisiert -\->
-		<xsl:param name="iteration" as="xs:integer"/><!-\- wird mit 0 initialisiert -\->
-		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="intern:power(-1, $iteration) div (2 * $iteration + 1) * intern:power($NormalisiertesArgument, 2 * $iteration + 1)"/>
-		<xsl:message select="$lokalesResultat"></xsl:message>
-		<xsl:choose>
-			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat) ne 0)">
-				<xsl:sequence select="intern:arcustangens-iterator($NormalisiertesArgument, $vortrag + $lokalesResultat, $iteration +1)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="$vortrag + $lokalesResultat"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>-->
-	
-	
-	<xsl:function name="xsb:atan" as="xs:anyAtomicType">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:atan($arg) )"/>
-	</xsl:function>
-	
-	<xsl:function name="intern:atan" as="xs:anyAtomicType">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:atan-iterator($arg, intern:pow(1 + ($arg * $arg), -0.5 ), 1, intern:sqrt(1 + ($arg * $arg) ), 0, 1)"/>
-	</xsl:function>
-	
-	<xsl:function name="intern:atan-iterator" as="xs:anyAtomicType">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:param name="an" as="xs:anyAtomicType"/>
-		<xsl:param name="bn" as="xs:anyAtomicType"/><!-- wird mit 1 initialisiert -->
-		<xsl:param name="konstanterDivisor" as="xs:anyAtomicType"/><!-- wird mit intern:sqrt(1 + intern:power($arg, 2) ) initialisiert -->
-		<xsl:param name="letztesResultat" as="xs:anyAtomicType"/><!-- wird mit irgendwas, z.B. 0, initialisiert -->
-		<xsl:param name="iteration" as="xs:integer"/><!-- wird mit 1 initialisiert -->
-		<xsl:variable name="anplus1" as="xs:anyAtomicType" select="intern:iround(0.5 * ($an + $bn) )"/>
-		<xsl:variable name="bnplus1" as="xs:anyAtomicType" select="intern:iround(intern:sqrt($anplus1 * $bn) )"/>
-		<xsl:variable name="lokalesResultat" as="xs:anyAtomicType" select="intern:iround($arg div ($konstanterDivisor * $anplus1 ) )"/>
-		<xsl:choose>
-			<xsl:when test="($iteration le (1 * $intern:max) ) and (intern:iround($lokalesResultat - $letztesResultat) ne 0)">
-				<xsl:sequence select="intern:atan-iterator($arg, $anplus1, $bnplus1, $konstanterDivisor, $lokalesResultat, $iteration + 1 )"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="$lokalesResultat"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>
-	
-	
-	<xsl:function name="xsb:atan2" as="xs:anyAtomicType">
-		<xsl:param name="y" as="xs:anyAtomicType"/>
-		<xsl:param name="x" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:atan2($y, $x) )"/>
-	</xsl:function>
-	
-	<xsl:function name="intern:atan2" as="xs:anyAtomicType">
-		<xsl:param name="y" as="xs:anyAtomicType"/>
-		<xsl:param name="x" as="xs:anyAtomicType"/>
-		<!-- ToDo: -INF und INF als Parameter berücksichtigen (so dann in XPath 3.0 berücksichtigt)  -->
-		<xsl:choose>
-			<!-- Sonderfälle laut Standard (http://www.w3.org/TR/xpath-functions-30/#func-atan2) werden explizit behandelt -->
-			<!-- Die Ziffern in den Kommentaren beziehen sich auf die Beispiele im Standard -->
-			<xsl:when test="$y eq 0">
-				<xsl:variable name="sy" as="xs:double" select="intern:sgn($y)"/>
-				<xsl:variable name="sx" as="xs:double" select="intern:sgn($x)"/>
-				<xsl:choose>
-					<xsl:when test="$x eq 0">
-						<xsl:choose>
-							<!-- 1 -->
-							<xsl:when test="$sy eq +1 and $sx eq +1">
-								<xsl:sequence select="+0.0e0"/>
-							</xsl:when>
-							<!-- 2 -->
-							<xsl:when test="$sy eq -1 and $sx eq +1">
-								<xsl:sequence select="-0.0e0"/>
-							</xsl:when>
-							<!-- 3 -->
-							<xsl:when test="$sy eq +1 and $sx eq -1">
-								<xsl:sequence select="xsb:pi()"/>
-							</xsl:when>
-							<!-- 4 -->
-							<xsl:when test="$sy eq -1 and $sx eq -1">
-								<xsl:sequence select="- xsb:pi()"/>
-							</xsl:when>
-							<xsl:otherwise>ToDo:Atan2-003</xsl:otherwise>
-						</xsl:choose>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:choose>
-							<!-- 7 -->
-							<xsl:when test="$sy eq -1 and $x lt 0">
-								<xsl:sequence select="- xsb:pi()"/>
-							</xsl:when>
-							<!-- 8 -->
-							<xsl:when test="$sy eq +1 and $x lt 0">
-								<xsl:sequence select="xsb:pi()"/>
-							</xsl:when>
-							<!-- 9 -->
-							<xsl:when test="$sy eq -1 and $x gt 0">
-								<xsl:sequence select="-0.0e0"/>
-							</xsl:when>
-							<!-- 10 -->
-							<xsl:when test="$sy eq +1 and $x gt 0">
-								<xsl:sequence select="+0.0e0"/>
-							</xsl:when>
-							<xsl:otherwise>ToDo:Atan2-002</xsl:otherwise>
-						</xsl:choose>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:when>
-			<xsl:when test="$x eq 0">
-				<xsl:choose>
-					<!-- 5 -->
-					<xsl:when test="$y lt 0">
-						<xsl:sequence select="- (xsb:pi() div 2)"/>
-					</xsl:when>
-					<!-- 6 -->
-					<xsl:otherwise>
-						<xsl:sequence select="xsb:pi() div 2"/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="2 * intern:atan((intern:sqrt($x * $x + $y * $y) - $x) div $y)"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>
-	
-	
-	<xsl:function name="xsb:sgn" as="xs:anyAtomicType">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:choose>
-			<xsl:when test="$arg eq 0">
-				<xsl:sequence select="xsb:cast(0, xsb:type-annotation($arg))"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="intern:sgn($arg)"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>
-	
-	
-	
-	<xsl:function name="intern:sgn" as="xs:anyAtomicType">
-		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:variable name="temp" as="xs:double">
-			<xsl:choose>
-				<xsl:when test="not($arg castable as xs:double)"><xsl:sequence select="number('NaN') "/></xsl:when>
-				<xsl:when test="number($arg) eq number('-INF')"><xsl:sequence select="-1"/></xsl:when>
-				<xsl:when test="number($arg) eq number('INF')"><xsl:sequence select="1"/></xsl:when>
-				<xsl:when test="number($arg) gt 0"><xsl:sequence select="1"/></xsl:when>
-				<xsl:when test="number($arg) lt 0"><xsl:sequence select="-1"/></xsl:when>
-				<xsl:when test="number($arg) eq 0">
-					<xsl:choose>
-						<xsl:when test="starts-with(string($arg), '-')"><xsl:sequence select="-1"/></xsl:when>
-						<xsl:otherwise><xsl:sequence select="1"/></xsl:otherwise>
-					</xsl:choose>
-				</xsl:when>
-				<xsl:otherwise><!-- ToDo: harte Fehlermeldung: logischer Fehler innerhalb der XSLT-SB --><xsl:sequence select="number('NaN')"/></xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:sequence select="xsb:cast($temp, xsb:type-annotation($arg))"/>
-	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->
