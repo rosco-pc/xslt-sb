@@ -50,8 +50,16 @@
 	<!--  -->
 	<doc:doc filename="internals.stylecheck.xsl" internal-ns="docv" global-ns="doc xsb intern" vocabulary="DocBook" info="$Revision$, $Date$">
 		<doc:title>StyleCheck</doc:title>
-		<para>Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf gängige Probleme zu testen.</para>
-		<para>Eine Spezialität dieses Stylesheets sind die <code>intern:solved</code>-Attribute. Sie können Token enthalten, die Stylesheet-Elemente von Tests ausschließen.</para>
+		<para xml:id="internals.stylecheck.main">Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf gängige Probleme zu testen.</para>
+		<para>Eine Spezialität dieses Stylesheets sind die <code>intern:solved</code>-Attribute. Sie können Token enthalten,
+			die Stylesheet-Elemente von Tests ausschließen.</para>
+		<para><emphasis role="bold">Verwendung</emphasis></para>
+		<para>Für den Stylesheet-Test wird die zu testende XSLT-Datei mit dem Template
+			<link linkend="internals.Stylecheck"><function>intern:internals.Stylecheck</function></link> transformiert. Anders formuliert:
+			das Eingabedokument der Transformation ist die zu testende XSLT-Datei und das Stylesheet ein Test-XSLT, das das Template
+			<function>intern:internals.Stylecheck</function> aufruft. Anwendungsbeispiele finden sich in den Test-Stylesheet der XSLT-SB wie
+			z.B. <code>strings_tests.xsl</code>. Die Verwendung von Stylecheck ist dem Einsatz der Testumgebung ähnlich und erfolgt innerhalb der
+			XSLT-SB meist gemeinsam, so dass bei Fragen ggfs. auch ein Blick <link linkend="internals.testing.main">dorthin</link> lohnt.</para>
 		<para>Autor: <author>
 			<firstname>Stefan</firstname>
 			<surname>Krause</surname>

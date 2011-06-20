@@ -231,6 +231,11 @@
 			<xsl:with-param name="reference-value" select="true()"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(('1', '2'), ('1', '2'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(('1', '2'), ('1', '2'))"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:is(current-date(), current-date())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:is(current-date(), current-date())"/>
 			<xsl:with-param name="reference-value" select="true()"/>
@@ -267,6 +272,11 @@
 			<xsl:with-param name="reference-value" select="false()"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(('1', '2'), ('1', '3'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(('1', '2'), ('1', '3'))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:is(current-date(), current-time())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:is(current-date(), current-time())"/>
 			<xsl:with-param name="reference-value" select="false()"/>
@@ -299,6 +309,67 @@
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:is($is-testwert1/comment(), $is-testwert2/comment())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:is($is-testwert1/comment(), $is-testwert2/comment())"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<!-- Sonderfälle -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(number('NaN'), number('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(number('NaN'), number('NaN'))"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(number('-INF'), number('-INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(number('-INF'), number('-INF'))"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(number('INF'), number('INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(number('INF'), number('INF'))"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(number('INF'), number('-INF'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(number('INF'), number('-INF'))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:double(-0.0e0), xs:double(-0.0e0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:double(-0.0e0), xs:double(-0.0e0))"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:double(+0.0e0), xs:double(+0.0e0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:double(+0.0e0), xs:double(+0.0e0))"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:double(-0.0e0), xs:double(+0.0e0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:double(-0.0e0), xs:double(+0.0e0))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(current-date(), string(current-date()))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(current-date(), string(current-date()))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:decimal(2), xs:float(2))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:decimal(2), xs:float(2))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:double(2), xs:float(2))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:double(2), xs:float(2))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:decimal(0), xs:float(0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:decimal(0), xs:float(0))"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is(xs:double(0), xs:float(0))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is(xs:double(0), xs:float(0))"/>
 			<xsl:with-param name="reference-value" select="false()"/>
 		</xsl:call-template>
 		<!--  -->
