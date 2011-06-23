@@ -550,7 +550,7 @@
 	<!-- __________     xsb:internals.FunctionError     __________ -->
 	<doc:template>
 		<para xml:id="internals.FunctionError">Dieses Template gibt eine einfache Fehlermeldung aus. Es ist ein Wrapper für 
-			<function>xsb:internals.Error</function>, der die Rückgabe von Werten durch das Template unterbindet (was bei Funktionen
+			<function>xsb:internals.Error</function>, der die Rückgabe von Werten durch das Template unterbindet (was innerhalb von Funktionen
 			in der Regel unerwünscht ist und ggfs. zu Fehlern führen kann).</para>
 		<para><emphasis role="bold">Achtung!</emphasis> Dadurch werden keine Meldungen (als Kommentar, Text, HTML, XML) in Ausgabedateien geschrieben!</para>
 		<revhistory>
@@ -585,6 +585,41 @@
 			<xsl:with-param name="caller" select="$caller"/>
 			<xsl:with-param name="level" select="$level"/>
 			<xsl:with-param name="message" select="$message"/>
+			<xsl:with-param name="show-context" select="false()"/>
+			<xsl:with-param name="write-to-file" select="false()"/>
+		</xsl:call-template>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:internals.FatalError     __________ -->
+	<doc:template>
+		<para xml:id="internals.FatalError">Dieses Template gibt eine Fehlermeldung bei Fehlern in der Logik der XSL-SB aus. Da das Ausführungsverhalten
+			in solchen Situationen nicht vorhersehbar ist, wird die Verarbeitung abgebrochen.</para>
+		<para>Dieses Template ist ein Wrapper für <function>xsb:internals.Error</function>, der die Rückgabe von Werten durch das Template unterbindet
+			(was innerhalb von Funktionen in der Regel unerwünscht ist und ggfs. zu Fehlern führen kann).</para>
+		<para><emphasis role="bold">Achtung!</emphasis> Dadurch werden keine Meldungen (als Kommentar, Text, HTML, XML) in Ausgabedateien geschrieben!</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+		<doc:param name="errorID"><para>Fehler-Codenummer</para></doc:param>
+		<doc:param name="caller"><para>Aufrufende(s) Funktion/Template, z.B. <function>xsb:get-context-as-string()</function></para></doc:param>
+	</doc:template>
+	<xsl:template name="intern:internals.FatalError">
+		<xsl:param name="errorID" as="xs:string?" required="yes"/>
+		<xsl:param name="caller" as="xs:string?" required="yes"/>
+		<!--  -->
+		<xsl:call-template name="xsb:internals.Error">
+			<xsl:with-param name="caller" select="$caller"/>
+			<xsl:with-param name="level" select=" 'ERROR' "/>
+			<xsl:with-param name="message">Uups, das hätte nicht passieren dürfen :-(. Fataler Fehler innerhalb der XSLT-SB, Verarbeitung wurde abgebrochen (<xsl:value-of select="$errorID"/>)</xsl:with-param>
 			<xsl:with-param name="show-context" select="false()"/>
 			<xsl:with-param name="write-to-file" select="false()"/>
 		</xsl:call-template>
