@@ -240,6 +240,15 @@
 			Die Eingabe einer Leersequenz, eines Leerstring oder eines ungültigen Strings ergibt 0.</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.34</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>saubere Typung auf xs:decimal ergänzt</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.114</revnumber>
 				<date>2010-07-17</date>
 				<authorinitials>Stf</authorinitials>
@@ -258,7 +267,7 @@
 				<xsl:sequence select="xs:decimal($input)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="0"/>
+				<xsl:sequence select="xs:decimal(0)"/>
 				<xsl:if test="$warn-if-wrong-input">
 					<xsl:call-template name="xsb:internals.FunctionError">
 						<xsl:with-param name="caller">xsb:force-cast-to-decimal</xsl:with-param>
@@ -477,28 +486,28 @@
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal((), false())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal((), false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('', false())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('', false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('MMIX', false())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('MMIX', false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<!-- Wahr-Werte -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('0', false())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('0', false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1', false())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('1', false())"/>
-			<xsl:with-param name="reference-value" select="1" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(1)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1.23', false())</xsl:with-param>
@@ -510,28 +519,28 @@
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal(())</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal(())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('')"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('MMIX')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('MMIX')"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<!-- Wahr-Werte -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('0')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('0')"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('1')"/>
-			<xsl:with-param name="reference-value" select="1" as="xs:decimal"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(1)"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1.23')</xsl:with-param>

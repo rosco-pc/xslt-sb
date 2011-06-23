@@ -309,6 +309,26 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
+	<!-- __________     intern:half-pi     __________ -->
+	<doc:function>
+		<para xml:id="half-pi">Pi/2 (Konstante)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:half-pi" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:sequence select="1.570796326794896619231321691639751442098584699687552910487"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
 	<!--  -->
 	<!-- ====================     Funktionen     ==================== -->
 	<!--  -->
@@ -393,6 +413,8 @@
 		<doc:param name="basis"><para>Basis</para></doc:param>
 		<doc:param name="exponent"><para>Exponent</para></doc:param>
 		<para xml:id="pow">berechnet die Potenz basis^exponent</para>
+		<para>Bei ganzzahligen Exponenten wird die multiplikative Variante mit <function><link linkend="power">intern:power()</link></function>
+			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.25</revnumber>
@@ -418,6 +440,9 @@
 		<xsl:param name="basis" as="xs:anyAtomicType"/>
 		<xsl:param name="exponent" as="xs:anyAtomicType"/>
 		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($basis) or xsb:is-NaN($exponent)">
+				<xsl:sequence select="intern:cast-NaN($basis)"/>
+			</xsl:when>
 			<!-- ganzzahlige Exponenten können per Multiplikation bearbeitet werden -->
 			<xsl:when test="round($exponent) eq $exponent">
 				<xsl:sequence select="intern:round(intern:power($basis, xs:integer($exponent) ) )"/>
@@ -435,8 +460,6 @@
 		<doc:param name="basis"><para>Basis</para></doc:param>
 		<doc:param name="exponent"><para>Exponent</para></doc:param>
 		<para xml:id="pow_i">berechnet die Potenz basis^exponent</para>
-		<para>Bei ganzzahligen Exponenten wird die multiplikative Variante mit <function><link linkend="power">intern:power()</link></function>
-			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.25</revnumber>
@@ -527,7 +550,20 @@
 	</doc:function>
 	<xsl:function name="xsb:exp" as="xs:anyAtomicType">
 		<xsl:param name="exponent" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:exp($exponent) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($exponent)">
+				<xsl:sequence select="intern:cast-NaN($exponent)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-INF($exponent)">
+				<xsl:sequence select="intern:cast-INF($exponent)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-nINF($exponent)">
+				<xsl:sequence select="xsb:cast(0, xsb:type-annotation($exponent))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:exp($exponent) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -616,7 +652,14 @@
 	</doc:function>
 	<xsl:function name="xsb:exp10" as="xs:anyAtomicType">
 		<xsl:param name="exponent" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:exp10($exponent) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($exponent)">
+				<xsl:sequence select="intern:cast-NaN($exponent)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:exp10($exponent) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -678,7 +721,14 @@
 	</doc:function>
 	<xsl:function name="xsb:sin" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:sin($arg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:sin($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -766,7 +816,14 @@
 	</doc:function>
 	<xsl:function name="xsb:cos" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:cos($arg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:cos($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -873,7 +930,14 @@
 	</doc:function>
 	<xsl:function name="xsb:tan" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:tan($arg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:tan($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
@@ -926,7 +990,14 @@
 	</doc:function>
 	<xsl:function name="xsb:cot" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:cot($arg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:cot($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
@@ -981,7 +1052,14 @@
 	</doc:function>
 	<xsl:function name="xsb:deg-to-rad" as="xs:anyAtomicType">
 		<xsl:param name="deg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:deg-to-rad($deg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($deg)">
+				<xsl:sequence select="intern:cast-NaN($deg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:deg-to-rad($deg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1029,7 +1107,14 @@
 	<!-- __________     intern:rad-to-deg     __________ -->
 	<xsl:function name="xsb:rad-to-deg" as="xs:anyAtomicType">
 		<xsl:param name="rad" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:rad-to-deg($rad) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($rad)">
+				<xsl:sequence select="intern:cast-NaN($rad)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:rad-to-deg($rad) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<doc:function>
 		<doc:param name="rad"><para>Eingabe im Bogenmaß</para></doc:param>
@@ -1071,6 +1156,9 @@
 	<xsl:function name="xsb:sqrt" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
 			<xsl:when test="$arg ge 0">
 				<xsl:sequence select="xsb:nroot($arg, 2)"/>
 			</xsl:when>
@@ -1127,7 +1215,30 @@
 	<xsl:function name="xsb:nroot" as="xs:anyAtomicType">
 		<xsl:param name="wurzelbasis" as="xs:anyAtomicType"/>
 		<xsl:param name="wurzelexponent" as="xs:integer"/>
-		<xsl:sequence select="intern:round(intern:nroot($wurzelbasis, $wurzelexponent) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($wurzelbasis) or xsb:is-NaN($wurzelexponent)">
+				<xsl:sequence select="intern:cast-NaN($wurzelbasis)"/>
+			</xsl:when>
+			<xsl:when test="($wurzelbasis ge 0) and ($wurzelexponent ge 1)">
+				<xsl:sequence select="intern:round(intern:nroot($wurzelbasis, $wurzelexponent) )"/>
+			</xsl:when>
+			<xsl:when test="$wurzelbasis lt 0">
+				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:nroot</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$wurzelbasis"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:nroot(<xsl:sequence select="$wurzelbasis"/>, <xsl:sequence select="$wurzelexponent"/>)</xsl:with-param>
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="message">Ungültige Eingabe: Wurzelexponent ist »<xsl:sequence select="$wurzelexponent"/>«, muss aber größer/gleich 1 sein. Verarbeitung abgebrochen.</xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1151,27 +1262,7 @@
 	<xsl:function name="intern:nroot" as="xs:anyAtomicType" intern:solved="MissingTests">
 		<xsl:param name="wurzelbasis" as="xs:anyAtomicType"/>
 		<xsl:param name="wurzelexponent" as="xs:integer"/>
-		<xsl:choose>
-			<xsl:when test="($wurzelbasis ge 0) and ($wurzelexponent ge 1)">
-				<xsl:sequence select="intern:root-iterator($wurzelexponent, $wurzelbasis, 0, $wurzelbasis, 0)"/>
-			</xsl:when>
-			<xsl:when test="$wurzelbasis lt 0">
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
-				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:nroot</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$wurzelbasis"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
-				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:nroot</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: Wurzelexponent ist »<xsl:sequence select="$wurzelexponent"/>«, muss aber größer/gleich 1 sein. Verarbeitung abgebrochen.</xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:sequence select="intern:root-iterator($wurzelexponent, $wurzelbasis, 0, $wurzelbasis, 0)"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1233,7 +1324,17 @@
 	</doc:function>
 	<xsl:function name="xsb:log" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:log($arg ) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-INF($arg)">
+				<xsl:sequence select="intern:cast-INF($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:log($arg ) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1390,7 +1491,17 @@
 	</doc:function>
 	<xsl:function name="xsb:log10" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:log10($arg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-INF($arg)">
+				<xsl:sequence select="intern:cast-INF($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:log10($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1623,7 +1734,20 @@
 	</doc:function>
 	<xsl:function name="xsb:atan" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:atan($arg) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-INF($arg)">
+				<xsl:sequence select="xsb:cast(intern:round(intern:half-pi() ), xsb:type-annotation($arg) )"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-nINF($arg)">
+				<xsl:sequence select="xsb:cast(intern:round(- intern:half-pi() ), xsb:type-annotation($arg) )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:atan($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1631,6 +1755,17 @@
 	<doc:function>
 		<doc:param name="arg"><para>Argument der <function>intern:atan()</function>-Funktion</para></doc:param>
 		<para xml:id="atan_i">ermittelt den Arkustangens (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Verhalten bei Sonderfällen an XSLT 3.0 angepasst (NaN, INF, -0.0e0)</para>
+				</revdescription>
+			</revision>
+		</revhistory>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.34</revnumber>
@@ -1645,7 +1780,14 @@
 	</doc:function>
 	<xsl:function name="intern:atan" as="xs:anyAtomicType" intern:solved="MissingTests">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:atan-iterator($arg, intern:pow(1 + ($arg * $arg), -0.5 ), 1, intern:sqrt(1 + ($arg * $arg) ), 0, 1)"/>
+		<xsl:choose>
+			<xsl:when test="($arg eq 0) and (intern:sgn($arg) eq -1)">
+				<xsl:sequence select="xsb:cast(-0.0e0, xsb:type-annotation($arg) )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:atan-iterator($arg, intern:pow(1 + ($arg * $arg), -0.5 ), 1, intern:sqrt(1 + ($arg * $arg) ), 0, 1)"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1714,7 +1856,14 @@
 	<xsl:function name="xsb:atan2" as="xs:anyAtomicType">
 		<xsl:param name="y" as="xs:anyAtomicType"/>
 		<xsl:param name="x" as="xs:anyAtomicType"/>
-		<xsl:sequence select="intern:round(intern:atan2($y, $x) )"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($y) or xsb:is-NaN($x)">
+				<xsl:sequence select="intern:cast-NaN($y)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:atan2($y, $x) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -1752,42 +1901,54 @@
 						<xsl:choose>
 							<!-- 1 -->
 							<xsl:when test="$sy eq +1 and $sx eq +1">
-								<xsl:sequence select="+0.0e0"/>
+								<xsl:sequence select="xsb:cast(+0.0e0, xsb:type-annotation($y) )"/>
 							</xsl:when>
 							<!-- 2 -->
 							<xsl:when test="$sy eq -1 and $sx eq +1">
-								<xsl:sequence select="-0.0e0"/>
+								<xsl:sequence select="xsb:cast(-0.0e0, xsb:type-annotation($y) )"/>
 							</xsl:when>
 							<!-- 3 -->
 							<xsl:when test="$sy eq +1 and $sx eq -1">
-								<xsl:sequence select="xsb:pi()"/>
+								<xsl:sequence select="xsb:cast(xsb:pi(), xsb:type-annotation($y) )"/>
 							</xsl:when>
 							<!-- 4 -->
 							<xsl:when test="$sy eq -1 and $sx eq -1">
-								<xsl:sequence select="- xsb:pi()"/>
+								<xsl:sequence select="xsb:cast(- xsb:pi(), xsb:type-annotation($y) )"/>
 							</xsl:when>
-							<xsl:otherwise>ToDo:Atan2-003</xsl:otherwise>
+							<xsl:otherwise>
+								<xsl:sequence select="number('NaN')"/>
+								<xsl:call-template name="intern:internals.FatalError">
+									<xsl:with-param name="caller">intern:atan2</xsl:with-param>
+									<xsl:with-param name="errorID">atan2-001</xsl:with-param>
+								</xsl:call-template>
+							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:choose>
 							<!-- 7 -->
-							<xsl:when test="$sy eq -1 and $x lt 0">
+							<xsl:when test="xsb:cast($sy eq -1 and $x lt 0, xsb:type-annotation($y) )">
 								<xsl:sequence select="- xsb:pi()"/>
 							</xsl:when>
 							<!-- 8 -->
-							<xsl:when test="$sy eq +1 and $x lt 0">
+							<xsl:when test="xsb:cast($sy eq +1 and $x lt 0, xsb:type-annotation($y) )">
 								<xsl:sequence select="xsb:pi()"/>
 							</xsl:when>
 							<!-- 9 -->
-							<xsl:when test="$sy eq -1 and $x gt 0">
+							<xsl:when test="xsb:cast($sy eq -1 and $x gt 0, xsb:type-annotation($y) )">
 								<xsl:sequence select="-0.0e0"/>
 							</xsl:when>
 							<!-- 10 -->
-							<xsl:when test="$sy eq +1 and $x gt 0">
+							<xsl:when test="xsb:cast($sy eq +1 and $x gt 0, xsb:type-annotation($y) )">
 								<xsl:sequence select="+0.0e0"/>
 							</xsl:when>
-							<xsl:otherwise>ToDo:Atan2-002</xsl:otherwise>
+							<xsl:otherwise>
+								<xsl:sequence select="number('NaN')"/>
+								<xsl:call-template name="intern:internals.FatalError">
+									<xsl:with-param name="caller">intern:atan2</xsl:with-param>
+									<xsl:with-param name="errorID">atan2-002</xsl:with-param>
+								</xsl:call-template>
+							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -1795,17 +1956,17 @@
 			<xsl:when test="$x eq 0">
 				<xsl:choose>
 					<!-- 5 -->
-					<xsl:when test="$y lt 0">
-						<xsl:sequence select="- (xsb:pi() div 2)"/>
+					<xsl:when test="xsb:cast($y lt 0, xsb:type-annotation($y) )">
+						<xsl:sequence select="xsb:cast(- intern:half-pi(), xsb:type-annotation($y) )"/>
 					</xsl:when>
 					<!-- 6 -->
 					<xsl:otherwise>
-						<xsl:sequence select="xsb:pi() div 2"/>
+						<xsl:sequence select="xsb:cast(intern:half-pi(), xsb:type-annotation($y) )"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="2 * intern:atan((intern:sqrt($x * $x + $y * $y) - $x) div $y)"/>
+				<xsl:sequence select="xsb:cast(2 * intern:atan((intern:sqrt($x * $x + $y * $y) - $x) div $y), xsb:type-annotation($y) )"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1864,6 +2025,9 @@
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:variable name="temp" as="xs:double">
 			<xsl:choose>
+				<xsl:when test="xsb:is-NaN($arg)">
+					<xsl:sequence select="intern:cast-NaN($arg)"/>
+				</xsl:when>
 				<xsl:when test="not($arg castable as xs:double)"><xsl:sequence select="number('NaN') "/></xsl:when>
 				<xsl:when test="number($arg) eq number('-INF')"><xsl:sequence select="-1"/></xsl:when>
 				<xsl:when test="number($arg) eq number('INF')"><xsl:sequence select="1"/></xsl:when>
@@ -1875,10 +2039,72 @@
 						<xsl:otherwise><xsl:sequence select="1"/></xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
-				<xsl:otherwise><!-- ToDo: harte Fehlermeldung: logischer Fehler innerhalb der XSLT-SB --><xsl:sequence select="number('NaN')"/></xsl:otherwise>
+				<xsl:otherwise>
+					<xsl:sequence select="number('NaN')"/>
+					<xsl:call-template name="intern:internals.FatalError">
+						<xsl:with-param name="caller" select="intern:format-INF-caller('intern:sgn', $arg)"/>
+						<xsl:with-param name="errorID">sgn-001</xsl:with-param>
+					</xsl:call-template>
+				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
 		<xsl:sequence select="xsb:cast($temp, xsb:type-annotation($arg))"/>
+	</xsl:function>
+	
+	
+	
+	<xsl:function name="xsb:is-NaN" as="xs:boolean">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="string($arg) eq 'NaN' ">
+				<xsl:sequence select="true()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	<xsl:function name="xsb:is-INF" as="xs:boolean">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="string($arg) eq 'INF' ">
+				<xsl:sequence select="true()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	<xsl:function name="xsb:is-nINF" as="xs:boolean">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="string($arg) eq '-INF' ">
+				<xsl:sequence select="true()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	
+	<xsl:function name="intern:cast-NaN" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="xsb:cast(xs:float('NaN'), xsb:type-annotation($arg) )"/>
+	</xsl:function>
+	
+	
+	<xsl:function name="intern:cast-INF" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="xsb:cast(xs:float('INF'), xsb:type-annotation($arg) )"/>
+	</xsl:function>
+	
+	
+	<xsl:function name="intern:cast-nINF" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="xsb:cast(xs:float('-INF'), xsb:type-annotation($arg) )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
