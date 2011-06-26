@@ -15,6 +15,12 @@ gestartet werden.
 === Revision ===
 $Revision$, $Date$
 
+--- Änderungen in 0.2.37 ---
+* asin(), acos(), atan(), atan2() in math.xsl ergänzt
+* dynamische Typung: Functions geben jetzt ihre Ergebnisse mit dem Typ ihres 
+  Arguments zurück (anstelle des statischen xs:decimal)
+* internals.stylecheck.xsl testet auf die Verwendung von <xsl:message/>
+
 --- Änderungen in 0.2.31 ---
 * Tests aus standard.xsl nach standard_tests.xsl ausgelagert
 * Dokumentation verbessert

@@ -193,7 +193,7 @@
 			<xsl:with-param name="log-entry.write-preText" select="true()"/>
 		</xsl:call-template>
 		<xsl:if test="(xsb:lax-string-compare($_level, 'ERROR' ) and $_internals.errors.die-on-critical-errors) or xsb:lax-string-compare($_level, 'FATAL' )">
-			<xsl:message terminate="yes">Verarbeitung abgebrochen</xsl:message>
+			<xsl:message terminate="yes" intern:solved="CheckXSLMessage">Verarbeitung abgebrochen</xsl:message>
 		</xsl:if>
 	</xsl:template>
 	<!--  -->

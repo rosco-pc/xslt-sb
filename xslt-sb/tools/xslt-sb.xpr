@@ -10,57 +10,24 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
+                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
                                 </field>
                                 <field name="type">
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>../numbers.xsl</String>
+                                    <String>google_code.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
+                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
                                 </field>
                                 <field name="type">
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>../math2_tests.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_externen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_externen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../math2.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Dokumentation_erstellen</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.testing.xsl</String>
+                                    <String>../internals.stylecheck.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -82,29 +49,18 @@
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>../math_tests.xsl</String>
+                                    <String>../math2_tests.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    <String>Selbstest_mit_externen_Tests</String>
                                 </field>
                                 <field name="type">
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>../standard.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Dokumentation_erstellen</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.stylecheck.xsl</String>
+                                    <String>../math2.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -159,17 +115,6 @@
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>../../../../../../Dropbox/test.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
                                     <String>generate_documentation_for_google_code.xsl</String>
                                 </field>
                             </scenarioAssociation>
@@ -208,13 +153,35 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
+                                    <String>Selbstest_mit_internen_Tests</String>
                                 </field>
                                 <field name="type">
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>google_code.xsl</String>
+                                    <String>../math_tests.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../math.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../files.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -226,28 +193,6 @@
                                 </field>
                                 <field name="url">
                                     <String>../strings.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../pattern+includes.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.meta.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -269,7 +214,62 @@
                                     <String>XML</String>
                                 </field>
                                 <field name="url">
-                                    <String>../files.xsl</String>
+                                    <String>../standard.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../internals.meta.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../pattern+includes.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../numbers.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../internals.testing.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../internals.xsl</String>
                                 </field>
                             </scenarioAssociation>
                         </scenarioAssociation-array>
@@ -1531,10 +1531,10 @@
                                     <String></String>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>${currentFileURL}</String>
+                                    <String>${pdu}/google_code.xsl</String>
                                 </field>
                                 <field name="inputXMLURL">
-                                    <String>file:/Users/stf/Documents/checkout/xslt-sb/trunk/xslt-sb/strings.xsl</String>
+                                    <String>${pdu}/../strings.xsl</String>
                                 </field>
                                 <field name="defaultScenario">
                                     <Boolean>false</Boolean>
@@ -2355,5 +2355,6 @@
     </meta>
     <projectTree name="xslt-sb.xpr">
         <folder path="../"/>
+        <folder path="../../../wiki/"/>
     </projectTree>
 </project>

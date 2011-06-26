@@ -310,6 +310,9 @@
 		<xsl:call-template name="intern:internals.Stylecheck.CheckMisplacedIntern">
 			<xsl:with-param name="Dokument" as="document-node()" select="$stylesheet-node"/>
 		</xsl:call-template>
+		<xsl:call-template name="intern:internals.Stylecheck.CheckXSLMessage">
+			<xsl:with-param name="Dokument" as="document-node()" select="$stylesheet-node"/>
+		</xsl:call-template>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -703,7 +706,7 @@
 	<!-- __________     intern:internals.Stylecheck.CheckMisplacedIntern     __________ -->
 	<doc:template>
 		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
-		<para xml:id="internals.Stylecheck.CheckMisplacedIntern" intern:solved="ListTO_DOs">tested, ob im Stylesheet <code>intern:*</code>-Elemente innerhalb
+		<para xml:id="internals.Stylecheck.CheckMisplacedIntern">tested, ob im Stylesheet <code>intern:*</code>-Elemente innerhalb
 			von matching oder named templates stehen, da diese fälschlicherweise in das Ausgabedokument geschrieben werden könnten.</para>
 		<para>solved-Token: "<code>MisplacedIntern</code>" (kann am Element selbst oder an einem Eltern-Element stehen)</para>
 		<revhistory>
@@ -725,6 +728,38 @@
 				<xsl:with-param name="level">WARN</xsl:with-param>
 				<xsl:with-param name="caller">internals.Stylecheck.CheckMisplacedIntern</xsl:with-param>
 				<xsl:with-param name="message">//<xsl:sequence select="xsb:render-context-as-string(.)"/> innerhalb von xsl:template, wird möglicherweise in das Ausgabedokument geschrieben</xsl:with-param>
+				<xsl:with-param name="show-context" select="false()"/>
+			</xsl:call-template>
+		</xsl:for-each>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:internals.Stylecheck.CheckXSLMessage     __________ -->
+	<doc:template>
+		<doc:param name="Dokument"><para>XSL-Dokument-Knoten, auf den die Tests angewendet werden.</para></doc:param>
+		<para xml:id="internals.Stylecheck.CheckXSLMessage">tested, ob im Stylesheet <code>xsl:message</code>-Elemente verwendet werden.</para>
+		<para>Wegen der höheren Flexibilität bietet sich die Verwendung des Logging-Systems an. Innerhalb der Stylesheets der XSLT-SB soll <code>xsl:message</code>
+			nur in Ausnahmefällen verwendet werden.</para>
+		<para>solved-Token: "<code>CheckXSLMessage</code>" (kann am Element selbst stehen)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.36</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:template>
+	<xsl:template name="intern:internals.Stylecheck.CheckXSLMessage">
+		<xsl:param name="Dokument" as="document-node()" required="yes"/>
+		<xsl:for-each select="$Dokument//xsl:message[not(xsb:listed(@intern:solved, 'CheckXSLMessage') )]">
+			<xsl:call-template name="xsb:internals.Error">
+				<xsl:with-param name="level">INFO</xsl:with-param>
+				<xsl:with-param name="caller">internals.Stylecheck.CheckXSLMessage</xsl:with-param>
+				<xsl:with-param name="message">xsl:message verwendet. Ist eine Verwendung des XSLT-SB-Logging-Systems möglich? Kontext: <xsl:sequence select="intern:render-context-and-parent-as-string(.)"/></xsl:with-param>
 				<xsl:with-param name="show-context" select="false()"/>
 			</xsl:call-template>
 		</xsl:for-each>
