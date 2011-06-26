@@ -9,6 +9,10 @@ Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf
 
 Eine Spezialität dieses Stylesheets sind die `intern:solved`-Attribute. Sie können Token enthalten, die Stylesheet-Elemente von Tests ausschließen.
 
+*Verwendung*
+
+Für den Stylesheet-Test wird die zu testende XSLT-Datei mit dem Template ``intern:internals.Stylecheck`` transformiert. Anders formuliert: das Eingabedokument der Transformation ist die zu testende XSLT-Datei und das Stylesheet ein Test-XSLT, das das Template `intern:internals.Stylecheck` aufruft. Anwendungsbeispiele finden sich in den Test-Stylesheet der XSLT-SB wie z.B. `strings_tests.xsl`. Die Verwendung von Stylecheck ist dem Einsatz der Testumgebung ähnlich und erfolgt innerhalb der XSLT-SB meist gemeinsam, so dass bei Fragen ggfs. auch ein Blick `dorthin` lohnt.
+
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
 
@@ -18,6 +22,7 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 ||   || *intern:internals.Stylecheck.CallTemplateTestFunction* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template überprüft die Syntax von Funktionstests mit `xsl:call-template name="xsb:internals.test.Function"`. ||
 ||   || *intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template testet den Aufruf von Funktionstests mit `xsb:internals.test.function.withTestItem.BooleanResult"`, `xsb:internals.test.function.withTestItem.StringResult"` usw.. ||
 ||   || *intern:internals.Stylecheck.CheckMisplacedIntern* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || tested, ob im Stylesheet `intern:{{{*}}}`-Elemente innerhalb von matching oder named templates stehen, da diese fälschlicherweise in das Ausgabedokument geschrieben werden könnten. ||
+||   || *intern:internals.Stylecheck.CheckXSLMessage* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || tested, ob im Stylesheet `xsl:message`-Elemente verwendet werden. ||
 ||   || *intern:internals.Stylecheck.DocumentationTests* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation. ||
 ||   || *intern:internals.Stylecheck.EmptySequenceAllowed* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template testet, ob Funktionen oder Templates eine `empty sequence` als Resultat liefern dürfen. ||
 ||   || *intern:internals.Stylecheck.ListTO_DOs* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template listet Texte und Kommentare, die "TODO" enthalten. Die Groß-/Kleinschreibung wird nicht berücksichtigt. ||
@@ -28,5 +33,5 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 05.06.2011_
+_Seite erstellt am 26.06.2011_
 

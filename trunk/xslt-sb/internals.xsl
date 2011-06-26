@@ -542,7 +542,7 @@
 			<xsl:with-param name="log-entry.write-preText" select="true()"/>
 		</xsl:call-template>
 		<xsl:if test="(xsb:lax-string-compare($_level, 'ERROR' ) and $_internals.errors.die-on-critical-errors) or xsb:lax-string-compare($_level, 'FATAL' )">
-			<xsl:message terminate="yes">Verarbeitung abgebrochen</xsl:message>
+			<xsl:message terminate="yes" intern:solved="CheckXSLMessage">Verarbeitung abgebrochen</xsl:message>
 		</xsl:if>
 	</xsl:template>
 	<!--  -->
@@ -865,7 +865,7 @@
 			<xsl:with-param name="log-entry.write-preText" select="true()"/>
 		</xsl:call-template>
 		<xsl:if test="xsb:lax-string-compare($_level, 'ERROR' ) or xsb:lax-string-compare($_level, 'FATAL' )">
-			<xsl:message terminate="yes">Verarbeitung abgebrochen</xsl:message>
+			<xsl:message terminate="yes" intern:solved="CheckXSLMessage">Verarbeitung abgebrochen</xsl:message>
 		</xsl:if>
 	</xsl:template>
 	<!--  -->
@@ -1096,6 +1096,15 @@
 		<para>Werden zwei Leersequenzen verglichen, ist das Ergebnis <code>true()</code>.</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>Bugfix für "NaN" unter AltovaXML (bis einschließlich 2011 sp 3) eingefügt</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.34</revnumber>
 				<date>2011-06-26</date>
 				<authorinitials>Stf</authorinitials>
@@ -1146,9 +1155,12 @@
 						<xsl:choose>
 							<!-- Sonderfall -0.0e0 vs. +0.0e0 -->
 							<xsl:when test="($input1 castable as xs:double) and ($input2 castable as xs:double) and
-											(xsb:type-annotation($input1) eq xsb:type-annotation($input2)) and
 											(xs:double($input1) eq 0) and (xs:double($input2) eq 0)">
-							<xsl:sequence select="string($input1) eq string($input2)"/>
+								<xsl:sequence select="string($input1) eq string($input2)"/>
+							</xsl:when>
+							<!-- catch für buggy AltovaXML (bis einschließlich 2011 sp 3) -->
+							<xsl:when test="(string($input1) eq 'NaN') and (string($input2) eq 'NaN')">
+								<xsl:sequence select="true()"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<!-- deep-equal() statt eq, damit NaN, NaN zu true() wird -->

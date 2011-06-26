@@ -387,7 +387,7 @@
 	</doc:template>
 	<xsl:template name="intern:internals.logging.Write-to-console">
 		<!-- Parameter werden über tunnel="yes" durchgereicht (getunnelt) -->
-		<xsl:message terminate="no"><xsl:call-template name="intern:internals.logging.Render-to-string"/></xsl:message>
+		<xsl:message terminate="no" intern:solved="CheckXSLMessage"><xsl:call-template name="intern:internals.logging.Render-to-string"/></xsl:message>
 	</xsl:template>
 	<!--  -->
 	<!--  -->

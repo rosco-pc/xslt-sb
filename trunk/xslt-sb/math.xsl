@@ -27,7 +27,6 @@
 <!ENTITY TabString "&#160;&#160;&#160;&#160;&#160;&#160;">
 <!ENTITY XSL-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb">
 <!ENTITY doc-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb/doc">
-<!ENTITY xsdecimalINF "<para>Ein lästiges Problem ist, dass <code>xs:decimal</code> nicht die Werte <code>-INF</code> und <code>INF</code> abbilden kann. Die aktuelle Implementierung (Revision <code>0.2.25</code>) wirft in diesen Fällen ein Exception (Verarbeitung wird mit Fehler abgebrochen). Eine zukünftige Lösung könnte darin bestehen, das Ergebnis dynamisch auf <code>xs:double</code> oder <code>xs:decimal</code> zu casten.</para>">
 <!ENTITY internMax-internRound "<para>Die Anzahl der Iterationen resp. Genauigkeit wird von <function><link linkend='max_var'>$intern:max</link></function> 
 			und <function><link linkend='iround_var'>$intern:iround</link></function> beeinflusst.</para>">
 ]>
@@ -55,8 +54,7 @@
 		<doc:title>Mathematische Funktionen</doc:title>
 		<para>Dieses Stylesheet liefert mathematische Konstanten und berechnet mathematische Funktionen.</para>
 		<para>Die trigonometrischen und Exponential-Funktionen von <link xlink:href="http://www.w3.org/TR/xpath-functions-30/#trigonometry">XPath&#160;3.0</link>
-			wurden – mit Ausnahme der Arcus-Funktionen (<function>asin()</function>, <function>acos()</function>, <function>atan()</function>, <function>atan2()</function>) – 
-			implementiert. Daneben gibt es weitere »praktische« Funktionen wie <code><link linkend="fact">xsb:fact</link></code> (Fakultät).</para>
+			sind vollständig implementiert. Daneben gibt es weitere »praktische« Funktionen wie <code><link linkend="fact">xsb:fact</link></code> (Fakultät).</para>
 		<para>Autoren: <author>
 			<honorific>Dr</honorific>
 			<firstname>Thomas</firstname>
@@ -70,20 +68,21 @@
 		<para>Die Benennung der Funktionen folgt den Vorgaben von XPath&#160;3.0 
 			(vgl. <link xlink:href="http://www.w3.org/TR/xpath-functions-30/">http://www.w3.org/TR/xpath-functions-30/</link>).</para>
 		<para>Viele Funktionen gibt es in zwei Varianten: eine im Namensraum <code>xsb:</code> und eine im Namensraum <code>intern:</code>.
-			Die Funktionen im Namensraum <code>xsb:</code> liefern gerundete Ergebnisse (siehe <function><link linkend="round_var">intern:round</link></function>),
-			die Funktionen im Namensraum <code>intern:</code> liefern mit <function><link linkend="iround">intern:iround</link></function>
-			gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit
-			intern mit genaueren Werten gerechnet werden kann.</para>
-		<para>Die meisten Funktionen liefern <code>xs:decimal</code>. Hier habe ich mich der Einfachheit halber zu Gunsten
-			der höheren Präzision (und gegen den größeren Wertumfang) entschieden.</para>
-		&xsdecimalINF;
+			Die Funktionen im Namensraum <code>xsb:</code> prüfen die Funktionsargumente auf Gültigkeit und liefern gerundete Ergebnisse
+			(siehe <function><link linkend="round_var">intern:round</link></function>). Die Funktionen im Namensraum <code>intern:</code>
+			verzichten auf Tests der Argumente (soweit sich das sauber trennen lässt, was bei <code>-0.0e0</code> und <code>-INF</code>/<code>INF</code>
+			nicht immer sauber möglich ist) und liefern mit <function><link linkend="iround">intern:iround</link></function>
+			gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit intern mit höherer Geschwindigkeit und
+			genaueren Werten gerechnet werden kann.</para>
+		<para>Die Funktionen liefern i.d.R. ihre Ergebnisse mit dem Typ der (ersten) Arguments (dynamische Typung). Bei Funktionen,
+			die <code>-INF</code>, <code>INF</code> oder <code>NaN</code> als Ergebnis liefern, schlägt ggfs. der Cast des Ergebnisses
+			auf ungeeignete Typen wie <code>xs:decimal</code> oder <code>xs:integer</code> fehl. In diesen Fällen kann das Argument bspw.
+			explizit als <code>xs:double</code> übergeben werden.</para>
 		<para>Die Parameter der Funktionen im Namensraum <code>xsb:</code> sind – soweit nicht anders erforderlich –
 			ungetypt, um keine Casts bei der Parameterübergabe zu erzwingen.</para>
-		<para>Die Parameter der Funktionen im Namensraum <code>intern:</code> sind in der Regel auf 
-			<code>xs:decimal</code> oder <code>xs:integer</code> getypt.</para>
 		<para xml:id="math.hinweise"><emphasis role="bold">Hinweise:</emphasis></para>
-		<para>Bezüglich Typung, Verhalten bei Leersequenzen, +/-INF, NaN usw. kann es Abweichungen gegenüber dem XPath-3.0-Standard geben,
-			wobei in Zukunft Anpassungen an den Standard möglich sind (inklusive eigentlich verbotener Änderungen der Tests).</para>
+		<para>Bezüglich Typung, Verhalten bei Leersequenzen, <code>+/-INF</code>, <code>NaN</code> usw. kann es Abweichungen gegenüber dem 
+			XPath-3.0-Standard geben, wobei in Zukunft Anpassungen an den Standard möglich sind (inklusive eigentlich verbotener Änderungen der Tests).</para>
 		<para>Die Berechnung mancher Funktionen (wie <link linkend="nroot"><function>xsb:nroot</function></link> oder <link linkend="log"><function>xsb:log</function></link>) 
 			erfolgt über Näherungen und Reihenentwicklungen. Die Algorithmen sind nicht in Bezug auf Geschwindigkeit und Genauigkeit optimiert, d.h. es kann
 			zu unerwartet langen Ausführungszeiten und falschen Ergebnissen kommen. Vor dem Einsatz dieser Funktionen in kritischen
@@ -92,7 +91,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>mathematische Fehler: das Ergebnis einer Funktion ist für den eingegebenen Wert nicht definiert 
-						(bspw. <code>log(-2)</code> oder <code>sqrt(-2)</code>). In diesem Fall wird die Verarbeitung abgebrochen.</para>
+						(bspw. <code>log(-2)</code> oder <code>sqrt(-2)</code>). In diesem Fall wird <code>NaN</code> ausgegeben.</para>
 				</listitem>
 				<listitem>
 					<para>technischer Fehler: die Software bzw. der Algorithmus ist nicht für die Verarbeitung einer bestimmten Eingabe geeignet
@@ -101,7 +100,9 @@
 				</listitem>
 			</itemizedlist>
 		</para>
-		<para>Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von <link xlink:href="http://www.wolframalpha.com/">WolframAlpha</link> ermittelt.</para>
+		<para>Die <code>intern:*</code>-Funktionen werden i.d.R. nicht getestet, weil die Tests über die <code>xsb:*</code>-Pendants erfolgen.</para>
+		<para>Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von <link xlink:href="http://www.wolframalpha.com/">WolframAlpha</link> ermittelt.
+			Für diese Unterstützung möchte ich mich sehr herzlich bedanken, diese Website hat die Entwicklung dieses Stylesheets sehr beschleunigt.</para>
 		<para role="license"><emphasis role="bold">Lizenz (duale Lizenzierung):</emphasis></para>
 		<para role="license">Dieses Stylesheet und die dazugehörige Dokumentation sind unter einer Creative Commons-Lizenz (<link xlink:href="http://creativecommons.org/licenses/by/3.0/">CC-BY&#160;3.0</link>)
 			lizenziert. Die Weiternutzung ist bei Namensnennung erlaubt.</para>
@@ -130,6 +131,15 @@
 			</listitem>
 		</itemizedlist>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Ergänzung der Arkus-Funktionen, Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -180,7 +190,7 @@
 	<doc:variable>
 		<para xml:id="iround_var">Stellen für interne Ergebnis-Rundung</para>
 		<para>Am Ende der Berechnung werden die Ergebnisse auf diese Anzahl der Stellen gerundet. Default: 32 (das Doppelte von <code>intern:round</code>)</para>
-		<para>Hinweis: Intern müssen XSLT-Prozessoren nicht mit dieser Auflösung rechnen.</para>
+		<para>Hinweis: Intern müssen XSLT-Prozessoren nicht mit dieser Auflösung rechnen, und diese 32 Stellen müssen nicht signifikant oder richtig sein.</para>
 	</doc:variable>
 	<xsl:variable name="intern:iround" as="xs:integer" select="32"/>
 	<!--  -->
@@ -193,6 +203,15 @@
 	<doc:function>
 		<para xml:id="pi">Konstante Pi mit 3,14159265358979323846264338327950288419716939937511…</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -214,6 +233,15 @@
 		<para xml:id="tau">Konstante Tau mit 2 * Pi = 6,28318530717958647692528676655900576839433879875021…</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -233,6 +261,15 @@
 	<doc:function>
 		<para xml:id="e">Konstante e (Eulersche Zahl) mit 2,718281828459045235360287471353…</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -254,6 +291,15 @@
 		<para xml:id="ln2">natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante)</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -274,6 +320,15 @@
 		<para xml:id="ln10">natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante)</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -293,6 +348,15 @@
 	<doc:function>
 		<para xml:id="sqrt2">Wurzel aus 2 mit 1,4142135623730950488… (Konstante)</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -367,12 +431,12 @@
 				<xsl:sequence select="xsb:cast(intern:fact(xs:integer($n) ), xsb:type-annotation($n) )"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:fact</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe »<xsl:sequence select="$n"/>«. Die Fakultät ist nur für natürliche Zahlen (d.h. ganze Zahlen größer oder gleich Null) definiert, Verarbeitung abgebrochen.</xsl:with-param>
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:fact', $n)"/></xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+					<xsl:with-param name="message">Die Fakultät ist nur für natürliche Zahlen (d.h. ganze Zahlen größer oder gleich Null) definiert.</xsl:with-param>
 				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($n)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -416,6 +480,15 @@
 		<para>Bei ganzzahligen Exponenten wird die multiplikative Variante mit <function><link linkend="power">intern:power()</link></function>
 			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -462,6 +535,15 @@
 		<para xml:id="pow_i">berechnet die Potenz basis^exponent</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -495,6 +577,15 @@
 		<doc:param name="exponent"><para>Exponent, Ganzzahl</para></doc:param>
 		<para xml:id="power">berechnet die Potenz basis^exponent für ganzzahlige Exponenten (multiplikative Methode)</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -538,6 +629,15 @@
 		<para xml:id="exp">Exponential-Funktion e^exponent</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
 				<authorinitials>TM</authorinitials>
@@ -557,7 +657,7 @@
 			<xsl:when test="xsb:is-INF($exponent)">
 				<xsl:sequence select="intern:cast-INF($exponent)"/>
 			</xsl:when>
-			<xsl:when test="xsb:is-nINF($exponent)">
+			<xsl:when test="xsb:is-negative-INF($exponent)">
 				<xsl:sequence select="xsb:cast(0, xsb:type-annotation($exponent))"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -572,6 +672,15 @@
 		<doc:param name="exponent"><para>Exponent der e-Funktion</para></doc:param>
 		<para xml:id="exp_i">Exponential-Funktion e^exponent</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -602,6 +711,15 @@
 		&internMax-internRound;
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -624,7 +742,7 @@
 		<xsl:variable name="lokalesErgebnis" as="xs:anyAtomicType" select="$aktuellePow div $aktuelleFact"/>
 		<xsl:variable name="vorlaeufigesErgebnis" as="xs:anyAtomicType" select="$vortrag + $lokalesErgebnis"/>
 		<xsl:choose>
-			<xsl:when test="($iteration le $intern:max) and (round-half-to-even($lokalesErgebnis, $intern:iround) ne 0)">
+			<xsl:when test="($iteration le $intern:max) and (intern:iround($lokalesErgebnis) ne 0)">
 				<xsl:sequence select="intern:exp-iterator($exponent, $vorlaeufigesErgebnis, $iteration + 1, $aktuellePow, $aktuelleFact )"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -639,6 +757,15 @@
 		<doc:param name="exponent"><para>Exponent</para></doc:param>
 		<para xml:id="exp10">Exponential-Funktion 10^exponent (Zehnerpotenzen)</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -671,6 +798,15 @@
 			ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -699,6 +835,15 @@
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
 		<para xml:id="sin">Sinus-Funktion (Reihenentwicklung)</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -738,6 +883,15 @@
 		<para xml:id="sin_i">berechnet den Sinus</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -762,6 +916,15 @@
 		<para xml:id="sinus-iterator">Iterator zur Berechnung des Sinus</para>
 		&internMax-internRound;
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -794,6 +957,15 @@
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
 		<para xml:id="cos">berechnet den Cosinus</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -833,6 +1005,15 @@
 		<para xml:id="cos_i">berechnet den Cosinus</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -857,6 +1038,15 @@
 		<para xml:id="cosinus-iterator">Iterator zur Berechnung des Kosinus</para>
 		&internMax-internRound;
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -891,6 +1081,15 @@
 		<para xml:id="normalize-rad">rechnet Winkel auf den Bereich von <code>- 2 * Pi</code> bis <code>2 * Pi</code> um</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -903,11 +1102,22 @@
 	</doc:function>
 	<xsl:function name="intern:normalize-rad" as="xs:anyAtomicType">
 		<xsl:param name="rad" as="xs:anyAtomicType"/>
-		<xsl:sequence select="
-				 if (number($rad) ge  xsb:tau() ) then ($rad - floor($rad div ( xsb:tau() ) ) * xsb:tau() ) else
-				(if (number($rad) le -xsb:tau() ) then ($rad + floor($rad div (-xsb:tau() ) ) * xsb:tau() ) else 
-				     $rad)
-			"/>
+		<xsl:choose>
+			<xsl:when test="$rad castable as xs:decimal">
+				<xsl:sequence select="
+					 if (xs:decimal($rad) ge  xs:decimal(xsb:tau() ) ) then ($rad - floor($rad div ( xsb:tau() ) ) * xsb:tau() ) else
+					(if (xs:decimal($rad) le xs:decimal(-xsb:tau() ) ) then ($rad + floor($rad div (-xsb:tau() ) ) * xsb:tau() ) else 
+					     $rad)
+				"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="
+					 if (number($rad) ge  xsb:tau() ) then ($rad - floor($rad div ( xsb:tau() ) ) * xsb:tau() ) else
+					(if (number($rad) le -xsb:tau() ) then ($rad + floor($rad div (-xsb:tau() ) ) * xsb:tau() ) else 
+					     $rad)
+				"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -915,8 +1125,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
 		<para xml:id="tan">berchnet den Tangens</para>
-		&xsdecimalINF;
+		<para>Da als Ergebnis <code>-/+INF</code> ausgegeben werden kann, schlägt in diesen Fällen ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -934,6 +1154,15 @@
 			<xsl:when test="xsb:is-NaN($arg)">
 				<xsl:sequence select="intern:cast-NaN($arg)"/>
 			</xsl:when>
+			<xsl:when test="xsb:is-INF($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-negative-INF($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="xsb:is-negative-0($arg)">
+				<xsl:sequence select="intern:cast-negative-0($arg)"/>
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select="intern:round(intern:tan($arg) )"/>
 			</xsl:otherwise>
@@ -942,7 +1171,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
 		<para xml:id="tan_i">berchnet den Tangens</para>
+		<para>Da als Ergebnis <code>-/+INF</code> ausgegeben werden kann, schlägt in diesen Fällen ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -960,10 +1200,10 @@
 		<xsl:variable name="cos" as="xs:anyAtomicType" select="intern:cos($arg)"/>
 		<xsl:choose>
 			<xsl:when test="($cos eq 0) and ($sin ge 0)">
-				<xsl:sequence select="number('INF')"/>
+				<xsl:sequence select="intern:cast-INF($arg)"/>
 			</xsl:when>
 			<xsl:when test="($cos eq 0) and ($sin lt 0)">
-				<xsl:sequence select="number('-INF')"/>
+				<xsl:sequence select="intern:cast-negative-INF($arg)"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select="$sin div $cos"/>
@@ -976,7 +1216,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
 		<para xml:id="cot">berechnet den Cotangens</para>
+		<para>Da als Ergebnis <code>-/+INF</code> ausgegeben werden kann, schlägt in diesen Fällen ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1002,8 +1253,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Eingabewert, als Bogenmaß</para></doc:param>
 		<para xml:id="cot_i">berechnet den Cotangens</para>
-		&xsdecimalINF;
+		<para>Da als Ergebnis <code>-/+INF</code> ausgegeben werden kann, schlägt in diesen Fällen ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1020,11 +1281,14 @@
 		<xsl:variable name="sin" as="xs:anyAtomicType" select="intern:sin($arg)"/>
 		<xsl:variable name="cos" as="xs:anyAtomicType" select="intern:cos($arg)"/>
 		<xsl:choose>
+			<xsl:when test="xsb:is-negative-0($arg)">
+				<xsl:sequence select="intern:cast-negative-INF($arg)"/>
+			</xsl:when>
 			<xsl:when test="($sin eq 0) and ($cos ge 0)">
-				<xsl:sequence select="number('INF')"/>
+				<xsl:sequence select="intern:cast-INF($arg)"/>
 			</xsl:when>
 			<xsl:when test="($sin eq 0) and ($cos lt 0)">
-				<xsl:sequence select="number('-INF')"/>
+				<xsl:sequence select="intern:cast-negative-INF($arg)"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select="$cos div $sin"/>
@@ -1039,6 +1303,15 @@
 		<doc:param name="deg"><para>Eingabe im Gradmaß</para></doc:param>
 		<para xml:id="deg-to-rad">wandelt Gradmaß in Bogenmaß um</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -1070,6 +1343,15 @@
 		<para xml:id="deg-to-rad_i">wandelt Gradmaß in Bogenmaß um</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
 				<authorinitials>TM</authorinitials>
@@ -1092,6 +1374,15 @@
 		<para xml:id="rad-to-deg">rechnet Bogenmaß in Gradmaß um</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
 				<authorinitials>TM</authorinitials>
@@ -1102,9 +1393,6 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<!--  -->
-	<!--  -->
-	<!-- __________     intern:rad-to-deg     __________ -->
 	<xsl:function name="xsb:rad-to-deg" as="xs:anyAtomicType">
 		<xsl:param name="rad" as="xs:anyAtomicType"/>
 		<xsl:choose>
@@ -1116,10 +1404,22 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:rad-to-deg     __________ -->
 	<doc:function>
 		<doc:param name="rad"><para>Eingabe im Bogenmaß</para></doc:param>
 		<para xml:id="rad-to-deg_i">rechnet Bogenmaß in Gradmaß um</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -1143,6 +1443,15 @@
 		<para xml:id="sqrt">berechnet die Quadratwurzel</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
 				<authorinitials>TM</authorinitials>
@@ -1163,12 +1472,12 @@
 				<xsl:sequence select="xsb:nroot($arg, 2)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nie ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:sqrt</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:sqrt', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
 					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$arg"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
 				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1177,6 +1486,15 @@
 		<doc:param name="arg"><para>Eingabewert</para></doc:param>
 		<para xml:id="sqrt_i">berechnet die Quadratwurzel, Shortcut für <function>intern:nroot($arg, 2)</function></para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -1201,6 +1519,15 @@
 		<para xml:id="nroot">berechnet die n-te Wurzel (n = Wurzelexponent)</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
 				<authorinitials>TM</authorinitials>
@@ -1223,20 +1550,20 @@
 				<xsl:sequence select="intern:round(intern:nroot($wurzelbasis, $wurzelexponent) )"/>
 			</xsl:when>
 			<xsl:when test="$wurzelbasis lt 0">
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
-				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:nroot</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$wurzelbasis"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
 					<xsl:with-param name="caller">xsb:nroot(<xsl:sequence select="$wurzelbasis"/>, <xsl:sequence select="$wurzelexponent"/>)</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: Wurzelexponent ist »<xsl:sequence select="$wurzelexponent"/>«, muss aber größer/gleich 1 sein. Verarbeitung abgebrochen.</xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+					<xsl:with-param name="message">Wurzelbasis muss größer/gleich 0 sein.</xsl:with-param>
 				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($wurzelbasis)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller">xsb:nroot(<xsl:sequence select="$wurzelbasis"/>, <xsl:sequence select="$wurzelexponent"/>)</xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+					<xsl:with-param name="message">Wurzelexponent muss größer/gleich 1 sein.</xsl:with-param>
+				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($wurzelbasis)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1248,6 +1575,15 @@
 		<doc:param name="wurzelexponent"><para>Wurzelexponent; muss eine natürliche Zahl sein</para></doc:param>
 		<para xml:id="nroot_i">berechnet die n-te Wurzel (n = Wurzelexponent)</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1276,6 +1612,15 @@
 		<para xml:id="root-iterator">iterative Wurzelberechnung nach dem Heron-Verfahren</para>
 		&internMax-internRound;
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -1310,7 +1655,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Argument</para></doc:param>
 		<para xml:id="log">berechnet den natürlichen Logarithmus</para>
+		<para>Da als Ergebnis <code>-INF/INF/NaN</code> ausgegeben werden kann, schlägt in diesen Fällen ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -1346,8 +1702,18 @@
 			zwischen <function>1/sqrt(2)</function> und <function>sqrt(2)</function> konvergiert, werden die Argumente in diesen Bereich transformiert.
 			Zuerst wird mit <function><link linkend="log-m-iterator">intern:log-m-iterator</link></function> ein passender Faktor <code>m</code> ermittelt.
 			Das gesuchte Ergebnis ergibt sich über die Beziehung <function>log(x) = 2 * m * log(sqrt(2)) + log((2^ -m) * x)</function>.</para>
-		&xsdecimalINF;
+		<para>Da als Ergebnis <code>-INF</code> ausgegeben werden kann (für <code>$arg = 0</code>), schlägt in diesem Fall ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1371,15 +1737,15 @@
 				<xsl:sequence select="2 * $m * $logsqrt2 + intern:log-iterator($newArg -1, $newArg +1, 0, 0, 1)"/>
 			</xsl:when>
 			<xsl:when test="$arg eq 0">
-				<xsl:sequence select="number('-INF')"/>
+				<xsl:sequence select="intern:cast-negative-INF($arg)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:log</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe »<xsl:sequence select="$arg"/>«. Für Zahlen kleiner Null ist log(x) nicht definiert, Verarbeitung abgebrochen.</xsl:with-param>
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:log', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+					<xsl:with-param name="message">Für Zahlen kleiner Null ist log(x) nicht definiert.</xsl:with-param>
 				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1393,6 +1759,15 @@
 			in einem Bereich mit günstiger Konvergenz ausführen zu können.</para>
 		<para>Details siehe <function><link linkend="log_i">intern:log()</link></function></para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1421,11 +1796,10 @@
 				<xsl:sequence select="intern:log-m-iterator($x, $m + 1)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="0"/>
-				<xsl:call-template name="xsb:internals.FunctionError">
+				<xsl:sequence select="intern:cast-NaN($x)"/>
+				<xsl:call-template name="intern:internals.FatalError">
+					<xsl:with-param name="errorID">log-m-iterator-001</xsl:with-param>
 					<xsl:with-param name="caller">intern:log-m-iterator</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Entschuldigung, das hätte nicht passieren dürfen! intern:log-m-iterator(<xsl:sequence select="$x"/>, <xsl:sequence select="$m"/>) konnte kein gültiges Ergebnis ermitteln (interner Logik-Fehler), Verarbeitung abgebrochen.</xsl:with-param>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -1442,6 +1816,15 @@
 		<para xml:id="log-iterator">Iteration zur Ermittlung des natürlichen Logarithmus</para>
 		&internMax-internRound;
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1463,7 +1846,7 @@
 		<xsl:param name="n-iteration" as="xs:integer"/><!-- wird mit 1 initialisiert -->
 		<xsl:variable name="lokalesErgebnis" as="xs:anyAtomicType" select="intern:power($argm, $n-iteration) div ($n-iteration * intern:power($argp, $n-iteration) )"/>
 		<xsl:choose>
-			<xsl:when test="($iteration le ($intern:max) ) and (round-half-to-even($lokalesErgebnis, $intern:iround) ne 0)"><!-- intern:iround() führte hier zu einer Verfälschung des Ergebnisses, deshalb round-half-to-even() -->
+			<xsl:when test="($iteration le ($intern:max) ) and (intern:iround($lokalesErgebnis) ne 0)">
 				<xsl:sequence select="intern:log-iterator($argm, $argp, $vortrag + $lokalesErgebnis, $iteration +1, $n-iteration +2)"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -1477,7 +1860,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Argument</para></doc:param>
 		<para xml:id="log10">berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis</para>
+		<para>Da als Ergebnis <code>-INF/INF/NaN</code> ausgegeben werden kann, schlägt in diesen Fällen ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.12</revnumber>
 				<date>2011-05-21</date>
@@ -1509,8 +1903,18 @@
 	<doc:function>
 		<doc:param name="arg"><para>Argument</para></doc:param>
 		<para xml:id="log10_i">berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus)</para>
-		&xsdecimalINF;
+		<para>Da als Ergebnis <code>-INF</code> ausgegeben werden kann (für <code>$arg = 0</code>), schlägt in diesem Fall ein Cast auf ungeeignete Typen
+			(wie <code>xs:decimal</code>) fehl.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1529,15 +1933,15 @@
 				<xsl:sequence select="intern:iround(intern:log($arg) div intern:ln10() )"/>
 			</xsl:when>
 			<xsl:when test="$arg eq 0">
-				<xsl:sequence select="number('-INF')"/>
+				<xsl:sequence select="intern:cast-negative-INF($arg)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="number('NaN')"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:log10</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe »<xsl:sequence select="$arg"/>«. Für Zahlen kleiner Null ist lg(x) nicht definiert, Verarbeitung abgebrochen.</xsl:with-param>
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:log10', $arg)"/></xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+					<xsl:with-param name="message">Für Zahlen kleiner Null ist log10(x) nicht definiert.</xsl:with-param>
 				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1599,12 +2003,12 @@
 				<xsl:sequence select="intern:fibonacci-sequence($n, (0, 1) )"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="0"/><!-- dieses Ergebnis wird nicht ausgeliefert -->
 				<xsl:call-template name="xsb:internals.FunctionError">
-					<xsl:with-param name="caller">xsb:fibonacci-sequence</xsl:with-param>
-					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="message">Ungültige Eingabe: Argument ist »<xsl:sequence select="$n"/>«, muss aber größer/gleich 0 sein. Verarbeitung abgebrochen.</xsl:with-param>
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:fibonacci-sequence', $n)"/></xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+					<xsl:with-param name="message">Argument muss größer/gleich 0 sein.</xsl:with-param>
 				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($n)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1646,6 +2050,15 @@
 		<para xml:id="round">rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
 				<authorinitials>Stf</authorinitials>
@@ -1667,6 +2080,15 @@
 		<doc:param name="arg"><para>zu rundende Zahl</para></doc:param>
 		<para xml:id="iround">rundet Zahlen für interne Zwecke</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf dynamische Typung</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.25</revnumber>
 				<date>2011-05-29</date>
@@ -1716,10 +2138,161 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
+	<!-- __________     xsb:asin()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der <function>xsb:asin()</function>-Funktion</para></doc:param>
+		<para xml:id="asin">ermittelt den Arkussinus (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:asin" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="($arg lt -1) or ($arg gt 1)">
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:asin', $arg)"/></xsl:with-param>
+					<xsl:with-param name="message">Argumente der asin()-Funktion müssen im Wertebereich zwischen -1 und 1 liegen.</xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:asin($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:asin()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der <function>intern:asin()</function>-Funktion</para></doc:param>
+		<para xml:id="asin_i">ermittelt den Arkussinus (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:asin" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="$arg eq 0">
+				<xsl:variable name="sarg" as="xs:double" select="intern:sgn($arg)"/>
+				<xsl:choose>
+					<xsl:when test="$sarg eq -1">
+						<xsl:sequence select="xsb:cast(number(-0.0e0), xsb:type-annotation($arg) )"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:sequence select="xsb:cast(0, xsb:type-annotation($arg) )"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:when test="$arg eq 1">
+				<xsl:sequence select="xsb:cast(intern:half-pi(), xsb:type-annotation($arg) )"/>
+			</xsl:when>
+			<xsl:when test="$arg eq -1">
+				<xsl:sequence select="xsb:cast(-intern:half-pi(), xsb:type-annotation($arg) )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="xsb:sgn($arg) * (intern:atan(intern:sqrt($arg * $arg div (1 - $arg * $arg) ) ) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:acos()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der <function>xsb:acos()</function>-Funktion</para></doc:param>
+		<para xml:id="acos">ermittelt den Arkuskosinus (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:acos" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($arg)">
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:when test="($arg lt -1) or ($arg gt 1)">
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="caller"><xsl:sequence select="intern:format-INF-caller('xsb:acos', $arg)"/></xsl:with-param>
+					<xsl:with-param name="message">Argumente der acos()-Funktion müssen im Wertebereich zwischen -1 und 1 liegen.</xsl:with-param>
+					<xsl:with-param name="level">WARN</xsl:with-param>
+				</xsl:call-template>
+				<xsl:sequence select="intern:cast-NaN($arg)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:acos($arg) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:acos()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Argument der <function>intern:acos()</function>-Funktion</para></doc:param>
+		<para xml:id="acos_i">ermittelt den Arkuskosinus (im Bogenmaß)</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.35</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:acos" as="xs:anyAtomicType" intern:solved="MissingTests">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+			<xsl:choose>
+				<xsl:when test="($arg eq 0) and (intern:sgn($arg) eq -1)">
+					<xsl:sequence select="xsb:cast(- intern:half-pi(), xsb:type-annotation($arg) )"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:sequence select="xsb:cast(intern:half-pi(), xsb:type-annotation($arg) ) - intern:asin($arg)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
 	<!-- __________     xsb:atan()     __________ -->
 	<doc:function>
 		<doc:param name="arg"><para>Argument der <function>xsb:atan()</function>-Funktion</para></doc:param>
 		<para xml:id="atan">ermittelt den Arkustangens (im Bogenmaß)</para>
+		<para>Problematisch ist das Verhalten bei <code>+/-Pi div 2</code> mit den "richtigen" Ergebnissen <code>-INF</code> resp. <code>INF</code>.
+			Der <link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-math-tan">XPath-3.0-Entwurf</link> erwartet hier nur "sehr große" resp.
+			"sehr kleine" Zahlen, die jetzt auch geliefert werden (was vielleicht auch den Vorteil, innerhalb von <code>xs:decimal</code> ohne Abbruch
+			weiter rechnen zu können). Allerdings könnte sich dieses Verhalten im endgültigen Standard noch ändern, so dass diese Funktion später
+			noch verändert werden könnte.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.34</revnumber>
@@ -1741,7 +2314,7 @@
 			<xsl:when test="xsb:is-INF($arg)">
 				<xsl:sequence select="xsb:cast(intern:round(intern:half-pi() ), xsb:type-annotation($arg) )"/>
 			</xsl:when>
-			<xsl:when test="xsb:is-nINF($arg)">
+			<xsl:when test="xsb:is-negative-INF($arg)">
 				<xsl:sequence select="xsb:cast(intern:round(- intern:half-pi() ), xsb:type-annotation($arg) )"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -1840,7 +2413,7 @@
 		<doc:param name="x"><para>x-Wert (numerisch)</para></doc:param>
 		<para xml:id="atan2">berechnet <function>atan2(y, x) im Bogenmaß</function></para>
 		<para>Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden
-			<link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-atan2">XPath-3.0-Standard</link> zurückgegeben.</para>
+			<link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-math-atan2">XPath-3.0-Standard</link> zurückgegeben.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.34</revnumber>
@@ -1873,7 +2446,7 @@
 		<doc:param name="x"><para>x-Wert (numerisch)</para></doc:param>
 		<para xml:id="atan2_i">berechnet <function>atan2(y, x) im Bogenmaß</function></para>
 		<para>Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden
-			<link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-atan2">XPath-3.0-Standard</link> zurückgegeben.</para>
+			<link xlink:href="http://www.w3.org/TR/xpath-functions-30/#func-math-atan2">XPath-3.0-Standard</link> zurückgegeben.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.34</revnumber>
@@ -1889,9 +2462,9 @@
 	<xsl:function name="intern:atan2" as="xs:anyAtomicType" intern:solved="MissingTests">
 		<xsl:param name="y" as="xs:anyAtomicType"/>
 		<xsl:param name="x" as="xs:anyAtomicType"/>
-		<!-- ToDo: -INF und INF als Parameter berücksichtigen (so dann in XPath 3.0 berücksichtigt)  -->
+		<!-- ToDo: atan2(): -INF und INF als Parameter berücksichtigen (so dann in XPath 3.0 berücksichtigt)  -->
 		<xsl:choose>
-			<!-- Sonderfälle laut Standard (http://www.w3.org/TR/xpath-functions-30/#func-atan2) werden explizit behandelt -->
+			<!-- Sonderfälle laut Standard (http://www.w3.org/TR/xpath-functions-30/#func-math-atan2) werden explizit behandelt -->
 			<!-- Die Ziffern in den Kommentaren beziehen sich auf die Beispiele im Standard -->
 			<xsl:when test="$y eq 0">
 				<xsl:variable name="sy" as="xs:double" select="intern:sgn($y)"/>
@@ -2029,8 +2602,8 @@
 					<xsl:sequence select="intern:cast-NaN($arg)"/>
 				</xsl:when>
 				<xsl:when test="not($arg castable as xs:double)"><xsl:sequence select="number('NaN') "/></xsl:when>
-				<xsl:when test="number($arg) eq number('-INF')"><xsl:sequence select="-1"/></xsl:when>
-				<xsl:when test="number($arg) eq number('INF')"><xsl:sequence select="1"/></xsl:when>
+				<xsl:when test="xsb:is-negative-INF($arg)"><xsl:sequence select="-1"/></xsl:when>
+				<xsl:when test="xsb:is-INF($arg)"><xsl:sequence select="1"/></xsl:when>
 				<xsl:when test="number($arg) gt 0"><xsl:sequence select="1"/></xsl:when>
 				<xsl:when test="number($arg) lt 0"><xsl:sequence select="-1"/></xsl:when>
 				<xsl:when test="number($arg) eq 0">
@@ -2050,12 +2623,32 @@
 		</xsl:variable>
 		<xsl:sequence select="xsb:cast($temp, xsb:type-annotation($arg))"/>
 	</xsl:function>
-	
-	
-	
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:is-NaN()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="is-NaN">testet, ob ein numerischer Wert <code>NaN</code> ist</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="xsb:is-NaN" as="xs:boolean">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:choose>
+			<!-- das ist der reguläre Test -->
+			<xsl:when test="deep-equal($arg, number('NaN'))">
+				<xsl:sequence select="true()"/>
+			</xsl:when>
+			<!-- AltovaXML bis 2011r3 hat einen Bug, der hier umschifft wird -->
 			<xsl:when test="string($arg) eq 'NaN' ">
 				<xsl:sequence select="true()"/>
 			</xsl:when>
@@ -2064,7 +2657,24 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
-	
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:is-INF()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="is-INF">testet, ob ein numerischer Wert <code>INF</code> ist</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="xsb:is-INF" as="xs:boolean">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:choose>
@@ -2076,8 +2686,25 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
-	
-	<xsl:function name="xsb:is-nINF" as="xs:boolean">
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:is-negative-INF()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="is-negative-INF">testet, ob ein numerischer Wert <code>-INF</code> ist</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:is-negative-INF" as="xs:boolean">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:choose>
 			<xsl:when test="string($arg) eq '-INF' ">
@@ -2088,23 +2715,122 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
-	
-	
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:is-negative-0()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="is-negative-0">testet, ob ein numerischer Wert <code>-0.0e0</code> ist</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:is-negative-0" as="xs:boolean">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="($arg castable as xs:double) and ($arg eq 0) and (intern:sgn($arg) eq -1)">
+				<xsl:sequence select="true()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:cast-NaN()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="cast-NaN">erzeugt <code>NaN</code> mit dem Typ des übergebenen Arguments</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="intern:cast-NaN" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:sequence select="xsb:cast(xs:float('NaN'), xsb:type-annotation($arg) )"/>
 	</xsl:function>
-	
-	
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:cast-INF()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="cast-INF">erzeugt <code>INF</code> mit dem Typ des übergebenen Arguments</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
 	<xsl:function name="intern:cast-INF" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:sequence select="xsb:cast(xs:float('INF'), xsb:type-annotation($arg) )"/>
 	</xsl:function>
-	
-	
-	<xsl:function name="intern:cast-nINF" as="xs:anyAtomicType">
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:cast-negative-INF()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="cast-negative-INF">erzeugt <code>-INF</code> mit dem Typ des übergebenen Arguments</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:cast-negative-INF" as="xs:anyAtomicType">
 		<xsl:param name="arg" as="xs:anyAtomicType"/>
 		<xsl:sequence select="xsb:cast(xs:float('-INF'), xsb:type-annotation($arg) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:cast-negative-0()     __________ -->
+	<doc:function>
+		<doc:param name="arg"><para>Funktionsargument</para></doc:param>
+		<para xml:id="cast-negative-0">erzeugt <code>-0.0e0</code> mit dem Typ des übergebenen Arguments</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.37</revnumber>
+				<date>2011-06-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:cast-negative-0" as="xs:anyAtomicType">
+		<xsl:param name="arg" as="xs:anyAtomicType"/>
+		<xsl:sequence select="xsb:cast(xs:float('-0.0e0'), xsb:type-annotation($arg) )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->

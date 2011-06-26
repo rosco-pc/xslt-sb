@@ -5,11 +5,19 @@
 
 Stylesheet: `internals.testing.xsl`
 
-Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von Funktionen und Templates in XSLT-Stylesheets.
+Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von XSLT-Stylesheets.
 
-Test können im Stylesheet selbst oder in einem externen Test-Stylesheet (nach dem Namensschema `xxxxx_tests.xsl`) eingebunden werden.
+Grundidee ist, einzelne Funktionen und Templates mit definierten Argumenten aufzurufen und die Rückgabewerte mit erwarteten Werten zu vergleichen. Dieses Stylesheet stellt Funktionen und Templates bereit, die diesen Prozess vereinfachen.
 
-In der XSLT-SB kommen beide Techniken zum Einsatz, wobei es keine festen Regeln gibt. In der Praxis wird man meist mit Tests innerhalb des Stylesheets anfangen und diese bei einem bestimmten Umfang auslagern.
+Ein einzelner Test besteht aus dem Aufruf einer Funktion bzw. eines Templates und dem Vergleich des Ergebnisses mit einem Vorgabewert. Üblicherweise wird man mehrere Tests in einem Test-Template zusammenfassen, das dann unabhängig vom zu testenden Stylesheet aufgerufen wird.
+
+Test-Templates können in das zu testende Stylesheet selbst oder in externe Test-Stylesheets eingebunden werden.
+
+In der XSLT-SB kommen beide Techniken zum Einsatz, wobei es keine festen Regeln gibt. In der Praxis wird man meist mit Tests innerhalb des Stylesheets anfangen und diese bei einem bestimmten Umfang oder bei Abschluss der Entwicklung auslagern.
+
+Wegen der engen Verknüpfung der Test-Infrastruktur mit ``internals.Stylecheck`` (welches das zu testenden Stylesheet als Eingabedokument erwartet) werden innerhalb der XSLT-SB die Tests durch eine Transformation des zu testenden Stylesheets mit dem Test-Stylesheet (das im Fall interner Test-Templates das zu testende Stylesheet selbst ist) im Mode `internals.self-test` ausgeführt. Externe Test-Stylesheets müssen wegen dieser Verknüfung nach dem Namensschema `xxxxx_tests.xsl` (wobei »xxxxx« für den Namen – ohne Erweiterung – des zu testenden Stylesheets steht) benannt werden. Verzichtet man auf den Einsatz von `Stylecheck`, können die Tests in beliebigen XSLT-Dateien abgelegt werden.
+
+Die Verwendung der Testumgebung ist dem Einsatz von `Stylecheck` ähnlich und erfolgt innerhalb der XSLT-SB meist gemeinsam, so dass bei Fragen ggfs. auch ein Blick `dorthin` lohnt.
 
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
@@ -28,5 +36,5 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 05.06.2011_
+_Seite erstellt am 26.06.2011_
 

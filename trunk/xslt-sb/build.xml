@@ -55,7 +55,7 @@
 	<!--  -->
 	<!-- properties for the build infrastructure -->
 	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
-	<property name="dist.version" value="0.2.31" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.version" value="0.2.37" description="Versionsnummer des aktuellen Builds"/>
 	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
 	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
 	<property name="dist.google-doc" location="${dist.main}${file.separator}..${file.separator}..${file.separator}wiki" description="Zielverzeichnis für die Wiki-Seiten für Google Code"/>

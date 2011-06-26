@@ -36,7 +36,7 @@
 		</para>
 		<revhistory>
 			<revision>
-				<revnumber>ToDo</revnumber>
+				<revnumber>0.2.ToDo</revnumber>
 				<date>2011-ToDo-ToDo</date>
 				<authorinitials>ToDo</authorinitials>
 				<revremark>ToDo</revremark>
@@ -49,7 +49,7 @@
 	<!-- ====================     ToDo     ==================== -->
 	<!--  -->
 	<!--  -->
-	<!-- __________     ToDo     __________ -->
+	<!-- __________     ToDo()     __________ -->
 	<doc:function>
 		<doc:param name="ToDo"><para>ToDo</para></doc:param>
 		<para xml:id="ToDo">Diese Funktion ToDo.</para>

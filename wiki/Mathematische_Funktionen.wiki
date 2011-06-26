@@ -7,86 +7,107 @@ Stylesheet: `math.xsl`
 
 Dieses Stylesheet liefert mathematische Konstanten und berechnet mathematische Funktionen.
 
-Die trigonometrischen und Exponential-Funktionen von `XPath 3.0` wurden – mit Ausnahme der Arcus-Funktionen (`asin()`, `acos()`, `atan()`, `atan2()`) – implementiert, allerdings ohne den Standard bezüglich Typung, Leersequenzen usw. vollständig zu implementieren. Daneben gibt es weitere »praktische« Funktionen wie ``xsb:fact`` (Fakultät).
+Die trigonometrischen und Exponential-Funktionen von `XPath 3.0` sind vollständig implementiert. Daneben gibt es weitere »praktische« Funktionen wie ``xsb:fact`` (Fakultät).
 
-Die Benennung der Funktionen folgt den Vorgaben von XPath 3.0 (vgl. `http://www.w3.org/TR/xpath-functions-30/`).
+Die Benennung der Funktionen folgt den Vorgaben von XPath 3.0 (vgl. `http://www.w3.org/TR/xpath-functions-30/`).
 
-Viele Funktionen gibt es in zwei Varianten: eine im Namensraum `xsb:` und eine im Namensraum `intern:`. Die Funktionen im Namensraum `xsb:` liefern gerundete Ergebnisse (siehe ``intern:round``), die Funktionen im Namensraum `intern:` liefern mit ``intern:iround`` gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit intern mit genaueren Werten gerechnet werden kann.
+Viele Funktionen gibt es in zwei Varianten: eine im Namensraum `xsb:` und eine im Namensraum `intern:`. Die Funktionen im Namensraum `xsb:` prüfen die Funktionsargumente auf Gültigkeit und liefern gerundete Ergebnisse (siehe ``intern:round``). Die Funktionen im Namensraum `intern:` verzichten auf Tests der Argumente (soweit sich das sauber trennen lässt, was bei `-0.0e0` und `-INF`/`INF` nicht immer sauber möglich ist) und liefern mit ``intern:iround`` gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit intern mit höherer Geschwindigkeit und genaueren Werten gerechnet werden kann.
 
-Die meisten Funktionen liefern `xs:decimal`. Hier habe ich mich der Einfachheit halber zu Gunsten der höheren Präzision (und gegen den größeren Wertumfang) entschieden.
-
-Ein lästiges Problem ist, dass `xs:decimal` nicht die Werte `-INF` und `INF` abbilden kann. Die aktuelle Implementierung (Revision `0.2.25`) wirft in diesen Fällen ein Exception (Verarbeitung wird mit Fehler abgebrochen). Eine zukünftige Lösung könnte darin bestehen, das Ergebnis dynamisch auf `xs:double` oder `xs:decimal` zu casten.
+Die Funktionen liefern i.d.R. ihre Ergebnisse mit dem Typ der (ersten) Arguments (dynamische Typung). Bei Funktionen, die `-INF`, `INF` oder `NaN` als Ergebnis liefern, schlägt ggfs. der Cast des Ergebnisses auf ungeeignete Typen wie `xs:decimal` oder `xs:integer` fehl. In diesen Fällen kann das Argument bspw. explizit als `xs:double` übergeben werden.
 
 Die Parameter der Funktionen im Namensraum `xsb:` sind – soweit nicht anders erforderlich – ungetypt, um keine Casts bei der Parameterübergabe zu erzwingen.
 
-Die Parameter der Funktionen im Namensraum `intern:` sind in der Regel auf `xs:decimal` oder `xs:integer` getypt.
-
 *Hinweise:*
+
+Bezüglich Typung, Verhalten bei Leersequenzen, `+/-INF`, `NaN` usw. kann es Abweichungen gegenüber dem XPath-3.0-Standard geben, wobei in Zukunft Anpassungen an den Standard möglich sind (inklusive eigentlich verbotener Änderungen der Tests).
 
 Die Berechnung mancher Funktionen (wie ``xsb:nroot`` oder ``xsb:log``) erfolgt über Näherungen und Reihenentwicklungen. Die Algorithmen sind nicht in Bezug auf Geschwindigkeit und Genauigkeit optimiert, d.h. es kann zu unerwartet langen Ausführungszeiten und falschen Ergebnissen kommen. Vor dem Einsatz dieser Funktionen in kritischen Anwendungen sind unbedingt umfangreiche Tests erforderlich.
 
 Bei der Berechnung der Funktionen können zwei Fehlertypen auftreten: 
-  *   mathematische Fehler: das Ergebnis einer Funktion ist für den eingegebenen Wert nicht definiert (bspw. `log(-2)` oder `sqrt(-2)`). In diesem Fall wird die Verarbeitung abgebrochen.  
+  *   mathematische Fehler: das Ergebnis einer Funktion ist für den eingegebenen Wert nicht definiert (bspw. `log(-2)` oder `sqrt(-2)`). In diesem Fall wird `NaN` ausgegeben.  
   *   technischer Fehler: die Software bzw. der Algorithmus ist nicht für die Verarbeitung einer bestimmten Eingabe geeignet (bspw. benötigt `intern:power` als Exponenten eine nichtnegative Ganzzahl). In diesem Fall bricht das Stylesheet die Verarbeitung ab.  (Dieses Problem hätte zwar mit einer genaueren Typung umgangen werden können, aber Basic XSLT-Prozessoren unterstützen nicht alle Datentypen (wie `xs:nonNegativeInteger`).)  
   
   
 
-Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von `WolframAlpha` ermittelt.
+Die `intern:{{{*}}}`-Funktionen werden i.d.R. nicht getestet, weil die Tests über die `xsb:{{{*}}}`-Pendants erfolgen.
+
+Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von `WolframAlpha` ermittelt. Für diese Unterstützung möchte ich mich sehr herzlich bedanken, diese Website hat die Entwicklung dieses Stylesheets sehr beschleunigt.
 
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
 
 = Liste der Funktionen =
 
-|| *C* || *intern:cos*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || berechnet den Cosinus ||
-||   || *intern:cosinus-iterator*({{{NormalisiertesArgument}}} _as_ {{{xs:decimal}}}; {{{vortrag}}} _as_ {{{xs:decimal}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Kosinus ||
-||   || *intern:cot*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || berechnet den Cotangens ||
+|| *A* || *intern:acos*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkuskosinus (im Bogenmaß) ||
+||   || *intern:asin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkussinus (im Bogenmaß) ||
+||   || *intern:atan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkustangens (im Bogenmaß) ||
+||   || *intern:atan-iterator*({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{an}}} _as_ {{{xs:anyAtomicType}}}; {{{bn}}} _as_ {{{xs:anyAtomicType}}}; {{{konstanterDivisor}}} _as_ {{{xs:anyAtomicType}}}; {{{letztesResultat}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des Arkustangens ||
+||   || *intern:atan2*({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet `atan2(y, x) im Bogenmaß` ||
+||   || *xsb:acos*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkuskosinus (im Bogenmaß) ||
+||   || *xsb:asin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkussinus (im Bogenmaß) ||
+||   || *xsb:atan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkustangens (im Bogenmaß) ||
+||   || *xsb:atan2*({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet `atan2(y, x) im Bogenmaß` ||
+|| *C* || *intern:cast-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `INF` mit dem Typ des übergebenen Arguments ||
+||   || *intern:cast-NaN*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `NaN` mit dem Typ des übergebenen Arguments ||
+||   || *intern:cast-negative-0*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `-0.0e0` mit dem Typ des übergebenen Arguments ||
+||   || *intern:cast-negative-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `-INF` mit dem Typ des übergebenen Arguments ||
+||   || *intern:cos*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cosinus ||
+||   || *intern:cosinus-iterator*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Kosinus ||
+||   || *intern:cot*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cotangens ||
 ||   || *xsb:cos*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cosinus ||
 ||   || *xsb:cot*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cotangens ||
-|| *D* || *intern:deg-to-rad*({{{deg}}} _as_ {{{xs:decimal}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
+|| *D* || *intern:deg-to-rad*({{{deg}}} _as_ {{{xs:anyAtomicType}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
 ||   || *xsb:deg-to-rad*({{{deg}}} _as_ {{{xs:anyAtomicType}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
-|| *E* || *intern:exp*({{{exponent}}} _as_ {{{xs:decimal}}}) ||   || Exponential-Funktion e^exponent ||
-||   || *intern:exp-iterator*({{{exponent}}} _as_ {{{xs:decimal}}}; {{{vortrag}}} _as_ {{{xs:decimal}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{pow-vortrag}}} _as_ {{{xs:decimal}}}; {{{fact-vortrag}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung der e-Funktion (Reihenbildung) ||
-||   || *intern:exp10*({{{exponent}}} _as_ {{{xs:decimal}}}) ||   || Exponential-Funktion 10^exponent (Zehnerpotenzen) ||
+|| *E* || *intern:exp*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion e^exponent ||
+||   || *intern:exp-iterator*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{pow-vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{fact-vortrag}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung der e-Funktion (Reihenbildung) ||
+||   || *intern:exp10*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion 10^exponent (Zehnerpotenzen) ||
 ||   || *xsb:e*() ||   || Konstante e (Eulersche Zahl) mit 2,718281828459045235360287471353… ||
 ||   || *xsb:exp*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion e^exponent ||
 ||   || *xsb:exp10*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion 10^exponent (Zehnerpotenzen) ||
-|| *F* || *intern:fibonacci-sequence*({{{n}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer*}}}) ||   || berechnet Fibonacci-Reihen ||
+|| *F* || *intern:fact*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet die Fakultät einer natürlichen Zahl ||
+||   || *intern:fibonacci-sequence*({{{n}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer*}}}) ||   || berechnet Fibonacci-Reihen ||
 ||   || *intern:format-INF-caller*({{{caller}}} _as_ {{{xs:string}}}; {{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || formatiert einen String für die Fehlerausgabe ||
 ||   || *xsb:fact*({{{n}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Fakultät einer natürlichen Zahl ||
 ||   || *xsb:fibonacci*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet Fibonacci-Zahlen ||
 ||   || *xsb:fibonacci-sequence*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet Fibonacci-Reihen ||
-|| *I* || *intern:iround*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || rundet Zahlen für interne Zwecke ||
+|| *H* || *intern:half-pi*() ||   || Pi/2 (Konstante) ||
+|| *I* || *intern:iround*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen für interne Zwecke ||
+||   || *xsb:is-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `INF` ist ||
+||   || *xsb:is-NaN*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `NaN` ist ||
+||   || *xsb:is-negative-0*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-0.0e0` ist ||
+||   || *xsb:is-negative-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-INF` ist ||
 || *L* || *intern:ln10*() ||   || natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante) ||
 ||   || *intern:ln2*() ||   || natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante) ||
-||   || *intern:log*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || berechnet den natürlichen Logarithmus ||
-||   || *intern:log-iterator*({{{argm}}} _as_ {{{xs:decimal}}}; {{{argp}}} _as_ {{{xs:decimal}}}; {{{vortrag}}} _as_ {{{xs:decimal}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des natürlichen Logarithmus ||
-||   || *intern:log-m-iterator*({{{x}}} _as_ {{{xs:decimal}}}; {{{m}}} _as_ {{{xs:integer}}}) ||   || ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können. ||
-||   || *intern:log10*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis ||
+||   || *intern:log*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den natürlichen Logarithmus ||
+||   || *intern:log-iterator*({{{argm}}} _as_ {{{xs:anyAtomicType}}}; {{{argp}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des natürlichen Logarithmus ||
+||   || *intern:log-m-iterator*({{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{m}}} _as_ {{{xs:integer}}}) ||   || ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können. ||
+||   || *intern:log10*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis ||
 ||   || *xsb:log*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den natürlichen Logarithmus ||
 ||   || *xsb:log10*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis ||
-|| *N* || *intern:normalize-rad*({{{rad}}} _as_ {{{xs:decimal}}}) ||   || rechnet Winkel auf den Bereich von `- 2 {{{*}}} Pi` bis `2 {{{*}}} Pi` um ||
-||   || *intern:nroot*({{{wurzelbasis}}} _as_ {{{xs:decimal}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die n-te Wurzel (n = Wurzelexponent) ||
+|| *N* || *intern:normalize-rad*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Winkel auf den Bereich von `- 2 {{{*}}} Pi` bis `2 {{{*}}} Pi` um ||
+||   || *intern:nroot*({{{wurzelbasis}}} _as_ {{{xs:anyAtomicType}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die n-te Wurzel (n = Wurzelexponent) ||
 ||   || *xsb:nroot*({{{wurzelbasis}}} _as_ {{{xs:anyAtomicType}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die n-te Wurzel (n = Wurzelexponent) ||
-|| *P* || *intern:pow*({{{basis}}} _as_ {{{xs:decimal}}}; {{{exponent}}} _as_ {{{xs:decimal}}}) ||   || berechnet die Potenz basis^exponent ||
-||   || *intern:power*({{{basis}}} _as_ {{{xs:decimal}}}; {{{exponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die Potenz basis^exponent für ganzzahlige Exponenten (multiplikative Methode) ||
+|| *P* || *intern:pow*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Potenz basis^exponent ||
+||   || *intern:power*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die Potenz basis^exponent für ganzzahlige Exponenten (multiplikative Methode) ||
 ||   || *xsb:pi*() ||   || Konstante Pi mit 3,14159265358979323846264338327950288419716939937511… ||
 ||   || *xsb:pow*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Potenz basis^exponent ||
-|| *R* || *intern:rad-to-deg*({{{rad}}} _as_ {{{xs:decimal}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
-||   || *intern:root-iterator*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:decimal}}}; {{{y}}} _as_ {{{xs:decimal}}}; {{{yn}}} _as_ {{{xs:decimal}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || iterative Wurzelberechnung nach dem Heron-Verfahren ||
-||   || *intern:round*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB ||
+|| *R* || *intern:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
+||   || *intern:root-iterator*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || iterative Wurzelberechnung nach dem Heron-Verfahren ||
+||   || *intern:round*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB ||
 ||   || *xsb:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
-|| *S* || *intern:sin*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
-||   || *intern:sinus-iterator*({{{NormalisiertesArgument}}} _as_ {{{xs:decimal}}}; {{{vortrag}}} _as_ {{{xs:decimal}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Sinus ||
-||   || *intern:sqrt*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || berechnet die Quadratwurzel ||
+|| *S* || *intern:sgn*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
+||   || *intern:sin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
+||   || *intern:sinus-iterator*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Sinus ||
+||   || *intern:sqrt*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Quadratwurzel ||
 ||   || *intern:sqrt2*() ||   || Wurzel aus 2 mit 1,4142135623730950488… (Konstante) ||
+||   || *xsb:sgn*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
 ||   || *xsb:sin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
 ||   || *xsb:sqrt*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Quadratwurzel ||
-|| *T* || *intern:tan*({{{arg}}} _as_ {{{xs:decimal}}}) ||   || berchnet den Tangens ||
+|| *T* || *intern:tan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berchnet den Tangens ||
 ||   || *xsb:tan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berchnet den Tangens ||
 ||   || *xsb:tau*() ||   || Konstante Tau mit 2 {{{*}}} Pi = 6,28318530717958647692528676655900576839433879875021… ||
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 05.06.2011_
+_Seite erstellt am 26.06.2011_
 

@@ -12,6 +12,12 @@ You can start a new project by copy & paste from pattern+includes.xsl.
 === Revision ===
 $Revision$, $Date$
 
+--- Changes in 0.2.37 ---
+* added asin(), acos(), atan(), atan2() to math.xsl
+* dynamic typing: functions return now results with the type of 
+  their argument instead of xs:decimal
+* internals.stylecheck.xsl checks for the use of <xsl:message/>
+
 --- Changes in 0.2.31 ---
 * moved tests from standard.xsl to standard_tests.xsl
 * improved documentation
