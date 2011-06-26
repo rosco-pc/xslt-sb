@@ -1,0 +1,66 @@
+=== Zusammenfassung ===
+Die XSLT-Standard-Bibliothek (XSLT-SB) beinhaltet nützliche, immer wieder 
+gebrauchte Funktionen und Templates. Gleichzeitig dient sie als beispielhafte
+Inplementierung bestimmter Techniken. Sie wendet sich als Beispielsammlung 
+vor allem an deutschsprachige Entwickler, um für diese die Einstiegshürden
+zu senken.
+
+
+=== Getting Started ===
+Einfach eines der Bibliothek-Stylesheets in ein eigenes Stylesheet einbinden.
+Ein neues Projekt kann auch mit copy & paste von pattern+includes.xsl
+gestartet werden.
+
+
+=== Revision ===
+$Revision$, $Date$
+
+--- Änderungen in 0.2.37 ---
+* asin(), acos(), atan(), atan2() in math.xsl ergänzt
+* dynamische Typung: Functions geben jetzt ihre Ergebnisse mit dem Typ ihres 
+  Arguments zurück (anstelle des statischen xs:decimal)
+* internals.stylecheck.xsl testet auf die Verwendung von <xsl:message/>
+
+--- Änderungen in 0.2.31 ---
+* Tests aus standard.xsl nach standard_tests.xsl ausgelagert
+* Dokumentation verbessert
+
+--- Änderungen in 0.2.28 ---
+* math.xsl hinzugefügt
+* tools/google_code hinzugefügt
+* kleinere Bugfixes
+
+
+=== Lizenz (duale Lizenzierung) ===
+Copyright (c) 2010-2011 Stefan Krause, http://www.expedimentum.org/
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+Die XSLT-SB und alle dazugehörigen Stylesheets und Dokumentationen 
+sind unter einer Creative Commons-Lizenz (CC-BY 3.0, 
+http://creativecommons.org/licenses/by/3.0/) lizenziert.
+Die Weiternutzung ist bei Namensnennung erlaubt.
+
+
+=== bekannte Probleme ===
+* IntelSOAE stürzt beim Ausführen aller Test ab (die ist ein Problem
+  der letzten veröffentlichten Version 2.0.0.0 und möglicherweise in
+  späteren Releases behoben).
