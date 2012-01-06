@@ -120,7 +120,22 @@
 	<xsl:function name="xsb:random-sequence" as="xs:anyAtomicType+">
 		<xsl:param name="length" as="xs:anyAtomicType"/>
 		<xsl:param name="volatile" as="xs:anyAtomicType"/>
-		<xsl:sequence select="for $i in intern:random-sequence($length, $volatile) return xs:decimal($i div xs:decimal(4294967295) )"/>
+		<xsl:sequence select="for $i in intern:random-sequence($length, $volatile) return xs:decimal(xs:decimal($i) div xs:decimal(4294967295) )"/>
+	</xsl:function>
+	
+	
+	<xsl:function name="intern:variance" as="xs:anyAtomicType">
+		<xsl:param name="input" as="xs:anyAtomicType+"/>
+		<!-- für Details zum Alghorythmus siehe http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant -->
+		<xsl:variable name="mean" as="xs:anyAtomicType" select="avg($input)"/>
+		<xsl:variable name="sum2" as="xs:anyAtomicType" select="sum(for $i in $input return ( ($i - $mean) * ($i - $mean) ) )"/>
+		<xsl:variable name="sum3" as="xs:anyAtomicType" select="sum(for $i in $input return   ($i - $mean) )"/>
+		<xsl:sequence select="($sum2 - ($sum3 * $sum3) div count($input) ) div (count($input) - 1)"></xsl:sequence>
+	</xsl:function>
+	
+	<xsl:function name="intern:std" as="xs:anyAtomicType">
+		<xsl:param name="input" as="xs:anyAtomicType+"/>
+		<xsl:sequence select="intern:sqrt(intern:variance($input))"/>
 	</xsl:function>
 	
 	<!--  -->
@@ -202,7 +217,7 @@
 			</xsl:call-template>
 		</xsl:for-each>-->
 		
-		<xsl:message select="for $i in 1 to 10 return intern:seed(1)"/>
+		<!--<xsl:message select="for $i in 1 to 10 return intern:seed(1)"/>-->
 		<!--<xsl:message select="for $i in 1 to 10 return xs:integer(intern:seed(1))"/>
 		<xsl:message select="for $i in 1 to 100 return xsb:random($i)"/>
 		<xsl:message select="for $i in 1 to 100 return xsb:random($i)"/>
@@ -229,25 +244,75 @@
 		<xsl:message select="min(for $i in 1 to 100000 return xsb:random($i))"/>
 		<xsl:message select="min(for $i in 1 to 100000 return xsb:random($i))"/>-->
 		<xsl:message>----</xsl:message>
+		<!--<xsl:message select="xsb:random-sequence(100, 1)"/>
 		<xsl:message select="xsb:random-sequence(100, 1)"/>
-		<xsl:message select="xsb:random-sequence(100, 1)"/>
-		<xsl:message select="xsb:random-sequence(100, 1)"/>
+		<xsl:message select="xsb:random-sequence(100, 1)"/>-->
 		
-		<xsl:result-document href="daten.csv" encoding="UTF-8" method="text">
-			<xsl:for-each select="1 to 100">
-				<xsl:for-each select="xsb:random-sequence(100, xs:integer(.))">
+		<!--<xsl:result-document href="daten-6.csv" encoding="UTF-8" method="text">
+			<xsl:text>x-wert,y-wert&cr;</xsl:text>
+			<xsl:for-each select="1 to 1000">
+				<xsl:for-each select="xsb:random-sequence(1000, xs:integer(.))">
 					<xsl:value-of select="."/>
-					<xsl:if test="position() lt last()">
-						<xsl:text>;</xsl:text>
-					</xsl:if>
+					<xsl:choose>
+						<xsl:when test="position() mod 2 = 1">
+					 		<xsl:text>,</xsl:text>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>&cr;</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:for-each>
-				<xsl:text>&cr;</xsl:text>
 			</xsl:for-each>
-		</xsl:result-document>
+		</xsl:result-document>-->
+		
+		<!--<xsl:result-document href="daten-7.csv" encoding="UTF-8" method="text">
+			<xsl:text>x-wert,y-wert&cr;</xsl:text>
+			<xsl:for-each select="1 to 1000000">
+					<xsl:value-of select="xsb:random(.)"/>
+					<xsl:text>,</xsl:text>
+					<xsl:value-of select="xsb:random(. + 1)"/>
+					<xsl:text>&cr;</xsl:text>
+			</xsl:for-each>
+		</xsl:result-document>-->
+		
+		<!--<xsl:variable name="seq-01" as="xs:decimal+">
+			<xsl:for-each select="1 to 1000000">
+				<xsl:value-of select="xs:decimal(xsb:random(.))"/>
+			</xsl:for-each>
+		</xsl:variable>-->
+		
+		<!--<xsl:message select="sum($seq-01) div 1000000"></xsl:message>
+		<xsl:message select="min($seq-01)"/>
+		<xsl:message select="max($seq-01)"/>-->
+		
+		<xsl:message>----------</xsl:message>
+		
+		<!--<xsl:variable name="seq-02" as="xs:decimal+">
+			<xsl:for-each select="1 to 1000">
+				<xsl:for-each select="xsb:random-sequence(1000, .)">
+					<xsl:sequence select="xs:decimal(.)"/>
+				</xsl:for-each>
+			</xsl:for-each>
+		</xsl:variable>
+		
+		<xsl:message select="sum($seq-02) div 1000000"></xsl:message>
+		<xsl:message select="min($seq-02)"/>
+		<xsl:message select="max($seq-02)"/>-->
 		
 		
-		<xsl:message select="for $i in 1 to 100 return string(xsb:random(1))"/>
-		<xsl:message select="for $i in 1 to 100 return string(xsb:random($i))"/>
+		<xsl:message select="intern:variance((1.21, 3.4, 2, 4.66, 1.5, 5.61, 7.22))"></xsl:message>
+		<xsl:message select="intern:variance((4, 7, 13, 16))"></xsl:message>
+		<xsl:message select="intern:variance((1000000000000004, 1000000000000007, 1000000000000013, 1000000000000016))"></xsl:message>
+		<xsl:message select="intern:variance((1, 2, 3, 3, 5, 6))"></xsl:message>
+		<xsl:message select="intern:std((2,  4,  4,  4,  5,  5,  7,  9))"></xsl:message>
+		
+		<xsl:message>----- über Zufallssequenz -----</xsl:message>
+		
+		<xsl:variable name="rseq" select="for $i in 1 to 1000 return xsb:random($i)"/>
+		<xsl:message select="$rseq"/>
+		<xsl:message select="avg($rseq)"/>
+		<xsl:message select="intern:variance($rseq)"/>
+		<xsl:message select="intern:std($rseq)"/>
 		<!--  -->
 		<!--  -->
 		<!--  -->
