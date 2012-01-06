@@ -2834,5 +2834,302 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
+	<!-- __________     xsb:is-in-range     __________ -->
+	<doc:function>
+		<doc:param name="value"><para>zu testender Wert</para></doc:param>
+		<doc:param name="minInclusive"><para>untere Grenze</para></doc:param>
+		<doc:param name="maxInclusive"><para>obere Grenze</para></doc:param>
+		<para xml:id="is-in-range">überprüft, ob ein numerischer Wert innerhalb eines Wertebereiches liegt</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:is-in-range" as="xs:boolean">
+		<xsl:param name="value" as="xs:anyAtomicType"/>
+		<xsl:param name="minInclusive" as="xs:anyAtomicType"/>
+		<xsl:param name="maxInclusive" as="xs:anyAtomicType"/>
+		<xsl:choose>
+			<xsl:when test="xsb:is-NaN($value)">
+				<xsl:sequence select="false()"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="if ( ($value ge $minInclusive) and ($value le $maxInclusive) ) then true() else false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:variance     __________ -->
+	<doc:function>
+		<doc:param name="sequence_of_numeric_values"><para>Eingabewerte, Sequenz von atomaren numerischen Werten</para></doc:param>
+		<para xml:id="variance">berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:variance" as="xs:anyAtomicType">
+		<xsl:param name="sequence_of_numeric_values" as="xs:anyAtomicType+"/>
+		<xsl:choose>
+			<xsl:when test="some $i in $sequence_of_numeric_values satisfies ( xsb:is-NaN($i) )">
+				<xsl:sequence select="intern:cast-NaN($sequence_of_numeric_values[1])"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:variance($sequence_of_numeric_values) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:variance     __________ -->
+	<doc:function>
+		<doc:param name="sequence_of_numeric_values"><para>Eingabewerte, Sequenz von atomaren numerischen Werten</para></doc:param>
+		<para xml:id="variance_i">berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz</para>
+		<para>Der Algorithmus wird unter <link xlink:href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant">http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant</link> beschrieben</para>
+		<revhistory>
+			<revhistory>
+				<revision>
+					<revnumber>0.2.40</revnumber>
+					<date>2012-01-04</date>
+					<authorinitials>Stf</authorinitials>
+					<revdescription>
+						<para conformance="beta">Status: beta</para>
+						<para>initiale Version</para>
+					</revdescription>
+				</revision>
+			</revhistory>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:variance" as="xs:anyAtomicType">
+		<xsl:param name="sequence_of_numeric_values" as="xs:anyAtomicType+"/>
+		<!-- für Details zum Algorithmus siehe http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant -->
+		<xsl:variable name="mean" as="xs:anyAtomicType" select="avg($sequence_of_numeric_values)"/>
+		<xsl:variable name="sum2" as="xs:anyAtomicType" select="sum(for $i in $sequence_of_numeric_values return ( ($i - $mean) * ($i - $mean) ) )"/>
+		<xsl:variable name="sum3" as="xs:anyAtomicType" select="sum(for $i in $sequence_of_numeric_values return   ($i - $mean) )"/>
+		<xsl:variable name="count" as="xs:integer" select="count($sequence_of_numeric_values)"/>
+		<!-- die Implementoren von avg() werden sich schon Gedanken über den Typ gemacht haben … -->
+		<xsl:sequence select="xsb:cast( ( ($sum2 - ($sum3 * $sum3) div $count ) div ($count - 1) ), xsb:type-annotation($mean) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:standard-deviation     __________ -->
+	<doc:function>
+		<doc:param name="sequence_of_numeric_values"><para>Eingabewerte, Sequenz von atomaren numerischen Werten</para></doc:param>
+		<para xml:id="standard-deviation">berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:standard-deviation" as="xs:anyAtomicType">
+		<xsl:param name="sequence_of_numeric_values" as="xs:anyAtomicType+"/>
+		<xsl:choose>
+			<xsl:when test="some $i in $sequence_of_numeric_values satisfies ( xsb:is-NaN($i) )">
+				<xsl:sequence select="intern:cast-NaN($sequence_of_numeric_values[1])"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="intern:round(intern:standard-deviation($sequence_of_numeric_values) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:standard-deviation     __________ -->
+	<doc:function>
+		<doc:param name="sequence_of_numeric_values"><para>Eingabewerte, Sequenz von atomaren numerischen Werten</para></doc:param>
+		<para xml:id="standard-deviation_i">berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz</para>
+		<revhistory>
+			<revhistory>
+				<revision>
+					<revnumber>0.2.40</revnumber>
+					<date>2012-01-04</date>
+					<authorinitials>Stf</authorinitials>
+					<revdescription>
+						<para conformance="beta">Status: beta</para>
+						<para>initiale Version</para>
+					</revdescription>
+				</revision>
+			</revhistory>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:standard-deviation" as="xs:anyAtomicType">
+		<xsl:param name="sequence_of_numeric_values" as="xs:anyAtomicType+"/>
+		<xsl:sequence select="intern:sqrt(intern:variance($sequence_of_numeric_values) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:linear-congruential-generator     __________ -->
+	<doc:function>
+		<doc:param name="length"><para>Anzahl der neu zu erzeugende Werte</para></doc:param>
+		<doc:param name="vortrag"><para>Hilfsparameter für die rekursive Erzeugung der Sequenz. Beim Aufruf der Funktion wird hier
+			der Seed-Wert übergeben, bei weiteren Durchläufen werden neu generierte angehängt. Bei Rückgabe der Seguenz wird der erste Wert (Seed) entfernt.</para></doc:param>
+		<para xml:id="linear-congruential-generator">linearer Kongruenzgenerator, erzeugt Pseudo-Zufallszahlen</para>
+		<para>Die erzeugten Werte liegen zwischen 0 und 4294967295.</para>
+		<para>Die Länge der erzeugten Sequenz ist die Anzahl der Werte in <code>vortrag</code> minus <code>1</code> plus <code>length</code>.</para>
+		<para>Für Details siehe <link xlink:href="http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator">http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator</link>
+			und <link xlink:href="http://en.wikipedia.org/wiki/Linear_congruential_generator">http://en.wikipedia.org/wiki/Linear_congruential_generator</link>.</para>
+		<revhistory>
+			<revhistory>
+				<revision>
+					<revnumber>0.2.40</revnumber>
+					<date>2012-01-04</date>
+					<authorinitials>Stf</authorinitials>
+					<revdescription>
+						<para conformance="beta">Status: beta</para>
+						<para>initiale Version</para>
+					</revdescription>
+				</revision>
+			</revhistory>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:linear-congruential-generator" as="xs:integer+">
+		<xsl:param name="length" as="xs:integer"/>
+		<xsl:param name="vortrag" as="xs:integer+"/>
+		<xsl:choose>
+			<xsl:when test="$length eq 0">
+				<xsl:sequence select="$vortrag[position() gt 1]"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<!-- Werte für 'glibc' nach http://en.wikipedia.org/wiki/Linear_congruential_generator -->
+				<!-- Ergebnisse liegen zwischen 0 und 4294967295 -->
+				<xsl:sequence select="intern:linear-congruential-generator($length - 1, ($vortrag, (1103515245 *$vortrag[last()] + 12345) mod 4294967296) )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:random-seed     __________ -->
+	<doc:function>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<para xml:id="random-seed">erzeugt eine Zufallszahl</para>
+		<para>In die Berechnung der Zufallszahl gehen das aktuelle Datum und die aktuelle Uhrzeit sowie der <code>volatile</code>-Parameter ein.</para>
+		<para>Auch unabhängig vom Wert von <code>volatile</code> werden bei jedem Aufruf neue zufällige Werte erzeugt, allerdings 
+			1) vermindert ein möglichst zufälliger <code>volatile</code>-Wert die Vorhersagbarkeit des Ergebnisses und
+			2) verhindert ein wechselnder <code>volatile</code>-Wert bei wiederholten Aufrufen der Funktion, dass der XSLT-Prozessor die
+			unterschiedlichen Rückgabewerte qua Optimierung zu einem Wert vereinheitlicht.</para>
+		<para>Zum Hintergrund siehe <link xlink:href="http://www.nesterovsky-bros.com/weblog/2008/11/22/GeneratorFunctionInXslt20.aspx">http://www.nesterovsky-bros.com/weblog/2008/11/22/GeneratorFunctionInXslt20.aspx</link>.</para>
+		<revhistory>
+			<revhistory>
+				<revision>
+					<revnumber>0.2.40</revnumber>
+					<date>2012-01-04</date>
+					<authorinitials>Stf</authorinitials>
+					<revdescription>
+						<para conformance="beta">Status: beta</para>
+						<para>initiale Version</para>
+					</revdescription>
+				</revision>
+			</revhistory>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:random-seed" as="xs:integer" intern:solved="MissingTests">
+		<xsl:param name="volatile" as="xs:anyAtomicType"/>
+		<xsl:variable name="integer-of-volatile" as="xs:integer" select="if ($volatile castable as xs:integer) then xs:integer($volatile) else sum(string-to-codepoints(string($volatile) ) )"/>
+		<xsl:variable name="integer-of-current-date" as="xs:integer" select="xs:integer(format-dateTime(current-dateTime(), '[Y][d][H][m][s][f]') )"/>
+		<!-- zum Hintergrund siehe http://www.nesterovsky-bros.com/weblog/2008/11/22/GeneratorFunctionInXslt20.aspx -->
+		<xsl:variable name="temporary_node" as="text()">?</xsl:variable>
+		<xsl:variable name="sequence-of-weighted-id-integers" as="xs:integer+">
+			<xsl:for-each select="string-to-codepoints(generate-id($temporary_node) )">
+				<xsl:sequence select="intern:power(xs:integer(10), position()) * xs:integer(.)"/>
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:sequence select="intern:linear-congruential-generator(1, $integer-of-volatile + $integer-of-current-date + xs:integer(sum($sequence-of-weighted-id-integers) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     intern:random-sequence     __________ -->
+	<doc:function>
+		<doc:param name="length"><para>Anzahl der zu erzeugenden Zufallswerte</para></doc:param>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<para xml:id="random-sequence_i">erzeigt eine Sequenz von zufälligen Werten im Bereich von 0 bis 4294967295.</para>
+		<revhistory>
+			<revhistory>
+				<revision>
+					<revnumber>0.2.40</revnumber>
+					<date>2012-01-04</date>
+					<authorinitials>Stf</authorinitials>
+					<revdescription>
+						<para conformance="beta">Status: beta</para>
+						<para>initiale Version</para>
+					</revdescription>
+				</revision>
+			</revhistory>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:random-sequence" as="xs:integer+" intern:solved="MissingTests">
+		<xsl:param name="length" as="xs:integer"/>
+		<xsl:param name="volatile" as="xs:anyAtomicType"/>
+		<xsl:sequence select="intern:linear-congruential-generator($length, intern:random-seed($volatile) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:random     __________ -->
+	<doc:function>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<para xml:id="random">erzeugt eine Zufallszahl im Bereich zwischen 0 und 1</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:random" as="xs:decimal" intern:solved="MissingTests">
+		<xsl:param name="volatile" as="xs:anyAtomicType"/>
+		<xsl:sequence select="xs:decimal(intern:random-seed($volatile) div xs:decimal(4294967295) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:random-sequence()     __________ -->
+	<doc:function>
+		<doc:param name="length"><para>Anzahl der zu erzeugenden Zufallswerte</para></doc:param>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<para xml:id="random-sequence">erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:random-sequence" as="xs:decimal+" intern:solved="MissingTests">
+		<xsl:param name="length" as="xs:anyAtomicType"/>
+		<xsl:param name="volatile" as="xs:anyAtomicType"/>
+		<xsl:sequence select="for $i in intern:random-sequence($length, $volatile) return intern:round(xs:decimal(xs:decimal($i) div xs:decimal(4294967295) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
 	<!--  -->
 </xsl:stylesheet>

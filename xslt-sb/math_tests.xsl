@@ -1617,6 +1617,471 @@
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
+		<!-- __________     xsb:is-in-range()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range(0, 0, 0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range(0, 0, 0)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range(0, 1, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range(0, 1, 1)"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range(0.5, 0, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range(0.5, 0, 1)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range(0, 1.5, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range(0, 1.5, 1)"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range(0.5, 1, 0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range(0.5, 1, 0)"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     Statistik-Funktionen arbeiten über Sequenzen     __________ -->
+		<xsl:variable name="seq1" as="xs:double+" select="xs:double(0), xs:double(1), xs:double(2)"/>
+		<xsl:variable name="seq2" as="xs:decimal+" select="xs:decimal(1.21), xs:decimal(3.4), xs:decimal(2), xs:decimal(4.66), xs:decimal(1.5), xs:decimal(5.61), xs:decimal(7.22)"/>
+		<xsl:variable name="seq3" as="xs:decimal+" select="xs:decimal(4), xs:decimal(7), xs:decimal(13), xs:decimal(16)"/>
+		<xsl:variable name="seq4" as="xs:decimal+" select="xs:decimal(1000000000000004), xs:decimal(1000000000000007), xs:decimal(1000000000000013), xs:decimal(1000000000000016)"/>
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:variance     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:variance(number('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:variance(number('NaN'))"/>
+			<xsl:with-param name="reference-value" select="number('NaN')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:variance($seq1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:variance($seq1)"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:variance($seq2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:variance($seq2)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(5.161223809523809523809523809523809524)"/><!-- dieser Wert ist das Ergebnis der Berechnung mit Saxon mangels Vefügbarkeit geeignet genauer Referenzwerte -->
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:variance($seq3)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:variance($seq3)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(30)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:variance($seq4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:variance($seq4)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(30)"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:variance     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:variance(number('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:variance(number('NaN'))"/>
+			<xsl:with-param name="reference-value" select="number('NaN')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:variance($seq1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:variance($seq1)"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:variance($seq2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:variance($seq2)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(5.1612238095238095)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:variance($seq3)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:variance($seq3)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(30)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:variance($seq4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:variance($seq4)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(30)"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:standard-deviation()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:standard-deviation(number('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:standard-deviation(number('NaN'))"/>
+			<xsl:with-param name="reference-value" select="number('NaN')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:standard-deviation($seq1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:standard-deviation($seq1)"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:standard-deviation($seq2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:standard-deviation($seq2)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(2.271832698400964895269931307742138708755)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:standard-deviation($seq3)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:standard-deviation($seq3)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(5.47722557505166113457)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:standard-deviation($seq4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:standard-deviation($seq4)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(5.47722557505166113457)"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:standard-deviation()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:standard-deviation(number('NaN'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:standard-deviation(number('NaN'))"/>
+			<xsl:with-param name="reference-value" select="number('NaN')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:standard-deviation($seq1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:standard-deviation($seq1)"/>
+			<xsl:with-param name="reference-value" select="xs:double(1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:standard-deviation($seq2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:standard-deviation($seq2)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xs:decimal(2.271832698400964895269931307742138708755) )"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:standard-deviation($seq3)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:standard-deviation($seq3)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xs:decimal(5.47722557505166113457) )"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:standard-deviation($seq4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:standard-deviation($seq4)"/>
+			<xsl:with-param name="reference-value" select="intern:round(xs:decimal(5.47722557505166113457) )"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:linear-congruential-generator()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:linear-congruential-generator(1, 0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:linear-congruential-generator(1, 0)"/>
+			<xsl:with-param name="reference-value" select="12345"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:linear-congruential-generator(5, 0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:linear-congruential-generator(5, 0)"/>
+			<xsl:with-param name="reference-value" select="12345, 3554416254, 2802067423, 3596950572, 229283573"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:linear-congruential-generator(3, (12345, 3554416254) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:linear-congruential-generator(3, (12345, 3554416254) )"/>
+			<xsl:with-param name="reference-value" select="3554416254, 2802067423, 3596950572, 229283573"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     Zufallswerte können nicht normal getestet werden     __________ -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:random-seed()     __________ -->
+		<xsl:variable name="random-value-1" as="xs:integer" select="intern:random-seed(1)"/>
+		<xsl:variable name="random-value-2" as="xs:integer" select="intern:random-seed(2)"/>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">$random-value-1 ne 0</xsl:with-param>
+			<xsl:with-param name="actual-value" select="$random-value-1 ne 0"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">$random-value-2 ne 0</xsl:with-param>
+			<xsl:with-param name="actual-value" select="$random-value-2 ne 0"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">$random-value-1 ne 1</xsl:with-param>
+			<xsl:with-param name="actual-value" select="$random-value-1 ne 1"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">$random-value-2 ne 1</xsl:with-param>
+			<xsl:with-param name="actual-value" select="$random-value-2 ne 1"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">$random-value-1 ne $random-value-2</xsl:with-param>
+			<xsl:with-param name="actual-value" select="$random-value-1 ne $random-value-2"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:random-sequence()     __________ -->
+		<xsl:variable name="laenge" as="xs:integer" select="1000"/>
+		<xsl:variable name="random-sequence-1" as="xs:integer+" select="intern:random-sequence($laenge, 1)"/>
+		<xsl:variable name="random-sequence-1-min" as="xs:integer" select="min($random-sequence-1)"/>
+		<xsl:variable name="random-sequence-1-max" as="xs:integer" select="max($random-sequence-1)"/>
+		<xsl:variable name="random-sequence-1-avg" as="xs:decimal" select="avg($random-sequence-1)"/>
+		<xsl:variable name="random-sequence-1-stddev" as="xs:decimal" select="xsb:standard-deviation($random-sequence-1)"/>
+		<xsl:variable name="random-sequence-2" as="xs:integer+" select="intern:random-sequence($laenge, 2)"/>
+		<xsl:variable name="random-sequence-2-min" as="xs:integer" select="min($random-sequence-2)"/>
+		<xsl:variable name="random-sequence-2-max" as="xs:integer" select="max($random-sequence-2)"/>
+		<xsl:variable name="random-sequence-2-avg" as="xs:decimal" select="avg($random-sequence-2)"/>
+		<xsl:variable name="random-sequence-2-stddev" as="xs:decimal" select="xsb:standard-deviation($random-sequence-2)"/>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">deep-equal($random-sequence-1, $random-sequence-2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="deep-equal($random-sequence-1, $random-sequence-2)"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">count(distinct-values($random-sequence-1)) eq $laenge</xsl:with-param>
+			<!-- in seltenen Fällen geht das schief, dann sollte bei einem erneuten Testdurchlauf aber Ruhe sein -->
+			<xsl:with-param name="actual-value" select="count(distinct-values($random-sequence-1)) eq $laenge"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">count(distinct-values($random-sequence-2)) eq $laenge</xsl:with-param>
+			<!-- in seltenen Fällen geht das schief, dann sollte bei einem erneuten Testdurchlauf aber Ruhe sein -->
+			<xsl:with-param name="actual-value" select="count(distinct-values($random-sequence-2)) eq $laenge"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-1-min, 0, 42949672)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div $laenge * 10 = 42949672 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-1-min, 0, 42949672)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequence-1-min"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-2-min, 0, 42949672)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-2-min, 0, 42949672)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequence-2-min"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-1-max, 4252017623, 4294967295)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-1-max, 4252017623, 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequence-1-max"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-2-max, 4252017623, 4294967295)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-2-max, 4252017623, 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequence-2-max"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-1-avg, 2025990344, 2268976950)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div 2 ± 1/10 der stddev eines Test-Durchlaufes = 2147483647.5 ± 121493302.73827964390507325 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-1-avg, 2025990344, 2268976950)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-2-avg, 2025990344, 2268976950)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div 2 ± 1/10 der stddev eines Test-Durchlaufes = 2147483647.5 ± 121493302.73827964390507325 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-2-avg, 2025990344, 2268976950)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-1-stddev, 1150000000, 1300000000)</xsl:with-param>
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-1-stddev, 1150000000, 1300000000)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequence-1-avg"></xsl:message>
+		<xsl:message select="$random-sequence-1-stddev"></xsl:message>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequence-2-stddev, 1150000000, 1300000000)</xsl:with-param>
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequence-2-stddev, 1150000000, 1300000000)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequence-2-avg"></xsl:message>
+		<xsl:message select="$random-sequence-2-stddev"></xsl:message>-->
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:random()     __________ -->
+		<xsl:variable name="laenge" as="xs:integer" select="1000"/>
+		<xsl:variable name="random-seq-1" as="xs:decimal+" select="for $i in 1 to $laenge return xsb:random($i)"/>
+		<xsl:variable name="random-seq-1-min" as="xs:decimal" select="min($random-seq-1)"/>
+		<xsl:variable name="random-seq-1-max" as="xs:decimal" select="max($random-seq-1)"/>
+		<xsl:variable name="random-seq-1-avg" as="xs:decimal" select="avg($random-seq-1)"/>
+		<xsl:variable name="random-seq-1-stddev" as="xs:decimal" select="xsb:standard-deviation($random-seq-1)"/>
+		<xsl:variable name="random-seq-2" as="xs:decimal+" select="for $i in 1 to $laenge return xsb:random($i)"/>
+		<xsl:variable name="random-seq-2-min" as="xs:decimal" select="min($random-seq-2)"/>
+		<xsl:variable name="random-seq-2-max" as="xs:decimal" select="max($random-seq-2)"/>
+		<xsl:variable name="random-seq-2-avg" as="xs:decimal" select="avg($random-seq-2)"/>
+		<xsl:variable name="random-seq-2-stddev" as="xs:decimal" select="xsb:standard-deviation($random-seq-2)"/>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">deep-equal($random-seq-1, $random-seq-2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="deep-equal($random-seq-1, $random-seq-2)"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">count(distinct-values($random-seq-1)) eq $laenge</xsl:with-param>
+			<!-- in seltenen Fällen geht das schief, dann sollte bei einem erneuten Testdurchlauf aber Ruhe sein -->
+			<xsl:with-param name="actual-value" select="count(distinct-values($random-seq-1)) eq $laenge"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">count(distinct-values($random-seq-2)) eq $laenge</xsl:with-param>
+			<!-- in seltenen Fällen geht das schief, dann sollte bei einem erneuten Testdurchlauf aber Ruhe sein -->
+			<xsl:with-param name="actual-value" select="count(distinct-values($random-seq-2)) eq $laenge"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-1-min, 0, 42949672 div 4294967295)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div $laenge * 10 = 42949672 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-1-min, 0, 42949672 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-seq-1-min"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-2-min, 0, 42949672 div 4294967295)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-2-min, 0, 42949672 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-seq-2-min"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-1-max, 4252017623 div 4294967295, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-1-max, 4252017623 div 4294967295, 1)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-seq-1-max"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-2-max, 4252017623 div 4294967295, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-2-max, 4252017623 div 4294967295, 1)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-seq-2-max"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-1-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div 2 ± 1/10 der stddev eines Test-Durchlaufes = 2147483647.5 ± 121493302.73827964390507325 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-1-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-2-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div 2 ± 1/10 der stddev eines Test-Durchlaufes = 2147483647.5 ± 121493302.73827964390507325 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-2-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-1-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)</xsl:with-param>
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-1-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-seq-1-avg"></xsl:message>
+			<xsl:message select="$random-seq-1-stddev"></xsl:message>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-seq-2-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)</xsl:with-param>
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-seq-2-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-seq-2-avg"></xsl:message>
+			<xsl:message select="$random-seq-2-stddev"></xsl:message>-->
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:random-sequence()     __________ -->
+		<xsl:variable name="laenge" as="xs:integer" select="1000"/>
+		<xsl:variable name="random-sequenz-1" as="xs:decimal+" select="xsb:random-sequence($laenge, 123456789)"/>
+		<xsl:variable name="random-sequenz-1-min" as="xs:decimal" select="min($random-sequenz-1)"/>
+		<xsl:variable name="random-sequenz-1-max" as="xs:decimal" select="max($random-sequenz-1)"/>
+		<xsl:variable name="random-sequenz-1-avg" as="xs:decimal" select="avg($random-sequenz-1)"/>
+		<xsl:variable name="random-sequenz-1-stddev" as="xs:decimal" select="xsb:standard-deviation($random-sequenz-1)"/>
+		<xsl:variable name="random-sequenz-2" as="xs:decimal+" select="xsb:random-sequence($laenge, 'Mitternacht')"/>
+		<xsl:variable name="random-sequenz-2-min" as="xs:decimal" select="min($random-sequenz-2)"/>
+		<xsl:variable name="random-sequenz-2-max" as="xs:decimal" select="max($random-sequenz-2)"/>
+		<xsl:variable name="random-sequenz-2-avg" as="xs:decimal" select="avg($random-sequenz-2)"/>
+		<xsl:variable name="random-sequenz-2-stddev" as="xs:decimal" select="xsb:standard-deviation($random-sequenz-2)"/>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">deep-equal($random-sequenz-1, $random-sequenz-2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="deep-equal($random-sequenz-1, $random-sequenz-2)"/>
+			<xsl:with-param name="reference-value" select="false()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">count(distinct-values($random-sequenz-1)) eq $laenge</xsl:with-param>
+			<!-- in seltenen Fällen geht das schief, dann sollte bei einem erneuten Testdurchlauf aber Ruhe sein -->
+			<xsl:with-param name="actual-value" select="count(distinct-values($random-sequenz-1)) eq $laenge"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">count(distinct-values($random-sequenz-2)) eq $laenge</xsl:with-param>
+			<!-- in seltenen Fällen geht das schief, dann sollte bei einem erneuten Testdurchlauf aber Ruhe sein -->
+			<xsl:with-param name="actual-value" select="count(distinct-values($random-sequenz-2)) eq $laenge"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-1-min, 0, 42949672 div 4294967295)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div $laenge * 10 = 42949672 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-1-min, 0, 42949672 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequenz-1-min"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-2-min, 0, 42949672 div 4294967295)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-2-min, 0, 42949672 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequenz-2-min"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-1-max, 4252017623 div 4294967295, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-1-max, 4252017623 div 4294967295, 1)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequenz-1-max"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-2-max, 4252017623 div 4294967295, 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-2-max, 4252017623 div 4294967295, 1)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequenz-2-max"/>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-1-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div 2 ± 1/10 der stddev eines Test-Durchlaufes = 2147483647.5 ± 121493302.73827964390507325 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-1-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-2-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)</xsl:with-param>
+			<!-- Heuristik: 4294967295 div 2 ± 1/10 der stddev eines Test-Durchlaufes = 2147483647.5 ± 121493302.73827964390507325 -->
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-2-avg, 2025990344 div 4294967295, 2268976950 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-1-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)</xsl:with-param>
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-1-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequenz-1-avg"></xsl:message>
+			<xsl:message select="$random-sequenz-1-stddev"></xsl:message>-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:is-in-range($random-sequenz-2-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)</xsl:with-param>
+			<!-- vielleicht kann ja gelegentlich ein Mathematiker sinnvolle Werte beisteuern -->
+			<xsl:with-param name="actual-value" select="xsb:is-in-range($random-sequenz-2-stddev, 1150000000 div 4294967295, 1300000000 div 4294967295)"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<!--<xsl:message select="$random-sequenz-2-avg"></xsl:message>
+			<xsl:message select="$random-sequenz-2-stddev"></xsl:message>-->
+		<!--  -->
+		<!--  -->
 		<!--  -->
 		<!--  -->
 		<!--  -->
@@ -1905,6 +2370,28 @@
 			<xsl:with-param name="caller">xsb:type-annotation(intern:round(xs:integer(-0.5) ) )</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(intern:round(xs:integer(-0.5) ) )"/>
 			<xsl:with-param name="reference-value" select=" 'xs:integer' " as="xs:string"/>
+		</xsl:call-template>
+		<!-- xsb:variance() -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:variance( (xs:double(-0.5), xs:double(-0.5) ) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:variance( (xs:double(-0.5), xs:double(-0.5) ) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:variance( (xs:decimal(-0.5), xs:decimal(-0.5) ) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:variance( (xs:decimal(-0.5), xs:decimal(-0.5) ) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
+		</xsl:call-template>
+		<!-- xsb:standard-deviation() -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:standard-deviation( (xs:double(-0.5), xs:double(-0.5) ) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:standard-deviation( (xs:double(-0.5), xs:double(-0.5) ) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:double' " as="xs:string"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:type-annotation(xsb:standard-deviation( (xs:decimal(-0.5), xs:decimal(-0.5) ) ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:standard-deviation( (xs:decimal(-0.5), xs:decimal(-0.5) ) ) )"/>
+			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->

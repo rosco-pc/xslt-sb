@@ -1,13 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="12.2">
+<project version="13.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="12.2" xml:space="preserve">
+            <serialized version="13.1" xml:space="preserve">
                 <map>
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Selbstest_mit_internen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../math_tests.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Selbstest_mit_internen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../random.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Selbstest_mit_internen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>trash/test_random.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Selbstest_mit_externen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../math.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Selbstest_mit_internen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../Untitled1.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Selbstest_mit_internen_Tests</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>trash/test.xsl</String>
+                                </field>
+                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
                                     <String>Wiki-Seiten erstellen (für Google Code)</String>
@@ -149,28 +215,6 @@
                                 </field>
                                 <field name="url">
                                     <String>../internals.testing_tests.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../math_tests.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../math.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
@@ -427,6 +471,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonBAdvancedOptions>
                                         </entry>
                                     </map>
@@ -586,6 +633,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonSAAdvancedOptions>
                                         </entry>
                                         <entry>
@@ -625,6 +675,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonHEAdvancedOptions>
@@ -669,6 +722,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
@@ -881,6 +937,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonHEAdvancedOptions>
                                         </entry>
                                         <entry>
@@ -923,6 +982,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
@@ -1094,6 +1156,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
@@ -1297,6 +1362,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonSAAdvancedOptions>
                                         </entry>
                                         <entry>
@@ -1338,6 +1406,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonHEAdvancedOptions>
                                         </entry>
                                         <entry>
@@ -1356,7 +1427,7 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="lineNumbering">
-                                                    <Boolean>false</Boolean>
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="initialMode">
                                                     <String>internals.self-test</String>
@@ -1380,6 +1451,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
@@ -1688,6 +1762,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonSAAdvancedOptions>
                                         </entry>
                                         <entry>
@@ -1727,6 +1804,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonHEAdvancedOptions>
@@ -1771,6 +1851,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
@@ -1995,6 +2078,9 @@
                                                 <field name="configSystemID">
                                                     <null/>
                                                 </field>
+                                                <field name="initializer">
+                                                    <null/>
+                                                </field>
                                             </xsltSaxonSAAdvancedOptions>
                                         </entry>
                                         <entry>
@@ -2034,6 +2120,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonHEAdvancedOptions>
@@ -2078,6 +2167,9 @@
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="configSystemID">
+                                                    <null/>
+                                                </field>
+                                                <field name="initializer">
                                                     <null/>
                                                 </field>
                                             </xsltSaxonBAdvancedOptions>
