@@ -140,6 +140,14 @@ habe ich sie hier eingefügt.-->
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.41</revnumber>
+				<date>2012-02-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para>Umstellung auf stylesheet-interne Tabelle und dadurch mehr Mediatypes und Extensions</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.2.0</revnumber>
 				<date>2011-05-14</date>
 				<authorinitials>Stf</authorinitials>
@@ -1020,7 +1028,7 @@ habe ich sie hier eingefügt.-->
 		<xsl:param name="absoluteURL" as="xs:string?"/>
 		<xsl:sequence select="false()"/>
 		<xsl:call-template name="xsb:internals.FunctionError">
-			<xsl:with-param name="caller">xsb:document-exists()</xsl:with-param>
+			<xsl:with-param name="caller">intern:file-exists()</xsl:with-param>
 			<xsl:with-param name="level">FATAL</xsl:with-param>
 			<xsl:with-param name="message">Keine Möglichkeit zur Ermittlung, ob eine Datei existiert (Vendor-Hash: "<xsl:sequence select="xsb:current-vendor-hash()"/>")</xsl:with-param>
 		</xsl:call-template>
@@ -1038,6 +1046,15 @@ habe ich sie hier eingefügt.-->
 			ggfs. eine Warnung zurück.</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.41</revnumber>
+				<date>2012-02-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>Umstellung auf stylesheet-interne Tabelle und dadurch mehr Mediatypes und Extensions</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.90</revnumber>
 				<date>2010-04-23</date>
 				<authorinitials>Stf</authorinitials>
@@ -1052,23 +1069,13 @@ habe ich sie hier eingefügt.-->
 		<xsl:param name="URLwithFileExtension" as="xs:string?"/>
 		<xsl:param name="warn-if-wrong-input" as="xs:boolean"/>
 		<xsl:variable name="temp" as="xs:string" select="lower-case(xsb:fileExtention-from-url($URLwithFileExtension))"/>
+		<xsl:variable name="lines" as="element()*" select="document('')//intern:table[@xml:id eq 'mimetypes-extensions']/intern:l[intern:e eq $temp]"/>
 		<xsl:choose>
 			<xsl:when test="$temp = '' "><xsl:sequence select=" '' "/></xsl:when>
-			<xsl:when test="$temp = 'css' ">text/css</xsl:when>
-			<xsl:when test="$temp = 'gif' ">image/gif</xsl:when>
-			<xsl:when test="$temp = 'jpg' ">image/jpeg</xsl:when>
-			<xsl:when test="$temp = 'jpeg' ">image/jpeg</xsl:when>
-			<xsl:when test="$temp = 'ncx' ">application/x-dtbncx+xml</xsl:when>
-			<xsl:when test="$temp = 'pdf' ">application/pdf</xsl:when>
-			<xsl:when test="$temp = 'png' ">image/png</xsl:when>
-			<xsl:when test="$temp = 'svg' ">image/svg+xml</xsl:when>
-			<xsl:when test="$temp = 'rdf' ">application/rdf+xml</xsl:when>
-			<xsl:when test="$temp = 'tif' ">image/tiff</xsl:when>
-			<xsl:when test="$temp = 'txt' ">text/plain</xsl:when>
-			<xsl:when test="$temp = 'xhtml' ">application/xhtml+xml</xsl:when>
-			<!-- application/xml ist allgemeiner als text/xml -->
 			<!-- TODO: look into xml and detect media types like docbook's application/docbook+xml -->
-			<xsl:when test="$temp = 'xml' ">application/xml</xsl:when>
+			<xsl:when test="$lines">
+				<xsl:sequence select="xs:string($lines[1]/intern:m)"/>
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select=" '' "/>
 				<xsl:if test="$warn-if-wrong-input">
@@ -1081,6 +1088,169 @@ habe ich sie hier eingefügt.-->
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
+	<!-- basiert auf https://github.com/fcrepo/fcrepo/blob/master/resources/server/org/fcrepo/server/resources/MIMETypes.properties -->
+	<!-- mit geringen Änderungen -->
+	<!-- bei mehrfachen Einträgen (wiederholter Mediatype oder wiederholte Extension) wird der erste Eintrag in Dokumentenreihenfolge verwendet. -->
+	<table xmlns="http://www.expedimentum.org/XSLT/SB/intern" xml:id="mimetypes-extensions">
+		<l><m>application/andrew-inset</m><e>ez</e></l>
+		<l><m>application/excel</m><e>xls</e></l>
+		<l><m>application/mac-binhex40</m><e>hqx</e></l>
+		<l><m>application/mac-compactpro</m><e>cpt</e></l>
+		<l><m>application/mathml+xml</m><e>mathml</e></l>
+		<l><m>application/msword</m><e>doc</e></l>
+		<l><m>application/octet-stream</m><e>bin</e></l>
+		<l><m>application/oda</m><e>oda</e></l>
+		<l><m>application/ogg</m><e>ogg</e></l>
+		<l><m>application/pdf</m><e>pdf</e></l>
+		<l><m>application/pgp</m><e>pgp</e></l>
+		<l><m>application/pgp-encrypted</m><e>pgp</e></l>
+		<l><m>application/pgp-keys</m><e>pgp</e></l>
+		<l><m>application/pgp-signature</m><e>sig</e></l>
+		<l><m>application/postscript</m><e>ps</e></l>
+		<l><m>application/postscript</m><e>ai</e></l>
+		<l><m>application/postscript</m><e>eps</e></l>
+		<l><m>application/rdf+xml</m><e>rdf</e></l>
+		<l><m>application/rdf</m><e>rdf</e></l>
+		<l><m>application/rtf</m><e>rtf</e></l>
+		<l><m>application/smil</m><e>smil</e></l>
+		<l><m>application/smil</m><e>smi</e></l>
+		<l><m>application/srgs</m><e>gram</e></l>
+		<l><m>application/srgs+xml</m><e>grxml</e></l>
+		<l><m>application/vnd.mif</m><e>mif</e></l>
+		<l><m>application/vnd.mozilla.xul+xml</m><e>xul</e></l>
+		<l><m>application/vnd.ms-excel</m><e>xls</e></l>
+		<l><m>application/vnd.ms-powerpoint</m><e>ppt</e></l>
+		<l><m>application/vnd.ms-project</m><e>mpp</e></l>
+		<l><m>application/vnd.ms-tnef</m><e>tnef</e></l>
+		<l><m>application/vnd.rn-realmedia</m><e>rm</e></l>
+		<l><m>application/vnd.wap.wbxml</m><e>wbxml</e></l>
+		<l><m>application/vnd.wap.wmlc</m><e>wmlc</e></l>
+		<l><m>application/vnd.wap.wmlscriptc</m><e>wmlsc</e></l>
+		<l><m>application/voicexml+xml</m><e>vxml</e></l>
+		<l><m>application/x-arj-compressed</m><e>arj</e></l>
+		<l><m>application/x-bcpio</m><e>bcpio</e></l>
+		<l><m>application/x-cdlink</m><e>vcd</e></l>
+		<l><m>application/x-chess-pgn</m><e>pgn</e></l>
+		<l><m>application/x-compress</m><e>Z</e></l>
+		<l><m>application/x-cpio</m><e>cpio</e></l>
+		<l><m>application/x-csh</m><e>csh</e></l>
+		<l><m>application/x-debian-package</m><e>deb</e></l>
+		<l><m>application/x-director</m><e>dcr</e></l>
+		<l><m>application/x-director</m><e>dir</e></l>
+		<l><m>application/x-director</m><e>dxr</e></l>
+		<l><m>application/x-dtbncx+xml</m><e>ncx</e></l>
+		<l><m>application/x-dvi</m><e>dvi</e></l>
+		<l><m>application/x-futuresplash</m><e>spl</e></l>
+		<l><m>application/x-gtar</m><e>gtar</e></l>
+		<l><m>application/x-gunzip</m><e>gz</e></l>
+		<l><m>application/x-gzip</m><e>gz</e></l>
+		<l><m>application/x-hdf</m><e>hdf</e></l>
+		<l><m>application/x-javascript</m><e>js</e></l>
+		<l><m>application/x-koan</m><e>skp</e></l>
+		<l><m>application/x-koan</m><e>skd</e></l>
+		<l><m>application/x-koan</m><e>skt</e></l>
+		<l><m>application/x-koan</m><e>skm</e></l>
+		<l><m>application/x-latex</m><e>latex</e></l>
+		<l><m>application/x-mif</m><e>mif</e></l>
+		<l><m>application/x-msdos-program</m><e>exe</e></l>
+		<l><m>application/x-netcdf</m><e>cdf</e></l>
+		<l><m>application/x-netcdf</m><e>nc</e></l>
+		<l><m>application/x-netcdf</m><e>nc</e></l>
+		<l><m>application/x-perl</m><e>pl</e></l>
+		<l><m>application/x-perl</m><e>pm</e></l>
+		<l><m>application/x-python</m><e>py</e></l>
+		<l><m>application/x-rar-compressed</m><e>rar</e></l>
+		<l><m>application/x-sh</m><e>sh</e></l>
+		<l><m>application/x-shar</m><e>shar</e></l>
+		<l><m>application/x-shockwave-flash</m><e>swf</e></l>
+		<l><m>application/x-stuffit</m><e>sit</e></l>
+		<l><m>application/x-sv4cpio</m><e>sv4cpio</e></l>
+		<l><m>application/x-sv4crc</m><e>sv4crc</e></l>
+		<l><m>application/x-tar</m><e>tar</e></l>
+		<l><m>application/x-tar-gz</m><e>tgz</e></l>
+		<l><m>application/x-tcl</m><e>tcl</e></l>
+		<l><m>application/x-tex</m><e>tex</e></l>
+		<l><m>application/x-texinfo</m><e>texi</e></l>
+		<l><m>application/x-texinfo</m><e>texinfo</e></l>
+		<l><m>application/x-troff</m><e>t</e></l>
+		<l><m>application/x-troff</m><e>tr</e></l>
+		<l><m>application/x-troff</m><e>troff</e></l>
+		<l><m>application/x-troff-man</m><e>man</e></l>
+		<l><m>application/x-troff-me</m><e>me</e></l>
+		<l><m>application/x-troff-ms</m><e>ms</e></l>
+		<l><m>application/x-ustar</m><e>ustar</e></l>
+		<l><m>application/x-wais-source</m><e>src</e></l>
+		<l><m>application/x-zip-compressed</m><e>zip</e></l>
+		<l><m>application/xhtml+xml</m><e>xhtml</e></l>
+		<l><m>application/xhtml+xml</m><e>xht</e></l>
+		<l><m>application/xhtml</m><e>xhtml</e></l>
+		<l><m>application/xhtml</m><e>xht</e></l>
+		<l><m>application/xml</m><e>xml</e></l>
+		<l><m>application/xml-dtd</m><e>dtd</e></l>
+		<l><m>application/xslt+xml</m><e>xslt</e></l>
+		<l><m>application/xslt</m><e>xslt</e></l>
+		<l><m>application/zip</m><e>zip</e></l>
+		<l><m>audio/basic</m><e>au</e></l>
+		<l><m>audio/midi</m><e>mid</e></l>
+		<l><m>audio/midi</m><e>midi</e></l>
+		<l><m>audio/mpeg</m><e>mpa</e></l>
+		<l><m>audio/ulaw</m><e>au</e></l>
+		<l><m>audio/ulaw</m><e>snd</e></l>
+		<l><m>audio/x-aiff</m><e>aif</e></l>
+		<l><m>audio/x-mpegurl</m><e>m3u</e></l>
+		<l><m>audio/x-pn-realaudio</m><e>ram</e></l>
+		<l><m>audio/x-wav</m><e>wav</e></l>
+		<l><m>chemical/x-pdb</m><e>pdb</e></l>
+		<l><m>chemical/x-xyz</m><e>xyz</e></l>
+		<l><m>image/bmp</m><e>bmp</e></l>
+		<l><m>image/cgm</m><e>cgm</e></l>
+		<l><m>image/g3fax</m><e>fax</e></l>
+		<l><m>image/gif</m><e>gif</e></l>
+		<l><m>image/ief</m><e>ief</e></l>
+		<l><m>image/jpeg</m><e>jpg</e></l>
+		<l><m>image/jpeg</m><e>jpeg</e></l>
+		<l><m>image/png</m><e>png</e></l>
+		<l><m>image/svg+xml</m><e>svg</e></l>
+		<l><m>image/tiff</m><e>tif</e></l>
+		<l><m>image/tiff</m><e>tiff</e></l>
+		<l><m>image/vnd.djvu</m><e>djvu</e></l>
+		<l><m>image/vnd.wap.wbmp</m><e>wbmp</e></l>
+		<l><m>image/x-cmu-raster</m><e>ras</e></l>
+		<l><m>image/x-icon</m><e>ico</e></l>
+		<l><m>image/x-portable-anymap</m><e>pnm</e></l>
+		<l><m>image/x-portable-bitmap</m><e>pbm</e></l>
+		<l><m>image/x-portable-graymap</m><e>pgm</e></l>
+		<l><m>image/x-portable-pixmap</m><e>ppm</e></l>
+		<l><m>image/x-rgb</m><e>rgb</e></l>
+		<l><m>image/x-xbitmap</m><e>xbm</e></l>
+		<l><m>image/x-xpixmap</m><e>xpm</e></l>
+		<l><m>image/x-xwindowdump</m><e>xwd</e></l>
+		<l><m>model/iges</m><e>igs</e></l>
+		<l><m>model/mesh</m><e>msh</e></l>
+		<l><m>model/vrml</m><e>vrml</e></l>
+		<l><m>text/calendar</m><e>ics</e></l>
+		<l><m>text/css</m><e>css</e></l>
+		<l><m>text/html</m><e>html</e></l>
+		<l><m>text/plain</m><e>txt</e></l>
+		<l><m>text/richtext</m><e>rtx</e></l>
+		<l><m>text/rtf</m><e>rtf</e></l>
+		<l><m>text/sgml</m><e>sgml</e></l>
+		<l><m>text/tab-separated-values</m><e>tsv</e></l>
+		<l><m>text/vnd.wap.wml</m><e>wml</e></l>
+		<l><m>text/vnd.wap.wmlscript</m><e>wmls</e></l>
+		<l><m>text/x-setext</m><e>etx</e></l>
+		<l><m>text/xml</m><e>xml</e></l>
+		<l><m>video/dl</m><e>dl</e></l>
+		<l><m>video/fli</m><e>fli</e></l>
+		<l><m>video/gl</m><e>gl</e></l>
+		<l><m>video/mpeg</m><e>mpg</e></l>
+		<l><m>video/quicktime</m><e>mov</e></l>
+		<l><m>video/vnd.mpegurl</m><e>mxu</e></l>
+		<l><m>video/x-msvideo</m><e>avi</e></l>
+		<l><m>video/x-sgi-movie</m><e>movie</e></l>
+		<l><m>x-conference/x-cooltalk</m><e>ice</e></l>
+		<l><m>x-world/x-vrml</m><e>vrml</e></l>
+	</table>
 	<doc:function>
 		<doc:param name="URLwithFileExtension"><para>URL, aus dessen file extension der Mediatype ermittelt werden soll.</para></doc:param>
 		<para xml:id="mediatype-from-url_shortcut">Shortcut für <function>xsb:mediatype-from-url($URLwithFileExtension, true())</function>.</para>
@@ -1100,6 +1270,70 @@ habe ich sie hier eingefügt.-->
 	<xsl:function name="xsb:mediatype-from-url" as="xs:string">
 		<xsl:param name="URLwithFileExtension" as="xs:string?"/>
 		<xsl:sequence select="xsb:mediatype-from-url($URLwithFileExtension, true())"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:file-extension-from-mediatype     __________ -->
+	<doc:function>
+		<doc:param name="mediatype"><para>Mediatype, aus dem die Dateierweiterung ermittelt werden soll.</para></doc:param>
+		<doc:param name="warn-if-wrong-input"><para>Soll eine Warnung ausgegeben werden, wenn die Dateierweiterung nicht ermittelt werden kann?</para></doc:param>
+		<para xml:id="file-extension-from-mediatype">Diese Funktion ermittelt aus dem Mediatyp (auch <code>MIME-Typ</code> genannt) die Dateierweiterung.</para>
+		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
+		<para>Die Eingabe eines ungültigen Mediatypes gibt einen Leerstring und – in Abhängigkeit von <code>warn-if-wrong-input</code> – 
+			ggfs. eine Warnung zurück.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.41</revnumber>
+				<date>2012-02-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:file-extension-from-mediatype" as="xs:string">
+		<xsl:param name="mediatype" as="xs:string?"/>
+		<xsl:param name="warn-if-wrong-input" as="xs:boolean"/>
+		<xsl:variable name="temp" as="xs:string?" select="lower-case(normalize-space($mediatype) )"/>
+		<xsl:variable name="lines" as="element()*" select="document('')//intern:table[@xml:id eq 'mimetypes-extensions']/intern:l[intern:m eq $temp]"/>
+		<xsl:choose>
+			<xsl:when test="$mediatype eq '' "><xsl:sequence select=" '' "/></xsl:when>
+			<xsl:when test="$lines">
+				<xsl:sequence select="xs:string($lines[1]/intern:e)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select=" '' "/>
+				<xsl:if test="$warn-if-wrong-input">
+					<xsl:call-template name="xsb:internals.FunctionError">
+						<xsl:with-param name="message">Dateierweiterung für "<xsl:sequence select="$mediatype"/>" konnte nicht ermittelt werden, Leerstring zurückgegeben.</xsl:with-param>
+						<xsl:with-param name="level">WARN</xsl:with-param>
+						<xsl:with-param name="caller">xsb:file-extension-from-mediatype</xsl:with-param>
+					</xsl:call-template>
+				</xsl:if>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="mediatype"><para>Mediatype, aus dem die Dateierweiterung ermittelt werden soll.</para></doc:param>
+		<para xml:id="file-extension-from-mediatype_shortcut">Shortcut für <function>xsb:file-extension-from-mediatype($mediatype, true())</function>.</para>
+		<para></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.41</revnumber>
+				<date>2012-02-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:file-extension-from-mediatype" as="xs:string">
+		<xsl:param name="mediatype" as="xs:string?"/>
+		<xsl:sequence select="xsb:file-extension-from-mediatype($mediatype, true())"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->

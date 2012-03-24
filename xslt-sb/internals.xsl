@@ -1346,10 +1346,13 @@
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^PE 9.3')">Saxon-PE_9.3</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE 9.3')">Saxon-EE_9.3</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^HE 9.3')">Saxon-HE_9.3</xsl:when>
+			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^HE 9.4')">Saxon-HE_9.4</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and $java-available">Saxon-PE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and not($java-available)">Saxon-HE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE9.2')">Saxon-EE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.1') ) and not($is-schema-aware)">Saxon-B_9.1</xsl:when>
+			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2012 rel. 2') and ($java-available eq false() )">AltovaXML_CE_2012.2</xsl:when>
+			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2012 sp1') and ($java-available eq false() )">AltovaXML_CE_2012.sp1</xsl:when>
 			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2011 rel. 2 sp1') and ($java-available eq false() )">AltovaXML_CE_2011.2sp1</xsl:when>
 			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2010 rel. 3 sp1') and ($java-available eq true() )">AltovaXML_CE_2010.3sp1</xsl:when>
 			<xsl:otherwise>

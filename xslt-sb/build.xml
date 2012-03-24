@@ -55,7 +55,7 @@
 	<!--  -->
 	<!-- properties for the build infrastructure -->
 	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
-	<property name="dist.version" value="0.2.37" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.version" value="0.2.41" description="Versionsnummer des aktuellen Builds"/>
 	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
 	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
 	<property name="dist.google-doc" location="${dist.main}${file.separator}..${file.separator}..${file.separator}wiki" description="Zielverzeichnis für die Wiki-Seiten für Google Code"/>
@@ -125,13 +125,13 @@
 	<property name="tools.Saxon_6.path" location="${dist.tools}${file.separator}Saxon_6" description="Pfad zum Ordner von Saxon 6"/>
 	<property name="tools.Saxon_B.URL" value="http://sourceforge.net/projects/saxon/files/Saxon-B/9.1.0.8/saxonb9-1-0-8j.zip" description="Download-URL für Saxon-B"/>
 	<property name="tools.Saxon_B.path" location="${dist.tools}${file.separator}Saxon_B" description="Pfad zum Ordner von Saxon-B"/>
-	<property name="tools.Saxon_HE.URL" value="http://sourceforge.net/projects/saxon/files/Saxon-HE/9.3/saxonhe9-3-0-4j.zip" description="Download-URL für Saxon-HE"/>
+	<property name="tools.Saxon_HE.URL" value="http://downloads.sourceforge.net/project/saxon/Saxon-HE/9.4/SaxonHE9-4-0-3J.zip" description="Download-URL für Saxon-HE"/>
 	<property name="tools.Saxon_HE.path" location="${dist.tools}${file.separator}Saxon_HE" description="Pfad zum Ordner von Saxon-HE"/>
 	<property name="tools.Ant-Contrib.URL" value="http://sourceforge.net/projects/ant-contrib/files/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip" description="Download-URL für Ant-Contrib"/>
 	<property name="tools.Ant-Contrib.path" location="${dist.tools}${file.separator}ant-contrib" description="Pfad zum Ant-Contrib-Ordner"/>
 	<property name="tools.AltovaXML.URL" value="http://cdn.sw.altova.com/v2011r2sp1b/en/AltovaXMLCmu2011.exe" description="Download-URL für AltovaXML"/>
 	<!-- <property name="tools.AltovaXML.path" location="C:\Program Files (x86)\Altova\AltovaXML2011" description="Pfad zum Ordner von AltovaXML"/>-->
-	<property name="tools.AltovaXML.path" location="C:\Programme\Altova\AltovaXML2010" description="Pfad zum Ordner von AltovaXML"/>
+	<property name="tools.AltovaXML.path" location="C:\Programme\Altova\AltovaXML2012" description="Pfad zum Ordner von AltovaXML"/>
 	<property name="tools.AltovaXML.exe" location="${tools.AltovaXML.path}\AltovaXML.exe" description="Pfad zur EXE von AltovaXML"/>
 	<property name="tools.IntelSOAE.URL" value="http://software.intel.com/en-us/articles/download-intel-soa-expressway-xslt-20-processor/" description="Download-URL für Intel SOA Expressway XSLT 2.0 Processor"/>
 	<property name="tools.IntelSOAE.path" location="${dist.tools}${file.separator}Intel" description="Pfad zum Ordner von Intel SOA Expressway XSLT 2.0 Processor"/>

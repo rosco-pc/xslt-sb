@@ -15,6 +15,15 @@ gestartet werden.
 === Revision ===
 $Revision$, $Date$
 
+--- Änderungen in 0.2.41 ---
+* math.xsl: neue Funktionen zur Erzeugung von Zufallszahlen, damit im Zusammenhang neue statistische Funktionen (für Tests von Zufalsszahlen)
+** intern:linear-congruential-generator(), intern:random-seed(), intern:random-sequence(), xsb:random(), xsb:random-sequence()
+** xsb:is-in-range(), xsb:variance(), xsb:standard-deviation()
+* files.xsl:
+** xsb:mediatype-from-url() auf Tabelle umgestellt, dadurch werden mehr Typen erkannt
+** neue Funktion: xsb:file-extension-from-mediatype() auf der Grundlage der Tabelle
+* kleinere Maintenance-Fixes in verschiedenen Dateien
+
 --- Änderungen in 0.2.37 ---
 * asin(), acos(), atan(), atan2() in math.xsl ergänzt
 * dynamische Typung: Functions geben jetzt ihre Ergebnisse mit dem Typ ihres 

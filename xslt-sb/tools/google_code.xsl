@@ -387,10 +387,16 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="itemizedlist" mode="parse_docbook">
+	<xsl:template match="itemizedlist | orderedlist" mode="parse_docbook">
 		&crt;
 		<xsl:apply-templates mode="#current"/>
 		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="itemizedlist | orderedlist" mode="parse_docbook-line">
+		<xsl:apply-templates mode="#current"/>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -399,6 +405,35 @@
 		<xsl:text>* </xsl:text>
 		<xsl:apply-templates mode="#current"/>
 		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="itemizedlist/listitem" mode="parse_docbook-line">
+		<xsl:text>• </xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		<xsl:if test="following-sibling::listitem">
+			<xsl:text> </xsl:text>
+		</xsl:if>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="orderedlist/listitem" mode="parse_docbook">
+		<xsl:text># </xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="orderedlist/listitem" mode="parse_docbook-line">
+		<xsl:value-of select="1 + count(preceding-sibling::listitem)"/>
+		<xsl:text>) </xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		<xsl:if test="following-sibling::listitem">
+			<xsl:text> </xsl:text>
+		</xsl:if>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
