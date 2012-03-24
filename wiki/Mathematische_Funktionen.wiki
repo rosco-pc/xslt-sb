@@ -72,11 +72,13 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 ||   || *xsb:fibonacci-sequence*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet Fibonacci-Reihen ||
 || *H* || *intern:half-pi*() ||   || Pi/2 (Konstante) ||
 || *I* || *intern:iround*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen für interne Zwecke ||
+||   || *xsb:is-in-range*({{{value}}} _as_ {{{xs:anyAtomicType?}}}; {{{minInclusive}}} _as_ {{{xs:anyAtomicType}}}; {{{maxInclusive}}} _as_ {{{xs:anyAtomicType}}}) ||   || überprüft, ob ein numerischer Wert innerhalb eines Wertebereiches liegt ||
 ||   || *xsb:is-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `INF` ist ||
 ||   || *xsb:is-NaN*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `NaN` ist ||
 ||   || *xsb:is-negative-0*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-0.0e0` ist ||
 ||   || *xsb:is-negative-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-INF` ist ||
-|| *L* || *intern:ln10*() ||   || natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante) ||
+|| *L* || *intern:linear-congruential-generator*({{{length}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer+}}}) ||   || linearer Kongruenzgenerator, erzeugt Pseudo-Zufallszahlen ||
+||   || *intern:ln10*() ||   || natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante) ||
 ||   || *intern:ln2*() ||   || natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante) ||
 ||   || *intern:log*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den natürlichen Logarithmus ||
 ||   || *intern:log-iterator*({{{argm}}} _as_ {{{xs:anyAtomicType}}}; {{{argp}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des natürlichen Logarithmus ||
@@ -92,22 +94,30 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 ||   || *xsb:pi*() ||   || Konstante Pi mit 3,14159265358979323846264338327950288419716939937511… ||
 ||   || *xsb:pow*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Potenz basis^exponent ||
 || *R* || *intern:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
+||   || *intern:random-seed*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl ||
+||   || *intern:random-sequence*({{{length}}} _as_ {{{xs:integer}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
 ||   || *intern:root-iterator*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || iterative Wurzelberechnung nach dem Heron-Verfahren ||
 ||   || *intern:round*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB ||
 ||   || *xsb:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
+||   || *xsb:random*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl im Bereich zwischen 0 und 1 ||
+||   || *xsb:random-sequence*({{{length}}} _as_ {{{xs:anyAtomicType}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
 || *S* || *intern:sgn*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
 ||   || *intern:sin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
 ||   || *intern:sinus-iterator*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Sinus ||
 ||   || *intern:sqrt*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Quadratwurzel ||
 ||   || *intern:sqrt2*() ||   || Wurzel aus 2 mit 1,4142135623730950488… (Konstante) ||
+||   || *intern:standard-deviation*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
 ||   || *xsb:sgn*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
 ||   || *xsb:sin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
 ||   || *xsb:sqrt*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Quadratwurzel ||
+||   || *xsb:standard-deviation*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
 || *T* || *intern:tan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berchnet den Tangens ||
 ||   || *xsb:tan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berchnet den Tangens ||
 ||   || *xsb:tau*() ||   || Konstante Tau mit 2 {{{*}}} Pi = 6,28318530717958647692528676655900576839433879875021… ||
+|| *V* || *intern:variance*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz ||
+||   || *xsb:variance*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz ||
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 26.06.2011_
+_Seite erstellt am 24.03.2012_
 

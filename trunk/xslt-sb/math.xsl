@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-	Copyright (c) 2007-2011 Thomas Meinike, Stefan Krause
+	Copyright (c) 2007-2012 Thomas Meinike, Stefan Krause
 	
 	Permission is hereby granted, free of charge, to any person obtaining
 	a copy of this software and associated documentation files (the
@@ -2840,6 +2840,8 @@
 		<doc:param name="minInclusive"><para>untere Grenze</para></doc:param>
 		<doc:param name="maxInclusive"><para>obere Grenze</para></doc:param>
 		<para xml:id="is-in-range">überprüft, ob ein numerischer Wert innerhalb eines Wertebereiches liegt</para>
+		<para>Wenn <code>value</code> die Leersequenz, <code>NaN</code> oder kein numerischer Wert ist, wird <code>false()</code> zurückgegeben.
+			Zur Bequemlichkeit wird <code>value</code> auf xs:double gecastet, so dass auch (numerische) Strings verglichen werden können.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.40</revnumber>
@@ -2853,15 +2855,15 @@
 		</revhistory>
 	</doc:function>
 	<xsl:function name="xsb:is-in-range" as="xs:boolean">
-		<xsl:param name="value" as="xs:anyAtomicType"/>
+		<xsl:param name="value" as="xs:anyAtomicType?"/>
 		<xsl:param name="minInclusive" as="xs:anyAtomicType"/>
 		<xsl:param name="maxInclusive" as="xs:anyAtomicType"/>
 		<xsl:choose>
-			<xsl:when test="xsb:is-NaN($value)">
+			<xsl:when test="empty($value) or xsb:is-NaN($value) or not($value castable as xs:double)">
 				<xsl:sequence select="false()"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="if ( ($value ge $minInclusive) and ($value le $maxInclusive) ) then true() else false()"/>
+				<xsl:sequence select="if ( (xs:double($value) ge $minInclusive ) and (xs:double($value) le $maxInclusive) ) then true() else false()"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -2900,7 +2902,7 @@
 	<doc:function>
 		<doc:param name="sequence_of_numeric_values"><para>Eingabewerte, Sequenz von atomaren numerischen Werten</para></doc:param>
 		<para xml:id="variance_i">berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz</para>
-		<para>Der Algorithmus wird unter <link xlink:href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant">http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant</link> beschrieben</para>
+		<para>Der Algorithmus wird unter <link xlink:href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant">http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant</link> beschrieben.</para>
 		<revhistory>
 			<revhistory>
 				<revision>
@@ -2974,7 +2976,7 @@
 			</revhistory>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="intern:standard-deviation" as="xs:anyAtomicType">
+	<xsl:function name="intern:standard-deviation" as="xs:anyAtomicType" intern:solved="MissingTests">
 		<xsl:param name="sequence_of_numeric_values" as="xs:anyAtomicType+"/>
 		<xsl:sequence select="intern:sqrt(intern:variance($sequence_of_numeric_values) )"/>
 	</xsl:function>
@@ -3018,6 +3020,9 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
+	<!-- globale Variable mit dem Maximalwert für interne Zufallszahlen, ergibt sich aus dem Modulo oben -->
+	<!-- Achtung: wird auch in den Tests verwendet -->
+	<xsl:variable name="intern:random-max" as="xs:integer">4294967295</xsl:variable>
 	<!--  -->
 	<!--  -->
 	<!-- __________     intern:random-seed     __________ -->
@@ -3063,7 +3068,7 @@
 	<doc:function>
 		<doc:param name="length"><para>Anzahl der zu erzeugenden Zufallswerte</para></doc:param>
 		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
-		<para xml:id="random-sequence_i">erzeigt eine Sequenz von zufälligen Werten im Bereich von 0 bis 4294967295.</para>
+		<para xml:id="random-sequence_i">erzeugt eine Sequenz von zufälligen Werten im Bereich von 0 bis 4294967295.</para>
 		<revhistory>
 			<revhistory>
 				<revision>
@@ -3103,7 +3108,7 @@
 	</doc:function>
 	<xsl:function name="xsb:random" as="xs:decimal" intern:solved="MissingTests">
 		<xsl:param name="volatile" as="xs:anyAtomicType"/>
-		<xsl:sequence select="xs:decimal(intern:random-seed($volatile) div xs:decimal(4294967295) )"/>
+		<xsl:sequence select="xs:decimal(intern:random-seed($volatile) div xs:decimal($intern:random-max) )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -3127,7 +3132,7 @@
 	<xsl:function name="xsb:random-sequence" as="xs:decimal+" intern:solved="MissingTests">
 		<xsl:param name="length" as="xs:anyAtomicType"/>
 		<xsl:param name="volatile" as="xs:anyAtomicType"/>
-		<xsl:sequence select="for $i in intern:random-sequence($length, $volatile) return intern:round(xs:decimal(xs:decimal($i) div xs:decimal(4294967295) ) )"/>
+		<xsl:sequence select="for $i in intern:random-sequence($length, $volatile) return intern:round(xs:decimal(xs:decimal($i) div xs:decimal($intern:random-max) ) )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->

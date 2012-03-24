@@ -12,6 +12,15 @@ You can start a new project by copy & paste from pattern+includes.xsl.
 === Revision ===
 $Revision$, $Date$
 
+--- Changes in 0.2.41 ---
+* math.xsl: new functions for random numbers, new statistical functions (mainly for testing random numbers)
+** intern:linear-congruential-generator(), intern:random-seed(), intern:random-sequence(), xsb:random(), xsb:random-sequence()
+** xsb:is-in-range(), xsb:variance(), xsb:standard-deviation()
+* files.xsl:
+** xsb:mediatype-from-url() uses now a lookup-table, hereby recognition of much more mediatypes
+** new function: xsb:file-extension-from-mediatype() on base of the new lookup-table
+* minor maintenance-fixes in different files
+
 --- Changes in 0.2.37 ---
 * added asin(), acos(), atan(), atan2() to math.xsl
 * dynamic typing: functions return now results with the type of 

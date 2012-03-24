@@ -50,6 +50,8 @@
 ||   || *xsb:fibonacci-sequence*({{{n}}} _as_ {{{xs:integer}}}) || [Mathematische_Funktionen] || berechnet Fibonacci-Reihen ||
 ||   || *xsb:file-exists*({{{absoluteURL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`).  ||
 ||   || *xsb:file-exists*({{{relativeURL}}} _as_ {{{xs:string?}}}; {{{baseURL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`).  ||
+||   || *xsb:file-extension-from-mediatype*({{{mediatype}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) || [Dateien_und_Dateisystem] || Diese Funktion ermittelt aus dem Mediatyp (auch `MIME-Typ` genannt) die Dateierweiterung. ||
+||   || *xsb:file-extension-from-mediatype*({{{mediatype}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion ermittelt aus dem Mediatyp (auch `MIME-Typ` genannt) die Dateierweiterung. ||
 ||   || *xsb:fileExtention-from-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion ermittelt eine eventuelle Dateierweiterung aus einer URL. ||
 ||   || *xsb:fileName-and-fileExtention-from-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion gibt Dateinamen und Dateierweiterung aus einer URL zurück. ||
 ||   || *xsb:fileName-from-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion ermittelt einen Dateinamen ohne eventuelle Dateierweiterung aus einer URL. ||
@@ -62,6 +64,7 @@
 || *I* || *intern:iround*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || rundet Zahlen für interne Zwecke ||
 ||   || *xsb:is*({{{input1}}}; {{{input2}}}) || [Interne_Funktionen] || Diese Funktion vergleicht zwei beliebig getypte Werte und gibt bei Idendität `true()` zurück, d.h. der Vergleich ist eine Kombination aus `eq` und `deep-equal()` mit höherer Empfindlichkeit und einigen Sonderfällen. ||
 ||   || *xsb:is-absolute-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion überprüft, ob die angegebene URL absolut ist. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`).  ||
+||   || *xsb:is-in-range*({{{value}}} _as_ {{{xs:anyAtomicType?}}}; {{{minInclusive}}} _as_ {{{xs:anyAtomicType}}}; {{{maxInclusive}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || überprüft, ob ein numerischer Wert innerhalb eines Wertebereiches liegt ||
 ||   || *xsb:is-INF*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || testet, ob ein numerischer Wert `INF` ist ||
 ||   || *xsb:is-NaN*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || testet, ob ein numerischer Wert `NaN` ist ||
 ||   || *xsb:is-negative-0*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || testet, ob ein numerischer Wert `-0.0e0` ist ||
@@ -74,13 +77,14 @@
 ||   || *xsb:is-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion überprüft, ob der eingegebene String eine gültige URL gemäß `RFC 1808` ist. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`).  ||
 || *J* || *xsb:java-available*() || [Interne_Funktionen] || Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht. ||
 ||   || *xsb:java-available*() || [Interne_Funktionen] || Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht. ||
-|| *L* || *intern:ln10*() || [Mathematische_Funktionen] || natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante) ||
+|| *L* || *intern:linear-congruential-generator*({{{length}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer+}}}) || [Mathematische_Funktionen] || linearer Kongruenzgenerator, erzeugt Pseudo-Zufallszahlen ||
+||   || *intern:ln10*() || [Mathematische_Funktionen] || natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante) ||
 ||   || *intern:ln2*() || [Mathematische_Funktionen] || natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante) ||
 ||   || *intern:log*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berechnet den natürlichen Logarithmus ||
 ||   || *intern:log-iterator*({{{argm}}} _as_ {{{xs:anyAtomicType}}}; {{{argp}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}}) || [Mathematische_Funktionen] || Iteration zur Ermittlung des natürlichen Logarithmus ||
 ||   || *intern:log-m-iterator*({{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{m}}} _as_ {{{xs:integer}}}) || [Mathematische_Funktionen] || ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können. ||
 ||   || *intern:log10*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis ||
-||   || *intern:looks-like-a-function-call*({{{StringOfAFunctionCall}}} _as_ {{{xs:string?}}}) || [MetaFunktionen] || Diese Funktion überprüft eine String darauf, ob er wie der Aufruf einer XSLT-/Xpath-Funktion aussieht. Es werden nur zwei Dinge getestet:   per regulärem Ausdruck wird geprüft, ob der String aus einem Namen + einem geklammerten Ausdruck besteht und  per Simulation von `castable as xs:Name` wird geprüft, ob der vermeintliche Funktionsname ein XML-Name ist. Die Simulation ist notwendig, weil der Typ `xs:Name` nicht von einem Basic-XSLT-Prozessor unterstützt wird.     ||
+||   || *intern:looks-like-a-function-call*({{{StringOfAFunctionCall}}} _as_ {{{xs:string?}}}) || [MetaFunktionen] || Diese Funktion überprüft eine String darauf, ob er wie der Aufruf einer XSLT-/Xpath-Funktion aussieht. Es werden nur zwei Dinge getestet:   1) per regulärem Ausdruck wird geprüft, ob der String aus einem Namen + einem geklammerten Ausdruck besteht und   2) per Simulation von `castable as xs:Name` wird geprüft, ob der vermeintliche Funktionsname ein XML-Name ist. Die Simulation ist notwendig, weil der Typ `xs:Name` nicht von einem Basic-XSLT-Prozessor unterstützt wird.     ||
 ||   || *xsb:lax-string-compare*({{{input}}} _as_ {{{xs:string?}}}; {{{compare-to}}} _as_ {{{xs:string?}}}) || [Strings_und_Texte] || Verarbeitet Eingabe und Vergleichswert mit `normalize-space()` und `lower-case()` und vergleicht dann Eingabe und Vergleichswert. Dadurch werden kleine Differenzen ignoriert. ||
 ||   || *xsb:listed*({{{list}}} _as_ {{{xs:string?}}}; {{{item}}} _as_ {{{xs:string?}}}) || [Strings_und_Texte] || Diese Funktion überprüft, ob in einer Leerzeichen-getrennten Liste ein bestimmter Eintrag vorhanden ist. ||
 ||   || *xsb:log*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berechnet den natürlichen Logarithmus ||
@@ -104,12 +108,16 @@
 ||   || *xsb:pow*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berechnet die Potenz basis^exponent ||
 || *Q* || *xsb:query-from-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion gibt den Query-Teil von einer URL zurück. ||
 || *R* || *intern:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || rechnet Bogenmaß in Gradmaß um ||
+||   || *intern:random-seed*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || erzeugt eine Zufallszahl ||
+||   || *intern:random-sequence*({{{length}}} _as_ {{{xs:integer}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
 ||   || *intern:render-context-and-parent-as-string*({{{context}}} _as_ {{{node()?}}}) || [Interne_Funktionen] || Diese Funktion erzeugt aus dem Kontext eines Knotens und dessen Elternknoten einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. Kann z.B. zur Erläuterung bei Fehlermeldungen eingesetzt werden. ||
 ||   || *intern:render-level-to-pretext*({{{level}}} _as_ {{{xs:string?}}}) || [Interne_Funktionen] || Erzeugt zu den verbalen Fehlerwerten »`ALL`« > »`TRACE`« > »`DEBUG`« > »`INFO`« > »`WARN`« > »`ERROR`« > »`FATAL`« einen String, der bei ``xsb:internals.Error`` und verwandten Templates als `preText` verwendet werden kann. ||
 ||   || *intern:replace-nested-brackets-with-dashes*({{{input}}} _as_ {{{xs:string?}}}) || [MetaFunktionen] || Diese Funktion ist eine Hilfsfunktion, die nur existiert, weil rekursive Aufrufe notwendig waren. Details sind nicht interssant. ||
 ||   || *intern:root-iterator*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) || [Mathematische_Funktionen] || iterative Wurzelberechnung nach dem Heron-Verfahren ||
 ||   || *intern:round*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB ||
 ||   || *xsb:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || rechnet Bogenmaß in Gradmaß um ||
+||   || *xsb:random*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || erzeugt eine Zufallszahl im Bereich zwischen 0 und 1 ||
+||   || *xsb:random-sequence*({{{length}}} _as_ {{{xs:anyAtomicType}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
 ||   || *xsb:remove-query-and-fragment-from-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion entfernt Query- und Fragment-Teil von einer URL. ||
 ||   || *xsb:render-context-as-string*({{{context}}} _as_ {{{node()?}}}) || [Interne_Funktionen] || Diese Funktion erzeugt aus dem Kontext eines Knotens einen String in Form eines XPath-Ausdruckes, der diesen Knoten beschreibt. Kann z.B. zur Erläuterung bei Fehlermeldungen eingesetzt werden. ||
 ||   || *xsb:return-composed-string-if-not-empty*({{{string-before}}} _as_ {{{xs:string?}}}; {{{tested-string}}} _as_ {{{xs:string?}}}; {{{string-after}}} _as_ {{{xs:string?}}}) || [Strings_und_Texte] || Diese Funktion fügt vor und nach dem zu testenden String die übergebenen Strings ein, wenn der zu testende String nicht leer ist. ||
@@ -121,10 +129,12 @@
 ||   || *intern:sinus-iterator*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) || [Mathematische_Funktionen] || Iterator zur Berechnung des Sinus ||
 ||   || *intern:sqrt*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berechnet die Quadratwurzel ||
 ||   || *intern:sqrt2*() || [Mathematische_Funktionen] || Wurzel aus 2 mit 1,4142135623730950488… (Konstante) ||
+||   || *intern:standard-deviation*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) || [Mathematische_Funktionen] || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
 ||   || *xsb:scheme-from-url*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion gibt den scheme-Teil von einer absoluten URL zurück. ||
 ||   || *xsb:sgn*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
 ||   || *xsb:sin*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || Sinus-Funktion (Reihenentwicklung) ||
 ||   || *xsb:sqrt*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berechnet die Quadratwurzel ||
+||   || *xsb:standard-deviation*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) || [Mathematische_Funktionen] || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
 || *T* || *intern:tan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berchnet den Tangens ||
 ||   || *xsb:tan*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) || [Mathematische_Funktionen] || berchnet den Tangens ||
 ||   || *xsb:tau*() || [Mathematische_Funktionen] || Konstante Tau mit 2 {{{*}}} Pi = 6,28318530717958647692528676655900576839433879875021… ||
@@ -138,6 +148,8 @@
 ||   || *xsb:url-has-fragment*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion überprüft, ob die angegebene URL einen Fragment-Teil (eine Referenz auf einen Dokumenten-Teil nach einem Hash-Zeichen `#`) hat. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`).  ||
 ||   || *xsb:url-has-query*({{{URL}}} _as_ {{{xs:string?}}}) || [Dateien_und_Dateisystem] || Diese Funktion überprüft, ob die angegebene URL einen Query-Teil hat. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`).  ||
 || *V* || *intern:validate-test-node*({{{test-node}}} _as_ {{{element()}}}; {{{function-name}}} _as_ {{{xs:string}}}) || [Testen_von_Stylesheets] || Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funktionen wie `xsb:internals.test.function.withTestItem.BooleanResult`. ||
+||   || *intern:variance*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) || [Mathematische_Funktionen] || berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz ||
+||   || *xsb:variance*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) || [Mathematische_Funktionen] || berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz ||
 ||   || *xsb:vendor-hash*({{{product-name}}} _as_ {{{xs:string?}}}; {{{product-version}}} _as_ {{{xs:string?}}}; {{{java-available}}} _as_ {{{xs:boolean}}}; {{{is-schema-aware}}} _as_ {{{xs:boolean}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) || [Interne_Funktionen] || Diese Funktion ermittelt aus den übergebenen System-Parameter einen Hashwert, der z.B. für Vergleiche verwendet werden kann ||
 ||   || *xsb:vendor-hash*({{{product-name}}} _as_ {{{xs:string?}}}; {{{product-version}}} _as_ {{{xs:string?}}}; {{{java-available}}} _as_ {{{xs:boolean}}}; {{{is-schema-aware}}} _as_ {{{xs:boolean}}}) || [Interne_Funktionen] || Diese Funktion ermittelt aus den übergebenen System-Parameter einen Hashwert, der z.B. für Vergleiche verwendet werden kann ||
 
@@ -189,5 +201,5 @@
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 26.06.2011_
+_Seite erstellt am 24.03.2012_
 

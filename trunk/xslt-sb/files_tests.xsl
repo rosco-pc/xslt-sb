@@ -155,8 +155,8 @@
 			<value> </value>
 			<xsb:is-absolute-url>false</xsb:is-absolute-url>
 			<!-- AltovaXML stolpert hier über das automatische Strippen von Whitespace-Only-Nodes aus //test/value -->
-			<xsb:is-relative-url intern:skip="AltovaXML_CE_2010.3sp1 AltovaXML_CE_2011.2sp1">false</xsb:is-relative-url>
-			<xsb:is-url intern:skip="AltovaXML_CE_2010.3sp1 AltovaXML_CE_2011.2sp1">false</xsb:is-url>
+			<xsb:is-relative-url intern:skip="AltovaXML_CE_2010.3sp1 AltovaXML_CE_2011.2sp1 AltovaXML_CE_2012.sp1 AltovaXML_CE_2012.2">false</xsb:is-relative-url>
+			<xsb:is-url intern:skip="AltovaXML_CE_2010.3sp1 AltovaXML_CE_2011.2sp1 AltovaXML_CE_2012.sp1 AltovaXML_CE_2012.2">false</xsb:is-url>
 			<xsb:is-network-server-url>false</xsb:is-network-server-url>
 			<xsb:url-has-authority>false</xsb:url-has-authority>
 			<xsb:url-has-query>false</xsb:url-has-query>
@@ -1254,7 +1254,7 @@
 		</xsl:call-template>
 		<!-- wahr -->
 		<xsl:choose>
-			<xsl:when test="xsb:listed('Saxon-HE_9.2 Saxon-HE_9.3 AltovaXML_CE_2011.2sp1', $_internals.testing.current-vendor-hash)">
+			<xsl:when test="xsb:listed('Saxon-HE_9.2 Saxon-HE_9.3 Saxon-HE_9.4 AltovaXML_CE_2011.2sp1 AltovaXML_CE_2012.sp1 AltovaXML_CE_2012.2', $_internals.testing.current-vendor-hash)">
 				<xsl:call-template name="xsb:internals.testing.SkippedTests">
 					<xsl:with-param name="caller">xsb:file-exists()</xsl:with-param>
 				</xsl:call-template>
@@ -1321,8 +1321,6 @@
 					<xsl:with-param name="reference-value" select="false()"/>
 					</xsl:call-template>-->
 				
-				
-				
 				<!-- auskommentiert, weil intendiert mit Fehlermeldung und Abbruch -->
 				<!--<xsl:call-template name="xsb:internals.test.Function">
 					<xsl:with-param name="caller">xsb:file-exists('irgendeinekomischeDatei.nix')</xsl:with-param>
@@ -1334,55 +1332,107 @@
 					<xsl:with-param name="actual-value" select="xsb:file-exists( 'file://c:/io.sys' )"/>
 					<xsl:with-param name="reference-value" select="false()"/>
 					</xsl:call-template>-->
-				<!--  -->
-				<!--  -->
-				<!-- __________     xsb:mediatype-from-url()     __________ -->
-				<!-- null-wert -->
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( '', false() )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( '', false() )"/>
-					<xsl:with-param name="reference-value" select=" '' "/>
-				</xsl:call-template>
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( '' )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( '' )"/>
-					<xsl:with-param name="reference-value" select=" '' "/>
-				</xsl:call-template>
-				<!-- gültige Werte -->
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.txt', false() )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.txt', false() )"/>
-					<xsl:with-param name="reference-value" select=" 'text/plain' "/>
-				</xsl:call-template>
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.txt' )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.txt' )"/>
-					<xsl:with-param name="reference-value" select=" 'text/plain' "/>
-				</xsl:call-template>
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif', false() )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif', false() )"/>
-					<xsl:with-param name="reference-value" select=" 'image/gif' "/>
-				</xsl:call-template>
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif' )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif' )"/>
-					<xsl:with-param name="reference-value" select=" 'image/gif' "/>
-				</xsl:call-template>
-				<!-- ungültige Werte -->
-				<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.tx_', false() )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.tx_', false() )"/>
-					<xsl:with-param name="reference-value" select=" '' "/>
-				</xsl:call-template>
-				<!-- auskommentiert, um intendierte Fehlermeldung zu vermeiden -->
-				<!--<xsl:call-template name="xsb:internals.test.Function">
-					<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.tx_' )</xsl:with-param>
-					<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.tx_' )"/>
-					<xsl:with-param name="reference-value" select=" '' "/>
-					</xsl:call-template>-->
+				
 			</xsl:otherwise>
 		</xsl:choose>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:mediatype-from-url()     __________ -->
+		<!-- null-wert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( '', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( '', false() )"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( '' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( '' )"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<!-- gültige Werte -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.txt', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.txt', false() )"/>
+			<xsl:with-param name="reference-value" select=" 'text/plain' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.txt' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.txt' )"/>
+			<xsl:with-param name="reference-value" select=" 'text/plain' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.pdf' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.pdf' )"/>
+			<xsl:with-param name="reference-value" select=" 'application/pdf' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif', false() )"/>
+			<xsl:with-param name="reference-value" select=" 'image/gif' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'http://de.wikipedia.org/wiki/abc.gif' )"/>
+			<xsl:with-param name="reference-value" select=" 'image/gif' "/>
+		</xsl:call-template>
+		<!-- ungültige Werte -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.tx_', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.tx_', false() )"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<!-- auskommentiert, um intendierte Fehlermeldung zu vermeiden -->
+		<!--<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:mediatype-from-url( 'text.tx_' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:mediatype-from-url( 'text.tx_' )"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+			</xsl:call-template>-->
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:file-extension-from-mediatype()     __________ -->
+		<!-- null-wert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('', false() )"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('')"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<!-- gültige Werte -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('text/plain', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('text/plain', false() )"/>
+			<xsl:with-param name="reference-value" select=" 'txt' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('application/msword', false() )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('application/msword', false() )"/>
+			<xsl:with-param name="reference-value" select=" 'doc' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('application/xhtml+xml')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('application/xhtml+xml')"/>
+			<xsl:with-param name="reference-value" select=" 'xhtml' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('image/tiff')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('image/tiff')"/>
+			<xsl:with-param name="reference-value" select=" 'tif' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('image/jpeg')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('image/jpeg')"/>
+			<xsl:with-param name="reference-value" select=" 'jpg' "/>
+		</xsl:call-template>
+		<!-- auskommentiert, um intendierte Fehlermeldung zu vermeiden -->
+		<!--<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:file-extension-from-mediatype('image/gibtesnicht')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('image/gibtesnicht')"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>-->
 		<!--  -->
 		<!--  -->
 		<!--  -->
