@@ -94,7 +94,7 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 ||   || *xsb:pi*() ||   || Konstante Pi mit 3,14159265358979323846264338327950288419716939937511… ||
 ||   || *xsb:pow*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Potenz basis^exponent ||
 || *R* || *intern:rad-to-deg*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
-||   || *intern:random-seed*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl ||
+||   || *intern:random-seed*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl [http://www.expedimentum.org/example/xslt/xslt-sb/doc/math.html#random-seed …]||
 ||   || *intern:random-sequence*({{{length}}} _as_ {{{xs:integer}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
 ||   || *intern:root-iterator*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || iterative Wurzelberechnung nach dem Heron-Verfahren ||
 ||   || *intern:round*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB ||
@@ -120,4 +120,3 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
 _Seite erstellt am 24.03.2012_
-
