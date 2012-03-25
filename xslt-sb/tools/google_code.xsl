@@ -106,6 +106,10 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<xsl:param name="doc-url-praefix" as="xs:anyURI">http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/</xsl:param>
+	<!--  -->
+	<!--  -->
+	<!--  -->
 	<xsl:variable name="stylesheets" as="document-node()+" select=" document( (
 		'../files.xsl',
 		'../internals.logging.xsl',
@@ -224,7 +228,7 @@
 			<xsl:for-each-group select="$Funktionen" group-by="lower-case(substring(substring-after(@name, ':'), 1, 1) )">
 				<xsl:sort select="lower-case(substring-after(@name, ':') )" order="ascending"/>
 				<xsl:for-each select="current-group()">
-					<xsl:sort select="lower-case(@name)" order="ascending"/>
+					<xsl:sort select="lower-case(substring-after(@name, ':') )" order="ascending"/>
 					<xsl:call-template name="intern:table-row">
 						<xsl:with-param name="col1">
 							<xsl:if test="position() eq 1">
@@ -233,7 +237,11 @@
 						</xsl:with-param>
 						<xsl:with-param name="col2">
 							<xsl:text>*</xsl:text>
+							<xsl:text>[</xsl:text>
+							<xsl:value-of select="concat($doc-url-praefix, xsb:fileName-from-url(base-uri(root(.))), '.html', '#', substring-after(current()/@name, ':'))"/>
+							<xsl:text> </xsl:text>
 							<xsl:value-of select="@name"/>
+							<xsl:text>]</xsl:text>
 							<xsl:text>*</xsl:text>
 							<xsl:text>(</xsl:text>
 							<xsl:for-each select="xsl:param">
@@ -290,7 +298,7 @@
 			<xsl:for-each-group select="$Templates" group-by="lower-case(substring(substring-after(@name, ':'), 1, 1) )">
 				<xsl:sort select="lower-case(substring-after(@name, ':') )" order="ascending"/>
 				<xsl:for-each select="current-group()">
-					<xsl:sort select="lower-case(@name)" order="ascending"/>
+					<xsl:sort select="lower-case(substring-after(@name, ':') )" order="ascending"/>
 					<xsl:call-template name="intern:table-row">
 						<xsl:with-param name="col1">
 							<xsl:if test="position() eq 1">
@@ -299,7 +307,11 @@
 						</xsl:with-param>
 						<xsl:with-param name="col2">
 							<xsl:text>*</xsl:text>
+							<xsl:text>[</xsl:text>
+							<xsl:value-of select="concat($doc-url-praefix, xsb:fileName-from-url(base-uri(root(.))), '.html', '#', substring-after(current()/@name, ':'))"/>
+							<xsl:text> </xsl:text>
 							<xsl:value-of select="@name"/>
+							<xsl:text>]</xsl:text>
 							<xsl:text>*</xsl:text>
 							<xsl:if test="xsl:param">
 								<xsl:text> (</xsl:text>

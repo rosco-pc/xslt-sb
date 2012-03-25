@@ -3034,7 +3034,7 @@
 			1) vermindert ein möglichst zufälliger <code>volatile</code>-Wert die Vorhersagbarkeit des Ergebnisses und
 			2) verhindert ein wechselnder <code>volatile</code>-Wert bei wiederholten Aufrufen der Funktion, dass der XSLT-Prozessor die
 			unterschiedlichen Rückgabewerte qua Optimierung zu einem Wert vereinheitlicht.</para>
-		<para>Zum Hintergrund siehe <link xlink:href="http://www.nesterovsky-bros.com/weblog/2008/11/22/GeneratorFunctionInXslt20.aspx">http://www.nesterovsky-bros.com/weblog/2008/11/22/GeneratorFunctionInXslt20.aspx</link>.</para>
+		<para>Zum Hintergrund siehe <link xlink:href="http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/">http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/</link>.</para>
 		<revhistory>
 			<revhistory>
 				<revision>
@@ -3067,7 +3067,10 @@
 	<!-- __________     intern:random-sequence     __________ -->
 	<doc:function>
 		<doc:param name="length"><para>Anzahl der zu erzeugenden Zufallswerte</para></doc:param>
-		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte,
+			z.B. <code>string(.)</code>, <code>count(preceding-sibling::*)</code> o.ä., dabei ist es wichtig, das sich dieser Wert bei jedem
+			Aufruf der Funktion ändert, weniger der Wert oder die Länge. Zum Hintergrund siehe
+			<link xlink:href="http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/">http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/</link>.</para></doc:param>
 		<para xml:id="random-sequence_i">erzeugt eine Sequenz von zufälligen Werten im Bereich von 0 bis 4294967295.</para>
 		<revhistory>
 			<revhistory>
@@ -3092,7 +3095,10 @@
 	<!--  -->
 	<!-- __________     xsb:random     __________ -->
 	<doc:function>
-		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte,
+			z.B. <code>string(.)</code>, <code>count(preceding-sibling::*)</code> o.ä., dabei ist es wichtig, das sich dieser Wert bei jedem
+			Aufruf der Funktion ändert, weniger der Wert oder die Länge. Zum Hintergrund siehe
+			<link xlink:href="http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/">http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/</link>.</para></doc:param>
 		<para xml:id="random">erzeugt eine Zufallszahl im Bereich zwischen 0 und 1</para>
 		<revhistory>
 			<revision>
@@ -3115,7 +3121,10 @@
 	<!-- __________     xsb:random-sequence()     __________ -->
 	<doc:function>
 		<doc:param name="length"><para>Anzahl der zu erzeugenden Zufallswerte</para></doc:param>
-		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte</para></doc:param>
+		<doc:param name="volatile"><para>ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte,
+			z.B. <code>string(.)</code>, <code>count(preceding-sibling::*)</code> o.ä., dabei ist es wichtig, das sich dieser Wert bei jedem
+			Aufruf der Funktion ändert, weniger der Wert oder die Länge. Zum Hintergrund siehe
+			<link xlink:href="http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/">http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/</link>.</para></doc:param>
 		<para xml:id="random-sequence">erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1</para>
 		<revhistory>
 			<revision>
