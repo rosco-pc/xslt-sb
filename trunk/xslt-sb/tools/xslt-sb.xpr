@@ -10,6 +10,28 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="name">
+                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>google_code.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
+                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
+                                </field>
+                                <field name="type">
+                                    <String>XML</String>
+                                </field>
+                                <field name="url">
+                                    <String>../math.xsl</String>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="name">
                                     <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
                                 </field>
                                 <field name="type">
@@ -65,17 +87,6 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../math.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
                                     <String>Selbstest_mit_externen_Tests</String>
                                 </field>
                                 <field name="type">
@@ -116,17 +127,6 @@
                                 </field>
                                 <field name="url">
                                     <String>trash/test.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>google_code.xsl</String>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>

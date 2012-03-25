@@ -12,19 +12,19 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 = Liste der Funktionen =
 
-|| *F* || *xsb:force-cast-to-decimal*({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
-||   || *xsb:force-cast-to-decimal*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
-||   || *xsb:force-cast-to-integer*({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
-||   || *xsb:force-cast-to-integer*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
-|| *I* || *xsb:is-roman-numeral*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion überprüft, ob der angegebene String eine römische Zahl ist. ||
-|| *R* || *xsb:roman-number-char-to-integer*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion wandelt eine römische Ziffer (eines der Zeichen I, V, X, L, C, D, M) in einen Integer-Wert um. Ist das eingegebene Zeichen keine römische Ziffer oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
-||   || *xsb:roman-numeral-to-integer*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der eingegebene Wert keine römische Zahl oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
+|| *F* || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#force-cast-to-decimal xsb:force-cast-to-decimal]*({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
+||   || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#force-cast-to-decimal xsb:force-cast-to-decimal]*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:decimal`. ||
+||   || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#force-cast-to-integer xsb:force-cast-to-integer]*({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
+||   || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#force-cast-to-integer xsb:force-cast-to-integer]*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion erzwingt die Umwandlung eines Strings in `xs:integer`. ||
+|| *I* || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#is-roman-numeral xsb:is-roman-numeral]*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion überprüft, ob der angegebene String eine römische Zahl ist. ||
+|| *R* || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#roman-number-char-to-integer xsb:roman-number-char-to-integer]*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion wandelt eine römische Ziffer (eines der Zeichen I, V, X, L, C, D, M) in einen Integer-Wert um. Ist das eingegebene Zeichen keine römische Ziffer oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
+||   || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#roman-numeral-to-integer xsb:roman-numeral-to-integer]*({{{input}}} _as_ {{{xs:string?}}}) ||   || Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der eingegebene Wert keine römische Zahl oder leer, ist das Ergebnis 0. Die Funktion ist nicht case-sensitiv, d.h. Groß-/Kleinschreibung der Eingabe spielt keine Rolle. ||
 
 = Liste der benannten Templates =
 
-|| *N* || *intern:numbers.self-test* ||   || Dieses Template führt die lokalen Selbst-Tests aus. ||
+|| *N* || *[http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/numbers.html#numbers.self-test intern:numbers.self-test]* ||   || Dieses Template führt die lokalen Selbst-Tests aus. ||
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 24.03.2012_
+_Seite erstellt am 25.03.2012_
 
