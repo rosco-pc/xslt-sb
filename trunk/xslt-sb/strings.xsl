@@ -378,5 +378,119 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
+	<!-- __________     xsb:sort()     __________ -->
+	<doc:function>
+		<doc:param name="input-sequence"><para>Sequenz von atomic values</para></doc:param>
+		<para xml:id="sort">sortiert Sequenzen von atomic values</para>
+		<para>Die Implementierung folgt 1:1 dem <link xlink:href="http://www.w3.org/TR/2007/REC-xslt20-20070123/#d5e20205">XSLT&#160;Beispiel aus dem 2.0-Standard</link>.</para>
+		<para>Die Werte in der Sequnez müssen mit <code>lt</code> vergleichbar sein. Insbesondere scheitert das Sortieren von gemischten Sequenzen aus Strings und Zahlen.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-14</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:sort" as="xs:anyAtomicType*" intern:solved="EmptySequenceAllowed">
+		<xsl:param name="input-sequence" as="xs:anyAtomicType*"/>
+		<xsl:perform-sort select="$input-sequence">
+			<xsl:sort select="."/>
+		</xsl:perform-sort>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="input-sequence"><para>Sequenz von atomic values</para></doc:param>
+		<doc:param name="order"><para>»<code>ascending</code>«/»<code>descending</code>«</para></doc:param>
+		<para xml:id="sort_2">sortiert atomic values</para>
+		<para>Die Implementierung folgt dem <link xlink:href="http://www.w3.org/TR/2007/REC-xslt20-20070123/#d5e20205">XSLT&#160;Beispiel aus dem 2.0-Standard</link>.</para>
+		<para>Die Werte in der Sequnez müssen mit <code>lt</code> vergleichbar sein. Insbesondere scheitert das Sortieren von gemischten Sequenzen aus Strings und Zahlen.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-14</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:sort" as="xs:anyAtomicType*" intern:solved="EmptySequenceAllowed">
+		<xsl:param name="input-sequence" as="xs:anyAtomicType*"/>
+		<xsl:param name="order" as="xs:string"/>
+		<xsl:perform-sort select="$input-sequence">
+			<xsl:sort select="." order="{$order}"/>
+		</xsl:perform-sort>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:escape-for-regex()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>String, der escapt werden soll</para></doc:param>
+		<para xml:id="escape-for-regex">escapt Steuerungszeichen in regulären Ausdrücken mit »<code>\</code>«</para>
+		<para>Ist <code>input</code> die Leersequenz, wird der Leerstring zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-15</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:escape-for-regex" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:variable name="temp" as="xs:string*">
+			<xsl:analyze-string select="concat('', $input)" regex="[\\*.+?^$()\[\]{{}}|]">
+				<xsl:matching-substring>
+					<xsl:sequence select="'\', ."/>
+				</xsl:matching-substring>
+				<xsl:non-matching-substring>
+					<xsl:sequence select="."/>
+				</xsl:non-matching-substring>
+			</xsl:analyze-string>
+		</xsl:variable>
+		<xsl:sequence select="string-join($temp, '')"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:count-substrings()     __________ -->
+	<doc:function>
+		<doc:param name="string"><para>String, in dem gezählt wird</para></doc:param>
+		<doc:param name="regex"><para>regulärer Ausdruck, nach dem in <code>string</code> gesucht wird</para></doc:param>
+		<para xml:id="count-substrings">zählt das Vorkommen eines Suchstrings in einem String</para>
+		<para>Sind <code>string</code> oder <code>regex</code> Leerstring oder die Leersequenz, wird <code>0</code> zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-15</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:count-substrings" as="xs:integer">
+		<xsl:param name="string" as="xs:string?"/>
+		<xsl:param name="regex" as="xs:string?"/>
+		<xsl:choose>
+			<xsl:when test="normalize-space($string) and normalize-space($regex)">
+				<xsl:sequence select="count(tokenize($string, $regex)) - 1"/>
+			</xsl:when>
+			<xsl:otherwise>0</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
 	<!--  -->
 </xsl:stylesheet>
