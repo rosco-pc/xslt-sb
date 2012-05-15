@@ -474,10 +474,6 @@
 			<xsl:with-param name="actual-value" select="xsb:listed( 'item list item', 'item' )"/>
 			<xsl:with-param name="reference-value" select="true()"/>
 		</xsl:call-template>
-		
-		
-		
-		
 		<!--  -->
 		<!--  -->
 		<!-- __________     xsb:encode-for-id()     __________ -->
@@ -521,8 +517,459 @@
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
+		<!-- __________     xsb:sort()     __________ -->
+		<!-- Nullwert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(())"/>
+			<xsl:with-param name="reference-value" select="()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort('')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort('')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<!-- unverändert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(0)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort('1')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort('1')"/>
+			<xsl:with-param name="reference-value" select="'1'"/>
+		</xsl:call-template>
+		<!-- sortiert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((1, 2))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((1, 2))"/>
+			<xsl:with-param name="reference-value" select="(1, 2)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('1', '2'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('1', '2'))"/>
+			<xsl:with-param name="reference-value" select="('1', '2')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((2, 1))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((2, 1))"/>
+			<xsl:with-param name="reference-value" select="(1, 2)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('2', '1'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('2', '1'))"/>
+			<xsl:with-param name="reference-value" select="('1', '2')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((2, -1))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((2, -1))"/>
+			<xsl:with-param name="reference-value" select="(-1, 2)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('2', '-1'))</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('2', '-1'))"/>
+			<xsl:with-param name="reference-value" select="('-1', '2')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((xs:date('2012-05-14'), xs:date('2012-05-13') ) )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((xs:date('2012-05-14'), xs:date('2012-05-13') ) )"/>
+			<xsl:with-param name="reference-value" select="(xs:date('2012-05-13'), xs:date('2012-05-14') )"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:sort(sequence, order)     __________ -->
+		<!-- ascending -->
+		<!-- Nullwert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort('', 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort('', 'ascending')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<!-- unverändert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(0, 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(0, 'ascending')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort('1', 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort('1', 'ascending')"/>
+			<xsl:with-param name="reference-value" select="'1'"/>
+		</xsl:call-template>
+		<!-- sortiert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((1, 2), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((1, 2), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="(1, 2)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('1', '2'), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('1', '2'), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="('1', '2')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((2, 1), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((2, 1), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="(1, 2)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('2', '1'), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('2', '1'), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="('1', '2')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((2, -1), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((2, -1), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="(-1, 2)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('2', '-1'), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('2', '-1'), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="('-1', '2')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('aa', 'aä'), 'ascending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('aa', 'aä'), 'ascending')"/>
+			<xsl:with-param name="reference-value" select="('aa', 'aä')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((xs:date('2012-05-14'), xs:date('2012-05-13') ), 'ascending' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((xs:date('2012-05-14'), xs:date('2012-05-13') ), 'ascending' )"/>
+			<xsl:with-param name="reference-value" select="(xs:date('2012-05-13'), xs:date('2012-05-14') )"/>
+		</xsl:call-template>
+		<!--  -->
+		<!-- descending -->
+		<!--  -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((), 'descending')"/>
+			<xsl:with-param name="reference-value" select="()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort('', 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort('', 'descending')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<!-- unverändert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(0, 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(0, 'descending')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort('1', 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort('1', 'descending')"/>
+			<xsl:with-param name="reference-value" select="'1'"/>
+		</xsl:call-template>
+		<!-- sortiert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((1, 2), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((1, 2), 'descending')"/>
+			<xsl:with-param name="reference-value" select="(2, 1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('1', '2'), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('1', '2'), 'descending')"/>
+			<xsl:with-param name="reference-value" select="('2', '1')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((2, 1), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((2, 1), 'descending')"/>
+			<xsl:with-param name="reference-value" select="(2, 1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('2', '1'), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('2', '1'), 'descending')"/>
+			<xsl:with-param name="reference-value" select="('2', '1')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((2, -1), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((2, -1), 'descending')"/>
+			<xsl:with-param name="reference-value" select="(2, -1)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('2', '-1'), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('2', '-1'), 'descending')"/>
+			<xsl:with-param name="reference-value" select="('2', '-1')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort(('aa', 'aä'), 'descending')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort(('aa', 'aä'), 'descending')"/>
+			<xsl:with-param name="reference-value" select="('aä', 'aa')"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:sort((xs:date('2012-05-14'), xs:date('2012-05-13') ), 'descending' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:sort((xs:date('2012-05-14'), xs:date('2012-05-13') ), 'descending' )"/>
+			<xsl:with-param name="reference-value" select="(xs:date('2012-05-14'), xs:date('2012-05-13') )"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:is-absolute-url()     __________ -->
+		<!-- leer -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-regex(())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-regex(())"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-regex('')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-regex('')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<!--  -->
+		<!-- damit es etwas übersichtlicher wird -->
+		<xsl:variable name="seqURL-regexStrings" as="element()+" select="document( '' )//intern:testliste[@xml:id='regexStrings']/test"/>
+		<xsl:for-each select="$seqURL-regexStrings">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">xsb:escape-for-regex</xsl:with-param>
+				<xsl:with-param name="actual-value" select="xsb:escape-for-regex(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:count-substrings()     __________ -->
+		<!-- Leerwerte -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings((), ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings((), ())"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('', '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('', ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('', ())"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings((), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings((), '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('a', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('a', '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('', 'a')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<!--  -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('a', 'b')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('a', 'b')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('a', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('a', 'a')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('ab', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('ab', 'a')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('aa', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('aa', 'a')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('aba', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('aba', 'a')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('baab', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('baab', 'a')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('abcdefabc', 'def')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('abcdefabc', 'def')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('abc', '[ab]')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('abc', '[ab]')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-substrings('abc', '[ab]+')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-substrings('abc', '[ab]+')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
 		<!--  -->
 	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<intern:testliste xml:id="regexStrings">
+		<!-- empty sequence -->
+		<test>
+			<value/>
+			<xsb:escape-for-regex/>
+		</test>
+		<!-- ein Leerzeichen -->
+		<test>
+			<value> </value>
+			<xsb:escape-for-regex> </xsb:escape-for-regex>
+		</test>
+		<!-- unverändert -->
+		<test>
+			<value>a</value>
+			<xsb:escape-for-regex>a</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>abc</value>
+			<xsb:escape-for-regex>abc</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>abc def</value>
+			<xsb:escape-for-regex>abc def</xsb:escape-for-regex>
+		</test>
+		<!-- verändert: \*.+?^$(){}[]| -->
+		<test>
+			<value>\</value>
+			<xsb:escape-for-regex>\\</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>*</value>
+			<xsb:escape-for-regex>\*</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>.</value>
+			<xsb:escape-for-regex>\.</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>+</value>
+			<xsb:escape-for-regex>\+</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>?</value>
+			<xsb:escape-for-regex>\?</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>^</value>
+			<xsb:escape-for-regex>\^</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>$</value>
+			<xsb:escape-for-regex>\$</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>(</value>
+			<xsb:escape-for-regex>\(</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>)</value>
+			<xsb:escape-for-regex>\)</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>{</value>
+			<xsb:escape-for-regex>\{</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>}</value>
+			<xsb:escape-for-regex>\}</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>[</value>
+			<xsb:escape-for-regex>\[</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>]</value>
+			<xsb:escape-for-regex>\]</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>|</value>
+			<xsb:escape-for-regex>\|</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a\c</value>
+			<xsb:escape-for-regex>a\\c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a*c</value>
+			<xsb:escape-for-regex>a\*c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a.c</value>
+			<xsb:escape-for-regex>a\.c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a+c</value>
+			<xsb:escape-for-regex>a\+c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a?c</value>
+			<xsb:escape-for-regex>a\?c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a^c</value>
+			<xsb:escape-for-regex>a\^c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a$c</value>
+			<xsb:escape-for-regex>a\$c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a(c</value>
+			<xsb:escape-for-regex>a\(c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a)c</value>
+			<xsb:escape-for-regex>a\)c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a{c</value>
+			<xsb:escape-for-regex>a\{c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a}c</value>
+			<xsb:escape-for-regex>a\}c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a[c</value>
+			<xsb:escape-for-regex>a\[c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a]c</value>
+			<xsb:escape-for-regex>a\]c</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>a|c</value>
+			<xsb:escape-for-regex>a\|c</xsb:escape-for-regex>
+		</test>
+		<!-- ein paar Sonderfälle -->
+		<test>
+			<value>^.*$</value>
+			<xsb:escape-for-regex>\^\.\*\$</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>^.aaa*$</value>
+			<xsb:escape-for-regex>\^\.aaa\*\$</xsb:escape-for-regex>
+		</test>
+		<test>
+			<value>^.aaa*aaa$</value>
+			<xsb:escape-for-regex>\^\.aaa\*aaa\$</xsb:escape-for-regex>
+		</test>
+	</intern:testliste>
 	<!--  -->
 	<!--  -->
 	<!--  -->
