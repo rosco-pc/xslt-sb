@@ -734,83 +734,296 @@
 		</xsl:for-each>
 		<!--  -->
 		<!--  -->
-		<!-- __________     xsb:count-substrings()     __________ -->
+		<!-- __________     xsb:count-matches()     __________ -->
+		<!-- 2 Argumente -->
 		<!-- Leerwerte -->
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings((), ())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings((), ())"/>
+			<xsl:with-param name="caller">xsb:count-matches((), ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches((), ())"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('', '')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('', '')"/>
+			<xsl:with-param name="caller">xsb:count-matches('', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('', '')"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('', ())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('', ())"/>
+			<xsl:with-param name="caller">xsb:count-matches('', ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('', ())"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings((), '')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings((), '')"/>
+			<xsl:with-param name="caller">xsb:count-matches((), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches((), '')"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('a', '')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('a', '')"/>
+			<xsl:with-param name="caller">xsb:count-matches('a', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('a', '')"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('', 'a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('', 'a')"/>
+			<xsl:with-param name="caller">xsb:count-matches('', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('', 'a')"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<!--  -->
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('a', 'b')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('a', 'b')"/>
+			<xsl:with-param name="caller">xsb:count-matches('a', 'b')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('a', 'b')"/>
 			<xsl:with-param name="reference-value" select="0"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('a', 'a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('a', 'a')"/>
+			<xsl:with-param name="caller">xsb:count-matches('a', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('a', 'a')"/>
 			<xsl:with-param name="reference-value" select="1"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('ab', 'a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('ab', 'a')"/>
+			<xsl:with-param name="caller">xsb:count-matches('ab', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('ab', 'a')"/>
 			<xsl:with-param name="reference-value" select="1"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('aa', 'a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('aa', 'a')"/>
+			<xsl:with-param name="caller">xsb:count-matches('aa', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('aa', 'a')"/>
 			<xsl:with-param name="reference-value" select="2"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('aba', 'a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('aba', 'a')"/>
+			<xsl:with-param name="caller">xsb:count-matches('aba', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('aba', 'a')"/>
 			<xsl:with-param name="reference-value" select="2"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('baab', 'a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('baab', 'a')"/>
+			<xsl:with-param name="caller">xsb:count-matches('baab', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('baab', 'a')"/>
 			<xsl:with-param name="reference-value" select="2"/>
 		</xsl:call-template>
+		<!-- 3 Argumente -->
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('abcdefabc', 'def')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('abcdefabc', 'def')"/>
+			<xsl:with-param name="caller">xsb:count-matches((), (), ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches((), (), ())"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<!-- das folgende scheitert -->
+		<!--<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-matches('a', 'b', ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('a', 'b', ())"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>-->
+		<!-- Beispiele aus Dokumentation -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-matches('abc def abc', 'def')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('abc def abc', 'def')"/>
 			<xsl:with-param name="reference-value" select="1"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('abc', '[ab]')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('abc', '[ab]')"/>
+			<xsl:with-param name="caller">xsb:count-matches('abc def abc', 'abc')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('abc def abc', 'abc')"/>
 			<xsl:with-param name="reference-value" select="2"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:count-substrings('abc', '[ab]+')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:count-substrings('abc', '[ab]+')"/>
+			<xsl:with-param name="caller">xsb:count-matches('abc', '[ab]')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('abc', '[ab]')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-matches('abc', '[ab]+')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('abc', '[ab]+')"/>
 			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-matches('Aa', 'a', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('Aa', 'a', '')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:count-matches('Aa', 'a', 'i')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:count-matches('Aa', 'a', 'i')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:replace()     __________ -->
+		<!-- 3 Argumente -->
+		<!-- Leerwerte -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace((), '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace((), '', '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('', (), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('', (), '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('', '', ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('', '', ())"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace((), (), ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace((), (), ())"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', '', '')"/>
+			<xsl:with-param name="reference-value" select="'abc'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', (), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', (), '')"/>
+			<xsl:with-param name="reference-value" select="'abc'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', '', ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', '', ())"/>
+			<xsl:with-param name="reference-value" select="'abc'"/>
+		</xsl:call-template>
+		<!-- Ersetzung greift -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', 'a', 'x')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', 'a', 'x')"/>
+			<xsl:with-param name="reference-value" select="'xbc'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', ('a', 'b'), ('x', 'y') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', ('a', 'b'), ('x', 'y') )"/>
+			<xsl:with-param name="reference-value" select="'xyc'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', ('a', 'b'), ('x', '') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', ('a', 'b'), ('x', '') )"/>
+			<xsl:with-param name="reference-value" select="'xc'"/>
+		</xsl:call-template>
+		<!-- wenn replacement kürzer als pattern, dann löschen -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', ('a', 'b'), ('x') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', ('a', 'b'), ('x') )"/>
+			<xsl:with-param name="reference-value" select="'xc'"/>
+		</xsl:call-template>
+		<!-- Beispiele aus Dokumentation -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', 'Wolf') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', 'Wolf') )"/>
+			<xsl:with-param name="reference-value" select="'Fuchs Bär Wolf'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', '') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', '') )"/>
+			<xsl:with-param name="reference-value" select="'Fuchs Bär '"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs') )"/>
+			<xsl:with-param name="reference-value" select="'Fuchs Bär '"/>
+		</xsl:call-template>
+		<!-- 4 Argumente -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace((), (), (), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace((), (), (), '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', 'A', 'X', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', 'A', 'X', '')"/>
+			<xsl:with-param name="reference-value" select="'abc'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('abc', 'A', 'X', 'i')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('abc', 'A', 'X', 'i')"/>
+			<xsl:with-param name="reference-value" select="'Xbc'"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:index-of-first-match()     __________ -->
+		<!-- 2 Argumente -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('', '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match((), ())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match((), ())"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('', 'a')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match((), 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match((), 'a')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('a', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('a', '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('a', () )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('a', () )"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('a', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('a', 'a')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('aa', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('aa', 'a')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('aa', 'aa')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('aa', 'aa')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('ab', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('ab', 'a')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('ab', 'b')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('ab', 'b')"/>
+			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('ab', 'c')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('ab', 'c')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('aba', 'a')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('aba', 'a')"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<!-- 3 Argumente -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('', '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('', '', '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match((), (), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match((), (), '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('ABC', 'b', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('ABC', 'b', '')"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:index-of-first-match('ABC', 'b', 'i')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('ABC', 'b', 'i')"/>
+			<xsl:with-param name="reference-value" select="2"/>
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
