@@ -83,6 +83,12 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-15</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark>neue Funktionen: <code>xsb:sort()</code>, <code>xsb:escape-for-regex()</code>, <code>xsb:count-matches()</code></revremark>
+			</revision>
+			<revision>
 				<revnumber>0.2.0</revnumber>
 				<date>2011-05-14</date>
 				<authorinitials>Stf</authorinitials>
@@ -381,9 +387,7 @@
 	<!-- __________     xsb:sort()     __________ -->
 	<doc:function>
 		<doc:param name="input-sequence"><para>Sequenz von atomic values</para></doc:param>
-		<para xml:id="sort">sortiert Sequenzen von atomic values</para>
-		<para>Die Implementierung folgt 1:1 dem <link xlink:href="http://www.w3.org/TR/2007/REC-xslt20-20070123/#d5e20205">XSLT&#160;Beispiel aus dem 2.0-Standard</link>.</para>
-		<para>Die Werte in der Sequnez müssen mit <code>lt</code> vergleichbar sein. Insbesondere scheitert das Sortieren von gemischten Sequenzen aus Strings und Zahlen.</para>
+		<para xml:id="sort_2">Shortcut für <function><link linkend="sort">xsb:sort($input-sequence, 'ascending')</link></function></para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.47</revnumber>
@@ -398,14 +402,12 @@
 	</doc:function>
 	<xsl:function name="xsb:sort" as="xs:anyAtomicType*" intern:solved="EmptySequenceAllowed">
 		<xsl:param name="input-sequence" as="xs:anyAtomicType*"/>
-		<xsl:perform-sort select="$input-sequence">
-			<xsl:sort select="."/>
-		</xsl:perform-sort>
+		<xsl:sequence select="xsb:sort($input-sequence, 'ascending')"/>
 	</xsl:function>
 	<doc:function>
 		<doc:param name="input-sequence"><para>Sequenz von atomic values</para></doc:param>
 		<doc:param name="order"><para>»<code>ascending</code>«/»<code>descending</code>«</para></doc:param>
-		<para xml:id="sort_2">sortiert atomic values</para>
+		<para xml:id="sort">sortiert atomic values</para>
 		<para>Die Implementierung folgt dem <link xlink:href="http://www.w3.org/TR/2007/REC-xslt20-20070123/#d5e20205">XSLT&#160;Beispiel aus dem 2.0-Standard</link>.</para>
 		<para>Die Werte in der Sequnez müssen mit <code>lt</code> vergleichbar sein. Insbesondere scheitert das Sortieren von gemischten Sequenzen aus Strings und Zahlen.</para>
 		<revhistory>
@@ -434,6 +436,12 @@
 		<doc:param name="input"><para>String, der escapt werden soll</para></doc:param>
 		<para xml:id="escape-for-regex">escapt Steuerungszeichen in regulären Ausdrücken mit »<code>\</code>«</para>
 		<para>Ist <code>input</code> die Leersequenz, wird der Leerstring zurückgegeben.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>ToDo</function> ergibt »<code>ToDo</code>«</para>
+			</listitem>
+		</itemizedlist>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.47</revnumber>
@@ -462,12 +470,36 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!-- __________     xsb:count-substrings()     __________ -->
+	<!-- __________     xsb:count-matches()     __________ -->
 	<doc:function>
 		<doc:param name="string"><para>String, in dem gezählt wird</para></doc:param>
 		<doc:param name="regex"><para>regulärer Ausdruck, nach dem in <code>string</code> gesucht wird</para></doc:param>
-		<para xml:id="count-substrings">zählt das Vorkommen eines Suchstrings in einem String</para>
+		<doc:param name="flags"><para>flags analog zum <code>flags</code>-Parameter von <function>fn:matches()</function>
+			(siehe <emphasis>XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)</emphasis>,
+			<link xlink:href="http://www.w3.org/TR/xpath-functions/#flags">7.6.6.1 Flags</link>)</para></doc:param>
+		<para xml:id="count-matches">zählt das Vorkommen eines Suchstrings in einem String</para>
 		<para>Sind <code>string</code> oder <code>regex</code> Leerstring oder die Leersequenz, wird <code>0</code> zurückgegeben.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:count-matches('abc def abc', 'def')</function> ergibt »<code>1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:count-matches('abc def abc', 'abc')</function> ergibt »<code>2</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:count-matches('abc', '[ab]')</function> ergibt »<code>2</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:count-matches('abc', '[ab]+')</function> ergibt »<code>1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:count-matches('Aa', 'a', '')</function> ergibt »<code>1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:count-matches('Aa', 'a', 'i')</function> ergibt »<code>2</code>«</para>
+			</listitem>
+		</itemizedlist>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.47</revnumber>
@@ -480,15 +512,195 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="xsb:count-substrings" as="xs:integer">
+	<xsl:function name="xsb:count-matches" as="xs:integer">
 		<xsl:param name="string" as="xs:string?"/>
 		<xsl:param name="regex" as="xs:string?"/>
+		<xsl:param name="flags" as="xs:string?"/>
 		<xsl:choose>
 			<xsl:when test="normalize-space($string) and normalize-space($regex)">
-				<xsl:sequence select="count(tokenize($string, $regex)) - 1"/>
+				<xsl:sequence select="count(tokenize($string, $regex, $flags)) - 1"/>
 			</xsl:when>
 			<xsl:otherwise>0</xsl:otherwise>
 		</xsl:choose>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="string"><para>String, in dem gezählt wird</para></doc:param>
+		<doc:param name="regex"><para>regulärer Ausdruck, nach dem in <code>string</code> gesucht wird</para></doc:param>
+		<para xml:id="count-matches_2">Shortcut für <function><link linkend="count-matches">xsb:count-matches($string, $regex, '')</link></function></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-16</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:count-matches" as="xs:integer">
+		<xsl:param name="string" as="xs:string?"/>
+		<xsl:param name="regex" as="xs:string?"/>
+		<xsl:sequence select="xsb:count-matches($string, $regex, '')"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:replace()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>String, in dem ersetzt wird</para></doc:param>
+		<doc:param name="pattern"><para>Sequenz von regulären Ausdrücken, nach denen in <code>input</code> gesucht wird</para></doc:param>
+		<doc:param name="replacement"><para>Sequenz von Ersetzungstexten</para></doc:param>
+		<doc:param name="flags"><para>flags analog zum <code>flags</code>-Parameter von <function>fn:replace()</function>
+			(siehe <emphasis>XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)</emphasis>,
+			<link xlink:href="http://www.w3.org/TR/xpath-functions/#flags">7.6.6.1 Flags</link>)</para></doc:param>
+		<para xml:id="replace">führt wiederholtes paarweises Suchen und Ersetzen über einen String aus</para>
+		<para>Diese Funktion vereinfachte wiederholtes Suchen und Ersetzen über den selben String. Für jeden Wert aus der
+			<code>pattern</code>-Sequenz wird ein <function>fn:replace()</function> mit dem korrespondierenden Wert (selbe Position)
+			aus der <code>replacement</code>-Sequenz über den Eingabe-String ausgeführt. Sind in der <code>replacement</code>-Sequenz
+			weniger Werte als in der <code>pattern</code>-Sequenz, werden (analog zu <function>fn:translate()</function>) die Fundstellen der »überzähligen« Pattern gelöscht.</para>
+		<para>Ist <code>input</code> der Leerstring oder die Leersequenz, wird ein Leerstring zurückgegeben.</para>
+		<para>Ist <code>pattern</code> der Leerstring oder die Leersequenz, wird <code>input</code> unverändert zurückgegeben
+			(Ausnahme: Wenn <code>input</code> die Leersequenz ist, wird ein Leerstring zurückgegeben).</para>
+		<para>Ist <code>replacement</code> der Leerstring oder die Leersequenz, wird jeder Treffer von <code>pattern</code> in <code>input</code> gelöscht.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', 'Wolf') )</function> ergibt »<code>Fuchs Bär Wolf</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', '') )</function> ergibt »<code>Fuchs Bär </code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs') )</function> ergibt »<code>Fuchs Bär </code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-15</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:choose>
+			<xsl:when test="$pattern[1]">
+				<xsl:sequence select="xsb:replace(
+					replace($input, $pattern[1], $replacement[1], $flags),
+					$pattern[position() gt 1],
+					if ($replacement[2]) then $replacement[position() ge 2] else '',
+					$flags
+					)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="concat('', $input)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="input"><para>String, in dem ersetzt wird</para></doc:param>
+		<doc:param name="pattern"><para>Sequenz von regulären Ausdrücken, nach denen in <code>input</code> gesucht wird</para></doc:param>
+		<doc:param name="replacement"><para>Sequenz von Ersetzungstexten</para></doc:param>
+		<para xml:id="replace_3">Shortcut für <function><link linkend="replace">xsb:replace($input, $pattern, $replacement, '')</link></function></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-15</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:sequence select="xsb:replace($input, $pattern, $replacement, '')"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:index-of-first-match()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>String, in dem gesucht wird</para></doc:param>
+		<doc:param name="pattern"><para>Sequenz von regulären Ausdrücken, nach denen in <code>input</code> gesucht wird</para></doc:param>
+		<doc:param name="flags"><para>flags analog zum <code>flags</code>-Parameter von <function>fn:tokenize()</function>
+			(siehe <emphasis>XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)</emphasis>,
+			<link xlink:href="http://www.w3.org/TR/xpath-functions/#flags">7.6.6.1 Flags</link>)</para></doc:param>
+		<para xml:id="index-of-first-match">ermittelt die Position des ersten Auftretens von <code>pattern</code> in <code>string</code></para>
+		<para>Ist <code>string</code> oder <code>pattern</code> der Leerstring oder die Leersequenz, wird <code>0</code> zurückgegeben.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:index-of-first-match('ab', 'a')</function> ergibt »<code>1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:index-of-first-match('ab', 'b')</function> ergibt »<code>2</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:index-of-first-match('ab', 'c')</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:index-of-first-match('ABC', 'b', '')</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:index-of-first-match('ABC', 'b', 'i')</function> ergibt »<code>2</code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-16</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:index-of-first-match" as="xs:integer">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string?"/>
+		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:choose>
+			<xsl:when test="normalize-space($pattern) and matches($input, $pattern, $flags)">
+				<xsl:sequence select="string-length(tokenize($input, $pattern, $flags)[1]) + 1"/>
+			</xsl:when>
+			<xsl:otherwise>0</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<doc:function>
+		<doc:param name="input"><para>String, in dem gesucht wird</para></doc:param>
+		<doc:param name="pattern"><para>Sequenz von regulären Ausdrücken, nach denen in <code>input</code> gesucht wird</para></doc:param>
+		<para xml:id="index-of-first-match_2">Shortcut für <function><link linkend="index-of-first-match">xsb:index-of-first-match($input, $pattern, '')</link></function></para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.47</revnumber>
+				<date>2012-05-16</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:index-of-first-match" as="xs:integer">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string?"/>
+		<xsl:sequence select="xsb:index-of-first-match($input, $pattern, '')"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
