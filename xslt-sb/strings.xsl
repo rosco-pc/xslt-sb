@@ -83,6 +83,14 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.49</revnumber>
+				<date>2012-05-18</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark>neue Funktionen: <code>xsb:escape-for-replacement()</code>;
+					überarbeitet: <code>xsb:trim-left()</code>, <code>xsb:trim-right()</code>;
+					erweiter: <code>xsb:listed()</code></revremark>
+			</revision>
+			<revision>
 				<revnumber>0.2.47</revnumber>
 				<date>2012-05-15</date>
 				<authorinitials>Stf</authorinitials>
@@ -182,6 +190,15 @@
 		<para xml:id="trim-left">entfernt führenden Whitespace</para>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.48</revnumber>
+				<date>2012-05-18</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>auf <code>fn:replace()</code> umgeschrieben</para>
+				</revdescription>
+			</revision>
+			<revision>
 				<revnumber>0.53</revnumber>
 				<date>2009-10-25</date>
 				<authorinitials>Stf</authorinitials>
@@ -194,23 +211,24 @@
 	</doc:function>
 	<xsl:function name="xsb:trim-left" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:choose>
-			<xsl:when test="matches($input, '^\s' )">
-				<xsl:sequence select="xsb:trim-left(substring($input, 2, string-length($input)-1))"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<!-- erzwinge Ausgabe eines Leerstrings -->
-				<xsl:sequence select="concat('', $input)"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:sequence select="concat('', replace($input, '^\s+', '') )"></xsl:sequence>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!-- __________     xsb:trim-right()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>Eingabe (String)</para></doc:param>
-		<para xml:id="trim-right">entfernt Whitespace am Ende</para>
+		<para xml:id="trim-right">entfernt Whitespace am Ende eines Strigs</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.48</revnumber>
+				<date>2012-05-18</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>auf <code>fn:replace()</code> umgeschrieben</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.53</revnumber>
 				<date>2009-10-25</date>
@@ -224,15 +242,7 @@
 	</doc:function>
 	<xsl:function name="xsb:trim-right" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:choose>
-			<xsl:when test="matches($input, '^.*\s$' )">
-				<xsl:sequence select="xsb:trim-right(substring($input, 1, string-length($input)-1))"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<!-- erzwinge Ausgabe eines Leerstrings -->
-				<xsl:sequence select="concat('', $input)"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:sequence select="concat('', replace($input, '\s+$', '') )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -300,12 +310,21 @@
 	<!--  -->
 	<!-- __________     xsb:listed     __________ -->
 	<doc:function>
-		<doc:param name="list"><para>Leerzeichen-getrennte Liste von String-Token</para></doc:param>
+		<doc:param name="list"><para>Whitespace-getrennte Liste von String-Token</para></doc:param>
 		<doc:param name="item"><para>String-Token, auf dessen Existenz getestet werden soll</para></doc:param>
 		<para xml:id="listed">Diese Funktion überprüft, ob in einer Leerzeichen-getrennten Liste ein bestimmter Eintrag vorhanden ist.</para>
 		<para>Die Eingabe eines Leerstrings oder einer Leersequenz als Parameter <code>list</code> ergibt <code>false()</code>.</para>
 		<para>Die Eingabe eines Leerstrings oder einer Leersequenz als Parameter <code>item</code> ergibt <code>false()</code>.</para>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.48</revnumber>
+				<date>2012-05-18</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>neben Leerzeichen ist jetzt auch anderer Whitespace zum Trennen der String-Token erlaubt</para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.69</revnumber>
 				<date>2009-12-05</date>
@@ -321,7 +340,7 @@
 		<xsl:param name="list" as="xs:string?"/>
 		<xsl:param name="item" as="xs:string?"/>
 		<xsl:choose>
-			<xsl:when test="some $i in tokenize($list, ' ') satisfies ($i eq $item)"><xsl:sequence select="true()"/></xsl:when>
+			<xsl:when test="some $i in tokenize($list, '\s+') satisfies ($i eq $item)"><xsl:sequence select="true()"/></xsl:when>
 			<xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -386,7 +405,7 @@
 	<!--  -->
 	<!-- __________     xsb:sort()     __________ -->
 	<doc:function>
-		<doc:param name="input-sequence"><para>Sequenz von atomic values</para></doc:param>
+		<doc:param name="input-sequence"><para>Sequenz von <code>atomic values</code></para></doc:param>
 		<para xml:id="sort_2">Shortcut für <function><link linkend="sort">xsb:sort($input-sequence, 'ascending')</link></function></para>
 		<revhistory>
 			<revision>
@@ -405,11 +424,11 @@
 		<xsl:sequence select="xsb:sort($input-sequence, 'ascending')"/>
 	</xsl:function>
 	<doc:function>
-		<doc:param name="input-sequence"><para>Sequenz von atomic values</para></doc:param>
+		<doc:param name="input-sequence"><para>Sequenz von <code>atomic values</code></para></doc:param>
 		<doc:param name="order"><para>»<code>ascending</code>«/»<code>descending</code>«</para></doc:param>
-		<para xml:id="sort">sortiert atomic values</para>
+		<para xml:id="sort">sortiert <code>atomic values</code></para>
 		<para>Die Implementierung folgt dem <link xlink:href="http://www.w3.org/TR/2007/REC-xslt20-20070123/#d5e20205">XSLT&#160;Beispiel aus dem 2.0-Standard</link>.</para>
-		<para>Die Werte in der Sequnez müssen mit <code>lt</code> vergleichbar sein. Insbesondere scheitert das Sortieren von gemischten Sequenzen aus Strings und Zahlen.</para>
+		<para>Die Werte in der Sequenz müssen mit <code>lt</code> vergleichbar sein. Insbesondere scheitert das Sortieren von gemischten Sequenzen aus Strings und Zahlen.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.47</revnumber>
@@ -433,13 +452,16 @@
 	<!--  -->
 	<!-- __________     xsb:escape-for-regex()     __________ -->
 	<doc:function>
-		<doc:param name="input"><para>String, der escapt werden soll</para></doc:param>
-		<para xml:id="escape-for-regex">escapt Steuerungszeichen in regulären Ausdrücken mit »<code>\</code>«</para>
+		<doc:param name="input"><para>String, der escapet werden soll</para></doc:param>
+		<para xml:id="escape-for-regex">escapet Steuerzeichen in regulären Ausdrücken mit »<code>\</code>«</para>
 		<para>Ist <code>input</code> die Leersequenz, wird der Leerstring zurückgegeben.</para>
 		<itemizedlist>
 			<title>Beispiele</title>
 			<listitem>
-				<para><function>ToDo</function> ergibt »<code>ToDo</code>«</para>
+				<para><function>xsb:escape-for-regex('Jan.')</function> ergibt »<code>Jan\.</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:escape-for-regex('^1.200$')</function> ergibt »<code>\^1\.200\$</code>«</para>
 			</listitem>
 		</itemizedlist>
 		<revhistory>
@@ -456,17 +478,39 @@
 	</doc:function>
 	<xsl:function name="xsb:escape-for-regex" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:variable name="temp" as="xs:string*">
-			<xsl:analyze-string select="concat('', $input)" regex="[\\*.+?^$()\[\]{{}}|]">
-				<xsl:matching-substring>
-					<xsl:sequence select="'\', ."/>
-				</xsl:matching-substring>
-				<xsl:non-matching-substring>
-					<xsl:sequence select="."/>
-				</xsl:non-matching-substring>
-			</xsl:analyze-string>
-		</xsl:variable>
-		<xsl:sequence select="string-join($temp, '')"/>
+		<xsl:sequence select="concat('', replace($input, '[\\*.+?^$()\[\]{}|]', '\\$0') )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:escape-for-replacement()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>String, der escapet werden soll</para></doc:param>
+		<para xml:id="escape-for-replacement">escapet Steuerzeichen in Ersetzungstexten für <code>fn:replace()</code> (»<code>\</code>« und »<code>$</code>«) mit »<code>\</code>«</para>
+		<para>Ist <code>input</code> die Leersequenz, wird der Leerstring zurückgegeben.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:escape-for-replacement('$0')</function> ergibt »<code>\$0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:escape-for-replacement('\1.200$')</function> ergibt »<code>\\1.200\$</code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.48</revnumber>
+				<date>2012-05-17</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="alpha">Status: alpha</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:escape-for-replacement" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:sequence select="concat('', replace($input, '[\\$]', '\\$0') )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -562,17 +606,36 @@
 		<para>Ist <code>input</code> der Leerstring oder die Leersequenz, wird ein Leerstring zurückgegeben.</para>
 		<para>Ist <code>pattern</code> der Leerstring oder die Leersequenz, wird <code>input</code> unverändert zurückgegeben
 			(Ausnahme: Wenn <code>input</code> die Leersequenz ist, wird ein Leerstring zurückgegeben).</para>
-		<para>Ist <code>replacement</code> der Leerstring oder die Leersequenz, wird jeder Treffer von <code>pattern</code> in <code>input</code> gelöscht.</para>
+		<para>Ist <code>replacement</code> der Leerstring, wird jeder Treffer von <code>pattern</code> in <code>input</code> gelöscht.</para>
+		<para><emphasis render="bold">Achtung: </emphasis>eine Leersequenz innerhalb der pattern- oder replacement-Sequenz »verschwindet« aus der Sequenz,
+			d.h. die nachfolgenden Werte rücken eine Position nach vorn. Das wird in der Regel nicht der gewünschte Effekt sein!</para>
 		<itemizedlist>
 			<title>Beispiele</title>
 			<listitem>
-				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', 'Wolf') )</function> ergibt »<code>Fuchs Bär Wolf</code>«</para>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey', 'elephant') )</function> ergibt »<code>monkey Bär elephant</code>«</para>
 			</listitem>
 			<listitem>
-				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', '') )</function> ergibt »<code>Fuchs Bär </code>«</para>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey', '') )</function> ergibt »<code>monkey Bär </code>«</para>
 			</listitem>
 			<listitem>
-				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs') )</function> ergibt »<code>Fuchs Bär </code>«</para>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey') )</function> ergibt »<code>monkey Bär </code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Elefant', 'Löwe') , ('monkey', '', 'elephant', 'lion') )</function> ergibt »<code>monkey  elephant lion</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', '', 'Elefant') , ('monkey', '', 'elephant') )</function> ergibt
+					»<code>monkey Bär elephant</code>« (Leerstring in der pattern-Sequenz lässt Eingabe unverändert)</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', (), 'Elefant') , ('monkey', '', 'elephant') )</function> ergibt
+					»<code>monkey Bär </code>« (Leersequenz in der pattern-Sequenz »verschwindet«, dadurch wird <emphasis>Elefant</emphasis>
+					durch den Leerstring ersetzt)</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:replace('Affe Bär Elefant', ('Affe', 'Bär', 'Elefant') , ('monkey', (), 'elephant') )</function> ergibt
+					»<code>monkey elephant </code>« (Leersequenz in der replacement-Sequenz »verschwindet«, dadurch wird <emphasis>Bär</emphasis>
+					durch <emphasis>elephant</emphasis> ersetzt, und <emphasis>Elefant</emphasis> wird gelöscht.)</para>
 			</listitem>
 		</itemizedlist>
 		<revhistory>
@@ -593,12 +656,15 @@
 		<xsl:param name="replacement" as="xs:string*"/>
 		<xsl:param name="flags" as="xs:string?"/>
 		<xsl:choose>
-			<xsl:when test="$pattern[1]">
-				<xsl:sequence select="xsb:replace(
-					replace($input, $pattern[1], $replacement[1], $flags),
-					$pattern[position() gt 1],
-					if ($replacement[2]) then $replacement[position() ge 2] else '',
-					$flags
+			<xsl:when test="exists($pattern[1])">
+				<xsl:sequence select="
+					xsb:replace(
+						if (boolean($pattern[1]) )
+							then replace($input, $pattern[1], string($replacement[1]), $flags)
+							else $input,
+						$pattern[position() gt 1],
+						$replacement[position() gt 1],
+						$flags
 					)"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -634,7 +700,7 @@
 	<!-- __________     xsb:index-of-first-match()     __________ -->
 	<doc:function>
 		<doc:param name="input"><para>String, in dem gesucht wird</para></doc:param>
-		<doc:param name="pattern"><para>Sequenz von regulären Ausdrücken, nach denen in <code>input</code> gesucht wird</para></doc:param>
+		<doc:param name="pattern"><para>regulärer Ausdruck, nach dem in <code>input</code> gesucht wird</para></doc:param>
 		<doc:param name="flags"><para>flags analog zum <code>flags</code>-Parameter von <function>fn:tokenize()</function>
 			(siehe <emphasis>XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)</emphasis>,
 			<link xlink:href="http://www.w3.org/TR/xpath-functions/#flags">7.6.6.1 Flags</link>)</para></doc:param>
@@ -683,7 +749,7 @@
 	</xsl:function>
 	<doc:function>
 		<doc:param name="input"><para>String, in dem gesucht wird</para></doc:param>
-		<doc:param name="pattern"><para>Sequenz von regulären Ausdrücken, nach denen in <code>input</code> gesucht wird</para></doc:param>
+		<doc:param name="pattern"><para>regulärer Ausdruck, nach dem in <code>input</code> gesucht wird</para></doc:param>
 		<para xml:id="index-of-first-match_2">Shortcut für <function><link linkend="index-of-first-match">xsb:index-of-first-match($input, $pattern, '')</link></function></para>
 		<revhistory>
 			<revision>
