@@ -469,6 +469,16 @@
 			<xsl:with-param name="actual-value" select="xsb:listed( 'item list', 'item' )"/>
 			<xsl:with-param name="reference-value" select="true()"/>
 		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
+			<xsl:with-param name="caller">xsb:listed( 'item\tlist', 'item' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:listed( 'item	list', 'item' )"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:listed( 'item&#xA;list', 'item' )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:listed( 'item&#xA;list', 'item' )"/>
+			<xsl:with-param name="reference-value" select="true()"/>
+		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:listed( 'item list item', 'item' )</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:listed( 'item list item', 'item' )"/>
@@ -710,7 +720,7 @@
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
-		<!-- __________     xsb:is-absolute-url()     __________ -->
+		<!-- __________     xsb:escape-for-regex()     __________ -->
 		<!-- leer -->
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:escape-for-regex(())</xsl:with-param>
@@ -722,14 +732,58 @@
 			<xsl:with-param name="actual-value" select="xsb:escape-for-regex('')"/>
 			<xsl:with-param name="reference-value" select="''"/>
 		</xsl:call-template>
+		<!-- Beispiele aus der Doku -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-regex('Jan.')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-regex('Jan.')"/>
+			<xsl:with-param name="reference-value" select="'Jan\.'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-regex('^1.200$')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-regex('^1.200$')"/>
+			<xsl:with-param name="reference-value" select="'\^1\.200\$'"/>
+		</xsl:call-template>
 		<!--  -->
 		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="seqURL-regexStrings" as="element()+" select="document( '' )//intern:testliste[@xml:id='regexStrings']/test"/>
-		<xsl:for-each select="$seqURL-regexStrings">
+		<xsl:variable name="seq-regexStrings" as="element()+" select="document( '' )//intern:testliste[@xml:id='regexStrings']/test"/>
+		<xsl:for-each select="$seq-regexStrings">
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
 				<xsl:with-param name="test-node" select="."/>
 				<xsl:with-param name="function-name">xsb:escape-for-regex</xsl:with-param>
 				<xsl:with-param name="actual-value" select="xsb:escape-for-regex(./value/text())"/>
+			</xsl:call-template>
+		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:escape-for-replacement()     __________ -->
+		<!-- leer -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-replacement(())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-replacement(())"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-replacement('')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-replacement('')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<!-- Beispiele aus der Doku -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-replacement('$0')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-replacement('$0')"/>
+			<xsl:with-param name="reference-value" select="'\$0'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:escape-for-replacement('\1.200$')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:escape-for-replacement('\1.200$')"/>
+			<xsl:with-param name="reference-value" select="'\\1.200\$'"/>
+		</xsl:call-template>
+		<!--  -->
+		<xsl:for-each select="$seq-regexStrings">
+			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
+				<xsl:with-param name="test-node" select="."/>
+				<xsl:with-param name="function-name">xsb:escape-for-replacement</xsl:with-param>
+				<xsl:with-param name="actual-value" select="xsb:escape-for-replacement(./value/text())"/>
 			</xsl:call-template>
 		</xsl:for-each>
 		<!--  -->
@@ -888,14 +942,29 @@
 			<xsl:with-param name="reference-value" select="'xbc'"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('a b c', 'a', 'x')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('a b c', 'a', 'x')"/>
+			<xsl:with-param name="reference-value" select="'x b c'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:replace('abc', ('a', 'b'), ('x', 'y') )</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:replace('abc', ('a', 'b'), ('x', 'y') )"/>
 			<xsl:with-param name="reference-value" select="'xyc'"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('a b c', ('a', 'b'), ('x', 'y') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('a b c', ('a', 'b'), ('x', 'y') )"/>
+			<xsl:with-param name="reference-value" select="'x y c'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:replace('abc', ('a', 'b'), ('x', '') )</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:replace('abc', ('a', 'b'), ('x', '') )"/>
 			<xsl:with-param name="reference-value" select="'xc'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('a b c', ('a', 'b'), ('x', '') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('a b c', ('a', 'b'), ('x', '') )"/>
+			<xsl:with-param name="reference-value" select="'x  c'"/>
 		</xsl:call-template>
 		<!-- wenn replacement kürzer als pattern, dann löschen -->
 		<xsl:call-template name="xsb:internals.test.Function">
@@ -905,19 +974,52 @@
 		</xsl:call-template>
 		<!-- Beispiele aus Dokumentation -->
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', 'Wolf') )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', 'Wolf') )"/>
-			<xsl:with-param name="reference-value" select="'Fuchs Bär Wolf'"/>
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey', 'elephant') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey', 'elephant') )"/>
+			<xsl:with-param name="reference-value" select="'monkey Bär elephant'"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', '') )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs', '') )"/>
-			<xsl:with-param name="reference-value" select="'Fuchs Bär '"/>
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey', '') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey', '') )"/>
+			<xsl:with-param name="reference-value" select="'monkey Bär '"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs') )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('Fuchs') )"/>
-			<xsl:with-param name="reference-value" select="'Fuchs Bär '"/>
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Elefant') , ('monkey') )"/>
+			<xsl:with-param name="reference-value" select="'monkey Bär '"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Löwe', 'Elefant') , ('monkey', '', 'lion', 'elephant') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Löwe', 'Elefant') , ('monkey', '', 'lion', 'elephant') )"/>
+			<xsl:with-param name="reference-value" select="'monkey  elephant lion'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Elefant', 'Löwe') , ('monkey', '', 'elephant', 'lion') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Elefant', 'Löwe') , ('monkey', '', 'elephant', 'lion') )"/>
+			<xsl:with-param name="reference-value" select="'monkey  elephant lion'"/>
+		</xsl:call-template>
+		<!-- Leersequenz in replacement -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', 'Bär', 'Elefant') , ('monkey', (), 'elephant') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', 'Bär', 'Elefant') , ('monkey', (), 'elephant') )"/>
+			<xsl:with-param name="reference-value" select="'monkey elephant '"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Löwe', 'Elefant') , ('monkey', (), 'lion', 'elephant') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant Löwe', ('Affe', 'Bär', 'Löwe', 'Elefant') , ('monkey', (), 'lion', 'elephant') )"/>
+			<xsl:with-param name="reference-value" select="'monkey lion  elephant'"/>
+		</xsl:call-template>
+		<!-- Leerstring in pattern-Sequenz -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', '', 'Elefant') , ('monkey', '', 'elephant') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', '', 'Elefant') , ('monkey', '', 'elephant') )"/>
+			<xsl:with-param name="reference-value" select="'monkey Bär elephant'"/>
+		</xsl:call-template>
+		<!-- Leerequenz in pattern-Sequenz -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:replace('Affe Bär Elefant', ('Affe', (), 'Elefant') , ('monkey', '', 'elephant') )</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:replace('Affe Bär Elefant', ('Affe', (), 'Elefant') , ('monkey', '', 'elephant') )"/>
+			<xsl:with-param name="reference-value" select="'monkey Bär '"/>
 		</xsl:call-template>
 		<!-- 4 Argumente -->
 		<xsl:call-template name="xsb:internals.test.Function">
@@ -1037,150 +1139,196 @@
 		<test>
 			<value/>
 			<xsb:escape-for-regex/>
+			<xsb:escape-for-replacement/>
 		</test>
 		<!-- ein Leerzeichen -->
 		<test>
 			<value> </value>
 			<xsb:escape-for-regex> </xsb:escape-for-regex>
+			<xsb:escape-for-replacement> </xsb:escape-for-replacement>
 		</test>
 		<!-- unverändert -->
 		<test>
 			<value>a</value>
 			<xsb:escape-for-regex>a</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>abc</value>
 			<xsb:escape-for-regex>abc</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>abc</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>abc def</value>
 			<xsb:escape-for-regex>abc def</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>abc def</xsb:escape-for-replacement>
 		</test>
-		<!-- verändert: \*.+?^$(){}[]| -->
+		<!-- verändert: \*.+?^$(){}[]| bzw. \$-->
 		<test>
 			<value>\</value>
 			<xsb:escape-for-regex>\\</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>\\</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>*</value>
 			<xsb:escape-for-regex>\*</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>*</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>.</value>
 			<xsb:escape-for-regex>\.</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>.</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>+</value>
 			<xsb:escape-for-regex>\+</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>+</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>?</value>
 			<xsb:escape-for-regex>\?</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>?</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>^</value>
 			<xsb:escape-for-regex>\^</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>^</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>$</value>
 			<xsb:escape-for-regex>\$</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>\$</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>(</value>
 			<xsb:escape-for-regex>\(</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>(</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>)</value>
 			<xsb:escape-for-regex>\)</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>)</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>{</value>
 			<xsb:escape-for-regex>\{</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>{</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>}</value>
 			<xsb:escape-for-regex>\}</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>}</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>[</value>
 			<xsb:escape-for-regex>\[</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>[</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>]</value>
 			<xsb:escape-for-regex>\]</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>]</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>|</value>
 			<xsb:escape-for-regex>\|</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>|</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a\c</value>
 			<xsb:escape-for-regex>a\\c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a\\c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a*c</value>
 			<xsb:escape-for-regex>a\*c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a*c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a.c</value>
 			<xsb:escape-for-regex>a\.c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a.c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a+c</value>
 			<xsb:escape-for-regex>a\+c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a+c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a?c</value>
 			<xsb:escape-for-regex>a\?c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a?c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a^c</value>
 			<xsb:escape-for-regex>a\^c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a^c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a$c</value>
 			<xsb:escape-for-regex>a\$c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a\$c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a(c</value>
 			<xsb:escape-for-regex>a\(c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a(c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a)c</value>
 			<xsb:escape-for-regex>a\)c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a)c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a{c</value>
 			<xsb:escape-for-regex>a\{c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a{c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a}c</value>
 			<xsb:escape-for-regex>a\}c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a}c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a[c</value>
 			<xsb:escape-for-regex>a\[c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a[c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a]c</value>
 			<xsb:escape-for-regex>a\]c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a]c</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>a|c</value>
 			<xsb:escape-for-regex>a\|c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a|c</xsb:escape-for-replacement>
 		</test>
 		<!-- ein paar Sonderfälle -->
 		<test>
 			<value>^.*$</value>
 			<xsb:escape-for-regex>\^\.\*\$</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>^.*\$</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>^.aaa*$</value>
 			<xsb:escape-for-regex>\^\.aaa\*\$</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>^.aaa*\$</xsb:escape-for-replacement>
 		</test>
 		<test>
 			<value>^.aaa*aaa$</value>
 			<xsb:escape-for-regex>\^\.aaa\*aaa\$</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>^.aaa*aaa\$</xsb:escape-for-replacement>
+		</test>
+		<test>
+			<value>a$23c</value>
+			<xsb:escape-for-regex>a\$23c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a\$23c</xsb:escape-for-replacement>
+		</test>
+		<test>
+			<value>a\$23c</value>
+			<xsb:escape-for-regex>a\\\$23c</xsb:escape-for-regex>
+			<xsb:escape-for-replacement>a\\\$23c</xsb:escape-for-replacement>
 		</test>
 	</intern:testliste>
 	<!--  -->
