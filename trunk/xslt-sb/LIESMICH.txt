@@ -15,6 +15,22 @@ gestartet werden.
 === Revision ===
 $Revision$, $Date$
 
+--- Änderungen in 0.2.50 ---
+* einzelne Seiten für Funktionen und Templates im Goggle Code wiki
+* Neue Funktionen:
+** xsb:integer-to-hex()
+** xsb:twos-complement()
+** xsb:reverse-twos-complement()
+** xsb:hex-to-integer()
+** xsb:fill-left()
+** xsb:fill-right()
+** xsb:escape-for-replacement()
+** xsb:sort()
+** xsb:escape-for-regex()
+** xsb:count-matches()
+** xsb:decode-from-url()
+* Tests aus numbers.xsl in numbers_tests.xsl ausgegliedert
+
 --- Änderungen in 0.2.41 ---
 * math.xsl: neue Funktionen zur Erzeugung von Zufallszahlen, damit im Zusammenhang neue statistische Funktionen (für Tests von Zufalsszahlen)
 ** intern:linear-congruential-generator(), intern:random-seed(), intern:random-sequence(), xsb:random(), xsb:random-sequence()

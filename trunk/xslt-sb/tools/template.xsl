@@ -53,10 +53,16 @@
 	<doc:function>
 		<doc:param name="ToDo"><para>ToDo</para></doc:param>
 		<para xml:id="ToDo">Diese Funktion ToDo.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>ToDo</function> ergibt »<code>ToDo</code>«</para>
+			</listitem>
+		</itemizedlist>
 		<revhistory>
 			<revision>
 				<revnumber>ToDo</revnumber>
-				<date>2011-ToDo-ToDo</date>
+				<date>2012-ToDo-ToDo</date>
 				<authorinitials>ToDo</authorinitials>
 				<revdescription>
 					<para conformance="ToDo">Status: ToDo</para>
@@ -130,11 +136,13 @@
 		<!--  -->
 		<!--  -->
 		<!-- __________     xsb:ToDo()     __________ -->
-		<!--<xsl:call-template name="xsb:internals.test.Function">
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">xsb:ToDo('ToDo')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:ToDo('ToDo')"/>
 			<xsl:with-param name="reference-value" select="ToDo"/>
-		</xsl:call-template>-->
+		</xsl:call-template>
+		-->
 		<!--  -->
 		<!--  -->
 		<!--  -->

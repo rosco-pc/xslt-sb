@@ -37,6 +37,7 @@
 	xmlns:doc="http://www.CraneSoftwrights.com/ns/xslstyle"
 	xmlns:docv="http://www.CraneSoftwrights.com/ns/xslstyle/vocabulary"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:saxon="http://saxon.sf.net/"
 	exclude-result-prefixes="doc docv"
 	>
 	<!--  -->
@@ -102,11 +103,11 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<xsl:output method="xml" encoding="UTF-8" name="wiki-doku" omit-xml-declaration="yes" exclude-result-prefixes="#all"/>
+	<!--  -->
+	<!--  -->
+	<!--  -->
 	<xsl:param name="wiki-verzeichnis" as="xs:anyURI">../../wiki/</xsl:param>
-	<!--  -->
-	<!--  -->
-	<!--  -->
-	<xsl:param name="doc-url-praefix" as="xs:anyURI">http://xslt-sb.googlecode.com/svn/trunk/xslt-sb/doc/</xsl:param>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -138,6 +139,10 @@
 				<xsl:with-param name="stylesheet" select="."></xsl:with-param>
 			</xsl:call-template>
 		</xsl:for-each>
+		<!-- dann die Seiten für die einzelnen Templates/Funktionen -->
+		<xsl:call-template name="intern:process-top-level-items">
+			<xsl:with-param name="stylesheets" select="$stylesheets"/>
+		</xsl:call-template>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -178,6 +183,76 @@
 			<xsl:call-template name="intern:list-templates">
 				<xsl:with-param name="stylesheet" select="$stylesheet"/>
 			</xsl:call-template>
+			<xsl:call-template name="intern:make-footer"/>
+		</xsl:result-document>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template name="intern:process-top-level-items">
+		<!-- weil Funktionen mit identischem Namen über mehrere Stylesheets verteilt sein können -->
+		<xsl:param name="stylesheets" as="document-node()+" required="yes"/>
+		<xsl:for-each-group select="$stylesheets//xsl:function" group-by="@name">
+			<xsl:call-template name="intern:process-single-top-level-item"/>
+		</xsl:for-each-group>
+		<xsl:for-each-group select="$stylesheets//xsl:template[@name]" group-by="@name">
+			<xsl:call-template name="intern:process-single-top-level-item"/>
+		</xsl:for-each-group>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template name="intern:process-single-top-level-item">
+		<!-- Kontext ist ein xsl:function oder xsl:template -->
+		<xsl:variable name="wikifile" as="xs:anyURI" select="resolve-uri(concat($wiki-verzeichnis, intern:name-to-wikilink(@name), '.wiki' ), base-uri(.) )"/>
+		<xsl:call-template name="xsb:internals.Error">
+			<xsl:with-param name="show-context" select="false()"/>
+			<xsl:with-param name="level">INFO</xsl:with-param>
+			<xsl:with-param name="message">Schreibe <xsl:sequence select="$wikifile"/></xsl:with-param>
+		</xsl:call-template>
+		<xsl:result-document href="{$wikifile}" method="text" encoding="UTF-8">
+			<xsl:text>#summary Details für `</xsl:text>
+			<xsl:value-of select="@name"/>
+			<xsl:if test="self::xsl:function">
+				<xsl:text>()</xsl:text>
+			</xsl:if>
+			<xsl:text>`</xsl:text>&crt;
+			<xsl:text>#labels Dokumentation</xsl:text>&crt;
+			<xsl:text>#sidebar TableOfContents</xsl:text>&crt;
+			&crt;
+			<xsl:for-each select="current-group()">
+				<xsl:text>=</xsl:text>
+					<xsl:call-template name="intern:make-top-level-item-string">
+						<xsl:with-param name="link-name" select="false()"/>
+						<xsl:with-param name="bold-name" select="false()"/>
+					</xsl:call-template>
+				<xsl:text>=</xsl:text>&crt;
+				&crt;
+				<xsl:text>Stylesheet: `</xsl:text>
+				<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri(.) )"/>
+				<xsl:text>`</xsl:text>&crt;
+				&crt;
+				<xsl:variable name="doc" as="element()?" select="preceding-sibling::doc:function[1]"/>
+				<xsl:if test="$doc/doc:param">
+					<xsl:text>==Parameter==</xsl:text>&crt;
+					<xsl:apply-templates select="$doc/doc:param" mode="parse_docbook"/>
+					&crt;
+				</xsl:if>
+				<xsl:text>==Beschreibung==</xsl:text>&crt;
+				<xsl:apply-templates select="$doc/*[not(self::doc:param)]" mode="parse_docbook"/>
+				<xsl:text>==Implementierung==</xsl:text>&crt;
+				<xsl:text>{{{</xsl:text>&crt;
+				<xsl:value-of select="saxon:serialize(., 'wiki-doku')"/>
+				&crt;
+				<xsl:text>}}}</xsl:text>
+				&crt;
+				&crt;
+				<xsl:text>----</xsl:text>
+				&crt;
+			</xsl:for-each>
+			&crt;
+			<xsl:text>_Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._</xsl:text>
+			&crt;
 			<xsl:call-template name="intern:make-footer"/>
 		</xsl:result-document>
 	</xsl:template>
@@ -225,8 +300,10 @@
 			&crt;
 			<xsl:text>= Liste der Funktionen =</xsl:text>&crt;
 			&crt;
+			<!-- Gruppe: gleicher Anfangsbuchstabe -->
 			<xsl:for-each-group select="$Funktionen" group-by="lower-case(substring(substring-after(@name, ':'), 1, 1) )">
 				<xsl:sort select="lower-case(substring-after(@name, ':') )" order="ascending"/>
+				<!-- Item: Funktion -->
 				<xsl:for-each select="current-group()">
 					<xsl:sort select="lower-case(substring-after(@name, ':') )" order="ascending"/>
 					<xsl:call-template name="intern:table-row">
@@ -236,32 +313,14 @@
 							</xsl:if>
 						</xsl:with-param>
 						<xsl:with-param name="col2">
-							<xsl:text>*</xsl:text>
-							<xsl:text>[</xsl:text>
-							<xsl:value-of select="concat($doc-url-praefix, xsb:fileName-from-url(base-uri(root(.))), '.html', '#', substring-after(current()/@name, ':'))"/>
-							<xsl:text> </xsl:text>
-							<xsl:value-of select="@name"/>
-							<xsl:text>]</xsl:text>
-							<xsl:text>*</xsl:text>
-							<xsl:text>(</xsl:text>
-							<xsl:for-each select="xsl:param">
-								<xsl:text>{{{</xsl:text>
-								<xsl:value-of select="@name"/>
-								<xsl:text>}}}</xsl:text>
-								<xsl:if test="normalize-space(@as)">
-									<xsl:text> _as_ {{{</xsl:text>
-									<xsl:value-of select="normalize-space(@as)"/>
-									<xsl:text>}}}</xsl:text>
-								</xsl:if>
-								<xsl:if test="position() lt last()">
-									<xsl:text>; </xsl:text>
-								</xsl:if>
-							</xsl:for-each>
-							<xsl:text>)</xsl:text>
+							<xsl:call-template name="intern:make-top-level-item-string">
+								<xsl:with-param name="bold-name" select="true()"/>
+								<xsl:with-param name="link-name" select="true()"/>
+							</xsl:call-template>
 						</xsl:with-param>
 						<xsl:with-param name="col3">
 							<xsl:if test="$make-links">
-								<xsl:value-of select="intern:wikilink(base-uri(.) )"/>
+								<xsl:value-of select="intern:URI-to-wikilink(base-uri(.) )"/>
 							</xsl:if>
 						</xsl:with-param>
 						<xsl:with-param name="col4">
@@ -306,38 +365,14 @@
 							</xsl:if>
 						</xsl:with-param>
 						<xsl:with-param name="col2">
-							<xsl:text>*</xsl:text>
-							<xsl:text>[</xsl:text>
-							<xsl:value-of select="concat($doc-url-praefix, xsb:fileName-from-url(base-uri(root(.))), '.html', '#', substring-after(current()/@name, ':'))"/>
-							<xsl:text> </xsl:text>
-							<xsl:value-of select="@name"/>
-							<xsl:text>]</xsl:text>
-							<xsl:text>*</xsl:text>
-							<xsl:if test="xsl:param">
-								<xsl:text> (</xsl:text>
-								<xsl:for-each select="xsl:param">
-									<xsl:choose>
-										<xsl:when test="@required eq 'yes' ">_required_ </xsl:when>
-										<xsl:otherwise>_optional_ </xsl:otherwise>
-									</xsl:choose>
-									<xsl:text>{{{</xsl:text>
-									<xsl:value-of select="@name"/>
-									<xsl:text>}}}</xsl:text>
-									<xsl:if test="normalize-space(@as)">
-										<xsl:text> _as_ {{{</xsl:text>
-										<xsl:value-of select="normalize-space(@as)"/>
-										<xsl:text>}}}</xsl:text>
-									</xsl:if>
-									<xsl:if test="position() lt last()">
-										<xsl:text>; </xsl:text>
-									</xsl:if>
-								</xsl:for-each>
-								<xsl:text>)</xsl:text>
-							</xsl:if>
+							<xsl:call-template name="intern:make-top-level-item-string">
+								<xsl:with-param name="bold-name" select="true()"/>
+								<xsl:with-param name="link-name" select="true()"/>
+							</xsl:call-template>
 						</xsl:with-param>
 						<xsl:with-param name="col3">
 							<xsl:if test="$make-links">
-								<xsl:value-of select="intern:wikilink(base-uri(.) )"/>
+								<xsl:value-of select="intern:URI-to-wikilink(base-uri(.) )"/>
 							</xsl:if>
 						</xsl:with-param>
 						<xsl:with-param name="col4">
@@ -346,6 +381,54 @@
 					</xsl:call-template>
 				</xsl:for-each>
 			</xsl:for-each-group>
+		</xsl:if>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template name="intern:make-top-level-item-string">
+		<!-- Kontext ist eine einzelne xsl:function oder ein einzelnes xsl:template -->
+		<xsl:param name="bold-name" as="xs:boolean" required="yes"/>
+		<xsl:param name="link-name" as="xs:boolean" required="yes"/>
+		<xsl:if test="$bold-name">
+			<xsl:text>*</xsl:text>
+		</xsl:if>
+		<xsl:if test="$link-name">
+			<xsl:text>[</xsl:text>
+			<xsl:value-of select="intern:name-to-wikilink(@name)"/>
+			<xsl:text> </xsl:text>
+		</xsl:if>
+		<xsl:value-of select="@name"/>
+		<xsl:if test="$link-name">
+			<xsl:text>]</xsl:text>
+		</xsl:if>
+		<xsl:if test="$bold-name">
+			<xsl:text>*</xsl:text>
+		</xsl:if>
+		<xsl:if test="xsl:param">
+			<xsl:if test="self::xsl:template">
+				<xsl:text> </xsl:text>
+			</xsl:if>
+			<xsl:text>(</xsl:text>
+			<xsl:for-each select="xsl:param">
+				<xsl:choose>
+					<xsl:when test="parent::xsl:function"><!-- bei Funktionen sind alle Parameter zwingend --></xsl:when>
+					<xsl:when test="(@required eq 'yes')">_required_ </xsl:when>
+					<xsl:otherwise>_optional_ </xsl:otherwise>
+				</xsl:choose>
+				<xsl:text>{{{</xsl:text>
+				<xsl:value-of select="@name"/>
+				<xsl:text>}}}</xsl:text>
+				<xsl:if test="normalize-space(@as)">
+					<xsl:text> _as_ {{{</xsl:text>
+					<xsl:value-of select="normalize-space(@as)"/>
+					<xsl:text>}}}</xsl:text>
+				</xsl:if>
+				<xsl:if test="position() lt last()">
+					<xsl:text>; </xsl:text>
+				</xsl:if>
+			</xsl:for-each>
+			<xsl:text>)</xsl:text>
 		</xsl:if>
 	</xsl:template>
 	<!--  -->
@@ -399,22 +482,40 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<xsl:template match="para" mode="parse_docbook-line">
+		<xsl:apply-templates mode="#current"/>
+		<xsl:if test="following-sibling::para">
+			<xsl:text>; </xsl:text>
+		</xsl:if>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
 	<xsl:template match="itemizedlist | orderedlist" mode="parse_docbook">
 		&crt;
-		<xsl:apply-templates mode="#current"/>
+		<xsl:apply-templates select="*" mode="#current"/>
 		&crt;
 	</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!--  -->
 	<xsl:template match="itemizedlist | orderedlist" mode="parse_docbook-line">
+		<xsl:apply-templates select="*" mode="#current"/>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="itemizedlist/title|orderedlist/title" mode="parse_docbook">
+		<xsl:text>*</xsl:text>
 		<xsl:apply-templates mode="#current"/>
+		<xsl:text>*</xsl:text>
+		&crt;
 	</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!--  -->
 	<xsl:template match="itemizedlist/listitem" mode="parse_docbook">
-		<xsl:text>* </xsl:text>
+		<xsl:text> * </xsl:text>
 		<xsl:apply-templates mode="#current"/>
 		&crt;
 	</xsl:template>
@@ -435,6 +536,50 @@
 		<xsl:text># </xsl:text>
 		<xsl:apply-templates mode="#current"/>
 		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="doc:param" mode="parse_docbook">
+		<xsl:text>`</xsl:text>
+		<xsl:value-of select="@name"/>
+		<xsl:text>`: </xsl:text>
+		<xsl:apply-templates mode="#current"/>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="revhistory" mode="parse_docbook">
+		<xsl:text>===Versionen===</xsl:text>
+		&crt;
+		<xsl:text>|| Revision || Datum || Autor || Beschreibung ||</xsl:text>
+		&crt;
+		<xsl:apply-templates select="*" mode="#current"/>
+		&crt;
+		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="revision" mode="parse_docbook">
+		<xsl:apply-templates select="*" mode="#current"/>
+		<xsl:text> ||</xsl:text>
+		&crt;
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="revision/revnumber | revision/date | revision/authorinitials" mode="parse_docbook">
+		<xsl:text>|| </xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		<xsl:text> </xsl:text>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="revision/revdescription" mode="parse_docbook">
+		<xsl:text>|| </xsl:text>
+		<xsl:apply-templates select="node()" mode="parse_docbook-line"/>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -480,6 +625,14 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<xsl:template match="emphasis[not(@role)]" mode="parse_docbook parse_docbook-line">
+		<xsl:text>_</xsl:text>
+		<xsl:apply-templates mode="#current"/>
+		<xsl:text>_</xsl:text>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
 	<xsl:template match="text()" mode="parse_docbook parse_docbook-line">
 		<xsl:if test="matches(., '^\s')">
 			<xsl:text> </xsl:text>
@@ -498,7 +651,7 @@
 	<!--  -->
 	<doc:function>
 		<doc:param name="uri"><para>URI zum Stylesheet, das verlinkt werden soll.</para></doc:param>
-		<para xml:id="wikilink">erzeugt einen Wikilink (für Google Code). Dazu wird im Stylesheet <code>$uri</code> //doc:doc/doc:title ausgelesen.</para>
+		<para xml:id="URI-to-wikilink">wandelt den Namen eines XSL-SB-Stylesheets in einen Wikilink (für Google Code). Dazu wird im Stylesheet <code>$uri</code> //doc:doc/doc:title ausgelesen.</para>
 		<para>Bei einer leeren <code>$uri</code> wird eine Leersequenz zurückgegeben.</para>
 		<revhistory>
 			<revision>
@@ -512,7 +665,7 @@
 			</revision>
 		</revhistory>
 	</doc:function>
-	<xsl:function name="intern:wikilink" as="xs:string?">
+	<xsl:function name="intern:URI-to-wikilink" as="xs:string?">
 		<xsl:param name="uri" as="xs:anyURI?"/>
 		<xsl:variable name="file" as="xs:string?" select="xsb:fileName-and-fileExtention-from-url($uri)"/>
 		<xsl:choose>
@@ -523,12 +676,42 @@
 			<xsl:otherwise>
 				<xsl:call-template name="xsb:internals.FunctionError">
 					<xsl:with-param name="level">ERROR</xsl:with-param>
-					<xsl:with-param name="caller">intern:wikilink</xsl:with-param>
+					<xsl:with-param name="caller">intern:URI-to-wikilink</xsl:with-param>
 					<xsl:with-param name="message">kein Link für »<xsl:sequence select="$file"/>« definiert</xsl:with-param>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<doc:function>
+		<doc:param name="name"><para>Name der Funktion oder des Templates, das verlinkt werden soll</para></doc:param>
+		<para xml:id="name-to-wikilink">wandelt den Namen einer Funktion oder eines Templates in einen Wikilink (für Google Code).</para>
+		<para>Bei einer leeren <code>$name</code> wird eine Leersequenz zurückgegeben.</para>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.48</revnumber>
+				<date>2012-05-26</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="intern:name-to-wikilink" as="xs:string">
+		<xsl:param name="name" as="xs:string?"/>
+		<xsl:choose>
+			<xsl:when test="normalize-space($name)">
+				<xsl:sequence select="replace(xsb:encode-for-id($name), 'x3A', '_')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select=" '' "/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>	
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -623,6 +806,96 @@
 		<xsl:call-template name="intern:google_code.self-test"/>
 		<xsl:call-template name="xsb:internals.MakeFooter"/>
 	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<intern:testliste xml:id="StringTests">
+		<test>
+			<value></value>
+			<intern:wikipage-name></intern:wikipage-name>
+		</test>
+		<test>
+			<value>StyleCheck</value>
+			<intern:wikipage-name>StyleCheck</intern:wikipage-name>
+		</test>
+		<test>
+			<value>Meta-Funktionen</value>
+			<intern:wikipage-name>MetaFunktionen</intern:wikipage-name>
+		</test>
+		<test>
+			<value>Dateien und Dateisystem</value>
+			<intern:wikipage-name>Dateien_und_Dateisystem</intern:wikipage-name>
+		</test>
+	</intern:testliste>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<intern:testliste xml:id="FileTests">
+		<test>
+			<value></value>
+			<intern:doc-title></intern:doc-title>
+			<intern:wikifile-name></intern:wikifile-name>
+			<intern:URI-to-wikilink></intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../files.xsl</value>
+			<intern:doc-title>Dateien und Dateisystem</intern:doc-title>
+			<intern:wikifile-name>Dateien_und_Dateisystem.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[Dateien_und_Dateisystem]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../internals.logging.xsl</value>
+			<intern:doc-title>Logging-System</intern:doc-title>
+			<intern:wikifile-name>LoggingSystem.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[LoggingSystem]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../internals.meta.xsl</value>
+			<intern:doc-title>Meta-Funktionen</intern:doc-title>
+			<intern:wikifile-name>MetaFunktionen.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[MetaFunktionen]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../internals.stylecheck.xsl</value>
+			<intern:doc-title>StyleCheck</intern:doc-title>
+			<intern:wikifile-name>StyleCheck.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[StyleCheck]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../internals.testing.xsl</value>
+			<intern:doc-title>Testen von Stylesheets</intern:doc-title>
+			<intern:wikifile-name>Testen_von_Stylesheets.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[Testen_von_Stylesheets]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../internals.xsl</value>
+			<intern:doc-title>Interne Funktionen</intern:doc-title>
+			<intern:wikifile-name>Interne_Funktionen.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[Interne_Funktionen]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../numbers.xsl</value>
+			<intern:doc-title>Zahlen und Rechnen</intern:doc-title>
+			<intern:wikifile-name>Zahlen_und_Rechnen.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[Zahlen_und_Rechnen]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../standard.xsl</value>
+			<intern:doc-title>XSLT_SB</intern:doc-title>
+			<intern:wikifile-name>XSLT_SB.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[XSLT_SB]</intern:URI-to-wikilink>
+		</test>
+		<test>
+			<value>../strings.xsl</value>
+			<intern:doc-title>Strings und Texte</intern:doc-title>
+			<intern:wikifile-name>Strings_und_Texte.wiki</intern:wikifile-name>
+			<intern:URI-to-wikilink>[Strings_und_Texte]</intern:URI-to-wikilink>
+		</test>
+	</intern:testliste>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- __________     Tests     __________ -->
 	<doc:template>
 		<para xml:id="google_code.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
 		<revhistory>
@@ -638,91 +911,6 @@
 		</revhistory>
 	</doc:template>
 	<xsl:template name="intern:google_code.self-test">
-		<!--  -->
-		<!--  -->
-		<!--  -->
-		<!-- __________     Tests     __________ -->
-		<intern:testliste xml:id="StringTests">
-			<test>
-				<value></value>
-				<intern:wikipage-name></intern:wikipage-name>
-			</test>
-			<test>
-				<value>StyleCheck</value>
-				<intern:wikipage-name>StyleCheck</intern:wikipage-name>
-			</test>
-			<test>
-				<value>Meta-Funktionen</value>
-				<intern:wikipage-name>MetaFunktionen</intern:wikipage-name>
-			</test>
-			<test>
-				<value>Dateien und Dateisystem</value>
-				<intern:wikipage-name>Dateien_und_Dateisystem</intern:wikipage-name>
-			</test>
-		</intern:testliste>
-		<!--  -->
-		<intern:testliste xml:id="FileTests">
-			<test>
-				<value></value>
-				<intern:doc-title></intern:doc-title>
-				<intern:wikifile-name></intern:wikifile-name>
-				<intern:wikilink></intern:wikilink>
-			</test>
-			<test>
-				<value>../files.xsl</value>
-				<intern:doc-title>Dateien und Dateisystem</intern:doc-title>
-				<intern:wikifile-name>Dateien_und_Dateisystem.wiki</intern:wikifile-name>
-				<intern:wikilink>[Dateien_und_Dateisystem]</intern:wikilink>
-			</test>
-			<test>
-				<value>../internals.logging.xsl</value>
-				<intern:doc-title>Logging-System</intern:doc-title>
-				<intern:wikifile-name>LoggingSystem.wiki</intern:wikifile-name>
-				<intern:wikilink>[LoggingSystem]</intern:wikilink>
-			</test>
-			<test>
-				<value>../internals.meta.xsl</value>
-				<intern:doc-title>Meta-Funktionen</intern:doc-title>
-				<intern:wikifile-name>MetaFunktionen.wiki</intern:wikifile-name>
-				<intern:wikilink>[MetaFunktionen]</intern:wikilink>
-			</test>
-			<test>
-				<value>../internals.stylecheck.xsl</value>
-				<intern:doc-title>StyleCheck</intern:doc-title>
-				<intern:wikifile-name>StyleCheck.wiki</intern:wikifile-name>
-				<intern:wikilink>[StyleCheck]</intern:wikilink>
-			</test>
-			<test>
-				<value>../internals.testing.xsl</value>
-				<intern:doc-title>Testen von Stylesheets</intern:doc-title>
-				<intern:wikifile-name>Testen_von_Stylesheets.wiki</intern:wikifile-name>
-				<intern:wikilink>[Testen_von_Stylesheets]</intern:wikilink>
-			</test>
-			<test>
-				<value>../internals.xsl</value>
-				<intern:doc-title>Interne Funktionen</intern:doc-title>
-				<intern:wikifile-name>Interne_Funktionen.wiki</intern:wikifile-name>
-				<intern:wikilink>[Interne_Funktionen]</intern:wikilink>
-			</test>
-			<test>
-				<value>../numbers.xsl</value>
-				<intern:doc-title>Zahlen und Rechnen</intern:doc-title>
-				<intern:wikifile-name>Zahlen_und_Rechnen.wiki</intern:wikifile-name>
-				<intern:wikilink>[Zahlen_und_Rechnen]</intern:wikilink>
-			</test>
-			<test>
-				<value>../standard.xsl</value>
-				<intern:doc-title>XSLT_SB</intern:doc-title>
-				<intern:wikifile-name>XSLT_SB.wiki</intern:wikifile-name>
-				<intern:wikilink>[XSLT_SB]</intern:wikilink>
-			</test>
-			<test>
-				<value>../strings.xsl</value>
-				<intern:doc-title>Strings und Texte</intern:doc-title>
-				<intern:wikifile-name>Strings_und_Texte.wiki</intern:wikifile-name>
-				<intern:wikilink>[Strings_und_Texte]</intern:wikilink>
-			</test>
-		</intern:testliste>
 		<!--  -->
 		<!--  -->
 		<!--  -->
@@ -765,14 +953,43 @@
 		<!--  -->
 		<!--  -->
 		<!--  -->
-		<!-- __________     intern:wikilink     __________ -->
+		<!-- __________     intern:URI-to-wikilink     __________ -->
 		<xsl:for-each select="$seqFileTests">
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
 				<xsl:with-param name="test-node" select="."/>
-				<xsl:with-param name="function-name">intern:wikilink</xsl:with-param>
-				<xsl:with-param name="actual-value" select="intern:wikilink(./value/text())"/>
+				<xsl:with-param name="function-name">intern:URI-to-wikilink</xsl:with-param>
+				<xsl:with-param name="actual-value" select="intern:URI-to-wikilink(./value/text())"/>
 			</xsl:call-template>
 		</xsl:for-each>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:URI-to-wikilink     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:name-to-wikilink(())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:name-to-wikilink(())"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:name-to-wikilink('')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:name-to-wikilink('')"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:name-to-wikilink('xsb:e')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:name-to-wikilink('xsb:e')"/>
+			<xsl:with-param name="reference-value" select=" 'xsb_e' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:name-to-wikilink('xsb:Ende')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:name-to-wikilink('xsb:Ende')"/>
+			<xsl:with-param name="reference-value" select=" 'xsb_Ende' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:name-to-wikilink('intern:e')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:name-to-wikilink('intern:e')"/>
+			<xsl:with-param name="reference-value" select=" 'intern_e' "/>
+		</xsl:call-template>
 		<!--  -->
 		<!--  -->
 		<!--  -->

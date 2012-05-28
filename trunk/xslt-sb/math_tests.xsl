@@ -157,7 +157,7 @@
 		<xsl:param name="actual-value" required="yes" intern:solved="MissingTypes"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:choose>
-				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name() eq $function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
 					<xsl:call-template name="xsb:internals.testing.SkippedTests">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 					</xsl:call-template>
@@ -166,7 +166,7 @@
 					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 						<xsl:with-param name="actual-value" select="intern:round($actual-value)"/>
-						<xsl:with-param name="reference-value" select="intern:round(xsb:cast($test-node/*[name()=$function-name]/text(), xsb:type-annotation($actual-value) ) )"/>
+						<xsl:with-param name="reference-value" select="intern:round(xsb:cast($test-node/*[name() eq $function-name]/text(), xsb:type-annotation($actual-value) ) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -203,7 +203,7 @@
 		<xsl:param name="actual-value" required="yes" intern:solved="MissingTypes"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:choose>
-				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name() eq $function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
 					<xsl:call-template name="xsb:internals.testing.SkippedTests">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 					</xsl:call-template>
@@ -212,7 +212,7 @@
 					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 						<xsl:with-param name="actual-value" select="intern:iround($actual-value)"/>
-						<xsl:with-param name="reference-value" select="intern:iround(xsb:cast($test-node/*[name()=$function-name]/text(), xsb:type-annotation($actual-value) ) )"/>
+						<xsl:with-param name="reference-value" select="intern:iround(xsb:cast($test-node/*[name() eq $function-name]/text(), xsb:type-annotation($actual-value) ) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -643,11 +643,50 @@
 		</revhistory>
 	</doc:template>
 	<xsl:template name="intern:math.self-test">
+		<!-- erstmal schauen, ob grundlegende Arithmetik klappt -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xs:double(18446744073709551615 div 16)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xs:double(18446744073709551615 div 16)"/>
+			<xsl:with-param name="reference-value" select="xs:double(1152921504606846975.9375)"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xs:decimal(18446744073709551615 div 16)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xs:decimal(18446744073709551615 div 16)"/>
+			<xsl:with-param name="reference-value" select="xs:decimal(1152921504606846975.9375)"/>
+		</xsl:call-template>
+		<xsl:choose>
+			<xsl:when test="xsb:listed('AltovaXML_CE_2012.2', $_internals.testing.current-vendor-hash)">
+				<xsl:call-template name="xsb:internals.testing.SkippedTests">
+					<xsl:with-param name="caller">floor(xs:decimal(4294967295.999999999999) )</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.test.Function">
+					<xsl:with-param name="caller">floor(xs:decimal(4294967295.999999999999) )</xsl:with-param>
+					<xsl:with-param name="actual-value" select="floor(xs:decimal(4294967295.999999999999) )"/>
+					<xsl:with-param name="reference-value" select="xs:decimal(4294967295)"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+		<xsl:choose>
+			<xsl:when test="xsb:listed('AltovaXML_CE_2012.2', $_internals.testing.current-vendor-hash)">
+				<xsl:call-template name="xsb:internals.testing.SkippedTests">
+					<xsl:with-param name="caller">floor(xs:decimal(1152921504606846975.9375) )</xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.test.Function">
+					<xsl:with-param name="caller">floor(xs:decimal(1152921504606846975.9375) )</xsl:with-param>
+					<xsl:with-param name="actual-value" select="floor(xs:decimal(1152921504606846975.9375) )"/>
+					<xsl:with-param name="reference-value" select="xs:decimal(1152921504606846975)"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
 		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="seqMathTests" as="element()+" select="document( '' )//intern:testliste[@xml:id='MathTests']/test"/>
-		<xsl:variable name="seqMathTestsNull" as="element()+" select="document( '' )//intern:testliste[@xml:id='MathTestsNull']/test"/>
-		<xsl:variable name="seqMathTestsNeg" as="element()+" select="document( '' )//intern:testliste[@xml:id='MathTestsNeg']/test"/>
-		<xsl:variable name="seqMathTests2" as="element()+" select="document( '' )//intern:testliste[@xml:id='MathTests2']/test"/>
+		<xsl:variable name="seqMathTests" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'MathTests']/test"/>
+		<xsl:variable name="seqMathTestsNull" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'MathTestsNull']/test"/>
+		<xsl:variable name="seqMathTestsNeg" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'MathTestsNeg']/test"/>
+		<xsl:variable name="seqMathTests2" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'MathTests2']/test"/>
 		<!--  -->
 		<!--  -->
 		<!-- __________     xsb:fact     __________ -->
@@ -2438,6 +2477,360 @@
 			<xsl:with-param name="actual-value" select="xsb:type-annotation(xsb:standard-deviation( (xs:decimal(-0.5), xs:decimal(-0.5) ) ) )"/>
 			<xsl:with-param name="reference-value" select=" 'xs:decimal' " as="xs:string"/>
 		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:integer-to-hex()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(0)"/>
+			<xsl:with-param name="reference-value" select="'0'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-0)"/>
+			<xsl:with-param name="reference-value" select="'0'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(9)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(9)"/>
+			<xsl:with-param name="reference-value" select="'9'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(10)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(10)"/>
+			<xsl:with-param name="reference-value" select="'A'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-10)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-10)"/>
+			<xsl:with-param name="reference-value" select="'-A'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(15)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(15)"/>
+			<xsl:with-param name="reference-value" select="'F'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(255)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(255)"/>
+			<xsl:with-param name="reference-value" select="'FF'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-65535)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-65535)"/>
+			<xsl:with-param name="reference-value" select="'-FFFF'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(18446744073709551615)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(18446744073709551615)"/>
+			<xsl:with-param name="reference-value" select="'FFFFFFFFFFFFFFFF'"/>
+		</xsl:call-template>
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(0, 0)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(0, 0)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(5, 2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(5, 2)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-8, 2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-8, 2)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(128, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(128, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(0, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(0, 8)"/>
+			<xsl:with-param name="reference-value" select=" '00' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(10, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(10, 8)"/>
+			<xsl:with-param name="reference-value" select="'0A'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-24, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-24, 8)"/>
+			<xsl:with-param name="reference-value" select="'E8'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-1, 64)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-1, 64)"/>
+			<xsl:with-param name="reference-value" select="'FFFFFFFFFFFFFFFF'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(0, 3)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(0, 3)"/>
+			<xsl:with-param name="reference-value" select=" '0' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(0, 4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(0, 4)"/>
+			<xsl:with-param name="reference-value" select=" '0' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(0, 5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(0, 5)"/>
+			<xsl:with-param name="reference-value" select=" '00' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(10, 5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(10, 5)"/>
+			<xsl:with-param name="reference-value" select=" '0A' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-10, 5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-10, 5)"/>
+			<xsl:with-param name="reference-value" select=" '16' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(18446744073709551615, 65)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(18446744073709551615, 65)"/>
+			<xsl:with-param name="reference-value" select="'0FFFFFFFFFFFFFFFF'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(-18446744073709551616, 65)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(-18446744073709551616, 65)"/>
+			<xsl:with-param name="reference-value" select="'10000000000000000'"/>
+		</xsl:call-template>
+		<!-- fehlerhaft -->
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(16, 5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(16, 5)"/>
+			<xsl:with-param name="reference-value" select=" 'NaN' "/>
+		</xsl:call-template>
+		-->
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:integer-to-hex(128, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:integer-to-hex(128, 8)"/>
+			<xsl:with-param name="reference-value" select="'NaN'"/>
+		</xsl:call-template>
+		-->
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:twos-complement()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(0, 2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(0, 2)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(0, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(0, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(127, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(127, 8)"/>
+			<xsl:with-param name="reference-value" select="127"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-128, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-128, 8)"/>
+			<xsl:with-param name="reference-value" select="128"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-1, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-1, 8)"/>
+			<xsl:with-param name="reference-value" select="255"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-64, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-64, 8)"/>
+			<xsl:with-param name="reference-value" select="192"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-2567447, 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-2567447, 32)"/>
+			<xsl:with-param name="reference-value" select="4292399849"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(2567447, 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(2567447, 32)"/>
+			<xsl:with-param name="reference-value" select="2567447"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-64, 64)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-64, 64)"/>
+			<xsl:with-param name="reference-value" select="18446744073709551552"/><!-- with courtesy to Wolfram Alpha -->
+		</xsl:call-template>
+		<!-- fehlerhaft, Abbruch -->
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(128, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(128, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:twos-complement(-129, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:twos-complement(-129, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		-->
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:reverse-twos-complement()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(0, 2)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(0, 2)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(0, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(0, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(127, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(127, 8)"/>
+			<xsl:with-param name="reference-value" select="127"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(255, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(255, 8)"/>
+			<xsl:with-param name="reference-value" select="-1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(128, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(128, 8)"/>
+			<xsl:with-param name="reference-value" select="-128"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(192, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(192, 8)"/>
+			<xsl:with-param name="reference-value" select="-64"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(4292399849, 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(4292399849, 32)"/>
+			<xsl:with-param name="reference-value" select="-2567447"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(2567447, 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(2567447, 32)"/>
+			<xsl:with-param name="reference-value" select="2567447"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(18446744073709551552, 64)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(18446744073709551552, 64)"/>
+			<xsl:with-param name="reference-value" select="-64"/>
+		</xsl:call-template>
+		<!-- fehlerhaft, Abbruch -->
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(-1, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(-1, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(256, 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(256, 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		-->
+		<!-- roundtrip -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(xsb:twos-complement(0, 8), 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(xsb:twos-complement(0, 8), 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(xsb:twos-complement(127, 8), 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(xsb:twos-complement(127, 8), 8)"/>
+			<xsl:with-param name="reference-value" select="127"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(xsb:twos-complement(12345, 32), 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(xsb:twos-complement(12345, 32), 32)"/>
+			<xsl:with-param name="reference-value" select="12345"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:reverse-twos-complement(xsb:twos-complement(-12345, 32), 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:reverse-twos-complement(xsb:twos-complement(-12345, 32), 32)"/>
+			<xsl:with-param name="reference-value" select="-12345"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:hex-to-integer()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('0', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('0', 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('00', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('00', 8)"/>
+			<xsl:with-param name="reference-value" select="0"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('1', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('1', 8)"/>
+			<xsl:with-param name="reference-value" select="1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('A', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('A', 8)"/>
+			<xsl:with-param name="reference-value" select="10"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('7F', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('7F', 8)"/>
+			<xsl:with-param name="reference-value" select="127"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('FF', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('FF', 8)"/>
+			<xsl:with-param name="reference-value" select="-1"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('80', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('80', 8)"/>
+			<xsl:with-param name="reference-value" select="-128"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('E8', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('E8', 8)"/>
+			<xsl:with-param name="reference-value" select="-24"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('FFFFFFFF', 32)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('FFFFFFFF', 32)"/>
+			<xsl:with-param name="reference-value" select="-1"/>
+		</xsl:call-template>
+		<!-- fehlerhaft -->
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('-E8', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('-E8', 8)"/>
+			<xsl:with-param name="reference-value" select="'NaN'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('E8', 1)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('E8', 1)"/>
+			<xsl:with-param name="reference-value" select="'NaN'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('2E8', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('2E8', 8)"/>
+			<xsl:with-param name="reference-value" select="'NaN'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:hex-to-integer('2E8', 5)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:hex-to-integer('2E8', 5)"/>
+			<xsl:with-param name="reference-value" select="'NaN'"/>
+		</xsl:call-template>
+		-->
 		<!--  -->
 		<!--  -->
 		<!--  -->

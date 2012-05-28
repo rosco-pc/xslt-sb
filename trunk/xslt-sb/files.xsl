@@ -92,6 +92,7 @@ habe ich sie hier eingefügt.-->
 	<!--  -->
 	<!--  -->
 	<xsl:import href="internals.xsl"/>
+	<xsl:import href="numbers.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -139,6 +140,14 @@ habe ich sie hier eingefügt.-->
 			</listitem>
 		</itemizedlist>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para>neue Funktion: <function>xsb:decode-from-url()</function></para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.41</revnumber>
 				<date>2012-02-04</date>
@@ -861,7 +870,7 @@ habe ich sie hier eingefügt.-->
 				</xsl:call-template>
 			</xsl:when>
 			<!-- was anderes als "file: ..." ist nicht OK -->
-			<xsl:when test="not(xsb:scheme-from-url($absoluteURL_cleaned) = 'file' )">
+			<xsl:when test="not(xsb:scheme-from-url($absoluteURL_cleaned) eq 'file' )">
 				<xsl:sequence select="false()"/>
 				<xsl:call-template name="xsb:internals.Error">
 					<xsl:with-param name="caller">xsb:file-exists(absoluteURL)</xsl:with-param>
@@ -1071,7 +1080,7 @@ habe ich sie hier eingefügt.-->
 		<xsl:variable name="temp" as="xs:string" select="lower-case(xsb:fileExtention-from-url($URLwithFileExtension))"/>
 		<xsl:variable name="lines" as="element()*" select="document('')//intern:table[@xml:id eq 'mimetypes-extensions']/intern:l[intern:e eq $temp]"/>
 		<xsl:choose>
-			<xsl:when test="$temp = '' "><xsl:sequence select=" '' "/></xsl:when>
+			<xsl:when test="not(normalize-space($temp))"><xsl:sequence select=" '' "/></xsl:when>
 			<!-- TODO: look into xml and detect media types like docbook's application/docbook+xml -->
 			<xsl:when test="$lines">
 				<xsl:sequence select="xs:string($lines[1]/intern:m)"/>
@@ -1334,6 +1343,71 @@ habe ich sie hier eingefügt.-->
 	<xsl:function name="xsb:file-extension-from-mediatype" as="xs:string">
 		<xsl:param name="mediatype" as="xs:string?"/>
 		<xsl:sequence select="xsb:file-extension-from-mediatype($mediatype, true())"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:decode-from-url()     __________ -->
+	<doc:function>
+		<doc:param name="URL"><para>zu konvertierende URL</para></doc:param>
+		<para xml:id="decode-from-url">wandelt Hex-codierte Zeichen in URLs in Zeichen um.</para>
+		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
+		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
+		<para>Zeichen außerhalb des in URLs darstellbaren ASCII-Zeichenvorrats (Codepoints 127 oder kleiner 32) werden encodiert belassen.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:decode-from-url('')</function> ergibt den Leerstring</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:decode-from-url('file')</function> ergibt »<code>file</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:decode-from-url('%3b%4f')</function> ergibt »<code>;O</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:decode-from-url('%17')</function> ergibt »<code>%17</code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:decode-from-url" as="xs:string">
+		<xsl:param name="URL" as="xs:string?"/>
+		<xsl:choose>
+			<xsl:when test="$URL and xsb:is-url($URL)">
+				<xsl:variable name="temp" as="xs:string*">
+					<xsl:analyze-string select="$URL" regex="%[0-9A-Fa-f]{{2}}">
+						<xsl:matching-substring>
+							<xsl:variable name="codepoint" as="xs:integer" select="xsb:hex-to-integer(substring(., 2, 2) )"/>
+							<xsl:choose>
+								<xsl:when test="($codepoint ge 32) and ($codepoint le 126)">
+									<xsl:sequence select="codepoints-to-string($codepoint)"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:sequence select="."/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:variable>
+				<xsl:sequence select="string-join($temp, '')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select=" '' "/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->

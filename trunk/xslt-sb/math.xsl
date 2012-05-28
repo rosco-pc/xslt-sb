@@ -47,6 +47,7 @@
 	<!--  -->
 	<!--  -->
 	<xsl:import href="internals.xsl"/>
+	<xsl:import href="numbers.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -131,6 +132,16 @@
 			</listitem>
 		</itemizedlist>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>neue Funktionen: <function>xsb:integer-to-hex()</function>, <function>xsb:twos-complement()</function>,
+						<function>xsb:reverse-twos-complement()</function> und <function>xsb:hex-to-integer($input, $n)</function></para>
+				</revdescription>
+			</revision>
 			<revision>
 				<revnumber>0.2.37</revnumber>
 				<date>2011-06-26</date>
@@ -2904,17 +2915,15 @@
 		<para xml:id="variance_i">berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz</para>
 		<para>Der Algorithmus wird unter <link xlink:href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant">http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant</link> beschrieben.</para>
 		<revhistory>
-			<revhistory>
-				<revision>
-					<revnumber>0.2.40</revnumber>
-					<date>2012-01-04</date>
-					<authorinitials>Stf</authorinitials>
-					<revdescription>
-						<para conformance="beta">Status: beta</para>
-						<para>initiale Version</para>
-					</revdescription>
-				</revision>
-			</revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
 		</revhistory>
 	</doc:function>
 	<xsl:function name="intern:variance" as="xs:anyAtomicType">
@@ -2963,17 +2972,15 @@
 		<doc:param name="sequence_of_numeric_values"><para>Eingabewerte, Sequenz von atomaren numerischen Werten</para></doc:param>
 		<para xml:id="standard-deviation_i">berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz</para>
 		<revhistory>
-			<revhistory>
-				<revision>
-					<revnumber>0.2.40</revnumber>
-					<date>2012-01-04</date>
-					<authorinitials>Stf</authorinitials>
-					<revdescription>
-						<para conformance="beta">Status: beta</para>
-						<para>initiale Version</para>
-					</revdescription>
-				</revision>
-			</revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
 		</revhistory>
 	</doc:function>
 	<xsl:function name="intern:standard-deviation" as="xs:anyAtomicType" intern:solved="MissingTests">
@@ -2993,17 +3000,15 @@
 		<para>Für Details siehe <link xlink:href="http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator">http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator</link>
 			und <link xlink:href="http://en.wikipedia.org/wiki/Linear_congruential_generator">http://en.wikipedia.org/wiki/Linear_congruential_generator</link>.</para>
 		<revhistory>
-			<revhistory>
-				<revision>
-					<revnumber>0.2.40</revnumber>
-					<date>2012-01-04</date>
-					<authorinitials>Stf</authorinitials>
-					<revdescription>
-						<para conformance="beta">Status: beta</para>
-						<para>initiale Version</para>
-					</revdescription>
-				</revision>
-			</revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
 		</revhistory>
 	</doc:function>
 	<xsl:function name="intern:linear-congruential-generator" as="xs:integer+">
@@ -3036,17 +3041,15 @@
 			unterschiedlichen Rückgabewerte qua Optimierung zu einem Wert vereinheitlicht.</para>
 		<para>Zum Hintergrund siehe <link xlink:href="http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/">http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/</link>.</para>
 		<revhistory>
-			<revhistory>
-				<revision>
-					<revnumber>0.2.40</revnumber>
-					<date>2012-01-04</date>
-					<authorinitials>Stf</authorinitials>
-					<revdescription>
-						<para conformance="beta">Status: beta</para>
-						<para>initiale Version</para>
-					</revdescription>
-				</revision>
-			</revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
 		</revhistory>
 	</doc:function>
 	<xsl:function name="intern:random-seed" as="xs:integer" intern:solved="MissingTests">
@@ -3073,17 +3076,15 @@
 			<link xlink:href="http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/">http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/</link>.</para></doc:param>
 		<para xml:id="random-sequence_i">erzeugt eine Sequenz von zufälligen Werten im Bereich von 0 bis 4294967295.</para>
 		<revhistory>
-			<revhistory>
-				<revision>
-					<revnumber>0.2.40</revnumber>
-					<date>2012-01-04</date>
-					<authorinitials>Stf</authorinitials>
-					<revdescription>
-						<para conformance="beta">Status: beta</para>
-						<para>initiale Version</para>
-					</revdescription>
-				</revision>
-			</revhistory>
+			<revision>
+				<revnumber>0.2.40</revnumber>
+				<date>2012-01-04</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
 		</revhistory>
 	</doc:function>
 	<xsl:function name="intern:random-sequence" as="xs:integer+" intern:solved="MissingTests">
@@ -3142,6 +3143,387 @@
 		<xsl:param name="length" as="xs:anyAtomicType"/>
 		<xsl:param name="volatile" as="xs:anyAtomicType"/>
 		<xsl:sequence select="for $i in intern:random-sequence($length, $volatile) return intern:round(xs:decimal(xs:decimal($i) div xs:decimal($intern:random-max) ) )"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     integer-to-hex()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>Integer-Zahl</para></doc:param>
+		<para xml:id="integer-to-hex">Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden mit einem vorangestellten <code>-</code> (Minus) ausgegeben</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:integer-to-hex(0)</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:integer-to-hex(10)</function> ergibt »<code>A</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:integer-to-hex(-10)</function> ergibt »<code>-A</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:integer-to-hex(-65535)</function> ergibt »<code>-FFFF</code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.49</revnumber>
+				<date>2012-05-19</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:integer-to-hex" as="xs:string">
+		<xsl:param name="input" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="$input lt 0">
+				<xsl:sequence select="concat('-', xsb:integer-to-hex(-1 * $input) )"/>
+			</xsl:when>
+			<xsl:when test="$input lt 16">
+				<xsl:sequence select="('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F')[$input + 1]"/>
+			</xsl:when>
+			<!-- teile und herrsche, weil AltovaXML bei fn:floor() von großen Zahlen Probleme hat, hier mit string-basierter Implementierung von fn:floor() -->
+			<xsl:when test="$input ge xs:integer(18446744073709551615)">
+				<xsl:sequence select="concat(
+					xsb:integer-to-hex(xs:integer(tokenize(string($input div xs:integer(4294967296) ), '\.' )[1] ) ),
+					xsb:fill-left(xsb:integer-to-hex(xs:integer($input mod xs:integer(4294967296) ) ), '0', 8)
+					)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="concat(
+					xsb:integer-to-hex(xs:integer(floor($input div 16) ) ),
+					xsb:integer-to-hex(xs:integer($input mod 16) )
+					)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<doc:function>
+		<doc:param name="input"><para>Integer-Zahl</para></doc:param>
+		<doc:param name="n"><para>Anzahl der Bits für Formatierung</para></doc:param>
+		<para xml:id="integer-to-hex_2">Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden im Zweierkomplement ausgegeben.</para>
+		<para>Je angefangene vier Bit wird eine Hexadezimalstelle ausgegeben.</para>
+		<para>Wenn <code>$input</code> nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehler ausgegeben und die Verarbeitung abgebrochen.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:integer-to-hex(10, 8)</function> ergibt »<code>0A</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:integer-to-hex(-24, 8)</function> ergibt »<code>E8</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:integer-to-hex(-1, 64)</function> ergibt »<code>FFFFFFFFFFFFFFFF</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:integer-to-hex(128, 8)</function> ergibt einen Fehler</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.49</revnumber>
+				<date>2012-05-19</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:integer-to-hex" as="xs:string">
+		<xsl:param name="input" as="xs:integer"/>
+		<xsl:param name="n" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="$n gt 1">
+				<xsl:variable name="temp" as="xs:integer" select="intern:power(2, $n - 1)"/>
+				<xsl:variable name="max" as="xs:integer" select="$temp - 1"/>
+				<xsl:variable name="min" as="xs:integer" select="- 1 * $temp"/>
+				<xsl:choose>
+					<xsl:when test="($input le $max) and ($input ge $min)">
+						<xsl:choose>
+							<xsl:when test="$input lt 0">
+								<xsl:sequence select="xsb:integer-to-hex(xsb:twos-complement($input, $n) )"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:sequence select="xsb:fill-left(xsb:integer-to-hex($input), '0', xs:integer(ceiling($n div 4) ) )"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="xsb:internals.FunctionError">
+							<xsl:with-param name="level">ERROR</xsl:with-param>
+							<xsl:with-param name="caller">xsb:integer-to-hex()</xsl:with-param>
+							<xsl:with-param name="message">Eingabe »<xsl:sequence select="$input"/>« außerhalb des Wertebereiches (»<xsl:sequence select="$min"/> bis <xsl:sequence select="$max"/>«), der durch den Exponenten (»<xsl:sequence select="$n"/>«) bestimmt wird.</xsl:with-param>
+						</xsl:call-template>
+						<xsl:sequence select="'NaN'"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="caller">xsb:integer-to-hex()</xsl:with-param>
+					<xsl:with-param name="message">ungültiger Exponent. Argument $n muss größer als 1 sein, ist aber »<xsl:sequence select="$n"/>«</xsl:with-param>
+				</xsl:call-template>
+				<xsl:sequence select="'NaN'"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:twos-complement()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>Integer-Zahl</para></doc:param>
+		<doc:param name="n"><para>Anzahl Bits für das Zeierkomplement</para></doc:param>
+		<para xml:id="twos-complement">ermittelt das Zweierkomplement</para>
+		<para>Wenn <code>$input</code> nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehler ausgegeben und die Verarbeitung abgebrochen.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:twos-complement(0, 8)</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:twos-complement(-64, 8)</function> ergibt »<code>192</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:twos-complement(-64, 64)</function> ergibt »<code>18446744073709551552</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:twos-complement(128, 8)</function> führt zum Abbruch</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:twos-complement(-129, 8)</function> führt zum Abbruch</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:twos-complement" as="xs:integer">
+		<xsl:param name="input" as="xs:integer"/>
+		<xsl:param name="n" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="$n gt 1">
+				<xsl:variable name="temp" as="xs:integer" select="intern:power(2, $n - 1)"/>
+				<xsl:variable name="max" as="xs:integer" select="$temp - 1"/>
+				<xsl:variable name="min" as="xs:integer" select="- 1 * $temp"/>
+				<xsl:choose>
+					<xsl:when test="($input le $max) and ($input ge $min)">
+						<xsl:choose>
+							<xsl:when test="$input lt 0">
+								<xsl:sequence select="2 * $temp + $input"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:sequence select="$input"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="xsb:internals.FunctionError">
+							<xsl:with-param name="level">ERROR</xsl:with-param>
+							<xsl:with-param name="caller">xsb:twos-complement()</xsl:with-param>
+							<xsl:with-param name="message">Eingabe »<xsl:sequence select="$input"/>« außerhalb des Wertebereiches (»<xsl:sequence select="$min"/> bis <xsl:sequence select="$max"/>«), der durch den Exponenten (»<xsl:sequence select="$n"/>«) bestimmt wird.</xsl:with-param>
+						</xsl:call-template>
+						<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+						<xsl:sequence select="xs:integer(number('NaN') )"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="caller">xsb:twos-complement()</xsl:with-param>
+					<xsl:with-param name="message">ungültige Bitzahl. Argument $n muss größer als 1 sein, ist aber »<xsl:sequence select="$n"/>«</xsl:with-param>
+				</xsl:call-template>
+				<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+				<xsl:sequence select="xs:integer(number('NaN') )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:reverse-twos-complement()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>Integer-Zahl</para></doc:param>
+		<doc:param name="n"><para>Anzahl Bits für das Zeierkomplement</para></doc:param>
+		<para xml:id="reverse-twos-complement">ermittelt aus einem Zweierkomplement einen Integer</para>
+		<para>Wenn <code>$input</code> nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehler ausgegeben und die Verarbeitung abgebrochen.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:reverse-twos-complement(0, 8)</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:reverse-twos-complement(255, 8)</function> ergibt »<code>-1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:reverse-twos-complement(192, 8)</function> ergibt »<code>-64</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:reverse-twos-complement(-1, 8)</function> führt zum Abbruch</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:reverse-twos-complement(192, 4)</function> führt zum Abbruch</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:reverse-twos-complement" as="xs:integer">
+		<xsl:param name="input" as="xs:integer"/>
+		<xsl:param name="n" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="$n gt 1">
+				<xsl:variable name="temp" as="xs:integer" select="intern:power(2, $n - 1)"/>
+				<xsl:variable name="max" as="xs:integer" select="2 * $temp - 1"/>
+				<xsl:variable name="min" as="xs:integer" select="0"/>
+				<xsl:choose>
+					<xsl:when test="($input le $max) and ($input ge $min)">
+						<xsl:choose>
+							<xsl:when test="$input lt $temp">
+								<xsl:sequence select="$input"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:sequence select="$input - 2 * $temp"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="xsb:internals.FunctionError">
+							<xsl:with-param name="level">ERROR</xsl:with-param>
+							<xsl:with-param name="caller">xsb:reverse twos-complement()</xsl:with-param>
+							<xsl:with-param name="message">Eingabe »<xsl:sequence select="$input"/>« außerhalb des Wertebereiches (»<xsl:sequence select="$min"/> bis <xsl:sequence select="$max"/>«), der durch den Exponenten (»<xsl:sequence select="$n"/>«) bestimmt wird.</xsl:with-param>
+						</xsl:call-template>
+						<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+						<xsl:sequence select="xs:integer(number('NaN') )"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="caller">xsb:reverse-twos-complement()</xsl:with-param>
+					<xsl:with-param name="message">ungültige Bitzahl. Argument $n muss größer als 1 sein, ist aber »<xsl:sequence select="$n"/>«</xsl:with-param>
+				</xsl:call-template>
+				<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+				<xsl:sequence select="xs:integer(number('NaN') )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:hex-to-integer()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>eine hexadezimale Zahl (beliebige Folge aus <code>0-9</code> und <code>A-F</code> bzw. <code>a-f</code>)</para></doc:param>
+		<doc:param name="n"><para>Anzahl Bits für das Zeierkomplement</para></doc:param>
+		<para xml:id="hex-to-integer_2">wandelt Hexadezimalzahlen im Zweierkomplement in Integer-Zahlen um.</para>
+		<para>Wenn <code>$input</code> nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehler ausgegeben und die Verarbeitung abgebrochen.</para>
+		<para>Eine andere Version dieser Funktion, die negative Zahlen mit Minus-Vorzeichen darstellt, findet sich in <link xlink:href="numbers.html#hex-to-integer">numbers.xsl</link></para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:hex-to-integer('0', 8)</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('1', 8)</function> ergibt »<code>1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('A', 8)</function> ergibt »<code>10</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('FF', 8)</function> ergibt »<code>-1</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('E8', 8)</function> ergibt »<code>-24</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('ffee', 8)</function> führt zum Abbruch</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:hex-to-integer" as="xs:integer">
+		<xsl:param name="input" as="xs:string"/>
+		<xsl:param name="n" as="xs:integer"/>
+		<xsl:variable name="uppercase-input" as="xs:string" select="translate(normalize-space(upper-case($input) ), ' ', '')"/>
+		<xsl:choose>
+			<xsl:when test="matches($uppercase-input, '^[0-9A-F]+$')">
+				<xsl:choose>
+					<xsl:when test="$n gt 1">
+						<xsl:variable name="InputMin" as="xs:integer" select="0"/>
+						<xsl:variable name="InputMax" as="xs:integer" select="intern:power(2, $n) - 1"/>
+						<xsl:variable name="InputInteger" as="xs:integer" select="xsb:hex-to-integer($input)"/>
+						<xsl:choose>
+							<xsl:when test="($InputInteger ge $InputMin) and ($InputInteger le $InputMax)">
+								<xsl:sequence select="xsb:reverse-twos-complement($InputInteger, $n)"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:variable name="offset" as="xs:integer" select="intern:power(2, $n - 1)"/>
+								<xsl:call-template name="xsb:internals.FunctionError">
+									<xsl:with-param name="level">ERROR</xsl:with-param>
+									<xsl:with-param name="caller">xsb:hex-to-integer</xsl:with-param>
+									<xsl:with-param name="message">Eingabe »<xsl:sequence select="$input"/>« außerhalb des Wertebereiches (integer »<xsl:sequence select="$InputMin - $offset"/> bis <xsl:sequence select="$InputMax - $offset"/>«, hex »<xsl:sequence select="xsb:integer-to-hex($InputMin - $offset, $n)"/> bis <xsl:sequence select="xsb:integer-to-hex($InputMax - $offset, $n)"/>«), der durch den Exponenten (»<xsl:sequence select="$n"/>«) bestimmt wird.</xsl:with-param>
+								</xsl:call-template>
+								<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+								<xsl:sequence select="xs:integer(number('NaN') )"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="xsb:internals.FunctionError">
+							<xsl:with-param name="level">ERROR</xsl:with-param>
+							<xsl:with-param name="caller">xsb:hex-to-integer</xsl:with-param>
+							<xsl:with-param name="message">ungültige Bitzahl. Argument $n muss größer als 1 sein, ist aber »<xsl:sequence select="$n"/>«</xsl:with-param>
+						</xsl:call-template>
+						<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+						<xsl:sequence select="xs:integer(number('NaN') )"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="caller">xsb:hex-to-integer</xsl:with-param>
+					<xsl:with-param name="message">Input »<xsl:sequence select="$input"/>« ist keine gültige Hexadezimalzahl.</xsl:with-param>
+				</xsl:call-template>
+				<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+				<xsl:sequence select="xs:integer(number('NaN') )"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->

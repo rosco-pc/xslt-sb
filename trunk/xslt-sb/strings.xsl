@@ -83,18 +83,25 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark>neue Funktionen: <function>xsb:fill-left()</function>, <function>xsb:fill-right()</function></revremark>
+			</revision>
+			<revision>
 				<revnumber>0.2.49</revnumber>
 				<date>2012-05-18</date>
 				<authorinitials>Stf</authorinitials>
-				<revremark>neue Funktionen: <code>xsb:escape-for-replacement()</code>;
-					überarbeitet: <code>xsb:trim-left()</code>, <code>xsb:trim-right()</code>;
-					erweiter: <code>xsb:listed()</code></revremark>
+				<revremark>neue Funktionen: <function>xsb:escape-for-replacement()</function>;
+					überarbeitet: <function>xsb:trim-left()</function>, <function>xsb:trim-right()</function>;
+					erweiter: <function>xsb:listed()</function>
+				</revremark>
 			</revision>
 			<revision>
 				<revnumber>0.2.47</revnumber>
 				<date>2012-05-15</date>
 				<authorinitials>Stf</authorinitials>
-				<revremark>neue Funktionen: <code>xsb:sort()</code>, <code>xsb:escape-for-regex()</code>, <code>xsb:count-matches()</code></revremark>
+				<revremark>neue Funktionen: <function>xsb:sort()</function>, <function>xsb:escape-for-regex()</function>, <function>xsb:count-matches()</function></revremark>
 			</revision>
 			<revision>
 				<revnumber>0.2.0</revnumber>
@@ -478,7 +485,7 @@
 	</doc:function>
 	<xsl:function name="xsb:escape-for-regex" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:sequence select="concat('', replace($input, '[\\*.+?^$()\[\]{}|]', '\\$0') )"/>
+		<xsl:sequence select="concat('', replace($input, '[\\*.+?\^\$()\[\]{}|]', '\\$0') )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -607,7 +614,7 @@
 		<para>Ist <code>pattern</code> der Leerstring oder die Leersequenz, wird <code>input</code> unverändert zurückgegeben
 			(Ausnahme: Wenn <code>input</code> die Leersequenz ist, wird ein Leerstring zurückgegeben).</para>
 		<para>Ist <code>replacement</code> der Leerstring, wird jeder Treffer von <code>pattern</code> in <code>input</code> gelöscht.</para>
-		<para><emphasis render="bold">Achtung: </emphasis>eine Leersequenz innerhalb der pattern- oder replacement-Sequenz »verschwindet« aus der Sequenz,
+		<para><emphasis role="bold">Achtung: </emphasis>eine Leersequenz innerhalb der pattern- oder replacement-Sequenz »verschwindet« aus der Sequenz,
 			d.h. die nachfolgenden Werte rücken eine Position nach vorn. Das wird in der Regel nicht der gewünschte Effekt sein!</para>
 		<itemizedlist>
 			<title>Beispiele</title>
@@ -767,6 +774,115 @@
 		<xsl:param name="input" as="xs:string?"/>
 		<xsl:param name="pattern" as="xs:string?"/>
 		<xsl:sequence select="xsb:index-of-first-match($input, $pattern, '')"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:fill-left()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>String, der aufgefüllt werden soll</para></doc:param>
+		<doc:param name="fill-with"><para>Zeichen, mit dem aufgefüllt werden soll</para></doc:param>
+		<doc:param name="length"><para>Anzahl Zeichen, auf die aufgefüllt werden soll</para></doc:param>
+		<para xml:id="fill-left">füllt <code>$input</code> links bis zur Länge <code>$length</code> mit dem Zeichen <code>$fill-with auf</code></para>
+		<para>Bei einem Leerstring oder einer Leersequenz als <code>$input</code> wird vollständig mit <code>$fill-with</code> aufgefüllt.</para>
+		<para>Bei einem Leerstring oder einer Leersequenz als <code>$fill-with</code> wird <code>$input</code> unverändert zurückgegeben.</para>
+		<para>Ist <code>$input</code> länger als <code>$fill-with</code>, wird <code>$input</code> unverändert zurückgegeben.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:fill-left('X', '-', 4)</function> ergibt »<code>---X</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:fill-left('', '-', 4)</function> ergibt »<code>----</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:fill-left('X', '', 4)</function> ergibt »<code>X</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:fill-left('sieben', '-', 4)</function> ergibt »<code>sieben</code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:fill-left" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="fill-with" as="xs:string?"/>
+		<xsl:param name="length" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="string-length($fill-with) eq 0">
+				<xsl:sequence select="concat('', $input)"/>
+			</xsl:when>
+			<xsl:when test="string-length($input) lt $length">
+				<xsl:sequence select="string-join( (for $i in 1 to $length - string-length($input) return substring($fill-with, 1, 1), $input), '')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="concat('', $input)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	<!--  -->
+	<!--  -->
+	<!-- __________     xsb:fill-right()     __________ -->
+	<doc:function>
+		<doc:param name="input"><para>String, der aufgefüllt werden soll</para></doc:param>
+		<doc:param name="fill-with"><para>Zeichen, mit dem aufgefüllt werden soll</para></doc:param>
+		<doc:param name="length"><para>Anzahl Zeichen, auf die aufgefüllt werden soll</para></doc:param>
+		<para xml:id="fill-right">füllt <code>$input</code> rechts bis zur Länge <code>$length</code> mit dem Zeichen <code>$fill-with auf</code></para>
+		<para>Bei einem Leerstring oder einer Leersequenz als <code>$input</code> wird vollständig mit <code>$fill-with</code> aufgefüllt.</para>
+		<para>Bei einem Leerstring oder einer Leersequenz als <code>$fill-with</code> wird <code>$input</code> unverändert zurückgegeben.</para>
+		<para>Ist <code>$input</code> länger als <code>$fill-with</code>, wird <code>$input</code> unverändert zurückgegeben.</para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:fill-right('X', '-', 4)</function> ergibt »<code>X---</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:fill-right('', '-', 4)</function> ergibt »<code>----</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:fill-right('X', '', 4)</function> ergibt »<code>X</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:fill-right('sieben', '-', 4)</function> ergibt »<code>sieben</code>«</para>
+			</listitem>
+		</itemizedlist>
+		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revdescription>
+					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</doc:function>
+	<xsl:function name="xsb:fill-right" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="fill-with" as="xs:string?"/>
+		<xsl:param name="length" as="xs:integer"/>
+		<xsl:choose>
+			<xsl:when test="string-length($fill-with) eq 0">
+				<xsl:sequence select="concat('', $input)"/>
+			</xsl:when>
+			<xsl:when test="string-length($input) lt $length">
+				<xsl:sequence select="string-join( ($input, for $i in 1 to $length - string-length($input) return substring($fill-with, 1, 1) ), '')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="concat('', $input)"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->

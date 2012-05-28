@@ -323,7 +323,7 @@
 		<xsl:param name="actual-value" as="xs:boolean" required="yes"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:choose>
-				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name() eq $function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
 					<xsl:call-template name="xsb:internals.testing.SkippedTests">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 					</xsl:call-template>
@@ -332,7 +332,7 @@
 					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 						<xsl:with-param name="actual-value" select="$actual-value"/>
-						<xsl:with-param name="reference-value" select="xsb:parse-string-to-boolean($test-node/*[name()=$function-name] )"/>
+						<xsl:with-param name="reference-value" select="xsb:parse-string-to-boolean($test-node/*[name() eq $function-name] )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -387,7 +387,7 @@
 		<xsl:param name="actual-value" as="xs:string?" required="yes"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:choose>
-				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name() eq $function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
 					<xsl:call-template name="xsb:internals.testing.SkippedTests">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 					</xsl:call-template>
@@ -396,7 +396,7 @@
 					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 						<xsl:with-param name="actual-value" select="string( $actual-value )"/>
-						<xsl:with-param name="reference-value" select="string( $test-node/*[name()=$function-name]/text() )"/>
+						<xsl:with-param name="reference-value" select="string( $test-node/*[name() eq $function-name]/text() )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -445,7 +445,7 @@
 		<xsl:param name="actual-value" required="yes" as="xs:anyAtomicType"/>
 		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
 			<xsl:choose>
-				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name()=$function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name() eq $function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
 					<xsl:call-template name="xsb:internals.testing.SkippedTests">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 					</xsl:call-template>
@@ -454,7 +454,7 @@
 					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
 						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
 						<xsl:with-param name="actual-value" select="$actual-value"/>
-						<xsl:with-param name="reference-value" select="xsb:cast($test-node/*[name()=$function-name]/text(), xsb:type-annotation($actual-value) )"/>
+						<xsl:with-param name="reference-value" select="xsb:cast($test-node/*[name() eq $function-name]/text(), xsb:type-annotation($actual-value) )"/>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -494,7 +494,7 @@
 				<!-- Dummy-Text als Fehler-Signal -->
 				<xsl:text>Fehler</xsl:text>
 			</xsl:if>
-			<xsl:if test="not($test-node/*[name()=$function-name] )">
+			<xsl:if test="not($test-node/*[name() eq $function-name] )">
 				<xsl:call-template name="xsb:internals.FunctionError">
 					<xsl:with-param name="caller">xsb:internals.test.function.withTestItem.Test-Node.Test, function-name="<xsl:sequence select="$function-name"/>"</xsl:with-param>
 					<xsl:with-param name="message">test-Element ohne <xsl:sequence select="$function-name"/>-Element</xsl:with-param>
@@ -503,7 +503,7 @@
 				<!-- Dummy-Text als Fehler-Signal -->
 				<xsl:text>Fehler</xsl:text>
 			</xsl:if>
-			<xsl:if test="count($test-node/*[name()=$function-name]) gt 1 ">
+			<xsl:if test="count($test-node/*[name() eq $function-name]) gt 1 ">
 				<xsl:call-template name="xsb:internals.FunctionError">
 					<xsl:with-param name="caller">xsb:internals.test.function.withTestItem.Test-Node.Test, function-name="<xsl:sequence select="$function-name"/>"</xsl:with-param>
 					<xsl:with-param name="message">test-Element mit mehr als einem <xsl:sequence select="$function-name"/>-Element</xsl:with-param>

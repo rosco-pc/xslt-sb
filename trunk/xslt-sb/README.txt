@@ -12,6 +12,22 @@ You can start a new project by copy & paste from pattern+includes.xsl.
 === Revision ===
 $Revision$, $Date$
 
+--- Changes in 0.2.50 ---
+* single pages for every function and every template in Goggle Code wiki
+* new functions:
+** xsb:integer-to-hex()
+** xsb:twos-complement()
+** xsb:reverse-twos-complement()
+** xsb:hex-to-integer()
+** xsb:fill-left()
+** xsb:fill-right()
+** xsb:escape-for-replacement()
+** xsb:sort()
+** xsb:escape-for-regex()
+** xsb:count-matches()
+** xsb:decode-from-url()
+* tests from numbers.xsl separeted to numbers_tests.xsl
+
 --- Changes in 0.2.41 ---
 * math.xsl: new functions for random numbers, new statistical functions (mainly for testing random numbers)
 ** intern:linear-congruential-generator(), intern:random-seed(), intern:random-sequence(), xsb:random(), xsb:random-sequence()

@@ -20,17 +20,17 @@ Die Stylesheets folgen dem Paradigma von "Convention over Configuration", d.h. s
 Ungültige Eingaben werden soweit wie möglich abgefangen und – unter Ausgabe einer Warnung – durch sinnvolle Werte ersetzt. Diese Warnung kann abgeschaltet werden, das muss aber explizit erfolgen.
 
 Per Standard werden dafür folgende Fehlerlevel verwendet: 
-  * `WARN`: Falsche Parameterwerte, ungültige Eingabewerte, es konnte zur Fehlerbehebung ein Standardwert zurückgegeben werden
-  * `ERROR`: falsche Benutzung der XSLT-SB, Programmierfehler: in der Regel Abbruch der Verarbeitung
-  * `FATAL` (sofortiger Abbruch der Verarbeitung): a) Fehler hat eventuell externe Auswirkungen/Seiteneffekte, z.B. falsche Ermittlung eines Dateinamens, b) Fataler Fehler innerhalb der XSLT-SB
-  
+ * `WARN`: Falsche Parameterwerte, ungültige Eingabewerte, es konnte zur Fehlerbehebung ein Standardwert zurückgegeben werden
+ * `ERROR`: falsche Benutzung der XSLT-SB, Programmierfehler: in der Regel Abbruch der Verarbeitung
+ * `FATAL` (sofortiger Abbruch der Verarbeitung): a) Fehler hat eventuell externe Auswirkungen/Seiteneffekte, z.B. falsche Ermittlung eines Dateinamens, b) Fataler Fehler innerhalb der XSLT-SB
+
   
 
 Diese Bibliothek ist "work in progress". Templates und Funktionen entstehen nicht systematisch, sondern nach Bedarf. Entsprechend ihrer Reife werden sie mit einem der Stati "alpha", "beta", "mature" versehen. Dabei werden folgende Kriterien zu Grunde gelegt: 
-  * alpha: Tests erfolgreich mit Saxon
-  * beta: Tests erfolgreich mit Saxon sowie AltovaXML oder Intel, außerdem haben alle aufgerufenen Funktionen/Templates den Status "beta"
-  * mature: Funktion bzw. Template ist seit mindestens einem Jahr Teil der Bibliothek und alle benutzen Funktionen/Templates haben den Status "mature"
-  
+ * alpha: Tests erfolgreich mit Saxon
+ * beta: Tests erfolgreich mit Saxon sowie AltovaXML oder Intel, außerdem haben alle aufgerufenen Funktionen/Templates den Status "beta"
+ * mature: Funktion bzw. Template ist seit mindestens einem Jahr Teil der Bibliothek und alle benutzen Funktionen/Templates haben den Status "mature"
+
  Produktiv sollten nur mit "mature" gekennzeichnete Funktionen und Templates eingesetzt werden.
 
 *Namenskonventionen*
@@ -94,5 +94,5 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 
 _Hinweis: Diese Wiki-Seite wird automatisch aus der Dokumentation der einzenen Stylesheets der XSLT-SB erzeugt und soll deshalb nicht bearbeitet werden._
 
-_Seite erstellt am 25.03.2012_
+_Seite erstellt am 28.05.2012_
 
