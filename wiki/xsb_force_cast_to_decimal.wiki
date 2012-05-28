@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:force-cast-to-decimal()}}}
+#summary Details für »xsb:force-cast-to-decimal()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{numbers.xsl}}}
 ==Parameter==
 `input`: zu castender String
 
+
 `warn-if-wrong-input`: (Boolean) Erzeugt eine Fehlermeldung, wenn der eingegebenen String keine gültige `xs:decimal`-Zahl ist.
+
 
 
 ==Beschreibung==
@@ -56,6 +58,7 @@ Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: zu castender String
+
 
 
 ==Beschreibung==

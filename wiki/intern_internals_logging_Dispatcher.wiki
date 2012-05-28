@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.Dispatcher}}}
+#summary Details für »intern:internals.logging.Dispatcher«
 #labels Dokumentation
 #sidebar TableOfContents
 

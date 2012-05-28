@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:escape-for-regex()}}}
+#summary Details für »xsb:escape-for-regex()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: String, der escapet werden soll
+
 
 
 ==Beschreibung==

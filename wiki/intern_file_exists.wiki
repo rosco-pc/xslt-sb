@@ -1,4 +1,4 @@
-#summary Details für {{{intern:file-exists()}}}
+#summary Details für »intern:file-exists()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Absoluter Pfad zur zu überprüfenden Datei.
+
 
 
 ==Beschreibung==
@@ -39,6 +40,7 @@ Stylesheet: {{{files.xsl}}}
 `absoluteURL`: Pfad zur zu überprüfenden Datei
 
 
+
 ==Beschreibung==
 Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`). 
 
@@ -66,6 +68,7 @@ Stylesheet: {{{files.xsl}}}
 `absoluteURL`: Pfad zur zu überprüfenden Datei
 
 
+
 ==Beschreibung==
 Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Ergebnis ist ein Wahrheitswert (`xs:boolean`, `true()` oder `false()`). 
 
@@ -91,6 +94,7 @@ Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei
+
 
 
 ==Beschreibung==

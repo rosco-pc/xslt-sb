@@ -1,4 +1,4 @@
-#summary Details für {{{intern:atan()}}}
+#summary Details für »intern:atan()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `intern:atan()`-Funktion
+
 
 
 ==Beschreibung==

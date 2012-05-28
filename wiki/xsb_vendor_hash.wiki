@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:vendor-hash()}}}
+#summary Details für »xsb:vendor-hash()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,13 +9,18 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `product-name`: Wert der entsprechenden System-Eigenschaft (String)
 
+
 `product-version`: Wert der entsprechenden System-Eigenschaft (String)
+
 
 `java-available`: Wert der entsprechenden System-Eigenschaft (Boolean)
 
+
 `is-schema-aware`: (Boolean)Wert der entsprechenden System-Eigenschaft (muss ggfs. von String umgewandelt werden, etwa mit xsb:parse-string-to-boolean())
 
+
 `warn-if-wrong-input`: Erzeugt eine Fehlermeldung, wenn der eingegebene String nicht in der Liste der gültigen Werte enthalten ist. (Boolean)
+
 
 
 ==Beschreibung==
@@ -73,17 +78,22 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `product-name`: Wert der entsprechenden System-Eigenschaft (String)
 
+
 `product-version`: Wert der entsprechenden System-Eigenschaft (String)
+
 
 `java-available`: Wert der entsprechenden System-Eigenschaft (Boolean)
 
+
 `is-schema-aware`: (Boolean)Wert der entsprechenden System-Eigenschaft (muss ggfs. von String umgewandelt werden, etwa mit xsb:parse-string-to-boolean())
+
 
 `warn-if-wrong-input`: Erzeugt eine Fehlermeldung, wenn der eingegebene String nicht in der Liste der gültigen Werte enthalten ist. (Boolean)
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:vendor-hash($product-name, $product-version, $java-available, true())``.
+Shortcut für `{{{xsb:vendor-hash($product-name, $product-version, $java-available, true())}}}`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

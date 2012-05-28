@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:internals.MakeHeader}}}
+#summary Details für »xsb:internals.MakeHeader«
 #labels Dokumentation
 #sidebar TableOfContents
 

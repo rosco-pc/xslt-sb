@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.FatalError}}}
+#summary Details für »intern:internals.FatalError«
 #labels Dokumentation
 #sidebar TableOfContents
 

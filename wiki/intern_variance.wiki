@@ -1,4 +1,4 @@
-#summary Details für {{{intern:variance()}}}
+#summary Details für »intern:variance()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,10 +10,11 @@ Stylesheet: {{{math.xsl}}}
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten
 
 
+
 ==Beschreibung==
 berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz
 
-Der Algorithmus wird unter `http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant` beschrieben.
+Der Algorithmus wird unter [http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Compensated_variant] beschrieben.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:linear-congruential-generator()}}}
+#summary Details für »intern:linear-congruential-generator()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `length`: Anzahl der neu zu erzeugende Werte
 
+
 `vortrag`: Hilfsparameter für die rekursive Erzeugung der Sequenz. Beim Aufruf der Funktion wird hier der Seed-Wert übergeben, bei weiteren Durchläufen werden neu generierte angehängt. Bei Rückgabe der Seguenz wird der erste Wert (Seed) entfernt.
+
 
 
 ==Beschreibung==
@@ -19,7 +21,7 @@ Die erzeugten Werte liegen zwischen 0 und 4294967295.
 
 Die Länge der erzeugten Sequenz ist die Anzahl der Werte in `vortrag` minus `1` plus `length`.
 
-Für Details siehe `http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator` und `http://en.wikipedia.org/wiki/Linear_congruential_generator`.
+Für Details siehe [http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator http://de.wikipedia.org/wiki/Kongruenzgenerator#Linearer_Kongruenzgenerator] und [http://en.wikipedia.org/wiki/Linear_congruential_generator http://en.wikipedia.org/wiki/Linear_congruential_generator].
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

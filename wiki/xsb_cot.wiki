@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:cot()}}}
+#summary Details für »xsb:cot()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Eingabewert, als Bogenmaß
+
 
 
 ==Beschreibung==

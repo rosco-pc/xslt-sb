@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:deg-to-rad()}}}
+#summary Details für »xsb:deg-to-rad()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `deg`: Eingabe im Gradmaß
+
 
 
 ==Beschreibung==

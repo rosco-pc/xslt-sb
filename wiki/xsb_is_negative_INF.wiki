@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:is-negative-INF()}}}
+#summary Details für »xsb:is-negative-INF()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Funktionsargument
+
 
 
 ==Beschreibung==

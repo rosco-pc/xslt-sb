@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:nroot()}}}
+#summary Details für »xsb:nroot()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -7,9 +7,11 @@
 Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
-`wurzelbasis`: Wurzelbasis (Radikand)
+`wurzelbasis`: Wurzelbasis (Radikand); muss größer Null sein
 
-; muss größer Null sein`wurzelexponent`: Wurzelexponent; muss eine natürliche Zahl sein
+
+`wurzelexponent`: Wurzelexponent; muss eine natürliche Zahl sein
+
 
 
 ==Beschreibung==

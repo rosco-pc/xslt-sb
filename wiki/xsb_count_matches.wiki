@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:count-matches()}}}
+#summary Details für »xsb:count-matches()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,9 +9,12 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `string`: String, in dem gezählt wird
 
+
 `regex`: regulärer Ausdruck, nach dem in `string` gesucht wird
 
-`flags`: flags analog zum `flags`-Parameter von `fn:matches()` (siehe _XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)_, `7.6.6.1 Flags`)
+
+`flags`: flags analog zum `flags`-Parameter von `fn:matches()` (siehe _XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)_, [http://www.w3.org/TR/xpath-functions/#flags 7.6.6.1 Flags])
+
 
 
 ==Beschreibung==
@@ -56,11 +59,13 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `string`: String, in dem gezählt wird
 
+
 `regex`: regulärer Ausdruck, nach dem in `string` gesucht wird
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:count-matches($string, $regex, '')``
+Shortcut für `{{{xsb:count-matches($string, $regex, '')}}}`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

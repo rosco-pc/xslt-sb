@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.EmptySequenceAllowed}}}
+#summary Details für »intern:internals.Stylecheck.EmptySequenceAllowed«
 #labels Dokumentation
 #sidebar TableOfContents
 

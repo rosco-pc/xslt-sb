@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:internals.test.Function}}}
+#summary Details für »xsb:internals.test.Function«
 #labels Dokumentation
 #sidebar TableOfContents
 

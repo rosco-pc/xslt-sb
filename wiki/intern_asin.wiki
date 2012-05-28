@@ -1,4 +1,4 @@
-#summary Details für {{{intern:asin()}}}
+#summary Details für »intern:asin()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `intern:asin()`-Funktion
+
 
 
 ==Beschreibung==

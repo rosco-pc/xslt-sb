@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:variance()}}}
+#summary Details für »xsb:variance()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten
+
 
 
 ==Beschreibung==

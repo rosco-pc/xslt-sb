@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:listed()}}}
+#summary Details für »xsb:listed()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `list`: Whitespace-getrennte Liste von String-Token
 
+
 `item`: String-Token, auf dessen Existenz getestet werden soll
+
 
 
 ==Beschreibung==

@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:index-of-first-match()}}}
+#summary Details für »xsb:index-of-first-match()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,9 +9,12 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `input`: String, in dem gesucht wird
 
+
 `pattern`: regulärer Ausdruck, nach dem in `input` gesucht wird
 
-`flags`: flags analog zum `flags`-Parameter von `fn:tokenize()` (siehe _XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)_, `7.6.6.1 Flags`)
+
+`flags`: flags analog zum `flags`-Parameter von `fn:tokenize()` (siehe _XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)_, [http://www.w3.org/TR/xpath-functions/#flags 7.6.6.1 Flags])
+
 
 
 ==Beschreibung==
@@ -55,11 +58,13 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `input`: String, in dem gesucht wird
 
+
 `pattern`: regulärer Ausdruck, nach dem in `input` gesucht wird
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:index-of-first-match($input, $pattern, '')``
+Shortcut für `{{{xsb:index-of-first-match($input, $pattern, '')}}}`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

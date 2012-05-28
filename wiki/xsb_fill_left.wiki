@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:fill-left()}}}
+#summary Details für »xsb:fill-left()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,9 +9,12 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `input`: String, der aufgefüllt werden soll
 
+
 `fill-with`: Zeichen, mit dem aufgefüllt werden soll
 
+
 `length`: Anzahl Zeichen, auf die aufgefüllt werden soll
+
 
 
 ==Beschreibung==

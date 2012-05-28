@@ -1,4 +1,4 @@
-#summary Überblick der Funktionen und Templates von {{{internals.logging.xsl}}}
+#summary Überblick der Funktionen und Templates von »internals.logging.xsl«
 #labels Dokumentation
 #sidebar TableOfContents
 

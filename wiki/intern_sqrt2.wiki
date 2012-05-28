@@ -1,4 +1,4 @@
-#summary Details für {{{intern:sqrt2()}}}
+#summary Details für »intern:sqrt2()«
 #labels Dokumentation
 #sidebar TableOfContents
 

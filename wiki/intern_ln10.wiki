@@ -1,4 +1,4 @@
-#summary Details für {{{intern:ln10()}}}
+#summary Details für »intern:ln10()«
 #labels Dokumentation
 #sidebar TableOfContents
 

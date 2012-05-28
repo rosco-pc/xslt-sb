@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:pow()}}}
+#summary Details für »xsb:pow()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,13 +9,15 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `basis`: Basis
 
+
 `exponent`: Exponent
+
 
 
 ==Beschreibung==
 berechnet die Potenz basis^exponent
 
-Bei ganzzahligen Exponenten wird die multiplikative Variante mit ``intern:power()`` ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.
+Bei ganzzahligen Exponenten wird die multiplikative Variante mit `{{{intern:power()}}}` ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

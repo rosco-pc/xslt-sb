@@ -1,4 +1,4 @@
-#summary Details für {{{intern:half-pi()}}}
+#summary Details für »intern:half-pi()«
 #labels Dokumentation
 #sidebar TableOfContents
 

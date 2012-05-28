@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:logging-level()}}}
+#summary Details für »xsb:logging-level()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `verbal-logging-level`: Eingabeknoten (ohne Typ)
 
+
 `warn-if-wrong-input`: Erzeugt eine Fehlermeldung, wenn der eingegebenen String nicht »`ALL`« > »`TRACE`« > »`DEBUG`« > »`INFO`« > »`WARN`« > »`ERROR`« > »`FATAL`« ist.
+
 
 
 ==Beschreibung==
@@ -58,8 +60,9 @@ Stylesheet: {{{internals.xsl}}}
 `verbal-logging-level`: Eingabeknoten (ohne Typ)
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:logging-level($verbal-logging-level, true() )``.
+Shortcut für `{{{xsb:logging-level($verbal-logging-level, true() )}}}`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

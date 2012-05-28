@@ -1,4 +1,4 @@
-#summary Details für {{{intern:castable-as-xs-name()}}}
+#summary Details für »intern:castable-as-xs-name()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{internals.meta.xsl}}}
 
 ==Parameter==
 `string`: String, der geprüft werden soll.
+
 
 
 ==Beschreibung==

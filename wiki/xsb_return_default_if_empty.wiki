@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:return-default-if-empty()}}}
+#summary Details für »xsb:return-default-if-empty()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `input`: Eingabe (String)
 
+
 `default`: Standardwert (String)
+
 
 
 ==Beschreibung==

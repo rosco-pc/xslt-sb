@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem}}}
+#summary Details für »intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem«
 #labels Dokumentation
 #sidebar TableOfContents
 

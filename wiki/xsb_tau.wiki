@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:tau()}}}
+#summary Details für »xsb:tau()«
 #labels Dokumentation
 #sidebar TableOfContents
 

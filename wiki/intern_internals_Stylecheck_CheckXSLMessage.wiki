@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.CheckXSLMessage}}}
+#summary Details für »intern:internals.Stylecheck.CheckXSLMessage«
 #labels Dokumentation
 #sidebar TableOfContents
 

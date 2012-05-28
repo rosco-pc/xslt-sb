@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:file-extension-from-mediatype()}}}
+#summary Details für »xsb:file-extension-from-mediatype()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{files.xsl}}}
 ==Parameter==
 `mediatype`: Mediatype, aus dem die Dateierweiterung ermittelt werden soll.
 
+
 `warn-if-wrong-input`: Soll eine Warnung ausgegeben werden, wenn die Dateierweiterung nicht ermittelt werden kann?
+
 
 
 ==Beschreibung==
@@ -60,6 +62,7 @@ Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `mediatype`: Mediatype, aus dem die Dateierweiterung ermittelt werden soll.
+
 
 
 ==Beschreibung==

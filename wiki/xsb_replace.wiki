@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:replace()}}}
+#summary Details für »xsb:replace()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,11 +9,15 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `input`: String, in dem ersetzt wird
 
+
 `pattern`: Sequenz von regulären Ausdrücken, nach denen in `input` gesucht wird
+
 
 `replacement`: Sequenz von Ersetzungstexten
 
-`flags`: flags analog zum `flags`-Parameter von `fn:replace()` (siehe _XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)_, `7.6.6.1 Flags`)
+
+`flags`: flags analog zum `flags`-Parameter von `fn:replace()` (siehe _XQuery 1.0 and XPath 2.0 Functions and Operators (Second Edition)_, [http://www.w3.org/TR/xpath-functions/#flags 7.6.6.1 Flags])
+
 
 
 ==Beschreibung==
@@ -73,13 +77,16 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `input`: String, in dem ersetzt wird
 
+
 `pattern`: Sequenz von regulären Ausdrücken, nach denen in `input` gesucht wird
+
 
 `replacement`: Sequenz von Ersetzungstexten
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:replace($input, $pattern, $replacement, '')``
+Shortcut für `{{{xsb:replace($input, $pattern, $replacement, '')}}}`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

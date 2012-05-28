@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.Render-to-xml}}}
+#summary Details für »intern:internals.logging.Render-to-xml«
 #labels Dokumentation
 #sidebar TableOfContents
 

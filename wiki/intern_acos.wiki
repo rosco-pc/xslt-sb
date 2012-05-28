@@ -1,4 +1,4 @@
-#summary Details für {{{intern:acos()}}}
+#summary Details für »intern:acos()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `intern:acos()`-Funktion
+
 
 
 ==Beschreibung==

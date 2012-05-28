@@ -1,4 +1,4 @@
-#summary Überblick der Funktionen und Templates von {{{standard.xsl}}}
+#summary Überblick der Funktionen und Templates von »standard.xsl«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,7 +10,7 @@ Die XSLT-Standard-Bibliothek (XSLT-SB) beinhaltet nützliche, immer wieder gebra
 
 *Benutzung*
 
-Die Stylesheets der XSLT-SB können per `xsl:import` bzw. `xsl:include` direkt in eigene Stylesheets eingebunden werden. Die meisten Stylesheets binden weitere Stylesheets ein. Die Import-Hierarchie (und damit eine Liste der jeweils benötigten Stylesheets) wird am Anfang der HTML-Dokumentation (unter »Import/include tree«) ausgegeben. So kann man beispielsweise in ``math.html`` nachlesen, dass `internals.xsl`, `internals.logging.xsl` und `strings.xsl` benötigt werden. (Saxon beschwert sich ab Version 9.3 über das mehrfache Einbinden von Stylesheets, dies ist aber kein Fehler, sondern ein ignorierbarer Hinweis.)
+Die Stylesheets der XSLT-SB können per `xsl:import` bzw. `xsl:include` direkt in eigene Stylesheets eingebunden werden. Die meisten Stylesheets binden weitere Stylesheets ein. Die Import-Hierarchie (und damit eine Liste der jeweils benötigten Stylesheets) wird am Anfang der HTML-Dokumentation (unter »Import/include tree«) ausgegeben. So kann man beispielsweise in {{{`math.html`}}} nachlesen, dass `internals.xsl`, `internals.logging.xsl` und `strings.xsl` benötigt werden. (Saxon beschwert sich ab Version 9.3 über das mehrfache Einbinden von Stylesheets, dies ist aber kein Fehler, sondern ein ignorierbarer Hinweis.)
 
 Die Test-Stylesheets (z.B. »`math_tests.xsl`«) werden zum Einsatz der Bibliothek nicht benötigt.
 
@@ -76,15 +76,15 @@ Bei jeder Stylesheet-Datei werden die Tests in einem Template mit dem Namen `int
 
 Alle Funktionen und Templates sowie deren Parameter werden – soweit sinnvoll – dokumentiert. Die Dokumentation umfasst eine kurze Beschreibung der Funktionalität und eventueller Parameter.
 
-Zur Dokumentation wird XSLStyle™ mit DocBook verwendet. Hinweise zur Installation und Bedienung finden sich u.a. auf `blog.expedimentum.com`.
+Zur Dokumentation wird XSLStyle™ mit DocBook verwendet. Hinweise zur Installation und Bedienung finden sich u.a. auf [http://blog.expedimentum.com/2009/xslt-dokumentation-mit-xslstyle%E2%84%A2/ blog.expedimentum.com].
 
 Zu jeder Funktion und jedem Template muss es in der Dokumentation ein para-Element mit einem xml:id-Attribut geben, dessen Wert der lokale Name der Funktion ist. XSLStyle™ erzeugt daraus in der HTML-Dokumentation Anker, so dass die Funktions-/Template-Beschreibungen direkt von außen verlinkt werden können.
 
 *Entwicklungsumgebung*
 
-Die XSLT-SB wurde mit `OxygenXML` entwickelt. Im Verzeichnis `tools` liegt die passende XPR-(Projekt-)Datei. Natürlich können die Stylesheets selbst aber in jeder beliebigen XSLT-2.0-Umgebung eingesetzt werden.
+Die XSLT-SB wurde mit [http://www.oxygenxml.com/ OxygenXML] entwickelt. Im Verzeichnis `tools` liegt die passende XPR-(Projekt-)Datei. Natürlich können die Stylesheets selbst aber in jeder beliebigen XSLT-2.0-Umgebung eingesetzt werden.
 
-Zur XSLT-SB gehört eine `build.xml` für `Apache Ant`. Dieses Skript führt Routineaufgaben wie die Erstellung der Dokumentation, den Selbsttest der Stylesheets mit unterschiedlichen XSLT-Prozessoren und das Zippen von Distributionen für den Download durch. Außerdem können externe Tools wie Saxon-HE oder XSLStyle™ installiert werden. Wie unter Ant üblich können die verfügbaren Targets (Befehle) mit `ant -p` angezeigt werden. Für nahezu alle Targets sind zusätzliche Programme nötig, die einmalig mit `ant get_tools` installiert werden müssen. Falls auch mit `AltovaXML` getestet werden soll, muss dieses von Hand installiert und der Pfad in `build.xml` eingetragen werden.
+Zur XSLT-SB gehört eine `build.xml` für [http://ant.apache.org/ Apache Ant]. Dieses Skript führt Routineaufgaben wie die Erstellung der Dokumentation, den Selbsttest der Stylesheets mit unterschiedlichen XSLT-Prozessoren und das Zippen von Distributionen für den Download durch. Außerdem können externe Tools wie Saxon-HE oder XSLStyle™ installiert werden. Wie unter Ant üblich können die verfügbaren Targets (Befehle) mit `ant -p` angezeigt werden. Für nahezu alle Targets sind zusätzliche Programme nötig, die einmalig mit `ant get_tools` installiert werden müssen. Falls auch mit [http://www.altova.com/altovaxml.html AltovaXML] getestet werden soll, muss dieses von Hand installiert und der Pfad in `build.xml` eingetragen werden.
 
 Für die Benutzung der XSLT-SB ist Ant aber nicht notwendig, die Stylesheets können direkt in eigene Projekte eingebunden werden.
 

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.RequiredParameter}}}
+#summary Details für »intern:internals.Stylecheck.RequiredParameter«
 #labels Dokumentation
 #sidebar TableOfContents
 

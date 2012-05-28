@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:internals.test.function.withTestItem.NumericResult}}}
+#summary Details für »xsb:internals.test.function.withTestItem.NumericResult«
 #labels Dokumentation
 #sidebar TableOfContents
 

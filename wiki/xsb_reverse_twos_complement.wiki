@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:reverse-twos-complement()}}}
+#summary Details für »xsb:reverse-twos-complement()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `input`: Integer-Zahl
 
+
 `n`: Anzahl Bits für das Zeierkomplement
+
 
 
 ==Beschreibung==

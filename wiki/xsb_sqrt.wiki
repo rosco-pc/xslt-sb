@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:sqrt()}}}
+#summary Details für »xsb:sqrt()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Eingabewert
+
 
 
 ==Beschreibung==

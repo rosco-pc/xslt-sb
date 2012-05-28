@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:e()}}}
+#summary Details für »xsb:e()«
 #labels Dokumentation
 #sidebar TableOfContents
 

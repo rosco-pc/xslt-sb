@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:type-annotation()}}}
+#summary Details für »xsb:type-annotation()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,15 +9,17 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
 
+
 `warn-if-wrong-input`: Erzeugt eine Fehlermeldung, wenn der Typ nicht ermittelt werden kann. Da die Tests vollständig sind und zumindest `xs:untypedAtomic` immer das Ergebnis sein sollte, dürfet dieser Fehler nie auftreten.
+
 
 
 ==Beschreibung==
 ermittelt den Typ eines Atomic Values
 
-Dazu wird das Argument mit einer Reihe von `instance of …` geprüft. Geprüft werden diejenigen Typen, die ein Basic-XSLT-Prozessor laut XSLT-Standard unterstützen muss (vgl. `3.13 Built-in Types`). Das sind `xs:double`, `xs:decimal`, `xs:integer`, `xs:float`, `xs:dateTime`, `xs:date`, `xs:time`, `xs:boolean`, `xs:yearMonthDuration`, `xs:dayTimeDuration`, `xs:duration`, `xs:string`, `xs:QName`, `xs:anyURI`, `xs:gYearMonth`, `xs:gMonthDay`, `xs:gYear`, `xs:gMonth`, `xs:gDay`, `xs:base64Binary`, `xs:hexBinary`, `xs:untypedAtomic` und `xs:anyAtomicType`.
+Dazu wird das Argument mit einer Reihe von `instance of …` geprüft. Geprüft werden diejenigen Typen, die ein Basic-XSLT-Prozessor laut XSLT-Standard unterstützen muss (vgl. [http://www.w3.org/TR/xslt20/#built-in-types 3.13 Built-in Types]). Das sind `xs:double`, `xs:decimal`, `xs:integer`, `xs:float`, `xs:dateTime`, `xs:date`, `xs:time`, `xs:boolean`, `xs:yearMonthDuration`, `xs:dayTimeDuration`, `xs:duration`, `xs:string`, `xs:QName`, `xs:anyURI`, `xs:gYearMonth`, `xs:gMonthDay`, `xs:gYear`, `xs:gMonth`, `xs:gDay`, `xs:base64Binary`, `xs:hexBinary`, `xs:untypedAtomic` und `xs:anyAtomicType`.
 
-Achtung: Die XSLT-Prozessor-Hersteller sind nicht verpflichtet, intern den jeweils »richtigen« Typ zu verwenden, $arg kann auch von einem beliebigen Subtyp sein (vgl. `hier`).
+Achtung: Die XSLT-Prozessor-Hersteller sind nicht verpflichtet, intern den jeweils »richtigen« Typ zu verwenden, $arg kann auch von einem beliebigen Subtyp sein (vgl. [http://markmail.org/message/4duzqlie5chiizrv hier]).
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||
@@ -83,6 +85,7 @@ Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
+
 
 
 ==Beschreibung==

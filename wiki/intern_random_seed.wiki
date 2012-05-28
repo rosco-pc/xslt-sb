@@ -1,4 +1,4 @@
-#summary Details für {{{intern:random-seed()}}}
+#summary Details für »intern:random-seed()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,6 +10,7 @@ Stylesheet: {{{math.xsl}}}
 `volatile`: ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte
 
 
+
 ==Beschreibung==
 erzeugt eine Zufallszahl
 
@@ -17,7 +18,7 @@ In die Berechnung der Zufallszahl gehen das aktuelle Datum und die aktuelle Uhrz
 
 Auch unabhängig vom Wert von `volatile` werden bei jedem Aufruf neue zufällige Werte erzeugt, allerdings 1) vermindert ein möglichst zufälliger `volatile`-Wert die Vorhersagbarkeit des Ergebnisses und 2) verhindert ein wechselnder `volatile`-Wert bei wiederholten Aufrufen der Funktion, dass der XSLT-Prozessor die unterschiedlichen Rückgabewerte qua Optimierung zu einem Wert vereinheitlicht.
 
-Zum Hintergrund siehe `http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/`.
+Zum Hintergrund siehe [http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/ http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/].
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

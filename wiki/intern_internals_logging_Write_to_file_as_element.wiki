@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.Write-to-file-as-element}}}
+#summary Details für »intern:internals.logging.Write-to-file-as-element«
 #labels Dokumentation
 #sidebar TableOfContents
 

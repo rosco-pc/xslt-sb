@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:internals.Log-system-properties}}}
+#summary Details für »xsb:internals.Log-system-properties«
 #labels Dokumentation
 #sidebar TableOfContents
 

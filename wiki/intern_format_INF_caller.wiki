@@ -1,4 +1,4 @@
-#summary Details für {{{intern:format-INF-caller()}}}
+#summary Details für »intern:format-INF-caller()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `arg`: Argument der aufrufenden Funktion
 
+
 `caller`: Name der aufrufenden Funktion
+
 
 
 ==Beschreibung==

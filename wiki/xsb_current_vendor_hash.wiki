@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:current-vendor-hash()}}}
+#summary Details für »xsb:current-vendor-hash()«
 #labels Dokumentation
 #sidebar TableOfContents
 

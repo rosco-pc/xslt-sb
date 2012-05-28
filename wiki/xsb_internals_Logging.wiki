@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:internals.Logging}}}
+#summary Details für »xsb:internals.Logging«
 #labels Dokumentation
 #sidebar TableOfContents
 

@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:hex-to-integer()}}}
+#summary Details für »xsb:hex-to-integer()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `input`: eine hexadezimale Zahl (beliebige Folge aus `0-9` und `A-F` bzw. `a-f`)
 
+
 `n`: Anzahl Bits für das Zeierkomplement
+
 
 
 ==Beschreibung==
@@ -17,7 +19,7 @@ wandelt Hexadezimalzahlen im Zweierkomplement in Integer-Zahlen um.
 
 Wenn `$input` nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehler ausgegeben und die Verarbeitung abgebrochen.
 
-Eine andere Version dieser Funktion, die negative Zahlen mit Minus-Vorzeichen darstellt, findet sich in `numbers.xsl`
+Eine andere Version dieser Funktion, die negative Zahlen mit Minus-Vorzeichen darstellt, findet sich in {{{numbers.xsl}}}
 
 
 *Beispiele*
@@ -106,6 +108,7 @@ Stylesheet: {{{numbers.xsl}}}
 `input`: eine hexadezimale Zahl (beliebige Folge aus `0-9` und `A-F` bzw. `a-f`), ggfs. mit einem vorangestellten »`-`« (Minus) für negative Zahlen
 
 
+
 ==Beschreibung==
 wandelt Hexadezimal- in Integer-Zahlen um.
 
@@ -113,7 +116,7 @@ Whitespace in der Eingabe wird entfernt, damit Notationen wie »`ff d8 d2 e9`« 
 
 Die Eingabe eines Leerstrings, einer Leersequenz, eines oder mehrerer ungültiger Zeichen führt zu einer Fehlermeldung.
 
-Eine andere Version dieser Funktion, die negative Zahlen als Zweierkomplement behandelt, findet sich in `math.xsl`
+Eine andere Version dieser Funktion, die negative Zahlen als Zweierkomplement behandelt, findet sich in {{{math.xsl}}}
 
 
 *Beispiele*

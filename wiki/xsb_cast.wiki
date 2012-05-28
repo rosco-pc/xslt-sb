@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:cast()}}}
+#summary Details für »xsb:cast()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,15 +9,17 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
 
+
 `as`: Typ, auf den gecastet werden soll
+
 
 
 ==Beschreibung==
 wandelt einen Atomic Value beliebigen Types in einen Atomic Value mit Typ entsprechend dem Parameter "`as`" um
 
-Unterstützt werden diejenigen Typen, die ein Basic-XSLT-Prozessor laut XSLT-Standard unterstützen muss (vgl. `3.13 Built-in Types`): `xs:double`, `xs:decimal`, `xs:integer`, `xs:float`, `xs:dateTime`, `xs:date`, `xs:time`, `xs:boolean`, `xs:yearMonthDuration`, `xs:dayTimeDuration`, `xs:duration`, `xs:string`, `xs:QName`, `xs:anyURI`, `xs:gYearMonth`, `xs:gMonthDay`, `xs:gYear`, `xs:gMonth`, `xs:gDay`, `xs:base64Binary`, `xs:hexBinary`, `xs:untypedAtomic` mit Ausnahme von `xs:anyAtomicType` (weil ein Cast dahin nicht möglich ist).
+Unterstützt werden diejenigen Typen, die ein Basic-XSLT-Prozessor laut XSLT-Standard unterstützen muss (vgl. [http://www.w3.org/TR/xslt20/#built-in-types 3.13 Built-in Types]): `xs:double`, `xs:decimal`, `xs:integer`, `xs:float`, `xs:dateTime`, `xs:date`, `xs:time`, `xs:boolean`, `xs:yearMonthDuration`, `xs:dayTimeDuration`, `xs:duration`, `xs:string`, `xs:QName`, `xs:anyURI`, `xs:gYearMonth`, `xs:gMonthDay`, `xs:gYear`, `xs:gMonth`, `xs:gDay`, `xs:base64Binary`, `xs:hexBinary`, `xs:untypedAtomic` mit Ausnahme von `xs:anyAtomicType` (weil ein Cast dahin nicht möglich ist).
 
-Laut Standard kann nicht auf `xs:QName` gecastet werden, da dieser Cast ein statisches *String Literal* erfordert und deshalb nicht mit dynamisch zu evaluierenden Variablen bzw. Parametern funktioniert. Details siehe im XPath-Standard, `Punkt 4.a.`, und `err:XPTY0004`.
+Laut Standard kann nicht auf `xs:QName` gecastet werden, da dieser Cast ein statisches *String Literal* erfordert und deshalb nicht mit dynamisch zu evaluierenden Variablen bzw. Parametern funktioniert. Details siehe im XPath-Standard, [http://www.w3.org/TR/xpath20/#id-cast Punkt 4.a.], und [http://www.w3.org/TR/xpath20/#ERRXPTY0004 err:XPTY0004].
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

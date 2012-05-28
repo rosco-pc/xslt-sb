@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:normalize-paragraphs()}}}
+#summary Details für »xsb:normalize-paragraphs()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
+
 
 
 ==Beschreibung==

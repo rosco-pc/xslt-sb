@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:is()}}}
+#summary Details für »xsb:is()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `input1`: Eingabe (ohne Typ)
 
+
 `input2`: Eingabe (ohne Typ)
+
 
 
 ==Beschreibung==

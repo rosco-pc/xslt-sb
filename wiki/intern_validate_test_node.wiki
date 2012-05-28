@@ -1,4 +1,4 @@
-#summary Details für {{{intern:validate-test-node()}}}
+#summary Details für »intern:validate-test-node()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{internals.testing.xsl}}}
 ==Parameter==
 `test-node`: zu testender test-node
 
+
 `function-name`: qualifizierter Name der Funktion, für die `$test-node` das erwartete Testergebnis beinhalten soll.
+
 
 
 ==Beschreibung==

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.MissingTypes}}}
+#summary Details für »intern:internals.Stylecheck.MissingTypes«
 #labels Dokumentation
 #sidebar TableOfContents
 

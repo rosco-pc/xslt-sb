@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:java-available()}}}
+#summary Details für »xsb:java-available()«
 #labels Dokumentation
 #sidebar TableOfContents
 

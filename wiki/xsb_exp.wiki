@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:exp()}}}
+#summary Details für »xsb:exp()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `exponent`: Exponent der e-Funktion
+
 
 
 ==Beschreibung==

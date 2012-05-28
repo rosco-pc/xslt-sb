@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:atan2()}}}
+#summary Details für »xsb:atan2()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,13 +9,15 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `y`: y-Wert (numerisch)
 
+
 `x`: x-Wert (numerisch)
+
 
 
 ==Beschreibung==
 berechnet `atan2(y, x) im Bogenmaß`
 
-Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden `XPath-3.0-Standard` zurückgegeben.
+Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden [http://www.w3.org/TR/xpath-functions-30/#func-math-atan2 XPath-3.0-Standard] zurückgegeben.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

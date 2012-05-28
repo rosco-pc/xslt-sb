@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.MakeFooter.html}}}
+#summary Details für »intern:internals.logging.MakeFooter.html«
 #labels Dokumentation
 #sidebar TableOfContents
 

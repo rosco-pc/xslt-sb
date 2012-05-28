@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.CheckMisplacedIntern}}}
+#summary Details für »intern:internals.Stylecheck.CheckMisplacedIntern«
 #labels Dokumentation
 #sidebar TableOfContents
 

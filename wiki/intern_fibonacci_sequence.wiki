@@ -1,4 +1,4 @@
-#summary Details für {{{intern:fibonacci-sequence()}}}
+#summary Details für »intern:fibonacci-sequence()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,13 +9,15 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `n`: Argument (positive natürliche Zahl), Anzahl der anzuhängenden Fibonacci-Zahlen (- 1, weil die Startsequenz in der Regel (0, 1) ist)
 
+
 `vortrag`: Sequenz von Fibonacci-Zahlen
+
 
 
 ==Beschreibung==
 berechnet rekursiv Fibonacci-Reihen, in dem an eine vorhandene Reihe die Summe aus vorletztem und letztem Item angefügt wird.
 
-Die Initalisierung erfolgt in der Regel über ``xsb:fibonacci-sequence($n as xs:integer)``, so das hier auf Typechecks verzichtet werden kann (was einer höheren Ausführungsgeschwindigkeit zu gute kommt).
+Die Initalisierung erfolgt in der Regel über `{{{xsb:fibonacci-sequence($n as xs:integer)}}}`, so das hier auf Typechecks verzichtet werden kann (was einer höheren Ausführungsgeschwindigkeit zu gute kommt).
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

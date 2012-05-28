@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.Render-to-string}}}
+#summary Details für »intern:internals.logging.Render-to-string«
 #labels Dokumentation
 #sidebar TableOfContents
 

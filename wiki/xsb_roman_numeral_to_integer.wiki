@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:roman-numeral-to-integer()}}}
+#summary Details für »xsb:roman-numeral-to-integer()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: römische Zahl (String)
+
 
 
 ==Beschreibung==

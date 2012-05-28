@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.Output}}}
+#summary Details für »intern:internals.logging.Output«
 #labels Dokumentation
 #sidebar TableOfContents
 

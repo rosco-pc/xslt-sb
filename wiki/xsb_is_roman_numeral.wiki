@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:is-roman-numeral()}}}
+#summary Details für »xsb:is-roman-numeral()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
+
 
 
 ==Beschreibung==

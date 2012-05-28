@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:atan()}}}
+#summary Details für »xsb:atan()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,10 +10,11 @@ Stylesheet: {{{math.xsl}}}
 `arg`: Argument der `xsb:atan()`-Funktion
 
 
+
 ==Beschreibung==
 ermittelt den Arkustangens (im Bogenmaß)
 
-Problematisch ist das Verhalten bei `+/-Pi div 2` mit den "richtigen" Ergebnissen `-INF` resp. `INF`. Der `XPath-3.0-Entwurf` erwartet hier nur "sehr große" resp. "sehr kleine" Zahlen, die jetzt auch geliefert werden (was vielleicht auch den Vorteil, innerhalb von `xs:decimal` ohne Abbruch weiter rechnen zu können). Allerdings könnte sich dieses Verhalten im endgültigen Standard noch ändern, so dass diese Funktion später noch verändert werden könnte.
+Problematisch ist das Verhalten bei `+/-Pi div 2` mit den "richtigen" Ergebnissen `-INF` resp. `INF`. Der [http://www.w3.org/TR/xpath-functions-30/#func-math-tan XPath-3.0-Entwurf] erwartet hier nur "sehr große" resp. "sehr kleine" Zahlen, die jetzt auch geliefert werden (was vielleicht auch den Vorteil, innerhalb von `xs:decimal` ohne Abbruch weiter rechnen zu können). Allerdings könnte sich dieses Verhalten im endgültigen Standard noch ändern, so dass diese Funktion später noch verändert werden könnte.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

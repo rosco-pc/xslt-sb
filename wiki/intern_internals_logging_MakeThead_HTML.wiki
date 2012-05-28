@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.MakeThead.HTML}}}
+#summary Details für »intern:internals.logging.MakeThead.HTML«
 #labels Dokumentation
 #sidebar TableOfContents
 

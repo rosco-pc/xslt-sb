@@ -1,4 +1,4 @@
-#summary Details für {{{intern:castable-as-xs-ncname()}}}
+#summary Details für »intern:castable-as-xs-ncname()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,8 +10,9 @@ Stylesheet: {{{internals.meta.xsl}}}
 `string`: String, der geprüft werden soll.
 
 
+
 ==Beschreibung==
-Diese Funktion überprüft eine String darauf, ob er als `xs:NCName` gecastest werden kann. Die Überprüfung erfolgt an Hand eines regulären Ausdruckes nach `http://www.w3.org/TR/REC-xml/#NT-Name`.
+Diese Funktion überprüft eine String darauf, ob er als `xs:NCName` gecastest werden kann. Die Überprüfung erfolgt an Hand eines regulären Ausdruckes nach [http://www.w3.org/TR/REC-xml/#NT-Name http://www.w3.org/TR/REC-xml/#NT-Name].
 
 Diese Funktion ist notwendig, weil `xs:NCName` resp. `castable as xs:NCName` nicht von einem Basic-XSLT-Prozessor unterstützt werden.
 

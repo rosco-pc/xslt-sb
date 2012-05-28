@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:internals.Error}}}
+#summary Details für »xsb:internals.Error«
 #labels Dokumentation
 #sidebar TableOfContents
 

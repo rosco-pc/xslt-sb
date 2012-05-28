@@ -1,4 +1,4 @@
-#summary Details für {{{intern:exp-iterator()}}}
+#summary Details für »intern:exp-iterator()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,19 +9,24 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `exponent`: Exponent der e-Funktion
 
+
 `vortrag`: Vortrag der Reihenbildung, wird mit 1 initialisiert
+
 
 `iteration`: Zähler für Anzahl der Iterationen; wird mit 1 initialisiert
 
+
 `pow-vortrag`: Vortrag der Potenz, wird mit 1 initialisiert
 
+
 `fact-vortrag`: Vortrag der Fakultät, wird mit 1 initialisiert
+
 
 
 ==Beschreibung==
 Iterator zur Berechnung der e-Funktion (Reihenbildung)
 
-Die Anzahl der Iterationen resp. Genauigkeit wird von ``$intern:max`` und ``$intern:iround`` beeinflusst.
+Die Anzahl der Iterationen resp. Genauigkeit wird von `{{{$intern:max}}}` und `{{{$intern:iround}}}` beeinflusst.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

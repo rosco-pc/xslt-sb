@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:sgn()}}}
+#summary Details für »xsb:sgn()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,10 +10,11 @@ Stylesheet: {{{math.xsl}}}
 `arg`: Funktionsargument, numerischer Wert
 
 
+
 ==Beschreibung==
 gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück
 
-Im Unterschied zu ``intern:sgn()`` wird bei `0` der Wert `0` zurückgegeben: Werte kleiner `0` ergeben `-1`, Werte gleich `0` ergeben `0` und Werte größer `0` ergeben `+1`.
+Im Unterschied zu {{{`intern:sgn()`}}} wird bei `0` der Wert `0` zurückgegeben: Werte kleiner `0` ergeben `-1`, Werte gleich `0` ergeben `0` und Werte größer `0` ergeben `+1`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

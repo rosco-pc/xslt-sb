@@ -1,4 +1,4 @@
-#summary Details für {{{intern:log()}}}
+#summary Details für »intern:log()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,10 +10,11 @@ Stylesheet: {{{math.xsl}}}
 `arg`: Argument
 
 
+
 ==Beschreibung==
 berechnet den natürlichen Logarithmus (Logarithmus zur Basis `e`)
 
-Da der Algorithmus von ``intern:log-iterator`` besonders gut für Argumente zwischen `1/sqrt(2)` und `sqrt(2)` konvergiert, werden die Argumente in diesen Bereich transformiert. Zuerst wird mit ``intern:log-m-iterator`` ein passender Faktor `m` ermittelt. Das gesuchte Ergebnis ergibt sich über die Beziehung `log(x) = 2 {{{*}}} m {{{*}}} log(sqrt(2)) + log((2^ -m) {{{*}}} x)`.
+Da der Algorithmus von `{{{intern:log-iterator}}}` besonders gut für Argumente zwischen `1/sqrt(2)` und `sqrt(2)` konvergiert, werden die Argumente in diesen Bereich transformiert. Zuerst wird mit `{{{intern:log-m-iterator}}}` ein passender Faktor `m` ermittelt. Das gesuchte Ergebnis ergibt sich über die Beziehung `log(x) = 2 {{{*}}} m {{{*}}} log(sqrt(2)) + log((2^ -m) {{{*}}} x)`.
 
 Da als Ergebnis `-INF` ausgegeben werden kann (für `$arg = 0`), schlägt in diesem Fall ein Cast auf ungeeignete Typen (wie `xs:decimal`) fehl.
 

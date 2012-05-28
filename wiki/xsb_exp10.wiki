@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:exp10()}}}
+#summary Details für »xsb:exp10()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `exponent`: Exponent
+
 
 
 ==Beschreibung==

@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:is-in-range()}}}
+#summary Details für »xsb:is-in-range()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,9 +9,12 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `value`: zu testender Wert
 
+
 `minInclusive`: untere Grenze
 
+
 `maxInclusive`: obere Grenze
+
 
 
 ==Beschreibung==

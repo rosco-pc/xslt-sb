@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:file-exists()}}}
+#summary Details für »xsb:file-exists()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Absoluter Pfad zur zu überprüfenden Datei.
+
 
 
 ==Beschreibung==
@@ -87,7 +88,9 @@ Stylesheet: {{{files.xsl}}}
 ==Parameter==
 `relativeURL`: relativer Pfad zur zu überprüfenden Datei.
 
+
 `baseURL`: Basis für den relativen Pfad.
+
 
 
 ==Beschreibung==

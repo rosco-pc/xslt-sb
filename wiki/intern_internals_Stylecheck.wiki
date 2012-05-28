@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck}}}
+#summary Details für »intern:internals.Stylecheck«
 #labels Dokumentation
 #sidebar TableOfContents
 

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:render-level-to-pretext()}}}
+#summary Details für »intern:render-level-to-pretext()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -10,8 +10,9 @@ Stylesheet: {{{internals.xsl}}}
 `level`: Eingabe (String)
 
 
+
 ==Beschreibung==
-Erzeugt zu den verbalen Fehlerwerten »`ALL`« > »`TRACE`« > »`DEBUG`« > »`INFO`« > »`WARN`« > »`ERROR`« > »`FATAL`« einen String, der bei ``xsb:internals.Error`` und verwandten Templates als `preText` verwendet werden kann.
+Erzeugt zu den verbalen Fehlerwerten »`ALL`« > »`TRACE`« > »`DEBUG`« > »`INFO`« > »`WARN`« > »`ERROR`« > »`FATAL`« einen String, der bei `{{{xsb:internals.Error}}}` und verwandten Templates als `preText` verwendet werden kann.
 
 Wird ein ungültiger Wert übergeben, wird der Wert für ALL gewählt.
 

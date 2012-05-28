@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.logging.Render-to-html}}}
+#summary Details für »intern:internals.logging.Render-to-html«
 #labels Dokumentation
 #sidebar TableOfContents
 

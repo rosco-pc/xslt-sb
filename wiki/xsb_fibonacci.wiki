@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:fibonacci()}}}
+#summary Details für »xsb:fibonacci()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `n`: Argument (positive natürliche Zahl)
+
 
 
 ==Beschreibung==

@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:mediatype-from-url()}}}
+#summary Details für »xsb:mediatype-from-url()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{files.xsl}}}
 ==Parameter==
 `URLwithFileExtension`: URL, aus dessen file extension der Mediatype ermittelt werden soll.
 
+
 `warn-if-wrong-input`: Soll eine Warnung ausgegeben werden, wenn der Mediatyp nicht ermittelt werden kann?
+
 
 
 ==Beschreibung==
@@ -67,6 +69,7 @@ Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URLwithFileExtension`: URL, aus dessen file extension der Mediatype ermittelt werden soll.
+
 
 
 ==Beschreibung==

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:atan-iterator()}}}
+#summary Details für »intern:atan-iterator()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,21 +9,27 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `arg`: Funktionsargument (numerischer Wert)
 
+
 `an`: zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit `intern:pow(1 + ($arg {{{*}}} $arg), -0.5 )` initialisiert
+
 
 `bn`: zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit `1` initialisiert
 
+
 `konstanterDivisor`: zur Optimierung, wird mit `intern:sqrt(1 + ($arg {{{*}}} $arg) )` initialisiert
+
 
 `letztesResultat`: zur Ermittlung des Iteration-Abbruches, wird mit einem beliebigen Wert wie `0` initialisiert.
 
+
 `iteration`: Zähler für Anzahl der Iterationen; wird mit `0` initialisiert
+
 
 
 ==Beschreibung==
 Iteration zur Ermittlung des Arkustangens
 
-Der Algorithmus folgt `http://mathworld.wolfram.com/InverseTangent.html`, Gleichungen Nr. 44 bis 48.
+Der Algorithmus folgt [http://mathworld.wolfram.com/InverseTangent.html http://mathworld.wolfram.com/InverseTangent.html], Gleichungen Nr. 44 bis 48.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:node-kind()}}}
+#summary Details für »xsb:node-kind()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,13 +9,15 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `context`: Eingabeknoten
 
+
 `warn-if-wrong-input`: Erzeugt eine Fehlermeldung, wenn für den eingegebenen Knoten keine gültige Art ermittelt werden kann. Da die Tests vollständig sind, dürfet dieser Fehler nie auftreten.
+
 
 
 ==Beschreibung==
 Diese Funktion ermittelt die Art eines `node()`, d.h. sie gibt je nach übergebenen Knoten einen der Werte »`document-node`«, »`element`«, »`attribute`«, »`text`«, »`comment`«, »`processing-instruction`« oder »`namespace`« zurück. Schlagen all Versuche zur Ermittlung fehl, wird der Wert `#undefined` zurückgegeben (Mir ist kein entsprechender Input-node() bekannt).
 
-Diese Funktion ist eine Implementierung des `dm:node-kind`-Accessors aus dem `XQuery 1.0 and XPath 2.0 Data Model (XDM)`.
+Diese Funktion ist eine Implementierung des `dm:node-kind`-Accessors aus dem [http://www.w3.org/TR/xpath-datamodel/#dm-node-kind XQuery 1.0 and XPath 2.0 Data Model (XDM)].
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||
@@ -63,8 +65,9 @@ Stylesheet: {{{internals.xsl}}}
 `context`: Eingabeknoten (ohne Typ)
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:node-kind($context, true())``
+Shortcut für `{{{xsb:node-kind($context, true())}}}`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

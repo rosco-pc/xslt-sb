@@ -1,4 +1,4 @@
-#summary Überblick der Funktionen und Templates von {{{math.xsl}}}
+#summary Überblick der Funktionen und Templates von »math.xsl«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,11 +8,11 @@ Stylesheet: {{{math.xsl}}}
 
 Dieses Stylesheet liefert mathematische Konstanten und berechnet mathematische Funktionen.
 
-Die trigonometrischen und Exponential-Funktionen von `XPath 3.0` sind vollständig implementiert. Daneben gibt es weitere »praktische« Funktionen wie ``xsb:fact`` (Fakultät).
+Die trigonometrischen und Exponential-Funktionen von [http://www.w3.org/TR/xpath-functions-30/#trigonometry XPath 3.0] sind vollständig implementiert. Daneben gibt es weitere »praktische« Funktionen wie `{{{xsb:fact}}}` (Fakultät).
 
-Die Benennung der Funktionen folgt den Vorgaben von XPath 3.0 (vgl. `http://www.w3.org/TR/xpath-functions-30/`).
+Die Benennung der Funktionen folgt den Vorgaben von XPath 3.0 (vgl. [http://www.w3.org/TR/xpath-functions-30/ http://www.w3.org/TR/xpath-functions-30/]).
 
-Viele Funktionen gibt es in zwei Varianten: eine im Namensraum `xsb:` und eine im Namensraum `intern:`. Die Funktionen im Namensraum `xsb:` prüfen die Funktionsargumente auf Gültigkeit und liefern gerundete Ergebnisse (siehe ``intern:round``). Die Funktionen im Namensraum `intern:` verzichten auf Tests der Argumente (soweit sich das sauber trennen lässt, was bei `-0.0e0` und `-INF`/`INF` nicht immer sauber möglich ist) und liefern mit ``intern:iround`` gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit intern mit höherer Geschwindigkeit und genaueren Werten gerechnet werden kann.
+Viele Funktionen gibt es in zwei Varianten: eine im Namensraum `xsb:` und eine im Namensraum `intern:`. Die Funktionen im Namensraum `xsb:` prüfen die Funktionsargumente auf Gültigkeit und liefern gerundete Ergebnisse (siehe `{{{intern:round}}}`). Die Funktionen im Namensraum `intern:` verzichten auf Tests der Argumente (soweit sich das sauber trennen lässt, was bei `-0.0e0` und `-INF`/`INF` nicht immer sauber möglich ist) und liefern mit `{{{intern:iround}}}` gerundete oder auch ungerundete Ergebnisse der jeweiligen Algorithmen, damit intern mit höherer Geschwindigkeit und genaueren Werten gerechnet werden kann.
 
 Die Funktionen liefern i.d.R. ihre Ergebnisse mit dem Typ der (ersten) Arguments (dynamische Typung). Bei Funktionen, die `-INF`, `INF` oder `NaN` als Ergebnis liefern, schlägt ggfs. der Cast des Ergebnisses auf ungeeignete Typen wie `xs:decimal` oder `xs:integer` fehl. In diesen Fällen kann das Argument bspw. explizit als `xs:double` übergeben werden.
 
@@ -22,7 +22,7 @@ Die Parameter der Funktionen im Namensraum `xsb:` sind – soweit nicht anders e
 
 Bezüglich Typung, Verhalten bei Leersequenzen, `+/-INF`, `NaN` usw. kann es Abweichungen gegenüber dem XPath-3.0-Standard geben, wobei in Zukunft Anpassungen an den Standard möglich sind (inklusive eigentlich verbotener Änderungen der Tests).
 
-Die Berechnung mancher Funktionen (wie ``xsb:nroot`` oder ``xsb:log``) erfolgt über Näherungen und Reihenentwicklungen. Die Algorithmen sind nicht in Bezug auf Geschwindigkeit und Genauigkeit optimiert, d.h. es kann zu unerwartet langen Ausführungszeiten und falschen Ergebnissen kommen. Vor dem Einsatz dieser Funktionen in kritischen Anwendungen sind unbedingt umfangreiche Tests erforderlich.
+Die Berechnung mancher Funktionen (wie {{{`xsb:nroot`}}} oder {{{`xsb:log`}}}) erfolgt über Näherungen und Reihenentwicklungen. Die Algorithmen sind nicht in Bezug auf Geschwindigkeit und Genauigkeit optimiert, d.h. es kann zu unerwartet langen Ausführungszeiten und falschen Ergebnissen kommen. Vor dem Einsatz dieser Funktionen in kritischen Anwendungen sind unbedingt umfangreiche Tests erforderlich.
 
 Bei der Berechnung der Funktionen können zwei Fehlertypen auftreten: 
  *   mathematische Fehler: das Ergebnis einer Funktion ist für den eingegebenen Wert nicht definiert (bspw. `log(-2)` oder `sqrt(-2)`). In diesem Fall wird `NaN` ausgegeben.  
@@ -32,7 +32,7 @@ Bei der Berechnung der Funktionen können zwei Fehlertypen auftreten:
 
 Die `intern:{{{*}}}`-Funktionen werden i.d.R. nicht getestet, weil die Tests über die `xsb:{{{*}}}`-Pendants erfolgen.
 
-Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von `WolframAlpha` ermittelt. Für diese Unterstützung möchte ich mich sehr herzlich bedanken, diese Website hat die Entwicklung dieses Stylesheets sehr beschleunigt.
+Die Konstanten und die Vergleichwerte für Tests wurden mit Hilfe von [http://www.wolframalpha.com/ WolframAlpha] ermittelt. Für diese Unterstützung möchte ich mich sehr herzlich bedanken, diese Website hat die Entwicklung dieses Stylesheets sehr beschleunigt.
 
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:log-iterator()}}}
+#summary Details für »intern:log-iterator()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,19 +9,24 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `argm`: ursprüngliches Argument + 1
 
+
 `argp`: ursprüngliches Argument - 1
+
 
 `vortrag`: zur Übergabe des Ergebnisses aus den vorherigen Iterationen; wird mit `0` initialisiert
 
+
 `iteration`: Zähler für Anzahl der Iterationen; wird mit `0` initialisiert
 
+
 `n-iteration`: weiterer Zähler; wird mit 1 initialisiert
+
 
 
 ==Beschreibung==
 Iteration zur Ermittlung des natürlichen Logarithmus
 
-Die Anzahl der Iterationen resp. Genauigkeit wird von ``$intern:max`` und ``$intern:iround`` beeinflusst.
+Die Anzahl der Iterationen resp. Genauigkeit wird von `{{{$intern:max}}}` und `{{{$intern:iround}}}` beeinflusst.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

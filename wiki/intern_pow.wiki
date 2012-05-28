@@ -1,4 +1,4 @@
-#summary Details für {{{intern:pow()}}}
+#summary Details für »intern:pow()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `basis`: Basis
 
+
 `exponent`: Exponent
+
 
 
 ==Beschreibung==

@@ -1,4 +1,4 @@
-#summary Details für {{{intern:normalize-rad()}}}
+#summary Details für »intern:normalize-rad()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `rad`: Winkel im Bogenmaß
+
 
 
 ==Beschreibung==

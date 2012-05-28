@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:trim-left()}}}
+#summary Details für »xsb:trim-left()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
+
 
 
 ==Beschreibung==

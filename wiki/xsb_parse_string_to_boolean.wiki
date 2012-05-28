@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:parse-string-to-boolean()}}}
+#summary Details für »xsb:parse-string-to-boolean()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,7 +9,9 @@ Stylesheet: {{{internals.xsl}}}
 ==Parameter==
 `input`: Eingabe (String)
 
+
 `warn-if-wrong-input`: (Boolean) Erzeugt eine Fehlermeldung, wenn der eingegebene String nicht in der Liste der gültigen Werte enthalten ist.
+
 
 
 ==Beschreibung==
@@ -63,8 +65,9 @@ Stylesheet: {{{internals.xsl}}}
 `input`: Eingabe (String)
 
 
+
 ==Beschreibung==
-Shortcut für ``xsb:parse-string-to-boolean($input, true())``.
+Shortcut für `{{{xsb:parse-string-to-boolean($input, true())}}}`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

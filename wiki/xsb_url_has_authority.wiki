@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:url-has-authority()}}}
+#summary Details für »xsb:url-has-authority()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.
+
 
 
 ==Beschreibung==

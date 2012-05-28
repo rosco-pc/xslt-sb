@@ -1,4 +1,4 @@
-#summary Details für {{{intern:internals.Stylecheck.ListTO_DOs}}}
+#summary Details für »intern:internals.Stylecheck.ListTO_DOs«
 #labels Dokumentation
 #sidebar TableOfContents
 

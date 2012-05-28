@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:return-composed-string-if-not-empty()}}}
+#summary Details für »xsb:return-composed-string-if-not-empty()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,9 +9,12 @@ Stylesheet: {{{strings.xsl}}}
 ==Parameter==
 `tested-string`: getesteter String
 
+
 `string-before`: String, der vor dem getesteten String eingefügt werden soll
 
+
 `string-after`: String, der nach dem getesteten String eingefügt werden soll
+
 
 
 ==Beschreibung==

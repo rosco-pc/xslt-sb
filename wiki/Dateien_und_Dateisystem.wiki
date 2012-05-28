@@ -1,4 +1,4 @@
-#summary Überblick der Funktionen und Templates von {{{files.xsl}}}
+#summary Überblick der Funktionen und Templates von »files.xsl«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,7 +8,7 @@ Stylesheet: {{{files.xsl}}}
 
 Dieses Stylesheet enthält Funktionen rund um das Dateisystem.
 
-Ein Großteil der Funktionen führt Formatchecks auf Strings aus und extrahiert Teile aus Strings, um den Umgang mit externe Dateien zu vereinfachen. Da der von XSLT präferierte Typ `xs:anyURI` recht unspezifisch ist, wird dabei auf URLs nach `RFC 1808` zurückgegriffen.
+Ein Großteil der Funktionen führt Formatchecks auf Strings aus und extrahiert Teile aus Strings, um den Umgang mit externe Dateien zu vereinfachen. Da der von XSLT präferierte Typ `xs:anyURI` recht unspezifisch ist, wird dabei auf URLs nach [http://tools.ietf.org/html/rfc1808 RFC 1808] zurückgegriffen.
 
 Einige Wertebereiche und Funktionsergebnisse sind nicht absolut konform zu RFC 1808 oder auch RFC 3986 (URIs), um den praktischen Nutzen zu erhöhen. So ist beispielsweise laut RFC 1808 die Tilde (~) kein gültiges Zeichen in URLs, sie wurde hier aber zugelassen.
 

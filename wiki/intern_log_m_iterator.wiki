@@ -1,4 +1,4 @@
-#summary Details für {{{intern:log-m-iterator()}}}
+#summary Details für »intern:log-m-iterator()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -9,13 +9,15 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `x`: Argument der `log()`-Funktion
 
+
 `m`: Vortrag; wird mit 0 initialisiert
+
 
 
 ==Beschreibung==
 ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können.
 
-Details siehe ``intern:log()``
+Details siehe `{{{intern:log()}}}`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

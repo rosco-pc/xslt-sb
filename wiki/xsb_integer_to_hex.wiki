@@ -1,4 +1,4 @@
-#summary Details für {{{xsb:integer-to-hex()}}}
+#summary Details für »xsb:integer-to-hex()«
 #labels Dokumentation
 #sidebar TableOfContents
 
@@ -8,6 +8,7 @@ Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `input`: Integer-Zahl
+
 
 
 ==Beschreibung==
@@ -59,7 +60,9 @@ Stylesheet: {{{math.xsl}}}
 ==Parameter==
 `input`: Integer-Zahl
 
+
 `n`: Anzahl der Bits für Formatierung
+
 
 
 ==Beschreibung==
