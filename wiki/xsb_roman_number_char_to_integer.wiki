@@ -1,10 +1,10 @@
-#summary Details für `xsb:roman-number-char-to-integer()`
+#summary Details für {{{xsb:roman-number-char-to-integer()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:roman-number-char-to-integer({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: römische Ziffer (String)

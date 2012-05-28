@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.Stylecheck.CheckXSLMessage`
+#summary Details für {{{intern:internals.Stylecheck.CheckXSLMessage}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.Stylecheck.CheckXSLMessage (_required_ {{{Dokument}}} _as_ {{{document-node()}}})=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -21,6 +21,12 @@ Stylesheet: `internals.stylecheck.xsl`
 		</xsl:for-each>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_render_context_and_parent_as_string intern:render-context-and-parent-as-string()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

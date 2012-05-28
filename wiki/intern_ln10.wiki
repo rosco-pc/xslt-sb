@@ -1,10 +1,10 @@
-#summary Details für `intern:ln10()`
+#summary Details für {{{intern:ln10()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:ln10=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Beschreibung==
 natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante)

@@ -1,10 +1,10 @@
-#summary Details für `intern:random-sequence()`
+#summary Details für {{{intern:random-sequence()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:random-sequence({{{length}}} _as_ {{{xs:integer}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `length`: Anzahl der zu erzeugenden Zufallswerte
@@ -28,6 +28,10 @@ erzeugt eine Sequenz von zufälligen Werten im Bereich von 0 bis 4294967295.
 		<xsl:sequence select="intern:linear-congruential-generator($length, intern:random-seed($volatile) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_linear_congruential_generator intern:linear-congruential-generator()]
+ * [intern_random_seed intern:random-seed()]
 
 ----
 

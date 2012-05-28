@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem`
+#summary Details für {{{intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem (_required_ {{{Dokument}}} _as_ {{{document-node()}}})=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -22,6 +22,13 @@ Stylesheet: `internals.stylecheck.xsl`
 		</xsl:for-each>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_listed xsb:listed()]
+ * [xsb_render_context_as_string xsb:render-context-as-string()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

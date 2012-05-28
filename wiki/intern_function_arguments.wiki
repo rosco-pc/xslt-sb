@@ -1,10 +1,10 @@
-#summary Details für `intern:function-arguments()`
+#summary Details für {{{intern:function-arguments()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:function-arguments({{{StringOfAFunctionCall}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.meta.xsl`
+Stylesheet: {{{internals.meta.xsl}}}
 
 ==Parameter==
 `StringOfAFunctionCall`: String, der wie ein Funktionsaufruf aussieht.
@@ -74,6 +74,11 @@ Die Eingabe eines ungültigen Strings (d.h. der String sieht nicht wie eine Funk
 		</xsl:if>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_function_argument_string intern:function-argument-string()]
+ * [intern_looks_like_a_function_call intern:looks-like-a-function-call()]
+ * [intern_replace_nested_brackets_with_dashes intern:replace-nested-brackets-with-dashes()]
 
 ----
 

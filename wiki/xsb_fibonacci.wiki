@@ -1,10 +1,10 @@
-#summary Details für `xsb:fibonacci()`
+#summary Details für {{{xsb:fibonacci()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:fibonacci({{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `n`: Argument (positive natürliche Zahl)

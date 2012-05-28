@@ -1,10 +1,10 @@
-#summary Details für `intern:round()`
+#summary Details für {{{intern:round()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:round({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: zu rundende Zahl

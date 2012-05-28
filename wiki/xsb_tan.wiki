@@ -1,10 +1,10 @@
-#summary Details für `xsb:tan()`
+#summary Details für {{{xsb:tan()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:tan({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Eingabewert, als Bogenmaß
@@ -44,6 +44,16 @@ Da als Ergebnis `-/+INF` ausgegeben werden kann, schlägt in diesen Fällen ein 
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_cast_negative_0 intern:cast-negative-0()]
+ * [intern_round intern:round()]
+ * [intern_tan intern:tan()]
+ * [xsb_is_INF xsb:is-INF()]
+ * [xsb_is_NaN xsb:is-NaN()]
+ * [xsb_is_negative_0 xsb:is-negative-0()]
+ * [xsb_is_negative_INF xsb:is-negative-INF()]
 
 ----
 

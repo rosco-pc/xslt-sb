@@ -1,10 +1,10 @@
-#summary Details für `xsb:escape-for-regex()`
+#summary Details für {{{xsb:escape-for-regex()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:escape-for-regex({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: String, der escapet werden soll

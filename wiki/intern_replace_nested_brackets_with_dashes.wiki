@@ -1,10 +1,10 @@
-#summary Details für `intern:replace-nested-brackets-with-dashes()`
+#summary Details für {{{intern:replace-nested-brackets-with-dashes()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:replace-nested-brackets-with-dashes({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.meta.xsl`
+Stylesheet: {{{internals.meta.xsl}}}
 
 ==Parameter==
 `input`: String, der wie ein Funktionsargument aussieht (wird nicht validiert).

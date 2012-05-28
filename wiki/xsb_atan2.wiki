@@ -1,10 +1,10 @@
-#summary Details für `xsb:atan2()`
+#summary Details für {{{xsb:atan2()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:atan2({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `y`: y-Wert (numerisch)
@@ -37,6 +37,12 @@ Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden `XPath-3.0-Standard`
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_atan2 intern:atan2()]
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_round intern:round()]
+ * [xsb_is_NaN xsb:is-NaN()]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `xsb:is-NaN()`
+#summary Details für {{{xsb:is-NaN()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is-NaN({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Funktionsargument

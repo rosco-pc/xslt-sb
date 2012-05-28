@@ -1,10 +1,10 @@
-#summary Details für `intern:nroot()`
+#summary Details für {{{intern:nroot()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:nroot({{{wurzelbasis}}} _as_ {{{xs:anyAtomicType}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `wurzelbasis`: Wurzelbasis (Radikand)
@@ -29,6 +29,9 @@ berechnet die n-te Wurzel (n = Wurzelexponent)
 		<xsl:sequence select="intern:root-iterator($wurzelexponent, $wurzelbasis, 0, $wurzelbasis, 0)"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_root_iterator intern:root-iterator()]
 
 ----
 

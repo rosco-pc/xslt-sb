@@ -1,10 +1,10 @@
-#summary Details für `xsb:atan()`
+#summary Details für {{{xsb:atan()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:atan({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `xsb:atan()`-Funktion
@@ -40,6 +40,17 @@ Problematisch ist das Verhalten bei `+/-Pi div 2` mit den "richtigen" Ergebnisse
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_atan intern:atan()]
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_half_pi intern:half-pi()]
+ * [intern_round intern:round()]
+ * [xsb_cast xsb:cast()]
+ * [xsb_is_INF xsb:is-INF()]
+ * [xsb_is_NaN xsb:is-NaN()]
+ * [xsb_is_negative_INF xsb:is-negative-INF()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

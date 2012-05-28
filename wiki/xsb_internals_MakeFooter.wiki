@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.MakeFooter`
+#summary Details für {{{xsb:internals.MakeFooter}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.MakeFooter=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -22,6 +22,10 @@ Stylesheet: `internals.xsl`
 		</xsl:if>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [intern_internals_logging_MakeFooter_element intern:internals.logging.MakeFooter.element]
+ * [intern_internals_logging_MakeFooter_html intern:internals.logging.MakeFooter.html]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `xsb:pi()`
+#summary Details für {{{xsb:pi()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:pi=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Beschreibung==
 Konstante Pi mit 3,14159265358979323846264338327950288419716939937511…

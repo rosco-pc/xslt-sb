@@ -1,10 +1,10 @@
-#summary Details für `intern:validate-test-node()`
+#summary Details für {{{intern:validate-test-node()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:validate-test-node({{{test-node}}} _as_ {{{element()}}}; {{{function-name}}} _as_ {{{xs:string}}})=
 
-Stylesheet: `internals.testing.xsl`
+Stylesheet: {{{internals.testing.xsl}}}
 
 ==Parameter==
 `test-node`: zu testender test-node
@@ -67,6 +67,11 @@ Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funk
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

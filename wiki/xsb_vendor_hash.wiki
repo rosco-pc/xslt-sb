@@ -1,10 +1,10 @@
-#summary Details für `xsb:vendor-hash()`
+#summary Details für {{{xsb:vendor-hash()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:vendor-hash({{{product-name}}} _as_ {{{xs:string?}}}; {{{product-version}}} _as_ {{{xs:string?}}}; {{{java-available}}} _as_ {{{xs:boolean}}}; {{{is-schema-aware}}} _as_ {{{xs:boolean}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `product-name`: Wert der entsprechenden System-Eigenschaft (String)
@@ -62,10 +62,13 @@ Diese Funktion ermittelt aus den übergebenen System-Parameter einen Hashwert, d
 	</xsl:function>
 }}}
 
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:vendor-hash({{{product-name}}} _as_ {{{xs:string?}}}; {{{product-version}}} _as_ {{{xs:string?}}}; {{{java-available}}} _as_ {{{xs:boolean}}}; {{{is-schema-aware}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `product-name`: Wert der entsprechenden System-Eigenschaft (String)
@@ -97,6 +100,9 @@ Shortcut für ``xsb:vendor-hash($product-name, $product-version, $java-available
 		<xsl:sequence select="xsb:vendor-hash($product-name, $product-version, $java-available, $is-schema-aware, true() )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_vendor_hash xsb:vendor-hash()]
 
 ----
 

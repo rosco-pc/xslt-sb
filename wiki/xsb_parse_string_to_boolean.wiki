@@ -1,10 +1,10 @@
-#summary Details für `xsb:parse-string-to-boolean()`
+#summary Details für {{{xsb:parse-string-to-boolean()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:parse-string-to-boolean({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
@@ -51,10 +51,13 @@ Diese Funktion wandelt eine String-Eingabe in einen Boolean-Wert um. Sie kennt d
 	</xsl:function>
 }}}
 
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:parse-string-to-boolean({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
@@ -75,6 +78,9 @@ Shortcut für ``xsb:parse-string-to-boolean($input, true())``.
 		<xsl:sequence select="xsb:parse-string-to-boolean($input, true())"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_parse_string_to_boolean xsb:parse-string-to-boolean()]
 
 ----
 

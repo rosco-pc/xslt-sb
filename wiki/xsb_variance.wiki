@@ -1,10 +1,10 @@
-#summary Details für `xsb:variance()`
+#summary Details für {{{xsb:variance()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:variance({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten
@@ -32,6 +32,11 @@ berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_round intern:round()]
+ * [intern_variance intern:variance()]
 
 ----
 

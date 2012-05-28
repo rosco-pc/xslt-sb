@@ -1,10 +1,10 @@
-#summary Details für `xsb:trim()`
+#summary Details für {{{xsb:trim()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:trim({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
@@ -25,6 +25,10 @@ entfernt Whitespace am Anfang und am Ende. Im Unterschied zu `normalize-space()`
 		<xsl:sequence select="xsb:trim-left(xsb:trim-right($input))"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_trim_left xsb:trim-left()]
+ * [xsb_trim_right xsb:trim-right()]
 
 ----
 

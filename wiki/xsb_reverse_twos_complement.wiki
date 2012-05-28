@@ -1,10 +1,10 @@
-#summary Details für `xsb:reverse-twos-complement()`
+#summary Details für {{{xsb:reverse-twos-complement()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:reverse-twos-complement({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `input`: Integer-Zahl
@@ -74,6 +74,13 @@ Wenn `$input` nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehl
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_power intern:power()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

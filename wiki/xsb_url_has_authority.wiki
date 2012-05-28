@@ -1,10 +1,10 @@
-#summary Details für `xsb:url-has-authority()`
+#summary Details für {{{xsb:url-has-authority()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:url-has-authority({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.
@@ -32,6 +32,9 @@ Die Eingabe einer ungültigen URL gibt `false()` zurück.
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_is_url xsb:is-url()]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.logging.Write-to-file-as-text`
+#summary Details für {{{intern:internals.logging.Write-to-file-as-text}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.logging.Write-to-file-as-text (_optional_ {{{log-entry.linebreak-string.tunneld}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -17,6 +17,9 @@ Stylesheet: `internals.logging.xsl`
 		<xsl:sequence select="$log-entry.linebreak-string.tunneld"/>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [intern_internals_logging_Render_to_string intern:internals.logging.Render-to-string]
 
 ----
 

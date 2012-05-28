@@ -1,10 +1,10 @@
-#summary Details für `xsb:normalize-paragraphs()`
+#summary Details für {{{xsb:normalize-paragraphs()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:normalize-paragraphs({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)
@@ -45,6 +45,9 @@ Da die Eingabe sinnvoll eine Leersequenz sein kann, ist die Rückgabe einer Leer
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_normalize_paragraphs xsb:normalize-paragraphs()]
 
 ----
 

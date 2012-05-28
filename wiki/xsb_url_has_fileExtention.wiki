@@ -1,10 +1,10 @@
-#summary Details für `xsb:url-has-fileExtention()`
+#summary Details für {{{xsb:url-has-fileExtention()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:url-has-fileExtention({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.

@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `internals.logging.xsl`
+#summary Überblick der Funktionen und Templates von {{{internals.logging.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `internals.logging.xsl` =
+= {{{internals.logging.xsl}}} =
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 Dieses Stylesheet stellt ein API für das Logging zur Verfügung. Die Templates sind nicht zur direkten Benutzung gedacht; vielmehr sollen externe Wrapper dieses API nutzen. Dadurch kann der Logging-Unterbau ggfs. ausgetauscht werden.
 

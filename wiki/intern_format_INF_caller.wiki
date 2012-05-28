@@ -1,10 +1,10 @@
-#summary Details für `intern:format-INF-caller()`
+#summary Details für {{{intern:format-INF-caller()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:format-INF-caller({{{caller}}} _as_ {{{xs:string}}}; {{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der aufrufenden Funktion

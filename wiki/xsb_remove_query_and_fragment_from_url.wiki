@@ -1,10 +1,10 @@
-#summary Details für `xsb:remove-query-and-fragment-from-url()`
+#summary Details für {{{xsb:remove-query-and-fragment-from-url()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:remove-query-and-fragment-from-url({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.
@@ -43,6 +43,11 @@ Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_is_url xsb:is-url()]
+ * [xsb_url_has_fragment xsb:url-has-fragment()]
+ * [xsb_url_has_query xsb:url-has-query()]
 
 ----
 

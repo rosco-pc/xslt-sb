@@ -1,10 +1,10 @@
-#summary Details für `intern:cast-negative-INF()`
+#summary Details für {{{intern:cast-negative-INF()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:cast-negative-INF({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Funktionsargument
@@ -25,6 +25,10 @@ erzeugt `-INF` mit dem Typ des übergebenen Arguments
 		<xsl:sequence select="xsb:cast(xs:float('-INF'), xsb:type-annotation($arg) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_cast xsb:cast()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

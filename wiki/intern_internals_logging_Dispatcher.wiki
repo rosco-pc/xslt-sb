@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.logging.Dispatcher`
+#summary Details für {{{intern:internals.logging.Dispatcher}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.logging.Dispatcher (_required_ {{{log-entry.write-to-console.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-comment.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-element.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-html.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-text.tunneld}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -39,6 +39,13 @@ Stylesheet: `internals.logging.xsl`
 		</xsl:if>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [intern_internals_logging_Write_to_console intern:internals.logging.Write-to-console]
+ * [intern_internals_logging_Write_to_file_as_comment intern:internals.logging.Write-to-file-as-comment]
+ * [intern_internals_logging_Write_to_file_as_element intern:internals.logging.Write-to-file-as-element]
+ * [intern_internals_logging_Write_to_file_as_html intern:internals.logging.Write-to-file-as-html]
+ * [intern_internals_logging_Write_to_file_as_text intern:internals.logging.Write-to-file-as-text]
 
 ----
 

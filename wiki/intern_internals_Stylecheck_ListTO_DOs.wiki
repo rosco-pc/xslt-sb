@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.Stylecheck.ListTO_DOs`
+#summary Details für {{{intern:internals.Stylecheck.ListTO_DOs}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.Stylecheck.ListTO_DOs (_required_ {{{Dokument}}} _as_ {{{document-node()}}})=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -27,6 +27,9 @@ Stylesheet: `internals.stylecheck.xsl`
 		</xsl:for-each>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.logging.Write-to-file-as-comment`
+#summary Details für {{{intern:internals.logging.Write-to-file-as-comment}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.logging.Write-to-file-as-comment=
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -14,6 +14,9 @@ Stylesheet: `internals.logging.xsl`
 		<xsl:comment><xsl:call-template name="intern:internals.logging.Render-to-string"/></xsl:comment>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [intern_internals_logging_Render_to_string intern:internals.logging.Render-to-string]
 
 ----
 

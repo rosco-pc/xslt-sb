@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.Stylecheck`
+#summary Details für {{{intern:internals.Stylecheck}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.Stylecheck=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -126,6 +126,26 @@ Stylesheet: `internals.stylecheck.xsl`
 		</xsl:call-template>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_fileExtention_from_url xsb:fileExtention-from-url()]
+ * [xsb_fileName_from_url xsb:fileName-from-url()]
+ * [xsb_path_from_url xsb:path-from-url()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [intern_internals_Stylecheck_CallTemplateTestFunction intern:internals.Stylecheck.CallTemplateTestFunction]
+ * [intern_internals_Stylecheck_CallTemplateTestFunctionWithTestItem intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem]
+ * [intern_internals_Stylecheck_MissingTypes intern:internals.Stylecheck.MissingTypes]
+ * [intern_internals_Stylecheck_EmptySequenceAllowed intern:internals.Stylecheck.EmptySequenceAllowed]
+ * [intern_internals_Stylecheck_RequiredParameter intern:internals.Stylecheck.RequiredParameter]
+ * [intern_internals_Stylecheck_MissingTests intern:internals.Stylecheck.MissingTests]
+ * [intern_internals_Stylecheck_DocumentationTests intern:internals.Stylecheck.DocumentationTests]
+ * [intern_internals_Stylecheck_ListTO_DOs intern:internals.Stylecheck.ListTO_DOs]
+ * [intern_internals_Stylecheck_CheckMisplacedIntern intern:internals.Stylecheck.CheckMisplacedIntern]
+ * [intern_internals_Stylecheck_CheckXSLMessage intern:internals.Stylecheck.CheckXSLMessage]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:atan2()`
+#summary Details für {{{intern:atan2()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:atan2({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `y`: y-Wert (numerisch)
@@ -109,6 +109,17 @@ Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden `XPath-3.0-Standard`
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_half_pi intern:half-pi()]
+ * [intern_sgn intern:sgn()]
+ * [xsb_cast xsb:cast()]
+ * [xsb_pi xsb:pi()]
+ * [xsb_type_annotation xsb:type-annotation()]
+
+===Benutzte Templates===
+ * [intern_internals_FatalError intern:internals.FatalError]
+ * [intern_internals_FatalError intern:internals.FatalError]
 
 ----
 

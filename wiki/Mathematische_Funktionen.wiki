@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `math.xsl`
+#summary Überblick der Funktionen und Templates von {{{math.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `math.xsl` =
+= {{{math.xsl}}} =
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 Dieses Stylesheet liefert mathematische Konstanten und berechnet mathematische Funktionen.
 

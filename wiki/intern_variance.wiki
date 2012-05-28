@@ -1,10 +1,10 @@
-#summary Details für `intern:variance()`
+#summary Details für {{{intern:variance()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:variance({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten
@@ -33,6 +33,10 @@ Der Algorithmus wird unter `http://en.wikipedia.org/wiki/Algorithms_for_calculat
 		<xsl:sequence select="xsb:cast( ( ($sum2 - ($sum3 * $sum3) div $count ) div ($count - 1) ), xsb:type-annotation($mean) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_cast xsb:cast()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

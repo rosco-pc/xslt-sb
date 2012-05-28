@@ -1,10 +1,10 @@
-#summary Details für `intern:exp10()`
+#summary Details für {{{intern:exp10()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:exp10({{{exponent}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `exponent`: Exponent
@@ -35,6 +35,10 @@ Bei ganzzahligen Exponenten wird die multiplikative Variante mit ``intern:power(
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_exp intern:exp()]
+ * [intern_power intern:power()]
 
 ----
 

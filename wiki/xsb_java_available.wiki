@@ -1,10 +1,10 @@
-#summary Details für `xsb:java-available()`
+#summary Details für {{{xsb:java-available()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:java-available=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht.
@@ -24,7 +24,7 @@ Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausf
 ----
 =xsb:java-available=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 Diese Funktion ermittelt – zusammen mit der vorhergehenden – ob Java auf dem ausführenden System zur Verfügung steht.

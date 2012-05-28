@@ -1,10 +1,10 @@
-#summary Details für `intern:standard-deviation()`
+#summary Details für {{{intern:standard-deviation()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:standard-deviation({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten
@@ -25,6 +25,10 @@ berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz
 		<xsl:sequence select="intern:sqrt(intern:variance($sequence_of_numeric_values) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_sqrt intern:sqrt()]
+ * [intern_variance intern:variance()]
 
 ----
 

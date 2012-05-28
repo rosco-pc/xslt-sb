@@ -1,10 +1,10 @@
-#summary Details für `xsb:fibonacci-sequence()`
+#summary Details für {{{xsb:fibonacci-sequence()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:fibonacci-sequence({{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `n`: Argument (positive natürliche Zahl)
@@ -39,6 +39,14 @@ berechnet Fibonacci-Reihen
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_fibonacci_sequence intern:fibonacci-sequence()]
+ * [intern_format_INF_caller intern:format-INF-caller()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

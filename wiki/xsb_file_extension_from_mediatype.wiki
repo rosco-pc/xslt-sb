@@ -1,10 +1,10 @@
-#summary Details für `xsb:file-extension-from-mediatype()`
+#summary Details für {{{xsb:file-extension-from-mediatype()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:file-extension-from-mediatype({{{mediatype}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `mediatype`: Mediatype, aus dem die Dateierweiterung ermittelt werden soll.
@@ -50,10 +50,13 @@ Die Eingabe eines ungültigen Mediatypes gibt einen Leerstring und – in Abhän
 	</xsl:function>
 }}}
 
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:file-extension-from-mediatype({{{mediatype}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `mediatype`: Mediatype, aus dem die Dateierweiterung ermittelt werden soll.
@@ -76,6 +79,9 @@ Shortcut für `xsb:file-extension-from-mediatype($mediatype, true())`.
 		<xsl:sequence select="xsb:file-extension-from-mediatype($mediatype, true())"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_file_extension_from_mediatype xsb:file-extension-from-mediatype()]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `xsb:is-roman-numeral()`
+#summary Details für {{{xsb:is-roman-numeral()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is-roman-numeral({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)

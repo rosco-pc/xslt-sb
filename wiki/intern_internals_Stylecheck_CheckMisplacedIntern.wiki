@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.Stylecheck.CheckMisplacedIntern`
+#summary Details für {{{intern:internals.Stylecheck.CheckMisplacedIntern}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.Stylecheck.CheckMisplacedIntern (_required_ {{{Dokument}}} _as_ {{{document-node()}}})=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -21,6 +21,12 @@ Stylesheet: `internals.stylecheck.xsl`
 		</xsl:for-each>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_render_context_as_string xsb:render-context-as-string()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

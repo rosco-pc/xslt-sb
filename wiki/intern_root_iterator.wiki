@@ -1,10 +1,10 @@
-#summary Details für `intern:root-iterator()`
+#summary Details für {{{intern:root-iterator()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:root-iterator({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `n`: Wurzelexponent
@@ -49,6 +49,9 @@ Die Anzahl der Iterationen resp. Genauigkeit wird von ``$intern:max`` und ``$int
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_root_iterator intern:root-iterator()]
 
 ----
 

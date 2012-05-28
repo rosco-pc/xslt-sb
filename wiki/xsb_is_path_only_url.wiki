@@ -1,10 +1,10 @@
-#summary Details für `xsb:is-path-only-url()`
+#summary Details für {{{xsb:is-path-only-url()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is-path-only-url({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.
@@ -38,6 +38,10 @@ Die Eingabe einer ungültigen URL gibt `false()` zurück.
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_is_network_server_url xsb:is-network-server-url()]
+ * [xsb_is_url xsb:is-url()]
 
 ----
 

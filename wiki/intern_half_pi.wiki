@@ -1,10 +1,10 @@
-#summary Details für `intern:half-pi()`
+#summary Details für {{{intern:half-pi()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:half-pi=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Beschreibung==
 Pi/2 (Konstante)

@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `internals.stylecheck.xsl`
+#summary Überblick der Funktionen und Templates von {{{internals.stylecheck.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `internals.stylecheck.xsl` =
+= {{{internals.stylecheck.xsl}}} =
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf gängige Probleme zu testen.
 

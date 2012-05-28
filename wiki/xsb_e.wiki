@@ -1,10 +1,10 @@
-#summary Details für `xsb:e()`
+#summary Details für {{{xsb:e()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:e=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Beschreibung==
 Konstante e (Eulersche Zahl) mit 2,718281828459045235360287471353…

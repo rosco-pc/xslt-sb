@@ -1,10 +1,10 @@
-#summary Details für `xsb:escape-for-replacement()`
+#summary Details für {{{xsb:escape-for-replacement()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:escape-for-replacement({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: String, der escapet werden soll

@@ -1,10 +1,10 @@
-#summary Details für `intern:sqrt2()`
+#summary Details für {{{intern:sqrt2()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:sqrt2=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Beschreibung==
 Wurzel aus 2 mit 1,4142135623730950488… (Konstante)

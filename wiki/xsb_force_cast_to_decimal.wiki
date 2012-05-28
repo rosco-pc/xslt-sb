@@ -1,10 +1,10 @@
-#summary Details für `xsb:force-cast-to-decimal()`
+#summary Details für {{{xsb:force-cast-to-decimal()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:force-cast-to-decimal({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: zu castender String
@@ -46,10 +46,13 @@ Ein gültiger String wird mit `xs:decimal()` umgewandelt. Die Eingabe einer Leer
 	</xsl:function>
 }}}
 
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:force-cast-to-decimal({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: zu castender String
@@ -70,6 +73,9 @@ Shortcut für `xsb:force-cast-to-decimal($input, true() )`
 		<xsl:sequence select="xsb:force-cast-to-decimal($input, true() )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_force_cast_to_decimal xsb:force-cast-to-decimal()]
 
 ----
 

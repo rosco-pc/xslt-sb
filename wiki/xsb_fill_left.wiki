@@ -1,10 +1,10 @@
-#summary Details für `xsb:fill-left()`
+#summary Details für {{{xsb:fill-left()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:fill-left({{{input}}} _as_ {{{xs:string?}}}; {{{fill-with}}} _as_ {{{xs:string?}}}; {{{length}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: String, der aufgefüllt werden soll

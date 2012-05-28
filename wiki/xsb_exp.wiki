@@ -1,10 +1,10 @@
-#summary Details für `xsb:exp()`
+#summary Details für {{{xsb:exp()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:exp({{{exponent}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `exponent`: Exponent der e-Funktion
@@ -39,6 +39,17 @@ Exponential-Funktion e^exponent
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_INF intern:cast-INF()]
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_exp intern:exp()]
+ * [intern_round intern:round()]
+ * [xsb_cast xsb:cast()]
+ * [xsb_is_INF xsb:is-INF()]
+ * [xsb_is_NaN xsb:is-NaN()]
+ * [xsb_is_negative_INF xsb:is-negative-INF()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

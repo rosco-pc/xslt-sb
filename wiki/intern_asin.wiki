@@ -1,10 +1,10 @@
-#summary Details für `intern:asin()`
+#summary Details für {{{intern:asin()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:asin({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `intern:asin()`-Funktion
@@ -46,6 +46,13 @@ ermittelt den Arkussinus (im Bogenmaß)
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_half_pi intern:half-pi()]
+ * [intern_sgn intern:sgn()]
+ * [xsb_cast xsb:cast()]
+ * [xsb_sgn xsb:sgn()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

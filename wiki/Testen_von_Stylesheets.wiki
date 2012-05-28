@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `internals.testing.xsl`
+#summary Überblick der Funktionen und Templates von {{{internals.testing.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `internals.testing.xsl` =
+= {{{internals.testing.xsl}}} =
 
-Stylesheet: `internals.testing.xsl`
+Stylesheet: {{{internals.testing.xsl}}}
 
 Dieses Stylesheet enthält interne Templates und Funktionen zum Testen von XSLT-Stylesheets.
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:log-m-iterator()`
+#summary Details für {{{intern:log-m-iterator()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:log-m-iterator({{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{m}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `x`: Argument der `log()`-Funktion
@@ -51,6 +51,13 @@ Details siehe ``intern:log()``
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_log_m_iterator intern:log-m-iterator()]
+
+===Benutzte Templates===
+ * [intern_internals_FatalError intern:internals.FatalError]
 
 ----
 

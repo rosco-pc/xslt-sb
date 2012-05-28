@@ -1,10 +1,10 @@
-#summary Details für `intern:power()`
+#summary Details für {{{intern:power()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:power({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `basis`: Basis
@@ -40,6 +40,9 @@ berechnet die Potenz basis^exponent für ganzzahlige Exponenten (multiplikative 
 		</xsl:choose>	
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_iround intern:iround()]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:render-context-and-parent-as-string()`
+#summary Details für {{{intern:render-context-and-parent-as-string()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:render-context-and-parent-as-string({{{context}}} _as_ {{{node()?}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `context`: Kontextknoten vom Typ `node()`, kann also vom Typ `element()`, `attribute()`, `text()`, `comment()` usw. sein
@@ -43,6 +43,9 @@ Diese Funktion erzeugt aus dem Kontext eines Knotens und dessen Elternknoten ein
 		<xsl:sequence select="string-join($temp, '' )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_render_context_as_string xsb:render-context-as-string()]
 
 ----
 

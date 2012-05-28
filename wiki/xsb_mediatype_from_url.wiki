@@ -1,10 +1,10 @@
-#summary Details für `xsb:mediatype-from-url()`
+#summary Details für {{{xsb:mediatype-from-url()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:mediatype-from-url({{{URLwithFileExtension}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URLwithFileExtension`: URL, aus dessen file extension der Mediatype ermittelt werden soll.
@@ -54,10 +54,16 @@ Die Eingabe einer ungültigen Dateierweiterung gibt einen Leerstring und – in 
 	</xsl:function>
 }}}
 
+===Benutzte Funktionen===
+ * [xsb_fileExtention_from_url xsb:fileExtention-from-url()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:mediatype-from-url({{{URLwithFileExtension}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URLwithFileExtension`: URL, aus dessen file extension der Mediatype ermittelt werden soll.
@@ -80,6 +86,9 @@ Shortcut für `xsb:mediatype-from-url($URLwithFileExtension, true())`.
 		<xsl:sequence select="xsb:mediatype-from-url($URLwithFileExtension, true())"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_mediatype_from_url xsb:mediatype-from-url()]
 
 ----
 

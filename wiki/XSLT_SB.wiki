@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `standard.xsl`
+#summary Überblick der Funktionen und Templates von {{{standard.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `standard.xsl` =
+= {{{standard.xsl}}} =
 
-Stylesheet: `standard.xsl`
+Stylesheet: {{{standard.xsl}}}
 
 Die XSLT-Standard-Bibliothek (XSLT-SB) beinhaltet nützliche, immer wieder gebrauchte Funktionen und Templates. Gleichzeitig dient sie als beispielhafte Inplementierung bestimmter Techniken. Sie wendet sich als Beispielsammlung vor allem an deutschsprachige Entwickler, um für diese die Einstiegshürden zu senken.
 

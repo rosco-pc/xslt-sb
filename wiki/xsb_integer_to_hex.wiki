@@ -1,10 +1,10 @@
-#summary Details für `xsb:integer-to-hex()`
+#summary Details für {{{xsb:integer-to-hex()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:integer-to-hex({{{input}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `input`: Integer-Zahl
@@ -47,10 +47,14 @@ Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden 
 	</xsl:function>
 }}}
 
+===Benutzte Funktionen===
+ * [xsb_fill_left xsb:fill-left()]
+ * [xsb_integer_to_hex xsb:integer-to-hex()]
+
 ----
 =xsb:integer-to-hex({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `input`: Integer-Zahl
@@ -119,6 +123,16 @@ Wenn `$input` nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehl
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_power intern:power()]
+ * [xsb_fill_left xsb:fill-left()]
+ * [xsb_integer_to_hex xsb:integer-to-hex()]
+ * [xsb_twos_complement xsb:twos-complement()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

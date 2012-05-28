@@ -1,10 +1,10 @@
-#summary Details für `xsb:tau()`
+#summary Details für {{{xsb:tau()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:tau=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Beschreibung==
 Konstante Tau mit 2 {{{*}}} Pi = 6,28318530717958647692528676655900576839433879875021…

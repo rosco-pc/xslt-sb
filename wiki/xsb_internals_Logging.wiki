@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.Logging`
+#summary Details für {{{xsb:internals.Logging}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.Logging (_optional_ {{{log-entry.preText}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.ID}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.timeStamp}}} _as_ {{{xs:dateTime?}}}; _optional_ {{{log-entry.processedFile}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.level}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.text}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.category}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.postText}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.linebreak-string}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.write-to-console}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-to-file}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-to-file-as-comment}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-to-file-as-element}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-to-file-as-html}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-to-file-as-text}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-preText}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-ID}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-timeStamp}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-processedFile}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-level}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-text}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-category}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-postText}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -73,6 +73,9 @@ Stylesheet: `internals.xsl`
 		</xsl:if>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [intern_internals_logging_Output intern:internals.logging.Output]
 
 ----
 

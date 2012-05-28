@@ -1,10 +1,10 @@
-#summary Details für `intern:cot()`
+#summary Details für {{{intern:cot()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:cot({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Eingabewert, als Bogenmaß
@@ -43,6 +43,13 @@ Da als Ergebnis `-/+INF` ausgegeben werden kann, schlägt in diesen Fällen ein 
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_INF intern:cast-INF()]
+ * [intern_cast_negative_INF intern:cast-negative-INF()]
+ * [intern_cos intern:cos()]
+ * [intern_sin intern:sin()]
+ * [xsb_is_negative_0 xsb:is-negative-0()]
 
 ----
 

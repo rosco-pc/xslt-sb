@@ -1,10 +1,10 @@
-#summary Details für `xsb:replace()`
+#summary Details für {{{xsb:replace()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:replace({{{input}}} _as_ {{{xs:string?}}}; {{{pattern}}} _as_ {{{xs:string*}}}; {{{replacement}}} _as_ {{{xs:string*}}}; {{{flags}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: String, in dem ersetzt wird
@@ -62,10 +62,13 @@ Ist `replacement` der Leerstring, wird jeder Treffer von `pattern` in `input` ge
 	</xsl:function>
 }}}
 
+===Benutzte Funktionen===
+ * [xsb_replace xsb:replace()]
+
 ----
 =xsb:replace({{{input}}} _as_ {{{xs:string?}}}; {{{pattern}}} _as_ {{{xs:string*}}}; {{{replacement}}} _as_ {{{xs:string*}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: String, in dem ersetzt wird
@@ -92,6 +95,9 @@ Shortcut für ``xsb:replace($input, $pattern, $replacement, '')``
 		<xsl:sequence select="xsb:replace($input, $pattern, $replacement, '')"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_replace xsb:replace()]
 
 ----
 

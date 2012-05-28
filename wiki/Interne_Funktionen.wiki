@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `internals.xsl`
+#summary Überblick der Funktionen und Templates von {{{internals.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `internals.xsl` =
+= {{{internals.xsl}}} =
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 Dieses Stylesheet enthält interne Templates und Funktionen, z.B. für Logging und Debug-Meldungen.
 

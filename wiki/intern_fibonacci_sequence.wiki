@@ -1,10 +1,10 @@
-#summary Details für `intern:fibonacci-sequence()`
+#summary Details für {{{intern:fibonacci-sequence()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:fibonacci-sequence({{{n}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer*}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `n`: Argument (positive natürliche Zahl), Anzahl der anzuhängenden Fibonacci-Zahlen (- 1, weil die Startsequenz in der Regel (0, 1) ist)
@@ -37,6 +37,9 @@ Die Initalisierung erfolgt in der Regel über ``xsb:fibonacci-sequence($n as xs:
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_fibonacci_sequence intern:fibonacci-sequence()]
 
 ----
 

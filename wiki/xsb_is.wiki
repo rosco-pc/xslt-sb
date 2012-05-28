@@ -1,10 +1,10 @@
-#summary Details für `xsb:is()`
+#summary Details für {{{xsb:is()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is({{{input1}}}; {{{input2}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `input1`: Eingabe (ohne Typ)

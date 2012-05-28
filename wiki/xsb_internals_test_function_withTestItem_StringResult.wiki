@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.test.function.withTestItem.StringResult`
+#summary Details für {{{xsb:internals.test.function.withTestItem.StringResult}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.test.function.withTestItem.StringResult (_required_ {{{test-node}}} _as_ {{{element()}}}; _required_ {{{function-name}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.testing.xsl`
+Stylesheet: {{{internals.testing.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -32,6 +32,14 @@ Stylesheet: `internals.testing.xsl`
 		</xsl:if>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_validate_test_node intern:validate-test-node()]
+ * [xsb_listed xsb:listed()]
+
+===Benutzte Templates===
+ * [xsb_internals_testing_SkippedTests xsb:internals.testing.SkippedTests]
+ * [xsb_internals_test_Function xsb:internals.test.Function]
 
 ----
 

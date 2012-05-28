@@ -1,10 +1,10 @@
-#summary Details für `xsb:node-kind()`
+#summary Details für {{{xsb:node-kind()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:node-kind({{{context}}} _as_ {{{node()?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `context`: Eingabeknoten
@@ -51,10 +51,13 @@ Diese Funktion ist eine Implementierung des `dm:node-kind`-Accessors aus dem `XQ
 	</xsl:function>
 }}}
 
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:node-kind({{{context}}} _as_ {{{node()?}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `context`: Eingabeknoten (ohne Typ)
@@ -75,6 +78,9 @@ Shortcut für ``xsb:node-kind($context, true())``
 		<xsl:sequence select="xsb:node-kind($context, true())"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_node_kind xsb:node-kind()]
 
 ----
 

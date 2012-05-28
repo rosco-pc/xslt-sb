@@ -1,10 +1,10 @@
-#summary Details für `xsb:hex-to-integer()`
+#summary Details für {{{xsb:hex-to-integer()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:hex-to-integer({{{input}}} _as_ {{{xs:string}}}; {{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `input`: eine hexadezimale Zahl (beliebige Folge aus `0-9` und `A-F` bzw. `a-f`)
@@ -86,10 +86,21 @@ Eine andere Version dieser Funktion, die negative Zahlen mit Minus-Vorzeichen da
 	</xsl:function>
 }}}
 
+===Benutzte Funktionen===
+ * [intern_power intern:power()]
+ * [xsb_hex_to_integer xsb:hex-to-integer()]
+ * [xsb_integer_to_hex xsb:integer-to-hex()]
+ * [xsb_reverse_twos_complement xsb:reverse-twos-complement()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:hex-to-integer({{{input}}} _as_ {{{xs:string}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: eine hexadezimale Zahl (beliebige Folge aus `0-9` und `A-F` bzw. `a-f`), ggfs. mit einem vorangestellten »`-`« (Minus) für negative Zahlen
@@ -146,6 +157,12 @@ Eine andere Version dieser Funktion, die negative Zahlen als Zweierkomplement be
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_hex_to_integer xsb:hex-to-integer()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.logging.MakeFooter.element`
+#summary Details für {{{intern:internals.logging.MakeFooter.element}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.logging.MakeFooter.element=
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==

@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `internals.meta.xsl`
+#summary Überblick der Funktionen und Templates von {{{internals.meta.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `internals.meta.xsl` =
+= {{{internals.meta.xsl}}} =
 
-Stylesheet: `internals.meta.xsl`
+Stylesheet: {{{internals.meta.xsl}}}
 
 Dieses Stylesheet enthält interne Templates und Funktionen zur Untersuchung von XSLT-Dateien.
 

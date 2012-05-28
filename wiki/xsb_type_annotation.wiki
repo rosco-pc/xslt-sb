@@ -1,10 +1,10 @@
-#summary Details für `xsb:type-annotation()`
+#summary Details für {{{xsb:type-annotation()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:type-annotation({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
@@ -73,10 +73,13 @@ Achtung: Die XSLT-Prozessor-Hersteller sind nicht verpflichtet, intern den jewei
 	</xsl:function>
 }}}
 
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+
 ----
 =xsb:type-annotation({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
@@ -97,6 +100,9 @@ Shortcut für `xsb:type-annotation($arg, true() )`
 		<xsl:sequence select="xsb:type-annotation($arg, true() )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

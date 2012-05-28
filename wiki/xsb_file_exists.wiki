@@ -1,10 +1,10 @@
-#summary Details für `xsb:file-exists()`
+#summary Details für {{{xsb:file-exists()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Absoluter Pfad zur zu überprüfenden Datei.
@@ -68,10 +68,21 @@ Der Wertebereich für gültige Parameter wurde auf den kleinsten gemeinsamen Nen
 	</xsl:function>
 }}}
 
+===Benutzte Funktionen===
+ * [intern_file_exists intern:file-exists()]
+ * [xsb_is_absolute_url xsb:is-absolute-url()]
+ * [xsb_remove_query_and_fragment_from_url xsb:remove-query-and-fragment-from-url()]
+ * [xsb_url_has_authority xsb:url-has-authority()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+
 ----
 =xsb:file-exists({{{relativeURL}}} _as_ {{{xs:string?}}}; {{{baseURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `relativeURL`: relativer Pfad zur zu überprüfenden Datei.
@@ -135,6 +146,17 @@ Die relative URL wird gegenüber der Basis aufgelöst. Es werden nur lokale Date
 		<xsl:sequence select="xsb:file-exists($composedURL)"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_file_exists xsb:file-exists()]
+ * [xsb_is_absolute_url xsb:is-absolute-url()]
+ * [xsb_is_relative_url xsb:is-relative-url()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

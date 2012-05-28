@@ -1,10 +1,10 @@
-#summary Details für `intern:atan-iterator()`
+#summary Details für {{{intern:atan-iterator()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:atan-iterator({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{an}}} _as_ {{{xs:anyAtomicType}}}; {{{bn}}} _as_ {{{xs:anyAtomicType}}}; {{{konstanterDivisor}}} _as_ {{{xs:anyAtomicType}}}; {{{letztesResultat}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Funktionsargument (numerischer Wert)
@@ -52,6 +52,11 @@ Der Algorithmus folgt `http://mathworld.wolfram.com/InverseTangent.html`, Gleich
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_atan_iterator intern:atan-iterator()]
+ * [intern_iround intern:iround()]
+ * [intern_sqrt intern:sqrt()]
 
 ----
 

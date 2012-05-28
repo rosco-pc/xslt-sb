@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.stylecheck.self-test`
+#summary Details für {{{intern:internals.stylecheck.self-test}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.stylecheck.self-test=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==

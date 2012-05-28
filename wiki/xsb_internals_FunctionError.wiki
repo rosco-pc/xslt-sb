@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.FunctionError`
+#summary Details für {{{xsb:internals.FunctionError}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.FunctionError (_optional_ {{{message}}} _as_ {{{xs:string?}}}; _optional_ {{{level}}} _as_ {{{xs:string?}}}; _optional_ {{{caller}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -24,6 +24,12 @@ Stylesheet: `internals.xsl`
 		</xsl:call-template>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_return_default_if_empty xsb:return-default-if-empty()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

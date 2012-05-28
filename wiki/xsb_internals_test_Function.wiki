@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.test.Function`
+#summary Details für {{{xsb:internals.test.Function}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.test.Function (_required_ {{{caller}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}}; _required_ {{{reference-value}}})=
 
-Stylesheet: `internals.testing.xsl`
+Stylesheet: {{{internals.testing.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -47,6 +47,14 @@ Stylesheet: `internals.testing.xsl`
 		</xsl:choose>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_is xsb:is()]
+ * [xsb_type_annotation xsb:type-annotation()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

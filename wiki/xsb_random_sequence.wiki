@@ -1,10 +1,10 @@
-#summary Details für `xsb:random-sequence()`
+#summary Details für {{{xsb:random-sequence()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:random-sequence({{{length}}} _as_ {{{xs:anyAtomicType}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `length`: Anzahl der zu erzeugenden Zufallswerte

@@ -1,10 +1,10 @@
-#summary Details für `intern:file-exists()`
+#summary Details für {{{intern:file-exists()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Absoluter Pfad zur zu überprüfenden Datei.
@@ -33,7 +33,7 @@ Es werden nur lokale Dateien mit absoluten URLs getestet.
 ----
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei
@@ -60,7 +60,7 @@ Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Erg
 ----
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei
@@ -87,7 +87,7 @@ Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Erg
 ----
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei
@@ -113,6 +113,12 @@ Diese Funktion wird aufgerufen, wenn weder Java noch Saxon-spezifische Funktione
 		</xsl:call-template>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_current_vendor_hash xsb:current-vendor-hash()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

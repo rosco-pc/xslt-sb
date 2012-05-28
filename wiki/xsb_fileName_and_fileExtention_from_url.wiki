@@ -1,10 +1,10 @@
-#summary Details für `xsb:fileName-and-fileExtention-from-url()`
+#summary Details für {{{xsb:fileName-and-fileExtention-from-url()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:fileName-and-fileExtention-from-url({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.
@@ -45,6 +45,11 @@ Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_is_network_server_url xsb:is-network-server-url()]
+ * [xsb_is_path_only_url xsb:is-path-only-url()]
+ * [xsb_remove_query_and_fragment_from_url xsb:remove-query-and-fragment-from-url()]
 
 ----
 

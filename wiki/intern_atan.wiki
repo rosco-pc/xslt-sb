@@ -1,10 +1,10 @@
-#summary Details für `intern:atan()`
+#summary Details für {{{intern:atan()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:atan({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `intern:atan()`-Funktion
@@ -37,6 +37,13 @@ ermittelt den Arkustangens (im Bogenmaß)
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_atan_iterator intern:atan-iterator()]
+ * [intern_pow intern:pow()]
+ * [intern_sqrt intern:sqrt()]
+ * [xsb_cast xsb:cast()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

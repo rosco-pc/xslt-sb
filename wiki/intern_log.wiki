@@ -1,10 +1,10 @@
-#summary Details für `intern:log()`
+#summary Details für {{{intern:log()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:log({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument
@@ -50,6 +50,15 @@ Da als Ergebnis `-INF` ausgegeben werden kann (für `$arg = 0`), schlägt in die
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_cast_negative_INF intern:cast-negative-INF()]
+ * [intern_format_INF_caller intern:format-INF-caller()]
+ * [intern_log_m_iterator intern:log-m-iterator()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

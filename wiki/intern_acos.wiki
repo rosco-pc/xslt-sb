@@ -1,10 +1,10 @@
-#summary Details für `intern:acos()`
+#summary Details für {{{intern:acos()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:acos({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `intern:acos()`-Funktion
@@ -32,6 +32,11 @@ ermittelt den Arkuskosinus (im Bogenmaß)
 			</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_half_pi intern:half-pi()]
+ * [xsb_cast xsb:cast()]
+ * [xsb_type_annotation xsb:type-annotation()]
 
 ----
 

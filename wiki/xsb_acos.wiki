@@ -1,10 +1,10 @@
-#summary Details für `xsb:acos()`
+#summary Details für {{{xsb:acos()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:acos({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Argument der `xsb:acos()`-Funktion
@@ -40,6 +40,16 @@ ermittelt den Arkuskosinus (im Bogenmaß)
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_acos intern:acos()]
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_format_INF_caller intern:format-INF-caller()]
+ * [intern_round intern:round()]
+ * [xsb_is_NaN xsb:is-NaN()]
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

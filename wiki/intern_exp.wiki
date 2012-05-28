@@ -1,10 +1,10 @@
-#summary Details für `intern:exp()`
+#summary Details für {{{intern:exp()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:exp({{{exponent}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `exponent`: Exponent der e-Funktion
@@ -28,6 +28,9 @@ Exponential-Funktion e^exponent
 		<xsl:sequence select="intern:power(2, $k) * intern:exp-iterator($exponent - $k * intern:ln2(), 1, 1, 1, 1)"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_power intern:power()]
 
 ----
 

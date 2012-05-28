@@ -1,10 +1,10 @@
-#summary Details für `intern:sin()`
+#summary Details für {{{intern:sin()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:sin({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Eingabewert, als Bogenmaß
@@ -26,6 +26,11 @@ berechnet den Sinus
 		<xsl:sequence select="intern:iround(intern:sinus-iterator(intern:normalize-rad($arg ), 0, 0) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_iround intern:iround()]
+ * [intern_normalize_rad intern:normalize-rad()]
+ * [intern_sinus_iterator intern:sinus-iterator()]
 
 ----
 

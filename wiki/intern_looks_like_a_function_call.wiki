@@ -1,10 +1,10 @@
-#summary Details für `intern:looks-like-a-function-call()`
+#summary Details für {{{intern:looks-like-a-function-call()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:looks-like-a-function-call({{{StringOfAFunctionCall}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.meta.xsl`
+Stylesheet: {{{internals.meta.xsl}}}
 
 ==Parameter==
 `StringOfAFunctionCall`: String, der wie ein Funktionsaufruf aussieht.

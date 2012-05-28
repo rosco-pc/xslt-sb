@@ -1,10 +1,10 @@
-#summary Details für `intern:deg-to-rad()`
+#summary Details für {{{intern:deg-to-rad()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:deg-to-rad({{{deg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `deg`: Eingabe im Gradmaß

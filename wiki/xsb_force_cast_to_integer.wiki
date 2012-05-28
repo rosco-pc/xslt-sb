@@ -1,10 +1,10 @@
-#summary Details für `xsb:force-cast-to-integer()`
+#summary Details für {{{xsb:force-cast-to-integer()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:force-cast-to-integer({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: zu castender String
@@ -31,10 +31,13 @@ Ein gültiger String wird mit `xsb:force-cast-to-integer()` umgewandelt. Die Ein
 	</xsl:function>
 }}}
 
+===Benutzte Funktionen===
+ * [xsb_force_cast_to_decimal xsb:force-cast-to-decimal()]
+
 ----
 =xsb:force-cast-to-integer({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: zu castender String
@@ -55,6 +58,9 @@ Shortcut für `xsb:force-cast-to-integer($input, true() )`
 		<xsl:sequence select="xsb:force-cast-to-integer($input, true() )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_force_cast_to_integer xsb:force-cast-to-integer()]
 
 ----
 

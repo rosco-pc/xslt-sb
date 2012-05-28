@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.MakeHeader`
+#summary Details für {{{xsb:internals.MakeHeader}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.MakeHeader=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -23,6 +23,11 @@ Stylesheet: `internals.xsl`
 		<xsl:call-template name="xsb:internals.Log-system-properties"/>
 	</xsl:template>
 }}}
+
+===Benutzte Templates===
+ * [intern_internals_logging_MakeHeader_element intern:internals.logging.MakeHeader.element]
+ * [intern_internals_logging_MakeHeader_html intern:internals.logging.MakeHeader.html]
+ * [xsb_internals_Log_system_properties xsb:internals.Log-system-properties]
 
 ----
 

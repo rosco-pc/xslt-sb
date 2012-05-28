@@ -1,10 +1,10 @@
-#summary Details für `intern:sqrt()`
+#summary Details für {{{intern:sqrt()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:sqrt({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Eingabewert
@@ -26,6 +26,9 @@ berechnet die Quadratwurzel, Shortcut für `intern:nroot($arg, 2)`
 		<xsl:sequence select="intern:nroot($arg, 2)"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_nroot intern:nroot()]
 
 ----
 

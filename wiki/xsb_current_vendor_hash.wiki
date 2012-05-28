@@ -1,10 +1,10 @@
-#summary Details für `xsb:current-vendor-hash()`
+#summary Details für {{{xsb:current-vendor-hash()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:current-vendor-hash=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 Diese Funktion ermittelt den Vendor-Hash für das aktuelle System.
@@ -20,6 +20,11 @@ Diese Funktion ermittelt den Vendor-Hash für das aktuelle System.
 		<xsl:value-of select="xsb:vendor-hash(system-property( 'xsl:product-name' ), system-property( 'xsl:product-version' ), xsb:java-available(), xsb:parse-string-to-boolean(system-property( 'xsl:is-schema-aware' )) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_java_available xsb:java-available()]
+ * [xsb_parse_string_to_boolean xsb:parse-string-to-boolean()]
+ * [xsb_vendor_hash xsb:vendor-hash()]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `intern:random-seed()`
+#summary Details für {{{intern:random-seed()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:random-seed({{{volatile}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `volatile`: ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte
@@ -40,6 +40,10 @@ Zum Hintergrund siehe `http://blog.expedimentum.com/2012/xsb-random-zufallszahle
 		<xsl:sequence select="intern:linear-congruential-generator(1, $integer-of-volatile + $integer-of-current-date + xs:integer(sum($sequence-of-weighted-id-integers) ) )"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_linear_congruential_generator intern:linear-congruential-generator()]
+ * [intern_power intern:power()]
 
 ----
 

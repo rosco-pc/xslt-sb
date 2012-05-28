@@ -1,10 +1,10 @@
-#summary Details für `xsb:cast()`
+#summary Details für {{{xsb:cast()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:cast({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{as}}} _as_ {{{xs:string}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
@@ -74,6 +74,10 @@ Laut Standard kann nicht auf `xs:QName` gecastet werden, da dieser Cast ein stat
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Templates===
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
+ * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 

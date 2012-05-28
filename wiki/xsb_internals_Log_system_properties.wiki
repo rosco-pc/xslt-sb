@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.Log-system-properties`
+#summary Details für {{{xsb:internals.Log-system-properties}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.Log-system-properties (_optional_ {{{logging-level}}} _as_ {{{xs:string}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -93,6 +93,28 @@ Stylesheet: `internals.xsl`
 		</xsl:call-template>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_current_vendor_hash xsb:current-vendor-hash()]
+ * [xsb_java_available xsb:java-available()]
+
+===Benutzte Templates===
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
+ * [xsb_internals_Logging xsb:internals.Logging]
 
 ----
 

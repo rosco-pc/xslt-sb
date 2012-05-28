@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.ProvisionalError`
+#summary Details für {{{intern:internals.ProvisionalError}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.ProvisionalError (_optional_ {{{message}}} _as_ {{{xs:string?}}}; _optional_ {{{level}}} _as_ {{{xs:string?}}}; _optional_ {{{caller}}} _as_ {{{xs:string?}}}; _optional_ {{{show-context}}} _as_ {{{xs:boolean}}}; _optional_ {{{write-to-file}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -45,6 +45,15 @@ Stylesheet: `internals.xsl`
 		</xsl:if>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_render_context_and_parent_as_string intern:render-context-and-parent-as-string()]
+ * [intern_render_level_to_pretext intern:render-level-to-pretext()]
+ * [xsb_lax_string_compare xsb:lax-string-compare()]
+ * [xsb_return_default_if_empty xsb:return-default-if-empty()]
+
+===Benutzte Templates===
+ * [xsb_internals_Logging xsb:internals.Logging]
 
 ----
 

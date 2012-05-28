@@ -1,10 +1,10 @@
-#summary Details für `xsb:is-negative-0()`
+#summary Details für {{{xsb:is-negative-0()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is-negative-0({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Funktionsargument

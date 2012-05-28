@@ -1,10 +1,10 @@
-#summary Details für `xsb:is-url()`
+#summary Details für {{{xsb:is-url()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is-url({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.

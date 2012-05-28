@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.logging.MakeThead.HTML`
+#summary Details für {{{intern:internals.logging.MakeThead.HTML}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.logging.MakeThead.HTML (_optional_ {{{log-entry.preText}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.ID}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.timeStamp}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.processedFile}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.level}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.text}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.category}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.postText}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.write-preText}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-ID}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-timeStamp}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-processedFile}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-level}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-text}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-category}}} _as_ {{{xs:boolean}}}; _optional_ {{{log-entry.write-postText}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==

@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `numbers.xsl`
+#summary Überblick der Funktionen und Templates von {{{numbers.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `numbers.xsl` =
+= {{{numbers.xsl}}} =
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 Dieses Stylesheet enthält Funktionen rund um Zahlen und Rechenoperationen.
 

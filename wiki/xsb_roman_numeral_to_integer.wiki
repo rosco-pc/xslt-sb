@@ -1,10 +1,10 @@
-#summary Details für `xsb:roman-numeral-to-integer()`
+#summary Details für {{{xsb:roman-numeral-to-integer()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:roman-numeral-to-integer({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `numbers.xsl`
+Stylesheet: {{{numbers.xsl}}}
 
 ==Parameter==
 `input`: römische Zahl (String)
@@ -45,6 +45,10 @@ Diese Funktion wandelt eine römische Zahl in einen Integer-Wert um. Ist der ein
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_is_roman_numeral xsb:is-roman-numeral()]
+ * [xsb_roman_number_char_to_integer xsb:roman-number-char-to-integer()]
 
 ----
 

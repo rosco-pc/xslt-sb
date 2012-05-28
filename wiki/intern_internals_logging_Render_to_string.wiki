@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.logging.Render-to-string`
+#summary Details für {{{intern:internals.logging.Render-to-string}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.logging.Render-to-string (_optional_ {{{log-entry.preText.tunneld}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.ID.tunneld}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.timeStamp.tunneld}}} _as_ {{{xs:dateTime?}}}; _optional_ {{{log-entry.processedFile.tunneld}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.level.tunneld}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.text.tunneld}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.category.tunneld}}} _as_ {{{xs:string?}}}; _optional_ {{{log-entry.postText.tunneld}}} _as_ {{{xs:string?}}}; _required_ {{{log-entry.write-preText.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-ID.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-timeStamp.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-processedFile.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-level.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-text.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-category.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-postText.tunneld}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.logging.xsl`
+Stylesheet: {{{internals.logging.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==

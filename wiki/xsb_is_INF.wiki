@@ -1,10 +1,10 @@
-#summary Details für `xsb:is-INF()`
+#summary Details für {{{xsb:is-INF()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:is-INF({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `arg`: Funktionsargument

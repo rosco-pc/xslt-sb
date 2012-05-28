@@ -1,10 +1,10 @@
-#summary Details für `intern:pow()`
+#summary Details für {{{intern:pow()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:pow({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `basis`: Basis
@@ -39,6 +39,10 @@ berechnet die Potenz basis^exponent
 		</xsl:choose>	
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_exp intern:exp()]
+ * [intern_iround intern:iround()]
 
 ----
 

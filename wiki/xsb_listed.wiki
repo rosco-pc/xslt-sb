@@ -1,10 +1,10 @@
-#summary Details für `xsb:listed()`
+#summary Details für {{{xsb:listed()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:listed({{{list}}} _as_ {{{xs:string?}}}; {{{item}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `list`: Whitespace-getrennte Liste von String-Token

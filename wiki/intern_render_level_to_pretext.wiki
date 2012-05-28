@@ -1,10 +1,10 @@
-#summary Details für `intern:render-level-to-pretext()`
+#summary Details für {{{intern:render-level-to-pretext()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:render-level-to-pretext({{{level}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Parameter==
 `level`: Eingabe (String)

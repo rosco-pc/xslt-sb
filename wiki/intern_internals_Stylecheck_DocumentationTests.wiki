@@ -1,10 +1,10 @@
-#summary Details für `intern:internals.Stylecheck.DocumentationTests`
+#summary Details für {{{intern:internals.Stylecheck.DocumentationTests}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:internals.Stylecheck.DocumentationTests (_required_ {{{Dokument}}} _as_ {{{document-node()}}})=
 
-Stylesheet: `internals.stylecheck.xsl`
+Stylesheet: {{{internals.stylecheck.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -88,6 +88,19 @@ Stylesheet: `internals.stylecheck.xsl`
 		</xsl:for-each>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_render_context_and_parent_as_string intern:render-context-and-parent-as-string()]
+ * [xsb_listed xsb:listed()]
+ * [xsb_render_context_as_string xsb:render-context-as-string()]
+
+===Benutzte Templates===
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
+ * [xsb_internals_Error xsb:internals.Error]
 
 ----
 

@@ -1,10 +1,10 @@
-#summary Details für `xsb:internals.Error`
+#summary Details für {{{xsb:internals.Error}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:internals.Error (_optional_ {{{message}}} _as_ {{{xs:string?}}}; _optional_ {{{level}}} _as_ {{{xs:string?}}}; _optional_ {{{caller}}} _as_ {{{xs:string?}}}; _optional_ {{{show-context}}} _as_ {{{xs:boolean}}}; _optional_ {{{write-to-file}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: `internals.xsl`
+Stylesheet: {{{internals.xsl}}}
 
 ==Beschreibung==
 ==Implementierung==
@@ -36,6 +36,13 @@ Stylesheet: `internals.xsl`
 		</xsl:if>
 	</xsl:template>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_render_level_to_pretext intern:render-level-to-pretext()]
+ * [xsb_return_default_if_empty xsb:return-default-if-empty()]
+
+===Benutzte Templates===
+ * [xsb_internals_Logging xsb:internals.Logging]
 
 ----
 

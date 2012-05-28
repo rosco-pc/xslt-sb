@@ -1,10 +1,10 @@
-#summary Details für `xsb:count-matches()`
+#summary Details für {{{xsb:count-matches()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:count-matches({{{string}}} _as_ {{{xs:string?}}}; {{{regex}}} _as_ {{{xs:string?}}}; {{{flags}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `string`: String, in dem gezählt wird
@@ -51,7 +51,7 @@ Sind `string` oder `regex` Leerstring oder die Leersequenz, wird `0` zurückgege
 ----
 =xsb:count-matches({{{string}}} _as_ {{{xs:string?}}}; {{{regex}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `string`: String, in dem gezählt wird
@@ -75,6 +75,9 @@ Shortcut für ``xsb:count-matches($string, $regex, '')``
 		<xsl:sequence select="xsb:count-matches($string, $regex, '')"/>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [xsb_count_matches xsb:count-matches()]
 
 ----
 

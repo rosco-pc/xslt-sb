@@ -1,10 +1,10 @@
-#summary Details für `xsb:standard-deviation()`
+#summary Details für {{{xsb:standard-deviation()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:standard-deviation({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten
@@ -32,6 +32,11 @@ berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz
 		</xsl:choose>
 	</xsl:function>
 }}}
+
+===Benutzte Funktionen===
+ * [intern_cast_NaN intern:cast-NaN()]
+ * [intern_round intern:round()]
+ * [intern_standard_deviation intern:standard-deviation()]
 
 ----
 

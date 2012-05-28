@@ -1,5 +1,6 @@
 #summary Überblick der Funktionen und Templates der XSL-SB
 #labels Dokumentation
+#sidebar TableOfContents
 
 = Liste der Funktionen =
 

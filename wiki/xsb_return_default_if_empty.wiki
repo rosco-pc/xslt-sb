@@ -1,10 +1,10 @@
-#summary Details für `xsb:return-default-if-empty()`
+#summary Details für {{{xsb:return-default-if-empty()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =xsb:return-default-if-empty({{{input}}} _as_ {{{xs:string?}}}; {{{default}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: `strings.xsl`
+Stylesheet: {{{strings.xsl}}}
 
 ==Parameter==
 `input`: Eingabe (String)

@@ -1,10 +1,10 @@
-#summary Details für `intern:rad-to-deg()`
+#summary Details für {{{intern:rad-to-deg()}}}
 #labels Dokumentation
 #sidebar TableOfContents
 
 =intern:rad-to-deg({{{rad}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: `math.xsl`
+Stylesheet: {{{math.xsl}}}
 
 ==Parameter==
 `rad`: Eingabe im Bogenmaß

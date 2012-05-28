@@ -1,9 +1,10 @@
-#summary Überblick der Funktionen und Templates von `files.xsl`
+#summary Überblick der Funktionen und Templates von {{{files.xsl}}}
 #labels Dokumentation
+#sidebar TableOfContents
 
-= `files.xsl` =
+= {{{files.xsl}}} =
 
-Stylesheet: `files.xsl`
+Stylesheet: {{{files.xsl}}}
 
 Dieses Stylesheet enthält Funktionen rund um das Dateisystem.
 
