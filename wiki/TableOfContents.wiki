@@ -1,7 +1,5 @@
  * [XSLT_SB Einführung]
-
  * [Index Index der Funktionen und Templates]
-
  * Stylesheets
   * [Dateien_und_Dateisystem]
   * [Interne_Funktionen]
