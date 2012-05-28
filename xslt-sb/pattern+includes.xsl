@@ -176,7 +176,7 @@
 					intern:render-level-to-pretext($_level),
 					if ($show-context) 
 						then concat(
-							if ($mode = '#default') then ('') else concat('[Mode: ', $mode, ']' ),
+							if ($mode eq '#default') then ('') else concat('[Mode: ', $mode, ']' ),
 							intern:render-context-and-parent-as-string(.), 
 							': '
 							)

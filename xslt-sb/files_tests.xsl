@@ -1039,6 +1039,114 @@
 			<xsb:is-path-only-url>false</xsb:is-path-only-url>
 			<xsb:scheme-from-url>file</xsb:scheme-from-url>
 		</test>
+	
+	
+	
+		<test>
+			<value>file:///server/path/test.txt/test</value>
+			<xsb:is-absolute-url>true</xsb:is-absolute-url>
+			<xsb:is-relative-url>true</xsb:is-relative-url>
+			<xsb:is-url>true</xsb:is-url>
+			<xsb:is-network-server-url>false</xsb:is-network-server-url>
+			<xsb:url-has-authority>false</xsb:url-has-authority>
+			<xsb:url-has-query>false</xsb:url-has-query>
+			<xsb:url-has-fragment>false</xsb:url-has-fragment>
+			<xsb:url-has-fileExtention>false</xsb:url-has-fileExtention>
+			<xsb:query-from-url/>
+			<xsb:fragment-from-url/>
+			<xsb:remove-query-and-fragment-from-url>file:///server/path/test.txt/test</xsb:remove-query-and-fragment-from-url>
+			<xsb:fileName-and-fileExtention-from-url>test</xsb:fileName-and-fileExtention-from-url>
+			<xsb:is-shortcut-only-url>false</xsb:is-shortcut-only-url>
+			<xsb:fileExtention-from-url></xsb:fileExtention-from-url>
+			<xsb:fileName-from-url>test</xsb:fileName-from-url>
+			<xsb:path-from-url>file:///server/path/test.txt/</xsb:path-from-url>
+			<xsb:is-path-only-url>false</xsb:is-path-only-url>
+			<xsb:scheme-from-url>file</xsb:scheme-from-url>
+		</test>
+		<test>
+			<value>file:///server/path/test.txt/test</value>
+			<xsb:is-absolute-url>true</xsb:is-absolute-url>
+			<xsb:is-relative-url>true</xsb:is-relative-url>
+			<xsb:is-url>true</xsb:is-url>
+			<xsb:is-network-server-url>false</xsb:is-network-server-url>
+			<xsb:url-has-authority>false</xsb:url-has-authority>
+			<xsb:url-has-query>false</xsb:url-has-query>
+			<xsb:url-has-fragment>false</xsb:url-has-fragment>
+			<xsb:url-has-fileExtention>false</xsb:url-has-fileExtention>
+			<xsb:query-from-url/>
+			<xsb:fragment-from-url/>
+			<xsb:remove-query-and-fragment-from-url>file:///server/path/test.txt/test</xsb:remove-query-and-fragment-from-url>
+			<xsb:fileName-and-fileExtention-from-url>test</xsb:fileName-and-fileExtention-from-url>
+			<xsb:is-shortcut-only-url>false</xsb:is-shortcut-only-url>
+			<xsb:fileExtention-from-url></xsb:fileExtention-from-url>
+			<xsb:fileName-from-url>test</xsb:fileName-from-url>
+			<xsb:path-from-url>file:///server/path/test.txt/</xsb:path-from-url>
+			<xsb:is-path-only-url>false</xsb:is-path-only-url>
+			<xsb:scheme-from-url>file</xsb:scheme-from-url>
+		</test>
+		<test>
+			<value>http://www.ix.de/a.htm?a=b</value>
+			<xsb:is-absolute-url>true</xsb:is-absolute-url>
+			<xsb:is-relative-url>true</xsb:is-relative-url>
+			<xsb:is-url>true</xsb:is-url>
+			<xsb:is-network-server-url>false</xsb:is-network-server-url>
+			<xsb:url-has-authority>true</xsb:url-has-authority>
+			<xsb:url-has-query>true</xsb:url-has-query>
+			<xsb:url-has-fragment>false</xsb:url-has-fragment>
+			<xsb:url-has-fileExtention>true</xsb:url-has-fileExtention>
+			<xsb:query-from-url>a=b</xsb:query-from-url>
+			<xsb:fragment-from-url/>
+			<xsb:remove-query-and-fragment-from-url>http://www.ix.de/a.htm</xsb:remove-query-and-fragment-from-url>
+			<xsb:fileName-and-fileExtention-from-url>a.htm</xsb:fileName-and-fileExtention-from-url>
+			<xsb:is-shortcut-only-url>false</xsb:is-shortcut-only-url>
+			<xsb:fileExtention-from-url>htm</xsb:fileExtention-from-url>
+			<xsb:fileName-from-url>a</xsb:fileName-from-url>
+			<xsb:path-from-url>http://www.ix.de/</xsb:path-from-url>
+			<xsb:is-path-only-url>false</xsb:is-path-only-url>
+			<xsb:scheme-from-url>http</xsb:scheme-from-url>
+		</test>
+		<test>
+			<value>http://en.wiktionary.org/wiki/מילנו</value>
+			<xsb:is-absolute-url>false</xsb:is-absolute-url>
+			<xsb:is-relative-url>false</xsb:is-relative-url>
+			<xsb:is-url>false</xsb:is-url>
+			<xsb:is-network-server-url>false</xsb:is-network-server-url>
+			<xsb:url-has-authority>false</xsb:url-has-authority>
+			<xsb:url-has-query>false</xsb:url-has-query>
+			<xsb:url-has-fragment>false</xsb:url-has-fragment>
+			<xsb:url-has-fileExtention>false</xsb:url-has-fileExtention>
+			<xsb:query-from-url/>
+			<xsb:fragment-from-url/>
+			<xsb:remove-query-and-fragment-from-url/>
+			<xsb:fileName-and-fileExtention-from-url/>
+			<xsb:is-shortcut-only-url>false</xsb:is-shortcut-only-url>
+			<xsb:fileExtention-from-url/>
+			<xsb:fileName-from-url/>
+			<xsb:path-from-url/>
+			<xsb:is-path-only-url>false</xsb:is-path-only-url>
+			<xsb:scheme-from-url/>
+		</test>
+		<test>
+			<value>http://en.wiktionary.org/w/index.php?title=%D7%9E%D7%99%D7%9C%D7%95%D7%9F&amp;action=edit</value>
+			<xsb:is-absolute-url>true</xsb:is-absolute-url>
+			<xsb:is-relative-url>true</xsb:is-relative-url>
+			<xsb:is-url>true</xsb:is-url>
+			<xsb:is-network-server-url>false</xsb:is-network-server-url>
+			<xsb:url-has-authority>true</xsb:url-has-authority>
+			<xsb:url-has-query>true</xsb:url-has-query>
+			<xsb:url-has-fragment>false</xsb:url-has-fragment>
+			<xsb:url-has-fileExtention>true</xsb:url-has-fileExtention>
+			<xsb:query-from-url>title=%D7%9E%D7%99%D7%9C%D7%95%D7%9F&amp;action=edit</xsb:query-from-url>
+			<xsb:fragment-from-url/>
+			<xsb:remove-query-and-fragment-from-url>http://en.wiktionary.org/w/index.php</xsb:remove-query-and-fragment-from-url>
+			<xsb:fileName-and-fileExtention-from-url>index.php</xsb:fileName-and-fileExtention-from-url>
+			<xsb:is-shortcut-only-url>false</xsb:is-shortcut-only-url>
+			<xsb:fileExtention-from-url>php</xsb:fileExtention-from-url>
+			<xsb:fileName-from-url>index</xsb:fileName-from-url>
+			<xsb:path-from-url>http://en.wiktionary.org/w/</xsb:path-from-url>
+			<xsb:is-path-only-url>false</xsb:is-path-only-url>
+			<xsb:scheme-from-url>http</xsb:scheme-from-url>
+		</test>
 	</intern:testliste>
 	<doc:template>
 		<para xml:id="files.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
@@ -1056,7 +1164,7 @@
 	</doc:template>
 	<xsl:template name="intern:files.self-test">
 		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="seqURL-Tests" as="element()+" select="document( '' )//intern:testliste[@xml:id='URLs']/test"/>
+		<xsl:variable name="seqURL-Tests" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'URLs']/test"/>
 		<!--  -->
 		<!--  -->
 		<!-- __________     xsb:is-absolute-url()     __________ -->
@@ -1433,6 +1541,55 @@
 			<xsl:with-param name="actual-value" select="xsb:file-extension-from-mediatype('image/gibtesnicht')"/>
 			<xsl:with-param name="reference-value" select=" '' "/>
 		</xsl:call-template>-->
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:decode-from-url()     __________ -->
+		<!-- null-wert -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url(())</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url(())"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('')"/>
+			<xsl:with-param name="reference-value" select=" '' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('haus')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('haus')"/>
+			<xsl:with-param name="reference-value" select=" 'haus' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('3b4f')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('3b4f')"/>
+			<xsl:with-param name="reference-value" select=" '3b4f' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('%3b%4f')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('%3b%4f')"/>
+			<xsl:with-param name="reference-value" select=" ';O' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('%20')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('%20')"/>
+			<xsl:with-param name="reference-value" select=" ' ' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('%3A%2F%3F%23%5B%5D%20%40%22%21%24%25%26%27%28%29%2A%2B%2C%3B%3D%7E')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('%3A%2F%3F%23%5B%5D%20%40%22%21%24%25%26%27%28%29%2A%2B%2C%3B%3D%7E')"/>
+			<xsl:with-param name="reference-value" select=" ':/?#[] @&quot;!$%&amp;''()*+,;=~' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('%17')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('%17')"/>
+			<xsl:with-param name="reference-value" select=" '%17' "/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:decode-from-url('%ff')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:decode-from-url('%ff')"/>
+			<xsl:with-param name="reference-value" select=" '%ff' "/>
+		</xsl:call-template>
 		<!--  -->
 		<!--  -->
 		<!--  -->

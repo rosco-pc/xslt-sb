@@ -42,6 +42,7 @@
 	<!--  -->
 	<!--  -->
 	<!-- 	Versionsgeschichte: -->
+	<!-- 		2012-05-27/Rev. 50 :	 v0.2.50	Stf		numbers_tests.xsl ergänzt -->
 	<!-- 		2011-06-05/Rev. 31 :	 v0.2.31	Stf		google_code.xsl ergänzt -->
 	<!-- 		2011-05-13/Rev. 141:	 v0.2.1		Stf		zip ergänzt -->
 	<!-- 		2011-04-25/Rev. 141:	 v0.2		Stf		funktionierende Selbstests -->
@@ -55,7 +56,7 @@
 	<!--  -->
 	<!-- properties for the build infrastructure -->
 	<property name="src" location="." description="Verzeichnis mit den Ausgangsdateien (*.xsl)"/>
-	<property name="dist.version" value="0.2.41" description="Versionsnummer des aktuellen Builds"/>
+	<property name="dist.version" value="0.2.50" description="Versionsnummer des aktuellen Builds"/>
 	<property name="dist.main" location="${src}" description="Root für Ausgabe (in der Regel gleich Quellverzeichnis)"/>
 	<property name="dist.doc" location="${dist.main}${file.separator}doc" description="Zielverzeichnis für die Dokumentation"/>
 	<property name="dist.google-doc" location="${dist.main}${file.separator}..${file.separator}..${file.separator}wiki" description="Zielverzeichnis für die Wiki-Seiten für Google Code"/>
@@ -77,6 +78,7 @@
 		<include name="internals.meta.xsl"/>
 		<include name="internals.testing.xsl"/>
 		<include name="math.xsl"/>
+		<include name="numbers.xsl"/>
 		<include name="standard.xsl"/>
 		<include name="strings.xsl"/>
 	</fileset>
@@ -91,7 +93,7 @@
 		<include name="internals.testing_tests.xsl"/>
 		<include name="internals_tests.xsl"/>
 		<include name="math_tests.xsl"/>
-		<include name="numbers.xsl"/>
+		<include name="numbers_tests.xsl"/>
 		<include name="pattern+includes.xsl"/>
 		<include name="standard_tests.xsl"/>
 		<include name="strings_tests.xsl"/>

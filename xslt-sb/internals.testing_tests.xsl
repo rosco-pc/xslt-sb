@@ -174,7 +174,7 @@
 		<!--  -->
 		<!-- __________     intern:validate-test-node()     __________ -->
 		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="testElements" as="element()+" select="document( '' )//intern:testliste[@xml:id='internals.testing_tests']/test"/>
+		<xsl:variable name="testElements" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'internals.testing_tests']/test"/>
 		<!--<!-\- auskommentiert, um intendierte Fehlermeldung zu vermeiden -\->
 		<!-\- NULL-/Leer-Werte -\->
 		<xsl:call-template name="xsb:internals.test.Function">
@@ -201,7 +201,7 @@
 			<xsl:with-param name="reference-value" select="true()"/>
 		</xsl:call-template>
 		<!--  -->
-		<xsl:variable name="numericElements" as="element()+" select="document( '' )//intern:testliste[@xml:id='numeric_tests']/test"/>
+		<xsl:variable name="numericElements" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'numeric_tests']/test"/>
 		<!--  -->
 		<!--  -->
 		<!-- __________     xsb:internals.test.function.withTestItem.NumericResult     __________ -->

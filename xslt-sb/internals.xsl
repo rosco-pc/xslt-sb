@@ -45,6 +45,7 @@
 	<!--  -->
 	<!--  -->
 	<xsl:import href="internals.logging.xsl"/>
+	<xsl:import href="strings.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -937,10 +938,10 @@
 		<xsl:variable name="kind" as="xs:string" select="xsb:node-kind($context)"/>
 		<xsl:variable name="temp" as="xs:string*">
 			<xsl:choose>
-				<xsl:when test="$kind = '' "/>
-				<xsl:when test="$kind = 'document-node' ">document-node()</xsl:when>
+				<xsl:when test="$kind eq '' "/>
+				<xsl:when test="$kind eq 'document-node' ">document-node()</xsl:when>
 				<!-- Element -->
-				<xsl:when test="$kind = 'element' ">
+				<xsl:when test="$kind eq 'element' ">
 					<xsl:sequence select="name($context)"/>
 					<xsl:if test="$context/@*">
 						<xsl:variable name="mit-klammern" as="xs:boolean" select="if ($context/@*[2]) then true() else false()"/>
@@ -960,11 +961,11 @@
 						<xsl:text>]</xsl:text>
 					</xsl:if>
 				</xsl:when>
-				<xsl:when test="$kind = 'text' ">text()</xsl:when>
-				<xsl:when test="$kind = 'attribute' ">@<xsl:sequence select="name($context/.)"/>[. =&quot;<xsl:sequence select="$context"/>&quot;]</xsl:when>
-				<xsl:when test="$kind = 'comment' ">comment()</xsl:when>
-				<xsl:when test="$kind = 'processing-instruction' ">processing-instruction()</xsl:when>
-				<xsl:when test="$kind = 'namespace' ">namespace::<xsl:sequence select="local-name($context)"/></xsl:when>
+				<xsl:when test="$kind eq 'text' ">text()</xsl:when>
+				<xsl:when test="$kind eq 'attribute' ">@<xsl:sequence select="name($context/.)"/>[. =&quot;<xsl:sequence select="$context"/>&quot;]</xsl:when>
+				<xsl:when test="$kind eq 'comment' ">comment()</xsl:when>
+				<xsl:when test="$kind eq 'processing-instruction' ">processing-instruction()</xsl:when>
+				<xsl:when test="$kind eq 'namespace' ">namespace::<xsl:sequence select="local-name($context)"/></xsl:when>
 				<!-- das dürfte eigentlich _nie_ passieren -->
 				<xsl:otherwise>
 					<xsl:call-template name="xsb:internals.FunctionError">
@@ -1003,16 +1004,16 @@
 		<xsl:param name="warn-if-wrong-input" as="xs:boolean"/>
 		<xsl:variable name="temp" as="xs:string?" select="normalize-space(lower-case($input))"/>
 		<xsl:choose>
-			<xsl:when test="string($temp)='0' "><xsl:sequence select="false()"/></xsl:when>
-			<xsl:when test="string($temp)='1' "><xsl:sequence select="true()"/></xsl:when>
-			<xsl:when test="string($temp)='false' "><xsl:sequence select="false()"/></xsl:when>
-			<xsl:when test="string($temp)='true' "><xsl:sequence select="true()"/></xsl:when>
-			<xsl:when test="string($temp)='no' "><xsl:sequence select="false()"/></xsl:when>
-			<xsl:when test="string($temp)='yes' "><xsl:sequence select="true()"/></xsl:when>
-			<xsl:when test="string($temp)='nein' "><xsl:sequence select="false()"/></xsl:when>
-			<xsl:when test="string($temp)='ja' "><xsl:sequence select="true()"/></xsl:when>
-			<xsl:when test="string($temp)='falsch' "><xsl:sequence select="false()"/></xsl:when>
-			<xsl:when test="string($temp)='wahr' "><xsl:sequence select="true()"/></xsl:when>
+			<xsl:when test="string($temp) eq '0' "><xsl:sequence select="false()"/></xsl:when>
+			<xsl:when test="string($temp) eq '1' "><xsl:sequence select="true()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'false' "><xsl:sequence select="false()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'true' "><xsl:sequence select="true()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'no' "><xsl:sequence select="false()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'yes' "><xsl:sequence select="true()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'nein' "><xsl:sequence select="false()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'ja' "><xsl:sequence select="true()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'falsch' "><xsl:sequence select="false()"/></xsl:when>
+			<xsl:when test="string($temp) eq 'wahr' "><xsl:sequence select="true()"/></xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select="false()"/>
 				<xsl:if test="$warn-if-wrong-input">
@@ -1071,13 +1072,13 @@
 	<xsl:function name="intern:render-level-to-pretext" as="xs:string">
 		<xsl:param name="level" as="xs:string?"/>
 		<xsl:choose>
-			<xsl:when test="$level = 'ALL' "><xsl:sequence select=" '    ' "/></xsl:when>
-			<xsl:when test="$level = 'TRACE' "><xsl:sequence select=" '    ' "/></xsl:when>
-			<xsl:when test="$level = 'DEBUG' "><xsl:sequence select=" '    ' "/></xsl:when>
-			<xsl:when test="$level = 'INFO' "><xsl:sequence select=" '' "/></xsl:when>
-			<xsl:when test="$level = 'WARN' "><xsl:sequence select=" '---- ' "/></xsl:when>
-			<xsl:when test="$level = 'ERROR' "><xsl:sequence select=" '#### ' "/></xsl:when>
-			<xsl:when test="$level = 'FATAL' "><xsl:sequence select=" '###### ' "/></xsl:when>
+			<xsl:when test="$level eq 'ALL' "><xsl:sequence select=" '    ' "/></xsl:when>
+			<xsl:when test="$level eq 'TRACE' "><xsl:sequence select=" '    ' "/></xsl:when>
+			<xsl:when test="$level eq 'DEBUG' "><xsl:sequence select=" '    ' "/></xsl:when>
+			<xsl:when test="$level eq 'INFO' "><xsl:sequence select=" '' "/></xsl:when>
+			<xsl:when test="$level eq 'WARN' "><xsl:sequence select=" '---- ' "/></xsl:when>
+			<xsl:when test="$level eq 'ERROR' "><xsl:sequence select=" '#### ' "/></xsl:when>
+			<xsl:when test="$level eq 'FATAL' "><xsl:sequence select=" '###### ' "/></xsl:when>
 			<xsl:otherwise><xsl:sequence select=" '    ' "/></xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -1351,6 +1352,7 @@
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and not($java-available)">Saxon-HE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE9.2')">Saxon-EE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.1') ) and not($is-schema-aware)">Saxon-B_9.1</xsl:when>
+			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2012 rel. 2 sp1') and ($java-available eq false() )">AltovaXML_CE_2012.2</xsl:when>
 			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2012 rel. 2') and ($java-available eq false() )">AltovaXML_CE_2012.2</xsl:when>
 			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2012 sp1') and ($java-available eq false() )">AltovaXML_CE_2012.sp1</xsl:when>
 			<xsl:when test="($product-name eq 'Altova XSLT Engine') and ($product-version eq '2011 rel. 2 sp1') and ($java-available eq false() )">AltovaXML_CE_2011.2sp1</xsl:when>

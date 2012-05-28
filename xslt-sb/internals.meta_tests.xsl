@@ -319,7 +319,7 @@
 		<!--  -->
 		<!--  -->
 		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="seqFunction-Tests" as="element()+" select="document( '' )//intern:testliste[@xml:id='FunctionTreatment']/test"/>
+		<xsl:variable name="seqFunction-Tests" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'FunctionTreatment']/test"/>
 		<!--  -->
 		<!--  -->
 		<!-- __________     intern:looks-like-a-function-call     __________ -->

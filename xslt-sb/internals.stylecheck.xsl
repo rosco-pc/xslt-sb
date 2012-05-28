@@ -337,11 +337,11 @@
 	</doc:template>
 	<xsl:template name="intern:internals.Stylecheck.CallTemplateTestFunction">
 		<xsl:param name="Dokument" as="document-node()" required="yes"/>
-		<xsl:for-each select="$Dokument//xsl:call-template[@name='xsb:internals.test.Function'][(xsl:with-param[@name='caller']/text()[1]) ne (xsl:with-param[@name='actual-value']/concat(@select, text()))]">
+		<xsl:for-each select="$Dokument//xsl:call-template[@name eq 'xsb:internals.test.Function'][(xsl:with-param[@name eq 'caller']/text()[1]) ne (xsl:with-param[@name eq 'actual-value']/concat(@select, text()))]">
 			<xsl:if test="not(xsb:listed(@intern:solved, 'CallTemplateTestFunction'))">
 				<xsl:call-template name="xsb:internals.Error">
 					<xsl:with-param name="caller">internals.Stylecheck.CallTemplateTestFunction</xsl:with-param>
-					<xsl:with-param name="message">Inkonsistenz zwischen caller und actual-value: //<xsl:sequence select="xsb:render-context-as-string(.)"/>[(<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name='caller'])"/>) and (<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name='actual-value'])"/>)] </xsl:with-param>
+					<xsl:with-param name="message">Inkonsistenz zwischen caller und actual-value: //<xsl:sequence select="xsb:render-context-as-string(.)"/>[(<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name eq 'caller'])"/>) and (<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name eq 'actual-value'])"/>)] </xsl:with-param>
 					<xsl:with-param name="level">WARN</xsl:with-param>
 				</xsl:call-template>
 			</xsl:if>
@@ -369,11 +369,11 @@
 	</doc:template>
 	<xsl:template name="intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem">
 		<xsl:param name="Dokument" as="document-node()" required="yes"/>
-		<xsl:for-each select="$Dokument//xsl:call-template[starts-with(@name, 'xsb:internals.test.function.withTestItem')][(xsl:with-param[@name='function-name']/text()[1]) ne (xsl:with-param[@name='actual-value']/substring-before(concat(@select, text()), '('))]">
+		<xsl:for-each select="$Dokument//xsl:call-template[starts-with(@name, 'xsb:internals.test.function.withTestItem')][(xsl:with-param[@name eq 'function-name']/text()[1]) ne (xsl:with-param[@name eq 'actual-value']/substring-before(concat(@select, text()), '('))]">
 			<xsl:if test="not(xsb:listed(@intern:solved, 'CallTemplateTestFunction'))">
 				<xsl:call-template name="xsb:internals.Error">
 					<xsl:with-param name="caller">internals.Stylecheck.CallTemplateTestFunctionWithTestItem</xsl:with-param>
-					<xsl:with-param name="message">Inkonsistenz zwischen function-name und actual-value: //<xsl:sequence select="xsb:render-context-as-string(.)"/>[(<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name='function-name'])"/>) and (<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name='actual-value'])"/>)] </xsl:with-param>
+					<xsl:with-param name="message">Inkonsistenz zwischen function-name und actual-value: //<xsl:sequence select="xsb:render-context-as-string(.)"/>[(<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name eq 'function-name'])"/>) and (<xsl:sequence select="xsb:render-context-as-string(xsl:with-param[@name eq 'actual-value'])"/>)] </xsl:with-param>
 					<xsl:with-param name="level">WARN</xsl:with-param>
 				</xsl:call-template>
 			</xsl:if>
@@ -480,12 +480,12 @@
 			<xsl:choose>
 				<!-- keine Tests -->
 				<xsl:when test="not(
-						//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.StringResult']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-						//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.BooleanResult']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-						//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.NumericResult']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-						//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.NumericResult.rounded']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-						//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.NumericResult.irounded']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-						//xsl:call-template[@name = 'xsb:internals.test.Function']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)]
+						//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.StringResult']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+						//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.BooleanResult']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+						//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.NumericResult']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+						//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.NumericResult.rounded']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+						//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.NumericResult.irounded']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+						//xsl:call-template[@name eq 'xsb:internals.test.Function']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)]
 					)">
 					<xsl:call-template name="xsb:internals.Error">
 						<xsl:with-param name="caller">internals.Stylecheck.MissingTests</xsl:with-param>
@@ -496,13 +496,13 @@
 				<!-- weniger als 3 Tests (Null, gültig, ungültig als Eingabe empfohlen) -->
 				<xsl:otherwise>
 					<xsl:if test="(
-						count( //xsl:call-template[@name = 'xsb:internals.test.Function']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)]) lt 3)
+						count( //xsl:call-template[@name eq 'xsb:internals.test.Function']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)]) lt 3)
 						and not(
-							//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.StringResult']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-							//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.NumericResult']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-							//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.NumericResult.rounded']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-							//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.NumericResult.irounded']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
-							//xsl:call-template[@name = 'xsb:internals.test.function.withTestItem.BooleanResult']/xsl:with-param[(@name='actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)]
+							//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.StringResult']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+							//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.NumericResult']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+							//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.NumericResult.rounded']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+							//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.NumericResult.irounded']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)] |
+							//xsl:call-template[@name eq 'xsb:internals.test.function.withTestItem.BooleanResult']/xsl:with-param[(@name eq 'actual-value')]/@select[(intern:function-name(.) eq $FunktionsName) and (intern:function-arity(.) eq $FunktionsArity)]
 						)">
 						<xsl:call-template name="xsb:internals.Error">
 							<xsl:with-param name="caller">internals.Stylecheck.MissingTests</xsl:with-param>

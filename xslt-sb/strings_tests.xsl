@@ -745,7 +745,7 @@
 		</xsl:call-template>
 		<!--  -->
 		<!-- damit es etwas übersichtlicher wird -->
-		<xsl:variable name="seq-regexStrings" as="element()+" select="document( '' )//intern:testliste[@xml:id='regexStrings']/test"/>
+		<xsl:variable name="seq-regexStrings" as="element()+" select="document( '' )//intern:testliste[@xml:id eq 'regexStrings']/test"/>
 		<xsl:for-each select="$seq-regexStrings">
 			<xsl:call-template name="xsb:internals.test.function.withTestItem.StringResult">
 				<xsl:with-param name="test-node" select="."/>
@@ -1126,6 +1126,82 @@
 			<xsl:with-param name="caller">xsb:index-of-first-match('ABC', 'b', 'i')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="xsb:index-of-first-match('ABC', 'b', 'i')"/>
 			<xsl:with-param name="reference-value" select="2"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:fill-left()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left((), (), 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left((), (), 8)"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left('', '', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left('', '', 8)"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left((), '-', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left((), '-', 8)"/>
+			<xsl:with-param name="reference-value" select="'--------'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left('', ' ', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left('', ' ', 8)"/>
+			<xsl:with-param name="reference-value" select="'        '"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left('X', '-', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left('X', '-', 8)"/>
+			<xsl:with-param name="reference-value" select="'-------X'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left('sieben', '-', 4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left('sieben', '-', 4)"/>
+			<xsl:with-param name="reference-value" select="'sieben'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-left('vier', '-', 4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-left('vier', '-', 4)"/>
+			<xsl:with-param name="reference-value" select="'vier'"/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:fill-right()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right((), (), 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right((), (), 8)"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right('', '', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right('', '', 8)"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right((), '-', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right((), '-', 8)"/>
+			<xsl:with-param name="reference-value" select="'--------'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right('', ' ', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right('', ' ', 8)"/>
+			<xsl:with-param name="reference-value" select="'        '"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right('X', '-', 8)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right('X', '-', 8)"/>
+			<xsl:with-param name="reference-value" select="'X-------'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right('sieben', '-', 4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right('sieben', '-', 4)"/>
+			<xsl:with-param name="reference-value" select="'sieben'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:fill-right('vier', '-', 4)</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:fill-right('vier', '-', 4)"/>
+			<xsl:with-param name="reference-value" select="'vier'"/>
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->

@@ -60,7 +60,7 @@
 	<!--  -->
 	<xsl:import href="math_tests.xsl"/>
 	<!--  -->
-	<xsl:import href="numbers.xsl"/>
+	<xsl:import href="numbers_tests.xsl"/>
 	<!--  -->
 	<xsl:import href="strings_tests.xsl"/>
 	<!--  -->

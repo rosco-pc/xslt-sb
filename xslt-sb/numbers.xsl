@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-	Copyright (c) 2009-2011 Stefan Krause
+	Copyright (c) 2009-2012 Stefan Krause
 	
 	Permission is hereby granted, free of charge, to any person obtaining
 	a copy of this software and associated documentation files (the
@@ -44,7 +44,7 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:import href="internals.stylecheck.xsl"/>
+	<xsl:import href="internals.xsl"/>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -72,10 +72,10 @@
 				<para>Dokumentation: <link xlink:href="&doc-Base-Directory;/numbers.html">&doc-Base-Directory;/numbers.html</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/numbers.xsl">&XSL-Base-Directory;/numbers.xsl</link></para>
+				<para>Test-Stylesheet: <link xlink:href="&XSL-Base-Directory;/numbers_tests.xsl">&XSL-Base-Directory;/numbers_tests.xsl</link></para>
 			</listitem>
 			<listitem>
-				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/numbers.html">&doc-Base-Directory;/numbers.html</link></para>
+				<para>Test-Dokumentation: <link xlink:href="&doc-Base-Directory;/numbers_tests.html">&doc-Base-Directory;/numbers_tests.html</link></para>
 			</listitem>
 			<listitem>
 				<para>XSLT-SB: <link xlink:href="&XSL-Base-Directory;/">&XSL-Base-Directory;/</link></para>
@@ -85,6 +85,12 @@
 			</listitem>
 		</itemizedlist>
 		<revhistory>
+			<revision>
+				<revnumber>0.2.50</revnumber>
+				<date>2015-05-27</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark><code>numbers_tests.xsl</code> aus <code>numbers.xsl</code> ausgegliedert, neue Funktion: <function>xsb:hex-to-integer()</function></revremark>
+			</revision>
 			<revision>
 				<revnumber>0.2.0</revnumber>
 				<date>2011-05-14</date>
@@ -218,13 +224,13 @@
 		<xsl:param name="input" as="xs:string?"/>
 		<xsl:variable name="temp" as="xs:string?" select="upper-case(normalize-space($input))"/>
 		<xsl:choose>
-			<xsl:when test="$temp = 'I' ">1</xsl:when>
-			<xsl:when test="$temp = 'V' ">5</xsl:when>
-			<xsl:when test="$temp = 'X' ">10</xsl:when>
-			<xsl:when test="$temp = 'L' ">50</xsl:when>
-			<xsl:when test="$temp = 'C' ">100</xsl:when>
-			<xsl:when test="$temp = 'D' ">500</xsl:when>
-			<xsl:when test="$temp = 'M' ">1000</xsl:when>
+			<xsl:when test="$temp eq 'I' ">1</xsl:when>
+			<xsl:when test="$temp eq 'V' ">5</xsl:when>
+			<xsl:when test="$temp eq 'X' ">10</xsl:when>
+			<xsl:when test="$temp eq 'L' ">50</xsl:when>
+			<xsl:when test="$temp eq 'C' ">100</xsl:when>
+			<xsl:when test="$temp eq 'D' ">500</xsl:when>
+			<xsl:when test="$temp eq 'M' ">1000</xsl:when>
 			<xsl:otherwise>0</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -351,271 +357,69 @@
 	</xsl:function>
 	<!--  -->
 	<!--  -->
-	<!--  -->
-	<!-- ====================     Tests     ==================== -->
-	<!--  -->
-	<!--  -->
-	<!--  -->
-	<doc:template>
-		<para>Dieses Template ist der Einstiegspunkt in die Selbst-Tests. Es loggt die Systemparameter und ruft die Test-Routinen 
-		der lokalen und eingebundenen Templates und Funktionen auf.</para>
+	<!-- __________     xsb:hex-to-integer()     __________ -->
+	<!-- in numbers.xsl, damit in file.xsl verwendet werden kann -->
+	<doc:function>
+		<doc:param name="input"><para>eine hexadezimale Zahl (beliebige Folge aus <code>0-9</code> und <code>A-F</code> bzw. <code>a-f</code>), ggfs. mit einem vorangestellten »<code>-</code>« (Minus) für negative Zahlen</para></doc:param>
+		<para xml:id="hex-to-integer">wandelt Hexadezimal- in Integer-Zahlen um.</para>
+		<para>Whitespace in der Eingabe wird entfernt, damit Notationen wie »<code>ff d8 d2 e9</code>« ohne weitere Bearbeitung konvertiert werden können.</para>
+		<para>Die Eingabe eines Leerstrings, einer Leersequenz, eines oder mehrerer ungültiger Zeichen führt zu einer Fehlermeldung.</para>
+		<para>Eine andere Version dieser Funktion, die negative Zahlen als Zweierkomplement behandelt, findet sich in <link xlink:href="math.html#hex-to-integer_2">math.xsl</link></para>
+		<itemizedlist>
+			<title>Beispiele</title>
+			<listitem>
+				<para><function>xsb:hex-to-integer('0')</function> ergibt »<code>0</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('a')</function> ergibt »<code>10</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('FFFF')</function> ergibt »<code>65535</code>«</para>
+			</listitem>
+			<listitem>
+				<para><function>xsb:hex-to-integer('-29a')</function> ergibt »<code>-666</code>«</para>
+			</listitem>
+		</itemizedlist>
 		<revhistory>
 			<revision>
-				<revnumber>0.50</revnumber>
-				<date>2009-10-11</date>
+				<revnumber>0.2.50</revnumber>
+				<date>2012-05-19</date>
 				<authorinitials>Stf</authorinitials>
 				<revdescription>
-					<para>initiale Version</para>
 					<para conformance="beta">Status: beta</para>
+					<para>initiale Version</para>
 				</revdescription>
 			</revision>
 		</revhistory>
-	</doc:template>
-	<xsl:template match="/" mode="internals.self-test">
-		<xsl:call-template name="xsb:internals.MakeHeader"/>
-		<xsl:call-template name="intern:internals.Stylecheck"/>
-		<xsl:call-template name="intern:numbers.self-test"/>
-		<xsl:call-template name="xsb:internals.MakeFooter"/>
-	</xsl:template>
-	<!--  -->
-	<!--  -->
-	<!--  -->
-	<doc:template>
-		<para xml:id="numbers.self-test">Dieses Template führt die lokalen Selbst-Tests aus.</para>
-		<revhistory>
-			<revision>
-				<revnumber>0.50</revnumber>
-				<date>2009-10-11</date>
-				<authorinitials>Stf</authorinitials>
-				<revdescription>
-					<para>initiale Version</para>
-					<para conformance="beta">Status: beta</para>
-				</revdescription>
-			</revision>
-		</revhistory>
-	</doc:template>
-	<xsl:template name="intern:numbers.self-test">
-		<!--  -->
-		<!-- __________     xsb:is-roman-numeral()     __________ -->
-		<!--  -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:is-roman-numeral('MMIX')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:is-roman-numeral('MMIX')"/>
-			<xsl:with-param name="reference-value" select="true()"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:is-roman-numeral('abc')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:is-roman-numeral('abc')"/>
-			<xsl:with-param name="reference-value" select="false()"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:is-roman-numeral( '' )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:is-roman-numeral( '' )"/>
-			<xsl:with-param name="reference-value" select="true()"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:is-roman-numeral( () )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:is-roman-numeral( () )"/>
-			<xsl:with-param name="reference-value" select="true()"/>
-		</xsl:call-template>
-		<!--  -->
-		<!-- __________     xsb:roman-number-char-to-integer()     __________ -->
-		<!--  -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer('M')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer('M')"/>
-			<xsl:with-param name="reference-value" select="1000"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer('c')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer('c')"/>
-			<xsl:with-param name="reference-value" select="100"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer('MM')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer('MM')"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer('a')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer('a')"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer('-')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer('-')"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer( '' )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer( '' )"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-number-char-to-integer( () )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-number-char-to-integer( () )"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<!--  -->
-		<!-- __________     xsb:roman-numeral-to-integer()     __________ -->
-		<!--  -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-numeral-to-integer('MMIX')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-numeral-to-integer('MMIX')"/>
-			<xsl:with-param name="reference-value" select="2009"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-numeral-to-integer('abc')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-numeral-to-integer('abc')"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-numeral-to-integer('')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-numeral-to-integer('')"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:roman-numeral-to-integer( () )</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:roman-numeral-to-integer( () )"/>
-			<xsl:with-param name="reference-value" select="0"/>
-		</xsl:call-template>
-		<!--  -->
-		<!-- __________     xsb:force-cast-to-decimal()     __________ -->
-		<!-- Arity: 2 -->
-		<!-- Null-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal((), false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal((), false())"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('', false())"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('MMIX', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('MMIX', false())"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<!-- Wahr-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('0', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('0', false())"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('1', false())"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(1)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1.23', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('1.23', false())"/>
-			<xsl:with-param name="reference-value" select="1.23" as="xs:decimal"/>
-		</xsl:call-template>
-		<!-- Arity: 1 -->
-		<!-- Null-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal(())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal(())"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('')"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('MMIX')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('MMIX')"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<!-- Wahr-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('0')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('0')"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(0)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('1')"/>
-			<xsl:with-param name="reference-value" select="xs:decimal(1)"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-decimal('1.23')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-decimal('1.23')"/>
-			<xsl:with-param name="reference-value" select="1.23" as="xs:decimal"/>
-		</xsl:call-template>
-		<!--  -->
-		<!-- __________     xsb:force-cast-to-integer()     __________ -->
-		<!-- Arity: 2 -->
-		<!-- Null-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer((), false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer((), false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('', false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('MMIX', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('MMIX', false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<!-- Wahr-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('0', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('0', false())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('1', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('1', false())"/>
-			<xsl:with-param name="reference-value" select="1" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('1.23', false())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('1.23', false())"/>
-			<xsl:with-param name="reference-value" select="1" as="xs:integer"/>
-		</xsl:call-template>
-		<!-- Arity: 1 -->
-		<!-- Null-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer(())</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer(())"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('')"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('MMIX')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('MMIX')"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<!-- Wahr-Werte -->
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('0')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('0')"/>
-			<xsl:with-param name="reference-value" select="0" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('1')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('1')"/>
-			<xsl:with-param name="reference-value" select="1" as="xs:integer"/>
-		</xsl:call-template>
-		<xsl:call-template name="xsb:internals.test.Function">
-			<xsl:with-param name="caller">xsb:force-cast-to-integer('1.23')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="xsb:force-cast-to-integer('1.23')"/>
-			<xsl:with-param name="reference-value" select="1" as="xs:integer"/>
-		</xsl:call-template>
-	</xsl:template>
+	</doc:function>
+	<xsl:function name="xsb:hex-to-integer" as="xs:integer">
+		<xsl:param name="input" as="xs:string"/>
+		<xsl:variable name="uppercase-input" as="xs:string" select="translate(normalize-space(upper-case($input) ), ' ', '')"/>
+		<xsl:choose>
+			<!-- mehrere Zeichen -->
+			<xsl:when test="matches($uppercase-input, '^[0-9A-Z]{2,}$')">
+				<xsl:sequence select="xsb:hex-to-integer(substring($uppercase-input, string-length($uppercase-input) ) )
+							   + 16 * xsb:hex-to-integer(substring($uppercase-input, 1, string-length($uppercase-input) - 1 ) )"/>
+			</xsl:when>
+			<!-- nur noch ein Zeichen -->
+			<xsl:when test="matches($uppercase-input, '^[0-9A-Z]$')">
+				<xsl:sequence select="index-of( ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'), $uppercase-input) - 1"/>
+			</xsl:when>
+			<!-- negativ -->
+			<xsl:when test="matches($uppercase-input, '^-[0-9A-Z]+$')">
+				<xsl:sequence select="-1 * xsb:hex-to-integer(substring($uppercase-input, 2, string-length($uppercase-input) - 1 ) )"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="xsb:internals.FunctionError">
+					<xsl:with-param name="level">ERROR</xsl:with-param>
+					<xsl:with-param name="caller">xsb:hex-to-integer()</xsl:with-param>
+					<xsl:with-param name="message">ungültige Eingabe. Kann »<xsl:sequence select="$input"/>« nicht in einen Integer umwandeln</xsl:with-param>
+				</xsl:call-template>
+				<!-- da ein Cast von von NaN auf Integer fehlschlägt, führt das zwingend zum Abbruch -->
+				<xsl:sequence select="xs:integer(number('NaN') )"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
 	<!--  -->
 	<!--  -->
 	<!--  -->
