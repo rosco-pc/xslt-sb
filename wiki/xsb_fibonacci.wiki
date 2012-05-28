@@ -16,7 +16,7 @@ berechnet Fibonacci-Zahlen
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||
-|| 0.2.25 || 2011-05-29 || Stf ||   Status: beta;   Neue Implementierung auf der Grundlage von ``xsb:fibonacci-sequence``   ||
+|| 0.2.25 || 2011-05-29 || Stf ||   Status: beta;   Neue Implementierung auf der Grundlage von `xsb:fibonacci-sequence`   ||
 || 0.2.12 || 2011-05-21 || TM ||   Status: beta;   initiale Version   ||
 
 

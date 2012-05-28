@@ -4,13 +4,13 @@
 
 = {{{standard.xsl}}} =
 
-Stylesheet: {{{standard.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/standard.xsl standard.xsl]
 
 Die XSLT-Standard-Bibliothek (XSLT-SB) beinhaltet nützliche, immer wieder gebrauchte Funktionen und Templates. Gleichzeitig dient sie als beispielhafte Inplementierung bestimmter Techniken. Sie wendet sich als Beispielsammlung vor allem an deutschsprachige Entwickler, um für diese die Einstiegshürden zu senken.
 
 *Benutzung*
 
-Die Stylesheets der XSLT-SB können per `xsl:import` bzw. `xsl:include` direkt in eigene Stylesheets eingebunden werden. Die meisten Stylesheets binden weitere Stylesheets ein. Die Import-Hierarchie (und damit eine Liste der jeweils benötigten Stylesheets) wird am Anfang der HTML-Dokumentation (unter »Import/include tree«) ausgegeben. So kann man beispielsweise in {{{`math.html`}}} nachlesen, dass `internals.xsl`, `internals.logging.xsl` und `strings.xsl` benötigt werden. (Saxon beschwert sich ab Version 9.3 über das mehrfache Einbinden von Stylesheets, dies ist aber kein Fehler, sondern ein ignorierbarer Hinweis.)
+Die Stylesheets der XSLT-SB können per `xsl:import` bzw. `xsl:include` direkt in eigene Stylesheets eingebunden werden. Die meisten Stylesheets binden weitere Stylesheets ein. Die Import-Hierarchie (und damit eine Liste der jeweils benötigten Stylesheets) wird am Anfang der HTML-Dokumentation (unter »Import/include tree«) ausgegeben. So kann man beispielsweise in {{{math.html}}} nachlesen, dass `internals.xsl`, `internals.logging.xsl` und `strings.xsl` benötigt werden. (Saxon beschwert sich ab Version 9.3 über das mehrfache Einbinden von Stylesheets, dies ist aber kein Fehler, sondern ein ignorierbarer Hinweis.)
 
 Die Test-Stylesheets (z.B. »`math_tests.xsl`«) werden zum Einsatz der Bibliothek nicht benötigt.
 

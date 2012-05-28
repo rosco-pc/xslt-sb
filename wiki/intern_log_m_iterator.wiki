@@ -17,7 +17,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 ==Beschreibung==
 ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können.
 
-Details siehe `{{{intern:log()}}}`
+Details siehe `intern:log()`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

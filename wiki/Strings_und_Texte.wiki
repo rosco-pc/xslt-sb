@@ -4,11 +4,11 @@
 
 = {{{strings.xsl}}} =
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 Dieses Stylesheet enthält Funktionen für Strings und Texte.
 
-Da für Testroutinen Funktionen und Templates aus `internals.xsl` benötigt werden, wird dieses Stylesheet in `{{{strings_tests.xsl}}}` getestet.
+Da für Testroutinen Funktionen und Templates aus `internals.xsl` benötigt werden, wird dieses Stylesheet in `strings_tests.xsl` getestet.
 
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._

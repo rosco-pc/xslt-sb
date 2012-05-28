@@ -64,7 +64,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/string
 
 
 ==Beschreibung==
-Shortcut für `{{{xsb:index-of-first-match($input, $pattern, '')}}}`
+Shortcut für `xsb:index-of-first-match($input, $pattern, '')`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

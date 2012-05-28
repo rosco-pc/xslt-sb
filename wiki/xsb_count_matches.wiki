@@ -65,7 +65,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/string
 
 
 ==Beschreibung==
-Shortcut für `{{{xsb:count-matches($string, $regex, '')}}}`
+Shortcut für `xsb:count-matches($string, $regex, '')`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

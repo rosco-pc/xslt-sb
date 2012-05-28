@@ -10,13 +10,13 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 `arg`: Funktionsargument (numerischer Wert)
 
 
-`an`: zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit `intern:pow(1 + ($arg {{{*}}} $arg), -0.5 )` initialisiert
+`an`: zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit `intern:pow(1 + ($arg * $arg), -0.5 )` initialisiert
 
 
 `bn`: zur Übergabe des Ergebnisses aus der vorherigen Iteration, wird mit `1` initialisiert
 
 
-`konstanterDivisor`: zur Optimierung, wird mit `intern:sqrt(1 + ($arg {{{*}}} $arg) )` initialisiert
+`konstanterDivisor`: zur Optimierung, wird mit `intern:sqrt(1 + ($arg * $arg) )` initialisiert
 
 
 `letztesResultat`: zur Ermittlung des Iteration-Abbruches, wird mit einem beliebigen Wert wie `0` initialisiert.

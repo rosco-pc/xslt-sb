@@ -7,7 +7,7 @@
 Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
-`volatile`: ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte, z.B. `string(.)`, `count(preceding-sibling::{{{*}}})` o.ä., dabei ist es wichtig, das sich dieser Wert bei jedem Aufruf der Funktion ändert, weniger der Wert oder die Länge. Zum Hintergrund siehe [http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/ http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/].
+`volatile`: ein möglichst zufälliger, veränderlicher Wert, der bei jedem Aufruf der Funktion verändert werden sollte, z.B. `string(.)`, `count(preceding-sibling::*)` o.ä., dabei ist es wichtig, das sich dieser Wert bei jedem Aufruf der Funktion ändert, weniger der Wert oder die Länge. Zum Hintergrund siehe [http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/ http://blog.expedimentum.com/2012/xsb-random-zufallszahlen-mit-xslt/].
 
 
 

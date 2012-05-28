@@ -14,7 +14,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 ==Beschreibung==
 berechnet die Potenz zur Basis 10
 
-Bei ganzzahligen Exponenten wird die multiplikative Variante mit `{{{intern:power()}}}` ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.
+Bei ganzzahligen Exponenten wird die multiplikative Variante mit `intern:power()` ausgeführt, bei gebrochenen Exponenten wird eine Näherung berechnet.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

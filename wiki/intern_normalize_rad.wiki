@@ -12,7 +12,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 
 
 ==Beschreibung==
-rechnet Winkel auf den Bereich von `- 2 {{{*}}} Pi` bis `2 {{{*}}} Pi` um
+rechnet Winkel auf den Bereich von `- 2 * Pi` bis `2 * Pi` um
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

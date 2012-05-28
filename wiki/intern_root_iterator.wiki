@@ -26,7 +26,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 ==Beschreibung==
 iterative Wurzelberechnung nach dem Heron-Verfahren
 
-Die Anzahl der Iterationen resp. Genauigkeit wird von `{{{$intern:max}}}` und `{{{$intern:iround}}}` beeinflusst.
+Die Anzahl der Iterationen resp. Genauigkeit wird von `$intern:max` und `$intern:iround` beeinflusst.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

@@ -4,7 +4,7 @@
 
 = {{{internals.stylecheck.xsl}}} =
 
-Stylesheet: {{{internals.stylecheck.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.stylecheck.xsl internals.stylecheck.xsl]
 
 Dieses Stylesheet enthält interne Templates und Funktionen, um XSLT-Dateien auf gängige Probleme zu testen.
 
@@ -12,7 +12,7 @@ Eine Spezialität dieses Stylesheets sind die `intern:solved`-Attribute. Sie kö
 
 *Verwendung*
 
-Für den Stylesheet-Test wird die zu testende XSLT-Datei mit dem Template {{{`intern:internals.Stylecheck`}}} transformiert. Anders formuliert: das Eingabedokument der Transformation ist die zu testende XSLT-Datei und das Stylesheet ein Test-XSLT, das das Template `intern:internals.Stylecheck` aufruft. Anwendungsbeispiele finden sich in den Test-Stylesheet der XSLT-SB wie z.B. `strings_tests.xsl`. Die Verwendung von Stylecheck ist dem Einsatz der Testumgebung ähnlich und erfolgt innerhalb der XSLT-SB meist gemeinsam, so dass bei Fragen ggfs. auch ein Blick {{{dorthin}}} lohnt.
+Für den Stylesheet-Test wird die zu testende XSLT-Datei mit dem Template {{{intern:internals.Stylecheck}}} transformiert. Anders formuliert: das Eingabedokument der Transformation ist die zu testende XSLT-Datei und das Stylesheet ein Test-XSLT, das das Template `intern:internals.Stylecheck` aufruft. Anwendungsbeispiele finden sich in den Test-Stylesheet der XSLT-SB wie z.B. `strings_tests.xsl`. Die Verwendung von Stylecheck ist dem Einsatz der Testumgebung ähnlich und erfolgt innerhalb der XSLT-SB meist gemeinsam, so dass bei Fragen ggfs. auch ein Blick {{{dorthin}}} lohnt.
 
 
 _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und Templates sind dort ausführlich dokumentiert._
@@ -22,7 +22,7 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 || *I* || *[intern_internals_Stylecheck intern:internals.Stylecheck]* ||   || Dieses Template ist der zentrale Einstieg zur Realisierung der Style-Checks. ||
 ||   || *[intern_internals_Stylecheck_CallTemplateTestFunction intern:internals.Stylecheck.CallTemplateTestFunction]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template überprüft die Syntax von Funktionstests mit `xsl:call-template name="xsb:internals.test.Function"`. ||
 ||   || *[intern_internals_Stylecheck_CallTemplateTestFunctionWithTestItem intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template testet den Aufruf von Funktionstests mit `xsb:internals.test.function.withTestItem.BooleanResult"`, `xsb:internals.test.function.withTestItem.StringResult"` usw.. ||
-||   || *[intern_internals_Stylecheck_CheckMisplacedIntern intern:internals.Stylecheck.CheckMisplacedIntern]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || tested, ob im Stylesheet `intern:{{{*}}}`-Elemente innerhalb von matching oder named templates stehen, da diese fälschlicherweise in das Ausgabedokument geschrieben werden könnten. ||
+||   || *[intern_internals_Stylecheck_CheckMisplacedIntern intern:internals.Stylecheck.CheckMisplacedIntern]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || tested, ob im Stylesheet `intern:*`-Elemente innerhalb von matching oder named templates stehen, da diese fälschlicherweise in das Ausgabedokument geschrieben werden könnten. ||
 ||   || *[intern_internals_Stylecheck_CheckXSLMessage intern:internals.Stylecheck.CheckXSLMessage]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || tested, ob im Stylesheet `xsl:message`-Elemente verwendet werden. ||
 ||   || *[intern_internals_Stylecheck_DocumentationTests intern:internals.Stylecheck.DocumentationTests]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template testet verschiedene Aspekte der Qualität der Dokumentation. ||
 ||   || *[intern_internals_Stylecheck_EmptySequenceAllowed intern:internals.Stylecheck.EmptySequenceAllowed]* (_required_ {{{Dokument}}} _as_ {{{document-node()}}}) ||   || Dieses Template testet, ob Funktionen oder Templates eine `empty sequence` als Resultat liefern dürfen. ||

@@ -17,7 +17,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 ==Beschreibung==
 berechnet rekursiv Fibonacci-Reihen, in dem an eine vorhandene Reihe die Summe aus vorletztem und letztem Item angefügt wird.
 
-Die Initalisierung erfolgt in der Regel über `{{{xsb:fibonacci-sequence($n as xs:integer)}}}`, so das hier auf Typechecks verzichtet werden kann (was einer höheren Ausführungsgeschwindigkeit zu gute kommt).
+Die Initalisierung erfolgt in der Regel über `xsb:fibonacci-sequence($n as xs:integer)`, so das hier auf Typechecks verzichtet werden kann (was einer höheren Ausführungsgeschwindigkeit zu gute kommt).
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

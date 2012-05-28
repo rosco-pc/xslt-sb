@@ -67,7 +67,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/intern
 
 
 ==Beschreibung==
-Shortcut für `{{{xsb:node-kind($context, true())}}}`
+Shortcut für `xsb:node-kind($context, true())`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

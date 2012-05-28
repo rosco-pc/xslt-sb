@@ -14,7 +14,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.x
 ==Beschreibung==
 gibt je nach Vorzeichen des Arguments `-1` oder `+1` zurück
 
-Im Unterschied zu {{{`xsb:sgn()`}}} wird bei `0` ein positiver oder negativer Wert zurückgegeben: Werte kleiner `0` und `-0.0e0` ergeben `-1`, Werte größer `0` und `(+)0.0e0` ergeben `+1`.
+Im Unterschied zu {{{xsb:sgn()}}} wird bei `0` ein positiver oder negativer Wert zurückgegeben: Werte kleiner `0` und `-0.0e0` ergeben `-1`, Werte größer `0` und `(+)0.0e0` ergeben `+1`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

@@ -4,7 +4,7 @@
 
 = {{{numbers.xsl}}} =
 
-Stylesheet: {{{numbers.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/numbers.xsl numbers.xsl]
 
 Dieses Stylesheet enthält Funktionen rund um Zahlen und Rechenoperationen.
 

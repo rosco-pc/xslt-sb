@@ -12,7 +12,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/string
 
 
 ==Beschreibung==
-Shortcut für `{{{xsb:sort($input-sequence, 'ascending')}}}`
+Shortcut für `xsb:sort($input-sequence, 'ascending')`
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

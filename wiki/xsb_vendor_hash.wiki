@@ -93,7 +93,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/intern
 
 
 ==Beschreibung==
-Shortcut für `{{{xsb:vendor-hash($product-name, $product-version, $java-available, true())}}}`.
+Shortcut für `xsb:vendor-hash($product-name, $product-version, $java-available, true())`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||

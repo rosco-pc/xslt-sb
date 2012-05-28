@@ -4,7 +4,7 @@
 
 = {{{internals.meta.xsl}}} =
 
-Stylesheet: {{{internals.meta.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.meta.xsl internals.meta.xsl]
 
 Dieses Stylesheet enthält interne Templates und Funktionen zur Untersuchung von XSLT-Dateien.
 

@@ -62,7 +62,7 @@ Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/intern
 
 
 ==Beschreibung==
-Shortcut für `{{{xsb:logging-level($verbal-logging-level, true() )}}}`.
+Shortcut für `xsb:logging-level($verbal-logging-level, true() )`.
 
 ===Versionen===
 || Revision || Datum || Autor || Beschreibung ||
