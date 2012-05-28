@@ -111,6 +111,10 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
+	<xsl:param name="xsl-stylesheet-href-prefix" as="xs:anyURI">http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/</xsl:param>
+	<!--  -->
+	<!--  -->
+	<!--  -->
 	<xsl:variable name="stylesheets" as="document-node()+" select=" document( (
 		'../files.xsl',
 		'../internals.logging.xsl',
@@ -150,6 +154,7 @@
 	<xsl:template name="intern:create-overview">
 		<xsl:text>#summary Überblick der Funktionen und Templates der XSL-SB</xsl:text>&crt;
 		<xsl:text>#labels Dokumentation</xsl:text>&crt;
+		<xsl:text>#sidebar TableOfContents</xsl:text>&crt;
 		<xsl:call-template name="intern:list-functions">
 			<xsl:with-param name="stylesheet" select="$stylesheets"/>
 			<xsl:with-param name="make-links" select="true()"/>
@@ -211,12 +216,12 @@
 			<xsl:with-param name="message">Schreibe <xsl:sequence select="$wikifile"/></xsl:with-param>
 		</xsl:call-template>
 		<xsl:result-document href="{$wikifile}" method="text" encoding="UTF-8">
-			<xsl:text>#summary Details für `</xsl:text>
+			<xsl:text>#summary Details für »</xsl:text>
 			<xsl:value-of select="@name"/>
 			<xsl:if test="self::xsl:function">
 				<xsl:text>()</xsl:text>
 			</xsl:if>
-			<xsl:text>`</xsl:text>&crt;
+			<xsl:text>«</xsl:text>&crt;
 			<xsl:text>#labels Dokumentation</xsl:text>&crt;
 			<xsl:text>#sidebar TableOfContents</xsl:text>&crt;
 			&crt;
@@ -228,9 +233,11 @@
 					</xsl:call-template>
 				<xsl:text>=</xsl:text>&crt;
 				&crt;
-				<xsl:text>Stylesheet: `</xsl:text>
+				<xsl:text>Stylesheet: [</xsl:text>
+				<xsl:value-of select="concat($xsl-stylesheet-href-prefix, xsb:fileName-and-fileExtention-from-url(base-uri(.) ) )"/>
+				<xsl:text> </xsl:text>
 				<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri(.) )"/>
-				<xsl:text>`</xsl:text>&crt;
+				<xsl:text>]</xsl:text>&crt;
 				&crt;
 				<xsl:variable name="doc" as="element()?" select="preceding-sibling::doc:function[1]"/>
 				<xsl:if test="$doc/doc:param">
@@ -246,6 +253,28 @@
 				&crt;
 				<xsl:text>}}}</xsl:text>
 				&crt;
+				<!-- benutzte Funktionen -->
+				<xsl:variable name="benutzteFunktionen" as="xs:string*" select="distinct-values(for $i in (.//@select|.//@test) return intern:extract-function-names($i, '') )[matches(., '^(xsb:|intern:)')]"/>
+				<xsl:if test="$benutzteFunktionen[1]">
+					&crt;
+					<xsl:text>===Benutzte Funktionen===</xsl:text>&crt;
+					<xsl:for-each select="$benutzteFunktionen">
+						<xsl:sort select="substring-before(., ':')"/>
+						<xsl:sort select="substring-after(., ':')"/>
+						<xsl:sequence select="concat(' * [', intern:name-to-wikilink(.) ,' ', ., '()]')"/>&crt;
+					</xsl:for-each>
+				</xsl:if>	
+				<!-- benutzte Templates -->
+				<xsl:if test=".//xsl:call-template">
+					&crt;
+					<xsl:variable name="knoten" as="node()">
+						<xsl:copy-of select="."/>
+					</xsl:variable>
+					<xsl:text>===Benutzte Templates===</xsl:text>&crt;
+					<xsl:for-each select="$knoten//xsl:call-template[every $i in . satisfies not($i/preceding::xsl:call-template[@name eq $i/@name])]">
+						<xsl:sequence select="concat(' * [', intern:name-to-wikilink(@name), ' ', @name, ']')"/>&crt;
+					</xsl:for-each>
+				</xsl:if>
 				&crt;
 				<xsl:text>----</xsl:text>
 				&crt;
@@ -261,18 +290,19 @@
 	<!--  -->
 	<xsl:template name="intern:make-header">
 		<xsl:param name="stylesheet" as="document-node()" required="yes"/>
-		<xsl:text>#summary Überblick der Funktionen und Templates von `</xsl:text>
+		<xsl:text>#summary Überblick der Funktionen und Templates von »</xsl:text>
 		<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri(.))"/>
-		<xsl:text>`</xsl:text>&crt;
+		<xsl:text>«</xsl:text>&crt;
 		<xsl:text>#labels Dokumentation</xsl:text>&crt;
+		<xsl:text>#sidebar TableOfContents</xsl:text>&crt;
 		&crt;
-		<xsl:text>= `</xsl:text>
+		<xsl:text>= {{{</xsl:text>
 		<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri($stylesheet) )"/>
-		<xsl:text>` =</xsl:text>&crt;
+		<xsl:text>}}} =</xsl:text>&crt;
 		&crt;
-		<xsl:text>Stylesheet: `</xsl:text>
+		<xsl:text>Stylesheet: {{{</xsl:text>
 		<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri($stylesheet) )"/>
-		<xsl:text>`</xsl:text>&crt;
+		<xsl:text>}}}</xsl:text>&crt;
 		&crt;
 		<xsl:apply-templates select="$stylesheet//doc:doc/para[not( (@role eq 'license') or matches(., '^(Autor:|Autoren:|Homepage:)') )]" mode="parse_docbook"/>
 		&crt;
@@ -545,6 +575,7 @@
 		<xsl:value-of select="@name"/>
 		<xsl:text>`: </xsl:text>
 		<xsl:apply-templates mode="#current"/>
+		&crt;
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -601,10 +632,29 @@
 	<!--  -->
 	<!--  -->
 	<!--  -->
-	<xsl:template match="link|ulink" mode="parse_docbook parse_docbook-line">
+	<xsl:template match="link|ulink" mode="parse_docbook-line">
 		<xsl:text>`</xsl:text>
 		<xsl:apply-templates mode="#current"/>
 		<xsl:text>`</xsl:text>
+	</xsl:template>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<xsl:template match="link|ulink" mode="parse_docbook">
+		<xsl:choose>
+			<xsl:when test="xsb:url-has-authority(@xlink:href|href)">
+				<xsl:text>[</xsl:text>
+				<xsl:value-of select="@xlink:href|href"/>
+				<xsl:text> </xsl:text>
+				<xsl:apply-templates mode="#current"/>
+				<xsl:text>]</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:text>{{{</xsl:text>
+				<xsl:apply-templates mode="#current"/>
+				<xsl:text>}}}</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -705,7 +755,7 @@
 		<xsl:param name="name" as="xs:string?"/>
 		<xsl:choose>
 			<xsl:when test="normalize-space($name)">
-				<xsl:sequence select="replace(xsb:encode-for-id($name), 'x3A', '_')"/>
+				<xsl:sequence select="replace(xsb:encode-for-id($name), 'x3A|-|\.', '_')"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:sequence select=" '' "/>
@@ -788,6 +838,21 @@
 	<xsl:function name="intern:wikifile-name" as="xs:string?">
 		<xsl:param name="uri" as="xs:anyURI?"/>
 		<xsl:sequence select="if (normalize-space($uri) ) then concat(intern:wikipage-name(intern:doc-title($uri) ), '.wiki') else ()"/>
+	</xsl:function>
+	<!--  -->
+	<!--  -->
+	<!-- extrahiert aus einem string, der wie ein funktionsaufruf aussieht, die qualifizierten Namen der Funktionen -->
+	<xsl:function name="intern:extract-function-names" as="xs:string*">
+		<xsl:param name="string" as="xs:string?"/>
+		<xsl:param name="vortrag" as="xs:string*"/>
+		<xsl:choose>
+			<xsl:when test="intern:looks-like-a-function-call($string)">
+				<xsl:sequence select="distinct-values(($vortrag, intern:function-name($string), for $i in intern:function-arguments($string) return intern:extract-function-names($i, '') ) )[normalize-space(.)]"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="distinct-values($vortrag)[normalize-space(.)]"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -989,6 +1054,30 @@
 			<xsl:with-param name="caller">intern:name-to-wikilink('intern:e')</xsl:with-param>
 			<xsl:with-param name="actual-value" select="intern:name-to-wikilink('intern:e')"/>
 			<xsl:with-param name="reference-value" select=" 'intern_e' "/>
+		</xsl:call-template>
+		<!--  -->
+		<!--  -->
+		<!--  -->
+		<!-- __________     intern:extract-function-names()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:extract-function-names('', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:extract-function-names('', '')"/>
+			<xsl:with-param name="reference-value" select="()"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:extract-function-names('name(666)', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:extract-function-names('name(666)', '')"/>
+			<xsl:with-param name="reference-value" select="'name'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:extract-function-names('intern:name(666)', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:extract-function-names('intern:name(666)', '')"/>
+			<xsl:with-param name="reference-value" select="'intern:name'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:extract-function-names('intern:name-to-wikilink(log(intern:hund(dec(1), dec(2), dec(3) ) ), xs:string(2) )', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:extract-function-names('intern:name-to-wikilink(log(intern:hund(dec(1), dec(2), dec(3) ) ), xs:string(2) )', '')"/>
+			<xsl:with-param name="reference-value" select="'intern:name-to-wikilink', 'log', 'intern:hund', 'dec', 'xs:string'"/>
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
