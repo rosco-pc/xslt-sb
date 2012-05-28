@@ -4,7 +4,7 @@
 
 =intern:ln2=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Beschreibung==
 natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante)

@@ -4,7 +4,7 @@
 
 =xsb:tau=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Beschreibung==
 Konstante Tau mit 2 {{{*}}} Pi = 6,28318530717958647692528676655900576839433879875021…

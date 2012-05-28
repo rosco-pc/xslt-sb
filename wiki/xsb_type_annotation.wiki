@@ -4,7 +4,7 @@
 
 =xsb:type-annotation({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
@@ -81,7 +81,7 @@ Achtung: Die XSLT-Prozessor-Hersteller sind nicht verpflichtet, intern den jewei
 ----
 =xsb:type-annotation({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)

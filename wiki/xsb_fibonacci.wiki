@@ -4,7 +4,7 @@
 
 =xsb:fibonacci({{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `n`: Argument (positive natürliche Zahl)

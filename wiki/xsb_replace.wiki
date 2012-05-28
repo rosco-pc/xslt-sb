@@ -4,7 +4,7 @@
 
 =xsb:replace({{{input}}} _as_ {{{xs:string?}}}; {{{pattern}}} _as_ {{{xs:string*}}}; {{{replacement}}} _as_ {{{xs:string*}}}; {{{flags}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input`: String, in dem ersetzt wird
@@ -72,7 +72,7 @@ Ist `replacement` der Leerstring, wird jeder Treffer von `pattern` in `input` ge
 ----
 =xsb:replace({{{input}}} _as_ {{{xs:string?}}}; {{{pattern}}} _as_ {{{xs:string*}}}; {{{replacement}}} _as_ {{{xs:string*}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input`: String, in dem ersetzt wird

@@ -4,7 +4,7 @@
 
 =xsb:render-context-as-string({{{context}}} _as_ {{{node()?}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `context`: Kontextknoten vom Typ `node()`, kann also vom Typ `element()`, `attribute()`, `text()`, `comment()` usw. sein

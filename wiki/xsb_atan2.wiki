@@ -4,7 +4,7 @@
 
 =xsb:atan2({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `y`: y-Wert (numerisch)

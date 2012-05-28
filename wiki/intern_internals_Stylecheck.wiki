@@ -4,7 +4,7 @@
 
 =intern:internals.Stylecheck=
 
-Stylesheet: {{{internals.stylecheck.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.stylecheck.xsl internals.stylecheck.xsl]
 
 ==Beschreibung==
 ==Implementierung==
@@ -133,8 +133,6 @@ Stylesheet: {{{internals.stylecheck.xsl}}}
  * [xsb_path_from_url xsb:path-from-url()]
 
 ===Benutzte Templates===
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [intern_internals_Stylecheck_CallTemplateTestFunction intern:internals.Stylecheck.CallTemplateTestFunction]
  * [intern_internals_Stylecheck_CallTemplateTestFunctionWithTestItem intern:internals.Stylecheck.CallTemplateTestFunctionWithTestItem]

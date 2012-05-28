@@ -4,7 +4,7 @@
 
 =xsb:pi=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Beschreibung==
 Konstante Pi mit 3,14159265358979323846264338327950288419716939937511…

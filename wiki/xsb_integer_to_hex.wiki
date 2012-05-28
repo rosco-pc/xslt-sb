@@ -4,7 +4,7 @@
 
 =xsb:integer-to-hex({{{input}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `input`: Integer-Zahl
@@ -55,7 +55,7 @@ Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden 
 ----
 =xsb:integer-to-hex({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `input`: Integer-Zahl
@@ -134,7 +134,6 @@ Wenn `$input` nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehl
  * [xsb_twos_complement xsb:twos-complement()]
 
 ===Benutzte Templates===
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----

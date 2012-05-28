@@ -4,7 +4,7 @@
 
 =xsb:index-of-first-match({{{input}}} _as_ {{{xs:string?}}}; {{{pattern}}} _as_ {{{xs:string?}}}; {{{flags}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input`: String, in dem gesucht wird
@@ -53,7 +53,7 @@ Ist `string` oder `pattern` der Leerstring oder die Leersequenz, wird `0` zurüc
 ----
 =xsb:index-of-first-match({{{input}}} _as_ {{{xs:string?}}}; {{{pattern}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input`: String, in dem gesucht wird

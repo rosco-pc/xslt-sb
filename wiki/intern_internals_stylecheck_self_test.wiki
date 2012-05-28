@@ -4,7 +4,7 @@
 
 =intern:internals.stylecheck.self-test=
 
-Stylesheet: {{{internals.stylecheck.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.stylecheck.xsl internals.stylecheck.xsl]
 
 ==Beschreibung==
 ==Implementierung==

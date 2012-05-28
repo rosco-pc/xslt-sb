@@ -4,7 +4,7 @@
 
 =intern:sinus-iterator({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `NormalisiertesArgument`: Winkel im Bogenmaß, normalisiert auf den Bereich zwischen `- 2 {{{*}}} Pi` und `2 {{{*}}} Pi`

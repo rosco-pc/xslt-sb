@@ -4,7 +4,7 @@
 
 =xsb:url-has-fileExtention({{{URL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `URL`: String, der als URL interpretiert wird.

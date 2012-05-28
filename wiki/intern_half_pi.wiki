@@ -4,7 +4,7 @@
 
 =intern:half-pi=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Beschreibung==
 Pi/2 (Konstante)

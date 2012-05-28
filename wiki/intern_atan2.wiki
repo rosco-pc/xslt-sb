@@ -4,7 +4,7 @@
 
 =intern:atan2({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `y`: y-Wert (numerisch)
@@ -120,7 +120,6 @@ Bei Nullwerten wird ein Ergebnis entsprechend dem kommenden [http://www.w3.org/T
  * [xsb_type_annotation xsb:type-annotation()]
 
 ===Benutzte Templates===
- * [intern_internals_FatalError intern:internals.FatalError]
  * [intern_internals_FatalError intern:internals.FatalError]
 
 ----

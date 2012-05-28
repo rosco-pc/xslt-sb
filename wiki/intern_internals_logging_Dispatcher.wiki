@@ -4,7 +4,7 @@
 
 =intern:internals.logging.Dispatcher (_required_ {{{log-entry.write-to-console.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-comment.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-element.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-html.tunneld}}} _as_ {{{xs:boolean}}}; _required_ {{{log-entry.write-to-file-as-text.tunneld}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.logging.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.logging.xsl internals.logging.xsl]
 
 ==Beschreibung==
 ==Implementierung==

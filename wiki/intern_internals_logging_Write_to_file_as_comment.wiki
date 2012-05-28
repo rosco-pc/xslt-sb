@@ -4,7 +4,7 @@
 
 =intern:internals.logging.Write-to-file-as-comment=
 
-Stylesheet: {{{internals.logging.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.logging.xsl internals.logging.xsl]
 
 ==Beschreibung==
 ==Implementierung==

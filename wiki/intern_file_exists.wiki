@@ -4,7 +4,7 @@
 
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `absoluteURL`: Absoluter Pfad zur zu überprüfenden Datei.
@@ -34,7 +34,7 @@ Es werden nur lokale Dateien mit absoluten URLs getestet.
 ----
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei
@@ -62,7 +62,7 @@ Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Erg
 ----
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei
@@ -90,7 +90,7 @@ Diese Funktion überprüft, ob die angegebene Datei lokal vorhanden ist. Das Erg
 ----
 =intern:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `absoluteURL`: Pfad zur zu überprüfenden Datei

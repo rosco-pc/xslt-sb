@@ -4,7 +4,7 @@
 
 =xsb:internals.MakeHeader=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 ==Implementierung==

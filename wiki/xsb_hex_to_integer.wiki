@@ -4,7 +4,7 @@
 
 =xsb:hex-to-integer({{{input}}} _as_ {{{xs:string}}}; {{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `input`: eine hexadezimale Zahl (beliebige Folge aus `0-9` und `A-F` bzw. `a-f`)
@@ -96,13 +96,11 @@ Eine andere Version dieser Funktion, die negative Zahlen mit Minus-Vorzeichen da
 
 ===Benutzte Templates===
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----
 =xsb:hex-to-integer({{{input}}} _as_ {{{xs:string}}})=
 
-Stylesheet: {{{numbers.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/numbers.xsl numbers.xsl]
 
 ==Parameter==
 `input`: eine hexadezimale Zahl (beliebige Folge aus `0-9` und `A-F` bzw. `a-f`), ggfs. mit einem vorangestellten »`-`« (Minus) für negative Zahlen

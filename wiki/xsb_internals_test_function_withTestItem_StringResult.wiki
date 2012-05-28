@@ -4,7 +4,7 @@
 
 =xsb:internals.test.function.withTestItem.StringResult (_required_ {{{test-node}}} _as_ {{{element()}}}; _required_ {{{function-name}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{internals.testing.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.testing.xsl internals.testing.xsl]
 
 ==Beschreibung==
 ==Implementierung==

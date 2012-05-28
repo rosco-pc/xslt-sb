@@ -4,7 +4,7 @@
 
 =intern:sqrt2=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Beschreibung==
 Wurzel aus 2 mit 1,4142135623730950488… (Konstante)

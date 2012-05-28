@@ -4,7 +4,7 @@
 
 =xsb:node-kind({{{context}}} _as_ {{{node()?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `context`: Eingabeknoten
@@ -59,7 +59,7 @@ Diese Funktion ist eine Implementierung des `dm:node-kind`-Accessors aus dem [ht
 ----
 =xsb:node-kind({{{context}}} _as_ {{{node()?}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `context`: Eingabeknoten (ohne Typ)

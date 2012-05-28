@@ -4,7 +4,7 @@
 
 =xsb:variance({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `sequence_of_numeric_values`: Eingabewerte, Sequenz von atomaren numerischen Werten

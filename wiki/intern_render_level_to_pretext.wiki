@@ -4,7 +4,7 @@
 
 =intern:render-level-to-pretext({{{level}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `level`: Eingabe (String)

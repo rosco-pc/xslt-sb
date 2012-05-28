@@ -4,7 +4,7 @@
 
 =xsb:nroot({{{wurzelbasis}}} _as_ {{{xs:anyAtomicType}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `wurzelbasis`: Wurzelbasis (Radikand); muss größer Null sein
@@ -62,7 +62,6 @@ berechnet die n-te Wurzel (n = Wurzelexponent)
  * [xsb_is_NaN xsb:is-NaN()]
 
 ===Benutzte Templates===
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----

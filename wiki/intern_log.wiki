@@ -4,7 +4,7 @@
 
 =intern:log({{{arg}}} _as_ {{{xs:anyAtomicType}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `arg`: Argument

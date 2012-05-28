@@ -4,7 +4,7 @@
 
 =xsb:java-available=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausführenden System zur Verfügung steht.
@@ -24,7 +24,7 @@ Diese Funktion ermittelt – zusammen mit der folgenden – ob Java auf dem ausf
 ----
 =xsb:java-available=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 Diese Funktion ermittelt – zusammen mit der vorhergehenden – ob Java auf dem ausführenden System zur Verfügung steht.

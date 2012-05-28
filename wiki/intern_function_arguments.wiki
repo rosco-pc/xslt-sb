@@ -4,7 +4,7 @@
 
 =intern:function-arguments({{{StringOfAFunctionCall}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{internals.meta.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.meta.xsl internals.meta.xsl]
 
 ==Parameter==
 `StringOfAFunctionCall`: String, der wie ein Funktionsaufruf aussieht.

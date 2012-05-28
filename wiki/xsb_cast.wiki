@@ -4,7 +4,7 @@
 
 =xsb:cast({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{as}}} _as_ {{{xs:string}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `arg`: Eingabeknoten (ohne Typ)
@@ -78,7 +78,6 @@ Laut Standard kann nicht auf `xs:QName` gecastet werden, da dieser Cast ein stat
 }}}
 
 ===Benutzte Templates===
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----

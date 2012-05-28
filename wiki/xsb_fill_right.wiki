@@ -4,7 +4,7 @@
 
 =xsb:fill-right({{{input}}} _as_ {{{xs:string?}}}; {{{fill-with}}} _as_ {{{xs:string?}}}; {{{length}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input`: String, der aufgefüllt werden soll

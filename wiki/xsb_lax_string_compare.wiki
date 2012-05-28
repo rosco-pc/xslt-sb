@@ -4,7 +4,7 @@
 
 =xsb:lax-string-compare({{{input}}} _as_ {{{xs:string?}}}; {{{compare-to}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input`: Eingabe (String)

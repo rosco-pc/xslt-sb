@@ -4,7 +4,7 @@
 
 =xsb:return-composed-string-if-not-empty({{{string-before}}} _as_ {{{xs:string?}}}; {{{tested-string}}} _as_ {{{xs:string?}}}; {{{string-after}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `tested-string`: getesteter String

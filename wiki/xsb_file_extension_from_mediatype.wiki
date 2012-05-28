@@ -4,7 +4,7 @@
 
 =xsb:file-extension-from-mediatype({{{mediatype}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `mediatype`: Mediatype, aus dem die Dateierweiterung ermittelt werden soll.
@@ -58,7 +58,7 @@ Die Eingabe eines ungültigen Mediatypes gibt einen Leerstring und – in Abhän
 ----
 =xsb:file-extension-from-mediatype({{{mediatype}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `mediatype`: Mediatype, aus dem die Dateierweiterung ermittelt werden soll.

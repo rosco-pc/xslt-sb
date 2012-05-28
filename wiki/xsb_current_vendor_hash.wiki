@@ -4,7 +4,7 @@
 
 =xsb:current-vendor-hash=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 Diese Funktion ermittelt den Vendor-Hash für das aktuelle System.

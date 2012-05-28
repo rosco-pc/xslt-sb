@@ -4,7 +4,7 @@
 
 =xsb:internals.Log-system-properties (_optional_ {{{logging-level}}} _as_ {{{xs:string}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 ==Implementierung==
@@ -99,21 +99,6 @@ Stylesheet: {{{internals.xsl}}}
  * [xsb_java_available xsb:java-available()]
 
 ===Benutzte Templates===
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
- * [xsb_internals_Logging xsb:internals.Logging]
  * [xsb_internals_Logging xsb:internals.Logging]
 
 ----

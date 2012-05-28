@@ -4,7 +4,7 @@
 
 =xsb:internals.testing.SkippedTests (_required_ {{{caller}}} _as_ {{{xs:string}}}; _optional_ {{{level}}} _as_ {{{xs:string}}})=
 
-Stylesheet: {{{internals.testing.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.testing.xsl internals.testing.xsl]
 
 ==Parameter==
 `test-node`: zu testender test-node

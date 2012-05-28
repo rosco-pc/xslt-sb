@@ -4,7 +4,7 @@
 
 =intern:fibonacci-sequence({{{n}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer*}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `n`: Argument (positive natürliche Zahl), Anzahl der anzuhängenden Fibonacci-Zahlen (- 1, weil die Startsequenz in der Regel (0, 1) ist)

@@ -4,7 +4,7 @@
 
 =intern:log-iterator({{{argm}}} _as_ {{{xs:anyAtomicType}}}; {{{argp}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `argm`: ursprüngliches Argument + 1

@@ -4,7 +4,7 @@
 
 =intern:validate-test-node({{{test-node}}} _as_ {{{element()}}}; {{{function-name}}} _as_ {{{xs:string}}})=
 
-Stylesheet: {{{internals.testing.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.testing.xsl internals.testing.xsl]
 
 ==Parameter==
 `test-node`: zu testender test-node
@@ -71,8 +71,6 @@ Diese Funktion testet ein Element auf seine Eignung als Eingabe-Knoten für Funk
 }}}
 
 ===Benutzte Templates===
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----

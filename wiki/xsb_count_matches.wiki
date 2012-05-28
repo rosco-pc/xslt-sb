@@ -4,7 +4,7 @@
 
 =xsb:count-matches({{{string}}} _as_ {{{xs:string?}}}; {{{regex}}} _as_ {{{xs:string?}}}; {{{flags}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `string`: String, in dem gezählt wird
@@ -54,7 +54,7 @@ Sind `string` oder `regex` Leerstring oder die Leersequenz, wird `0` zurückgege
 ----
 =xsb:count-matches({{{string}}} _as_ {{{xs:string?}}}; {{{regex}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `string`: String, in dem gezählt wird

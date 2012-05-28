@@ -4,7 +4,7 @@
 
 =xsb:reverse-twos-complement({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `input`: Integer-Zahl
@@ -81,7 +81,6 @@ Wenn `$input` nicht mit der gegebenen Anzahl Bits darstellbar ist, wird ein Fehl
  * [intern_power intern:power()]
 
 ===Benutzte Templates===
- * [xsb_internals_FunctionError xsb:internals.FunctionError]
  * [xsb_internals_FunctionError xsb:internals.FunctionError]
 
 ----

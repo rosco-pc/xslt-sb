@@ -4,7 +4,7 @@
 
 =xsb:parse-string-to-boolean({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `input`: Eingabe (String)
@@ -59,7 +59,7 @@ Diese Funktion wandelt eine String-Eingabe in einen Boolean-Wert um. Sie kennt d
 ----
 =xsb:parse-string-to-boolean({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `input`: Eingabe (String)

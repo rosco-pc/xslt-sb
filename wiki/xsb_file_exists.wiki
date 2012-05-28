@@ -4,7 +4,7 @@
 
 =xsb:file-exists({{{absoluteURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `absoluteURL`: Absoluter Pfad zur zu überprüfenden Datei.
@@ -77,13 +77,11 @@ Der Wertebereich für gültige Parameter wurde auf den kleinsten gemeinsamen Nen
 
 ===Benutzte Templates===
  * [xsb_internals_Error xsb:internals.Error]
- * [xsb_internals_Error xsb:internals.Error]
- * [xsb_internals_Error xsb:internals.Error]
 
 ----
 =xsb:file-exists({{{relativeURL}}} _as_ {{{xs:string?}}}; {{{baseURL}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{files.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/files.xsl files.xsl]
 
 ==Parameter==
 `relativeURL`: relativer Pfad zur zu überprüfenden Datei.
@@ -156,9 +154,6 @@ Die relative URL wird gegenüber der Basis aufgelöst. Es werden nur lokale Date
  * [xsb_is_relative_url xsb:is-relative-url()]
 
 ===Benutzte Templates===
- * [xsb_internals_Error xsb:internals.Error]
- * [xsb_internals_Error xsb:internals.Error]
- * [xsb_internals_Error xsb:internals.Error]
  * [xsb_internals_Error xsb:internals.Error]
 
 ----

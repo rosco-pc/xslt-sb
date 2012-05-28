@@ -4,7 +4,7 @@
 
 =xsb:force-cast-to-integer({{{input}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{numbers.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/numbers.xsl numbers.xsl]
 
 ==Parameter==
 `input`: zu castender String
@@ -39,7 +39,7 @@ Ein gültiger String wird mit `xsb:force-cast-to-integer()` umgewandelt. Die Ein
 ----
 =xsb:force-cast-to-integer({{{input}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{numbers.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/numbers.xsl numbers.xsl]
 
 ==Parameter==
 `input`: zu castender String

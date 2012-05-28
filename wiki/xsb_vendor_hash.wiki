@@ -4,7 +4,7 @@
 
 =xsb:vendor-hash({{{product-name}}} _as_ {{{xs:string?}}}; {{{product-version}}} _as_ {{{xs:string?}}}; {{{java-available}}} _as_ {{{xs:boolean}}}; {{{is-schema-aware}}} _as_ {{{xs:boolean}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `product-name`: Wert der entsprechenden System-Eigenschaft (String)
@@ -73,7 +73,7 @@ Diese Funktion ermittelt aus den übergebenen System-Parameter einen Hashwert, d
 ----
 =xsb:vendor-hash({{{product-name}}} _as_ {{{xs:string?}}}; {{{product-version}}} _as_ {{{xs:string?}}}; {{{java-available}}} _as_ {{{xs:boolean}}}; {{{is-schema-aware}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `product-name`: Wert der entsprechenden System-Eigenschaft (String)

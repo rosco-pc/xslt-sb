@@ -4,7 +4,7 @@
 
 =xsb:internals.FunctionError (_optional_ {{{message}}} _as_ {{{xs:string?}}}; _optional_ {{{level}}} _as_ {{{xs:string?}}}; _optional_ {{{caller}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 ==Implementierung==

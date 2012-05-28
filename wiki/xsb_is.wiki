@@ -4,7 +4,7 @@
 
 =xsb:is({{{input1}}}; {{{input2}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `input1`: Eingabe (ohne Typ)

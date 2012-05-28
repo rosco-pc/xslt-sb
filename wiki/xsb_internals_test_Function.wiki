@@ -4,7 +4,7 @@
 
 =xsb:internals.test.Function (_required_ {{{caller}}} _as_ {{{xs:string}}}; _required_ {{{actual-value}}}; _required_ {{{reference-value}}})=
 
-Stylesheet: {{{internals.testing.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.testing.xsl internals.testing.xsl]
 
 ==Beschreibung==
 ==Implementierung==
@@ -53,7 +53,6 @@ Stylesheet: {{{internals.testing.xsl}}}
  * [xsb_type_annotation xsb:type-annotation()]
 
 ===Benutzte Templates===
- * [xsb_internals_Error xsb:internals.Error]
  * [xsb_internals_Error xsb:internals.Error]
 
 ----

@@ -4,7 +4,7 @@
 
 =xsb:logging-level({{{verbal-logging-level}}} _as_ {{{xs:string?}}}; {{{warn-if-wrong-input}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `verbal-logging-level`: Eingabeknoten (ohne Typ)
@@ -54,7 +54,7 @@ Bei einer ungültigen Eingabe wird »4« (entspricht »`WARN`«) zurückgegeben.
 ----
 =xsb:logging-level({{{verbal-logging-level}}} _as_ {{{xs:string?}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Parameter==
 `verbal-logging-level`: Eingabeknoten (ohne Typ)

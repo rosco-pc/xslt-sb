@@ -4,7 +4,7 @@
 
 =xsb:e=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Beschreibung==
 Konstante e (Eulersche Zahl) mit 2,718281828459045235360287471353…

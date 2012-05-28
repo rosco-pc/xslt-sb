@@ -4,7 +4,7 @@
 
 =intern:internals.ProvisionalError (_optional_ {{{message}}} _as_ {{{xs:string?}}}; _optional_ {{{level}}} _as_ {{{xs:string?}}}; _optional_ {{{caller}}} _as_ {{{xs:string?}}}; _optional_ {{{show-context}}} _as_ {{{xs:boolean}}}; _optional_ {{{write-to-file}}} _as_ {{{xs:boolean}}})=
 
-Stylesheet: {{{internals.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.xsl internals.xsl]
 
 ==Beschreibung==
 ==Implementierung==

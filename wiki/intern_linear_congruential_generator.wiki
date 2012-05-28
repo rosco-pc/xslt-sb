@@ -4,7 +4,7 @@
 
 =intern:linear-congruential-generator({{{length}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer+}}})=
 
-Stylesheet: {{{math.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/math.xsl math.xsl]
 
 ==Parameter==
 `length`: Anzahl der neu zu erzeugende Werte

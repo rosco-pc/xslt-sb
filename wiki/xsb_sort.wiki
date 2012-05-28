@@ -4,7 +4,7 @@
 
 =xsb:sort({{{input-sequence}}} _as_ {{{xs:anyAtomicType*}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input-sequence`: Sequenz von `atomic values`
@@ -33,7 +33,7 @@ Shortcut für `{{{xsb:sort($input-sequence, 'ascending')}}}`
 ----
 =xsb:sort({{{input-sequence}}} _as_ {{{xs:anyAtomicType*}}}; {{{order}}} _as_ {{{xs:string}}})=
 
-Stylesheet: {{{strings.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/strings.xsl strings.xsl]
 
 ==Parameter==
 `input-sequence`: Sequenz von `atomic values`

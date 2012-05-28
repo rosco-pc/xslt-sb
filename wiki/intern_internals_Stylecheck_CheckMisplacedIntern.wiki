@@ -4,7 +4,7 @@
 
 =intern:internals.Stylecheck.CheckMisplacedIntern (_required_ {{{Dokument}}} _as_ {{{document-node()}}})=
 
-Stylesheet: {{{internals.stylecheck.xsl}}}
+Stylesheet: [http://code.google.com/p/xslt-sb/source/browse/trunk/xslt-sb/internals.stylecheck.xsl internals.stylecheck.xsl]
 
 ==Beschreibung==
 ==Implementierung==
