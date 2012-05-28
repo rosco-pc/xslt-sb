@@ -44,81 +44,81 @@ _Hinweis: Die Dokumentation entstammt dem Stylesheet selbst, die Funktionen und 
 ||   || *[intern_asin intern:asin]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkussinus (im Bogenmaß) ||
 ||   || *[xsb_atan xsb:atan]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkustangens (im Bogenmaß) ||
 ||   || *[intern_atan intern:atan]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || ermittelt den Arkustangens (im Bogenmaß) ||
-||   || *[intern_atan-iterator intern:atan-iterator]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{an}}} _as_ {{{xs:anyAtomicType}}}; {{{bn}}} _as_ {{{xs:anyAtomicType}}}; {{{konstanterDivisor}}} _as_ {{{xs:anyAtomicType}}}; {{{letztesResultat}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des Arkustangens ||
+||   || *[intern_atan_iterator intern:atan-iterator]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}; {{{an}}} _as_ {{{xs:anyAtomicType}}}; {{{bn}}} _as_ {{{xs:anyAtomicType}}}; {{{konstanterDivisor}}} _as_ {{{xs:anyAtomicType}}}; {{{letztesResultat}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des Arkustangens ||
 ||   || *[xsb_atan2 xsb:atan2]*({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet `atan2(y, x) im Bogenmaß` ||
 ||   || *[intern_atan2 intern:atan2]*({{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet `atan2(y, x) im Bogenmaß` ||
-|| *C* || *[intern_cast-INF intern:cast-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `INF` mit dem Typ des übergebenen Arguments ||
-||   || *[intern_cast-NaN intern:cast-NaN]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `NaN` mit dem Typ des übergebenen Arguments ||
-||   || *[intern_cast-negative-0 intern:cast-negative-0]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `-0.0e0` mit dem Typ des übergebenen Arguments ||
-||   || *[intern_cast-negative-INF intern:cast-negative-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `-INF` mit dem Typ des übergebenen Arguments ||
+|| *C* || *[intern_cast_INF intern:cast-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `INF` mit dem Typ des übergebenen Arguments ||
+||   || *[intern_cast_NaN intern:cast-NaN]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `NaN` mit dem Typ des übergebenen Arguments ||
+||   || *[intern_cast_negative_0 intern:cast-negative-0]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `-0.0e0` mit dem Typ des übergebenen Arguments ||
+||   || *[intern_cast_negative_INF intern:cast-negative-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt `-INF` mit dem Typ des übergebenen Arguments ||
 ||   || *[xsb_cos xsb:cos]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cosinus ||
 ||   || *[intern_cos intern:cos]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cosinus ||
-||   || *[intern_cosinus-iterator intern:cosinus-iterator]*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Kosinus ||
+||   || *[intern_cosinus_iterator intern:cosinus-iterator]*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Kosinus ||
 ||   || *[xsb_cot xsb:cot]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cotangens ||
 ||   || *[intern_cot intern:cot]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Cotangens ||
-|| *D* || *[xsb_deg-to-rad xsb:deg-to-rad]*({{{deg}}} _as_ {{{xs:anyAtomicType}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
-||   || *[intern_deg-to-rad intern:deg-to-rad]*({{{deg}}} _as_ {{{xs:anyAtomicType}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
+|| *D* || *[xsb_deg_to_rad xsb:deg-to-rad]*({{{deg}}} _as_ {{{xs:anyAtomicType}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
+||   || *[intern_deg_to_rad intern:deg-to-rad]*({{{deg}}} _as_ {{{xs:anyAtomicType}}}) ||   || wandelt Gradmaß in Bogenmaß um ||
 || *E* || *[xsb_e xsb:e]* ||   || Konstante e (Eulersche Zahl) mit 2,718281828459045235360287471353… ||
 ||   || *[xsb_exp xsb:exp]*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion e^exponent ||
 ||   || *[intern_exp intern:exp]*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion e^exponent ||
-||   || *[intern_exp-iterator intern:exp-iterator]*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{pow-vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{fact-vortrag}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung der e-Funktion (Reihenbildung) ||
+||   || *[intern_exp_iterator intern:exp-iterator]*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{pow-vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{fact-vortrag}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung der e-Funktion (Reihenbildung) ||
 ||   || *[xsb_exp10 xsb:exp10]*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion 10^exponent (Zehnerpotenzen) ||
 ||   || *[intern_exp10 intern:exp10]*({{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || Exponential-Funktion 10^exponent (Zehnerpotenzen) ||
 || *F* || *[xsb_fact xsb:fact]*({{{n}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Fakultät einer natürlichen Zahl ||
 ||   || *[intern_fact intern:fact]*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet die Fakultät einer natürlichen Zahl ||
 ||   || *[xsb_fibonacci xsb:fibonacci]*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet Fibonacci-Zahlen ||
-||   || *[xsb_fibonacci-sequence xsb:fibonacci-sequence]*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet Fibonacci-Reihen ||
-||   || *[intern_fibonacci-sequence intern:fibonacci-sequence]*({{{n}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer*}}}) ||   || berechnet Fibonacci-Reihen ||
-||   || *[intern_format-INF-caller intern:format-INF-caller]*({{{caller}}} _as_ {{{xs:string}}}; {{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || formatiert einen String für die Fehlerausgabe ||
-|| *H* || *[intern_half-pi intern:half-pi]* ||   || Pi/2 (Konstante) ||
-||   || *[xsb_hex-to-integer xsb:hex-to-integer]*({{{input}}} _as_ {{{xs:string}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   ||   ||
-|| *I* || *[xsb_integer-to-hex xsb:integer-to-hex]*({{{input}}} _as_ {{{xs:integer}}}) ||   || Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden mit einem vorangestellten `-` (Minus) ausgegeben ||
-||   || *[xsb_integer-to-hex xsb:integer-to-hex]*({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   || Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden mit einem vorangestellten `-` (Minus) ausgegeben ||
+||   || *[xsb_fibonacci_sequence xsb:fibonacci-sequence]*({{{n}}} _as_ {{{xs:integer}}}) ||   || berechnet Fibonacci-Reihen ||
+||   || *[intern_fibonacci_sequence intern:fibonacci-sequence]*({{{n}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer*}}}) ||   || berechnet Fibonacci-Reihen ||
+||   || *[intern_format_INF_caller intern:format-INF-caller]*({{{caller}}} _as_ {{{xs:string}}}; {{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || formatiert einen String für die Fehlerausgabe ||
+|| *H* || *[intern_half_pi intern:half-pi]* ||   || Pi/2 (Konstante) ||
+||   || *[xsb_hex_to_integer xsb:hex-to-integer]*({{{input}}} _as_ {{{xs:string}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   ||   ||
+|| *I* || *[xsb_integer_to_hex xsb:integer-to-hex]*({{{input}}} _as_ {{{xs:integer}}}) ||   || Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden mit einem vorangestellten `-` (Minus) ausgegeben ||
+||   || *[xsb_integer_to_hex xsb:integer-to-hex]*({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   || Diese Funktion wandelt Integer- in Hexadezimalzahlen um. Negative Zahlen werden mit einem vorangestellten `-` (Minus) ausgegeben ||
 ||   || *[intern_iround intern:iround]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen für interne Zwecke ||
-||   || *[xsb_is-in-range xsb:is-in-range]*({{{value}}} _as_ {{{xs:anyAtomicType?}}}; {{{minInclusive}}} _as_ {{{xs:anyAtomicType}}}; {{{maxInclusive}}} _as_ {{{xs:anyAtomicType}}}) ||   || überprüft, ob ein numerischer Wert innerhalb eines Wertebereiches liegt ||
-||   || *[xsb_is-INF xsb:is-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `INF` ist ||
-||   || *[xsb_is-NaN xsb:is-NaN]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `NaN` ist ||
-||   || *[xsb_is-negative-0 xsb:is-negative-0]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-0.0e0` ist ||
-||   || *[xsb_is-negative-INF xsb:is-negative-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-INF` ist ||
-|| *L* || *[intern_linear-congruential-generator intern:linear-congruential-generator]*({{{length}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer+}}}) ||   || linearer Kongruenzgenerator, erzeugt Pseudo-Zufallszahlen ||
+||   || *[xsb_is_in_range xsb:is-in-range]*({{{value}}} _as_ {{{xs:anyAtomicType?}}}; {{{minInclusive}}} _as_ {{{xs:anyAtomicType}}}; {{{maxInclusive}}} _as_ {{{xs:anyAtomicType}}}) ||   || überprüft, ob ein numerischer Wert innerhalb eines Wertebereiches liegt ||
+||   || *[xsb_is_INF xsb:is-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `INF` ist ||
+||   || *[xsb_is_NaN xsb:is-NaN]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `NaN` ist ||
+||   || *[xsb_is_negative_0 xsb:is-negative-0]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-0.0e0` ist ||
+||   || *[xsb_is_negative_INF xsb:is-negative-INF]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || testet, ob ein numerischer Wert `-INF` ist ||
+|| *L* || *[intern_linear_congruential_generator intern:linear-congruential-generator]*({{{length}}} _as_ {{{xs:integer}}}; {{{vortrag}}} _as_ {{{xs:integer+}}}) ||   || linearer Kongruenzgenerator, erzeugt Pseudo-Zufallszahlen ||
 ||   || *[intern_ln10 intern:ln10]* ||   || natürlicher Logarithmus von 10 mit 2,3025850929940456840179914546844… (Konstante) ||
 ||   || *[intern_ln2 intern:ln2]* ||   || natürlicher Logarithmus von 2 mit 0,69314718055994530941723212145818 (Konstante) ||
 ||   || *[xsb_log xsb:log]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den natürlichen Logarithmus ||
 ||   || *[intern_log intern:log]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den natürlichen Logarithmus ||
-||   || *[intern_log-iterator intern:log-iterator]*({{{argm}}} _as_ {{{xs:anyAtomicType}}}; {{{argp}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des natürlichen Logarithmus ||
-||   || *[intern_log-m-iterator intern:log-m-iterator]*({{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{m}}} _as_ {{{xs:integer}}}) ||   || ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können. ||
+||   || *[intern_log_iterator intern:log-iterator]*({{{argm}}} _as_ {{{xs:anyAtomicType}}}; {{{argp}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}; {{{n-iteration}}} _as_ {{{xs:integer}}}) ||   || Iteration zur Ermittlung des natürlichen Logarithmus ||
+||   || *[intern_log_m_iterator intern:log-m-iterator]*({{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{m}}} _as_ {{{xs:integer}}}) ||   || ermittelt einen Faktor, um intern:log-iterator in einem Bereich mit günstiger Konvergenz ausführen zu können. ||
 ||   || *[xsb_log10 xsb:log10]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis ||
 ||   || *[intern_log10 intern:log10]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet den Logarithmus zur Basis 10 (dekadischer Logarithmus) und rundet das Ergebnis ||
-|| *N* || *[intern_normalize-rad intern:normalize-rad]*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Winkel auf den Bereich von `- 2 {{{*}}} Pi` bis `2 {{{*}}} Pi` um ||
+|| *N* || *[intern_normalize_rad intern:normalize-rad]*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Winkel auf den Bereich von `- 2 {{{*}}} Pi` bis `2 {{{*}}} Pi` um ||
 ||   || *[xsb_nroot xsb:nroot]*({{{wurzelbasis}}} _as_ {{{xs:anyAtomicType}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die n-te Wurzel (n = Wurzelexponent) ||
 ||   || *[intern_nroot intern:nroot]*({{{wurzelbasis}}} _as_ {{{xs:anyAtomicType}}}; {{{wurzelexponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die n-te Wurzel (n = Wurzelexponent) ||
 || *P* || *[xsb_pi xsb:pi]* ||   || Konstante Pi mit 3,14159265358979323846264338327950288419716939937511… ||
 ||   || *[xsb_pow xsb:pow]*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Potenz basis^exponent ||
 ||   || *[intern_pow intern:pow]*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Potenz basis^exponent ||
 ||   || *[intern_power intern:power]*({{{basis}}} _as_ {{{xs:anyAtomicType}}}; {{{exponent}}} _as_ {{{xs:integer}}}) ||   || berechnet die Potenz basis^exponent für ganzzahlige Exponenten (multiplikative Methode) ||
-|| *R* || *[xsb_rad-to-deg xsb:rad-to-deg]*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
-||   || *[intern_rad-to-deg intern:rad-to-deg]*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
+|| *R* || *[xsb_rad_to_deg xsb:rad-to-deg]*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
+||   || *[intern_rad_to_deg intern:rad-to-deg]*({{{rad}}} _as_ {{{xs:anyAtomicType}}}) ||   || rechnet Bogenmaß in Gradmaß um ||
 ||   || *[xsb_random xsb:random]*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl im Bereich zwischen 0 und 1 ||
-||   || *[intern_random-seed intern:random-seed]*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl ||
-||   || *[intern_random-sequence intern:random-sequence]*({{{length}}} _as_ {{{xs:integer}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
-||   || *[xsb_random-sequence xsb:random-sequence]*({{{length}}} _as_ {{{xs:anyAtomicType}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
-||   || *[xsb_reverse-twos-complement xsb:reverse-twos-complement]*({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   || ermittelt aus einem Zweierkomplement einen Integer ||
-||   || *[intern_root-iterator intern:root-iterator]*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || iterative Wurzelberechnung nach dem Heron-Verfahren ||
+||   || *[intern_random_seed intern:random-seed]*({{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Zufallszahl ||
+||   || *[intern_random_sequence intern:random-sequence]*({{{length}}} _as_ {{{xs:integer}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
+||   || *[xsb_random_sequence xsb:random-sequence]*({{{length}}} _as_ {{{xs:anyAtomicType}}}; {{{volatile}}} _as_ {{{xs:anyAtomicType}}}) ||   || erzeugt eine Sequenz von Pseudo-Zufallszahlen im Bereich zwischen 0 und 1 ||
+||   || *[xsb_reverse_twos_complement xsb:reverse-twos-complement]*({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   || ermittelt aus einem Zweierkomplement einen Integer ||
+||   || *[intern_root_iterator intern:root-iterator]*({{{n}}} _as_ {{{xs:integer}}}; {{{x}}} _as_ {{{xs:anyAtomicType}}}; {{{y}}} _as_ {{{xs:anyAtomicType}}}; {{{yn}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || iterative Wurzelberechnung nach dem Heron-Verfahren ||
 ||   || *[intern_round intern:round]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || rundet Zahlen einheitlich für die Ausgabe der mathematischen Funktionen der XSLT-SB ||
 || *S* || *[xsb_sgn xsb:sgn]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
 ||   || *[intern_sgn intern:sgn]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || gibt je nach Vorzeichen und Wert des Arguments `-1`, `0` oder `+1` zurück ||
 ||   || *[xsb_sin xsb:sin]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
 ||   || *[intern_sin intern:sin]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || Sinus-Funktion (Reihenentwicklung) ||
-||   || *[intern_sinus-iterator intern:sinus-iterator]*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Sinus ||
+||   || *[intern_sinus_iterator intern:sinus-iterator]*({{{NormalisiertesArgument}}} _as_ {{{xs:anyAtomicType}}}; {{{vortrag}}} _as_ {{{xs:anyAtomicType}}}; {{{iteration}}} _as_ {{{xs:integer}}}) ||   || Iterator zur Berechnung des Sinus ||
 ||   || *[xsb_sqrt xsb:sqrt]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Quadratwurzel ||
 ||   || *[intern_sqrt intern:sqrt]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berechnet die Quadratwurzel ||
 ||   || *[intern_sqrt2 intern:sqrt2]* ||   || Wurzel aus 2 mit 1,4142135623730950488… (Konstante) ||
-||   || *[xsb_standard-deviation xsb:standard-deviation]*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
-||   || *[intern_standard-deviation intern:standard-deviation]*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
+||   || *[xsb_standard_deviation xsb:standard-deviation]*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
+||   || *[intern_standard_deviation intern:standard-deviation]*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet die Standardabweichung einer Stichprobe als Quadratwurzel der Varianz ||
 || *T* || *[xsb_tan xsb:tan]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berchnet den Tangens ||
 ||   || *[intern_tan intern:tan]*({{{arg}}} _as_ {{{xs:anyAtomicType}}}) ||   || berchnet den Tangens ||
 ||   || *[xsb_tau xsb:tau]* ||   || Konstante Tau mit 2 {{{*}}} Pi = 6,28318530717958647692528676655900576839433879875021… ||
-||   || *[xsb_twos-complement xsb:twos-complement]*({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   || ermittelt das Zweierkomplement ||
+||   || *[xsb_twos_complement xsb:twos-complement]*({{{input}}} _as_ {{{xs:integer}}}; {{{n}}} _as_ {{{xs:integer}}}) ||   || ermittelt das Zweierkomplement ||
 || *V* || *[xsb_variance xsb:variance]*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz ||
 ||   || *[intern_variance intern:variance]*({{{sequence_of_numeric_values}}} _as_ {{{xs:anyAtomicType+}}}) ||   || berechnet aus einer Folge von numerischen Werten die Stichprobenvarianz ||
 
