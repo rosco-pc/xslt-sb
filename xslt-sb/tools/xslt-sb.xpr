@@ -1,407 +1,611 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="13.2">
+<project version="14.0">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="13.2" xml:space="preserve">
+            <serialized version="14.0" xml:space="preserve">
                 <map>
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Dokumentation_erstellen</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../files.xsl</String>
+                                    <String>../date-time.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../files_temp.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../standard.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../standard_tests.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.meta.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.stylecheck.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.logging.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.testing.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../math.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../numbers.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../pattern+includes.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../strings.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../math_tests.xsl</String>
+                                    <String>../date-time_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../strings_tests.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../strings_tests_trash.xsl</String>
+                                    <String>../math.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_externen_Tests_Saxon_HE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../files_tests.xsl</String>
+                                    <String>../internals.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../math_tests_trash.xsl</String>
+                                    <String>../internals.logging.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Wiki-Seiten erstellen (für Google Code)</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>google_code.xsl</String>
+                                    <String>../internals.testing.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../numbers_tests.xsl</String>
+                                    <String>../internals.stylecheck.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>trash</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
-                                    <String>../../../../expedimentum/org/www/example/xslt/search-and-replace_02.xsl</String>
+                                    <String>../files.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Dokumentation_erstellen</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>trash</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../../../../expedimentum/org/www/example/xslt/search-and-replace_01.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
-                                <field name="url">
-                                    <String>../internals.testing_tests.xsl</String>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="name">
-                                    <String>trash</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../../../../expedimentum/org/www/example/xslt/search-and-replace.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_externen_Tests_XML</String>
+                                <field name="url">
+                                    <String>../files_temp.xsl</String>
                                 </field>
-                                <field name="type">
-                                    <String>XML</String>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Wiki-Seiten erstellen (für Google Code)</String>
+                                    </list>
                                 </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../../expedimentum/org/www/example/xslt/search-and-replace_02.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../../expedimentum/org/www/example/xslt/search-and-replace_01.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>google_code.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Wiki-Seiten erstellen (für Google Code)</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../standard.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../internals.meta.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../standard_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../numbers.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../pattern+includes.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../math_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../strings_tests_trash.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../files_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_externen_Tests_Saxon_HE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../math_tests_trash.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../numbers_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../internals.testing_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
                                 <field name="url">
                                     <String>../../../../../../../../Volumes/stf/Unbenannt2.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_externen_Tests_XML</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>trash/test_random.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../Untitled1.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>trash/test.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../internals_tests.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../math2_tests.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_externen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../math2.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_externen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>trash_.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_externen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../internals_trash.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_externen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>generate_documentation_for_google_code.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>test.xsl</String>
                                 </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
-                                <field name="name">
-                                    <String>Selbstest_mit_internen_Tests</String>
-                                </field>
-                                <field name="type">
-                                    <String>XML</String>
-                                </field>
                                 <field name="url">
                                     <String>../random.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../../../trash/epub_II/lib/tools/generate-DTBook-index-templates.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../../../trash/epub_II/lib/tools/Findbuch/trash/Untitled1.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
                                 </field>
                             </scenarioAssociation>
                         </scenarioAssociation-array>
@@ -680,6 +884,9 @@
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="addCommentsForValidationErrors">
+                                                    <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
@@ -1411,6 +1618,9 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
+                                                <field name="generateByteCode">
+                                                    <Boolean>false</Boolean>
+                                                </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
@@ -1811,6 +2021,9 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
+                                                <field name="generateByteCode">
+                                                    <Boolean>false</Boolean>
+                                                </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
@@ -2126,6 +2339,9 @@
                                                 </field>
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
+                                                </field>
+                                                <field name="generateByteCode">
+                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -2611,6 +2827,10 @@
                     <entry>
                         <String>scenarios.load.from.project</String>
                         <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
+                        <String>validation.scenarios</String>
+                        <validationScenario-array/>
                     </entry>
                 </map>
             </serialized>

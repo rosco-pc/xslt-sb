@@ -1053,6 +1053,7 @@ habe ich sie hier eingefügt.-->
 		<para>Die Eingabe einer ungültigen URL gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe einer ungültigen Dateierweiterung gibt einen Leerstring und – in Abhängigkeit von <code>warn-if-wrong-input</code> – 
 			ggfs. eine Warnung zurück.</para>
+		<para>Diese Funktion nutzt eine in das Stylesheet eingebundene Übersetzungstabelle, die für neue Mediatypes und Dateierweiterungen einfach erweitert werden kann.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.41</revnumber>
@@ -1290,6 +1291,7 @@ habe ich sie hier eingefügt.-->
 		<para>Die Eingabe eines Leerstringes gibt einen Leerstring zurück.</para>
 		<para>Die Eingabe eines ungültigen Mediatypes gibt einen Leerstring und – in Abhängigkeit von <code>warn-if-wrong-input</code> – 
 			ggfs. eine Warnung zurück.</para>
+		<para>Diese Funktion nutzt eine in das Stylesheet eingebundene Übersetzungstabelle, die für neue Mediatypes und Dateierweiterungen einfach erweitert werden kann.</para>
 		<revhistory>
 			<revision>
 				<revnumber>0.2.41</revnumber>

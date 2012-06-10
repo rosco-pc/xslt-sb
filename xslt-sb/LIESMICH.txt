@@ -18,6 +18,8 @@ $Revision$, $Date$
 --- Änderungen in 0.2.50 ---
 * einzelne Seiten für Funktionen und Templates im Goggle Code wiki
 * Neue Funktionen:
+** xsb:replace()
+** xsb:index-of-first-match()
 ** xsb:integer-to-hex()
 ** xsb:twos-complement()
 ** xsb:reverse-twos-complement()
