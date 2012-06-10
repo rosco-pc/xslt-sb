@@ -696,7 +696,7 @@
 	<!--  -->
 	<!-- __________     xsb:internals.Log-system-properties     __________ -->
 	<doc:template>
-		<doc:param name="logging-level">Logging-Level, mit dem die Ausgabe erfolgt. Default: "DEBUG"</doc:param>
+		<doc:param name="logging-level"><para>Logging-Level, mit dem die Ausgabe erfolgt. Default: "DEBUG"</para></doc:param>
 		<para xml:id="internals.Log-system-properties">Dieses Template gibt die Werte der Funktion 
 			<function>system-property()</function> für die im XSLT-Standard vorgegebenen Parameter 
 			vgl. <ulink href="http://www.w3.org/TR/xslt20/#function-system-property">http://www.w3.org/TR/xslt20/#function-system-property</ulink> 

@@ -83,6 +83,12 @@
 		</itemizedlist>
 		<revhistory>
 			<revision>
+				<revnumber>0.2.63</revnumber>
+				<date>2012-06-11</date>
+				<authorinitials>Stf</authorinitials>
+				<revremark>neue Funktionen: <function>intern:replace()</function>, <function>intern:recursive-replace()</function>, <function>xsb:recursive-replace()</function></revremark>
+			</revision>
+			<revision>
 				<revnumber>0.2.50</revnumber>
 				<date>2012-05-27</date>
 				<authorinitials>Stf</authorinitials>
@@ -129,6 +135,17 @@
 			</revision>
 		</revhistory>
 	</doc:doc>
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- ====================     Konstanten     ==================== -->
+	<doc:variable>
+		<para xml:id="max_var">maximale Rekursionstiefe</para>
+		<para>Manche rekursive Funktionen wie <link linkend="recursive-replace_i"><code>intern:recursive-replace()</code></link>
+			können mit Parameter aufgerufen werden, die einen Abbruch der Rekursion verhindern, etwa <code>intern:recursive-replace('a', 'a', 'a', '')</code>.
+			Diese Variable bestimmt, wie viele Rekursionen durchgeführt werden, bevor die Verarbeitung abgebrochen wird.</para>
+	</doc:variable>
+	<xsl:variable name="intern:maximale-rekursionstiefe" as="xs:integer">300</xsl:variable>
 	<!--  -->
 	<!--  -->
 	<!--  -->
@@ -185,7 +202,7 @@
 				<xsl:sequence select="$input"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="concat('', $default)"/>
+				<xsl:sequence select="string($default)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -218,7 +235,7 @@
 	</doc:function>
 	<xsl:function name="xsb:trim-left" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:sequence select="concat('', replace($input, '^\s+', '') )"></xsl:sequence>
+		<xsl:sequence select="string(replace($input, '^\s+', '') )"></xsl:sequence>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -249,7 +266,7 @@
 	</doc:function>
 	<xsl:function name="xsb:trim-right" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:sequence select="concat('', replace($input, '\s+$', '') )"/>
+		<xsl:sequence select="string(replace($input, '\s+$', '') )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -406,7 +423,7 @@
 	</doc:function>
 	<xsl:function name="xsb:encode-for-id" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:sequence select="concat(translate(encode-for-uri(translate(normalize-space($input), ' ', '_')), '%', 'x'), '')"/>
+		<xsl:sequence select="string(translate(encode-for-uri(translate(normalize-space($input), ' ', '_')), '%', 'x') )"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -485,7 +502,7 @@
 	</doc:function>
 	<xsl:function name="xsb:escape-for-regex" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:sequence select="concat('', replace($input, '[\\*.+?\^\$()\[\]{}|]', '\\$0') )"/>
+		<xsl:sequence select="replace($input, '[\\*.+?\^\$()\[\]{}|]', '\\$0')"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -517,7 +534,7 @@
 	</doc:function>
 	<xsl:function name="xsb:escape-for-replacement" as="xs:string">
 		<xsl:param name="input" as="xs:string?"/>
-		<xsl:sequence select="concat('', replace($input, '[\\$]', '\\$0') )"/>
+		<xsl:sequence select="replace($input, '[\\$]', '\\$0')"/>
 	</xsl:function>
 	<!--  -->
 	<!--  -->
@@ -662,20 +679,37 @@
 		<xsl:param name="pattern" as="xs:string*"/>
 		<xsl:param name="replacement" as="xs:string*"/>
 		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:sequence select="intern:replace($input, $pattern, $replacement, $flags, false())"/>
+	</xsl:function>
+	
+	
+	
+	<xsl:function name="intern:replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:param name="recurse" as="xs:boolean"/>
+		<!-- ToDo -->
+		<!--<xsl:message select="'i:r: $input', $input, '$pattern', $pattern, '$replacement', $replacement"/>-->
 		<xsl:choose>
 			<xsl:when test="exists($pattern[1])">
 				<xsl:sequence select="
-					xsb:replace(
+					intern:replace(
 						if (boolean($pattern[1]) )
-							then replace($input, $pattern[1], string($replacement[1]), $flags)
+							then
+								if ($recurse)
+									then intern:recursive-replace($input, $pattern[1], string($replacement[1]), $flags)
+									else replace($input, $pattern[1], string($replacement[1]), $flags)
 							else $input,
 						$pattern[position() gt 1],
 						$replacement[position() gt 1],
-						$flags
+						$flags,
+						$recurse
 					)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="concat('', $input)"/>
+				<xsl:sequence select="string($input)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -702,6 +736,66 @@
 		<xsl:param name="replacement" as="xs:string*"/>
 		<xsl:sequence select="xsb:replace($input, $pattern, $replacement, '')"/>
 	</xsl:function>
+	
+	
+	
+	<xsl:function name="xsb:recursive-replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:sequence select="intern:replace($input, $pattern, $replacement, $flags, true())"/>
+	</xsl:function>
+	
+	
+	<xsl:function name="xsb:recursive-replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:sequence select="xsb:recursive-replace($input, $pattern, $replacement, '')"/>
+	</xsl:function>
+	
+	
+	<xsl:function name="intern:recursive-replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:param name="remaining-recursions" as="xs:integer"/>
+		<!-- ToDo -->
+		<!--<xsl:message select="'i:rr: $input', $input, '$pattern', $pattern, '$replacement', $replacement"/>-->
+		<xsl:choose>
+			<xsl:when test="$remaining-recursions eq 0">
+				<xsl:sequence select="string($input)"/>
+				<!-- ToDo: Logging-System noch nicht verfügbar, Funktion auslagern? -->
+				<xsl:message terminate="yes">maximale Rekursionstiefe erreicht</xsl:message>
+			</xsl:when>
+			<xsl:when test="matches($input, $pattern, $flags)">
+				<xsl:sequence select="intern:recursive-replace(replace($input, $pattern, $replacement, $flags), $pattern, $replacement, $flags, $remaining-recursions - 1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<!-- ToDo -->
+				<!--<xsl:message select="'i:rr returning:', $input"/>-->
+				<xsl:sequence select="string($input)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	
+	
+	<!--
+		Es ist relativ einfach, rekursives Suchen &amp; Ersetzen so zu programmieren, dass Endlossschleifen entstehen.
+		Deshalb wird die Anzahl der Durchläufe gezählt und bei Überschreiten von $intern:maximale-rekursionstiefe
+		die Bearbeitung abgebrochen
+	-->
+	
+	<xsl:function name="intern:recursive-replace" as="xs:string">
+		<xsl:param name="input" as="xs:string?"/>
+		<xsl:param name="pattern" as="xs:string*"/>
+		<xsl:param name="replacement" as="xs:string*"/>
+		<xsl:param name="flags" as="xs:string?"/>
+		<xsl:sequence select="intern:recursive-replace($input, $pattern, $replacement, $flags, $intern:maximale-rekursionstiefe)"/>
+	</xsl:function>
+	
 	<!--  -->
 	<!--  -->
 	<!-- __________     xsb:index-of-first-match()     __________ -->
@@ -819,13 +913,13 @@
 		<xsl:param name="length" as="xs:integer"/>
 		<xsl:choose>
 			<xsl:when test="string-length($fill-with) eq 0">
-				<xsl:sequence select="concat('', $input)"/>
+				<xsl:sequence select="string($input)"/>
 			</xsl:when>
 			<xsl:when test="string-length($input) lt $length">
 				<xsl:sequence select="string-join( (for $i in 1 to $length - string-length($input) return substring($fill-with, 1, 1), $input), '')"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="concat('', $input)"/>
+				<xsl:sequence select="string($input)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -874,13 +968,13 @@
 		<xsl:param name="length" as="xs:integer"/>
 		<xsl:choose>
 			<xsl:when test="string-length($fill-with) eq 0">
-				<xsl:sequence select="concat('', $input)"/>
+				<xsl:sequence select="string($input)"/>
 			</xsl:when>
 			<xsl:when test="string-length($input) lt $length">
 				<xsl:sequence select="string-join( ($input, for $i in 1 to $length - string-length($input) return substring($fill-with, 1, 1) ), '')"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:sequence select="concat('', $input)"/>
+				<xsl:sequence select="string($input)"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>

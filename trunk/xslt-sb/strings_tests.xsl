@@ -1205,6 +1205,73 @@
 		</xsl:call-template>
 		<!--  -->
 		<!--  -->
+		<!-- __________     intern:recursive-replace()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:recursive-replace('', 'a', '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:recursive-replace('', 'a', '', '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<!-- Abbruch wegen erreichen der max. Rekursionstiefe -->
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:recursive-replace('a', 'a', 'a', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:recursive-replace('a', 'a', 'a', '')"/>
+			<xsl:with-param name="reference-value" select="'a'"/>
+		</xsl:call-template>
+		-->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:recursive-replace('a,b,c 1', '([a-z]),([a-z])( [0-9])', '$1$3,$2$3', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:recursive-replace('a,b,c 1', '([a-z]),([a-z])( [0-9])', '$1$3,$2$3', '')"/>
+			<xsl:with-param name="reference-value" select="'a 1,b 1,c 1'"/>
+		</xsl:call-template>
+		<!--
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:recursive-replace('', '', '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:recursive-replace('', '', '', '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">intern:recursive-replace('', '', '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="intern:recursive-replace('', '', '', '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		-->
+		
+		
+		
+		<!--  -->
+		<!--  -->
+		<!-- __________     xsb:recursive-replace()     __________ -->
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:recursive-replace('', 'a', '', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:recursive-replace('', 'a', '', '')"/>
+			<xsl:with-param name="reference-value" select="''"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:recursive-replace('ab', ('a', 'b'), ('x', 'y'), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:recursive-replace('ab', ('a', 'b'), ('x', 'y'), '')"/>
+			<xsl:with-param name="reference-value" select="'xy'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:recursive-replace('a,b,c 1', '([a-z]),([a-z])( [0-9])', '$1$3,$2$3', '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:recursive-replace('a,b,c 1', '([a-z]),([a-z])( [0-9])', '$1$3,$2$3', '')"/>
+			<xsl:with-param name="reference-value" select="'a 1,b 1,c 1'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:recursive-replace('a,b,c 1', ('([a-z]),([a-z])( [0-9])', '1'), ('$1$3,$2$3', '2'), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:recursive-replace('a,b,c 1', ('([a-z]),([a-z])( [0-9])', '1'), ('$1$3,$2$3', '2'), '')"/>
+			<xsl:with-param name="reference-value" select="'a 2,b 2,c 2'"/>
+		</xsl:call-template>
+		<xsl:call-template name="xsb:internals.test.Function">
+			<xsl:with-param name="caller">xsb:recursive-replace('a,b,c 1 @', ('([a-z]),([a-z])( [0-9])', '([a-z] [0-9]),([a-z] [0-9]) @'), ('$1$3,$2$3', '$1 @,$2 @'), '')</xsl:with-param>
+			<xsl:with-param name="actual-value" select="xsb:recursive-replace('a,b,c 1 @', ('([a-z]),([a-z])( [0-9])', '([a-z] [0-9]),([a-z] [0-9]) @'), ('$1$3,$2$3', '$1 @,$2 @'), '')"/>
+			<xsl:with-param name="reference-value" select="'a 1 @,b 1 @,c 1 @'"/>
+		</xsl:call-template>
+		
+		
+		
+		<!--  -->
+		<!--  -->
 		<!--  -->
 	</xsl:template>
 	<!--  -->

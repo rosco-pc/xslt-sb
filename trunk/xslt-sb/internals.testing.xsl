@@ -460,6 +460,36 @@
 			</xsl:choose>
 		</xsl:if>
 	</xsl:template>
+	
+	
+	
+	
+	
+	
+	
+	
+	<xsl:template name="xsb:internals.test.function.withTestItem.DateResult">
+		<!-- $test-node muss ein intern:test-element sein -->
+		<xsl:param name="test-node" as="element()" required="yes"/>
+		<xsl:param name="function-name" as="xs:string" required="yes"/>
+		<xsl:param name="actual-value" required="yes" as="xs:date?"/>
+		<xsl:if test="intern:validate-test-node($test-node, $function-name)">
+			<xsl:choose>
+				<xsl:when test="xsb:listed($test-node/@intern:skip, $_internals.testing.current-vendor-hash) or xsb:listed($test-node/*[name() eq $function-name]/@intern:skip, $_internals.testing.current-vendor-hash)">
+					<xsl:call-template name="xsb:internals.testing.SkippedTests">
+						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="xsb:internals.test.Function" intern:solved="CallTemplateTestFunction">
+						<xsl:with-param name="caller"><xsl:sequence select="$function-name"/>( '<xsl:sequence select="$test-node/value/text()"/>' )</xsl:with-param>
+						<xsl:with-param name="actual-value" select="$actual-value"/>
+						<xsl:with-param name="reference-value" select="if (normalize-space($test-node/*[name() eq $function-name]/text() ) ) then xs:date( $test-node/*[name() eq $function-name]/text() ) else ()"/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
+	</xsl:template>
 	<!--  -->
 	<!--  -->
 	<!-- __________     intern:validate-test-node     __________ -->

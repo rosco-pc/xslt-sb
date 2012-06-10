@@ -1525,7 +1525,7 @@
 	<!--  -->
 	<!-- __________     xsb:nroot     __________ -->
 	<doc:function>
-		<doc:param name="wurzelbasis"><para>Wurzelbasis (Radikand)</para>; muss größer Null sein</doc:param>
+		<doc:param name="wurzelbasis"><para>Wurzelbasis (Radikand); muss größer Null sein</para></doc:param>
 		<doc:param name="wurzelexponent"><para>Wurzelexponent; muss eine natürliche Zahl sein</para></doc:param>
 		<para xml:id="nroot">berechnet die n-te Wurzel (n = Wurzelexponent)</para>
 		<revhistory>
@@ -1582,7 +1582,7 @@
 	<!--  -->
 	<!-- __________     intern:nroot     __________ -->
 	<doc:function>
-		<doc:param name="wurzelbasis"><para>Wurzelbasis (Radikand)</para>; muss größer Null sein</doc:param>
+		<doc:param name="wurzelbasis"><para>Wurzelbasis (Radikand); muss größer Null sein</para></doc:param>
 		<doc:param name="wurzelexponent"><para>Wurzelexponent; muss eine natürliche Zahl sein</para></doc:param>
 		<para xml:id="nroot_i">berechnet die n-te Wurzel (n = Wurzelexponent)</para>
 		<revhistory>

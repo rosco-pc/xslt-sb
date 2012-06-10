@@ -300,9 +300,11 @@
 		<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri($stylesheet) )"/>
 		<xsl:text>}}} =</xsl:text>&crt;
 		&crt;
-		<xsl:text>Stylesheet: {{{</xsl:text>
+		<xsl:text>Stylesheet: [</xsl:text>
+		<xsl:value-of select="concat($xsl-stylesheet-href-prefix, xsb:fileName-and-fileExtention-from-url(base-uri($stylesheet) ) )"/>
+		<xsl:text> </xsl:text>
 		<xsl:value-of select="xsb:fileName-and-fileExtention-from-url(base-uri($stylesheet) )"/>
-		<xsl:text>}}}</xsl:text>&crt;
+		<xsl:text>]</xsl:text>&crt;
 		&crt;
 		<xsl:apply-templates select="$stylesheet//doc:doc/para[not( (@role eq 'license') or matches(., '^(Autor:|Autoren:|Homepage:)') )]" mode="parse_docbook"/>
 		&crt;
@@ -649,6 +651,9 @@
 				<xsl:apply-templates mode="#current"/>
 				<xsl:text>]</xsl:text>
 			</xsl:when>
+			<xsl:when test="ancestor::code|ancestor::function">
+				<xsl:apply-templates mode="#current"/>
+			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>{{{</xsl:text>
 				<xsl:apply-templates mode="#current"/>
@@ -660,9 +665,16 @@
 	<!--  -->
 	<!--  -->
 	<xsl:template match="code|function" mode="parse_docbook parse_docbook-line">
-		<xsl:text>`</xsl:text>
-		<xsl:apply-templates mode="#current"/>
-		<xsl:text>`</xsl:text>
+		<xsl:choose>
+			<xsl:when test="ancestor::link|ancestor::ulink">
+				<xsl:apply-templates mode="#current"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:text>`</xsl:text>
+				<xsl:apply-templates mode="#current"/>
+				<xsl:text>`</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 	<!--  -->
 	<!--  -->
@@ -687,7 +699,16 @@
 		<xsl:if test="matches(., '^\s')">
 			<xsl:text> </xsl:text>
 		</xsl:if>
-		<xsl:value-of select="replace(normalize-space(.), '\*', '{{{*}}}')"/>
+		<xsl:choose>
+			<!-- schon im Code-Modus -->
+			<xsl:when test="ancestor::code|ancestor::function|ancestor::link|ancestor::ulink">
+				<xsl:value-of select="normalize-space(.)"/>
+			</xsl:when>
+			<!-- Asteriks muss escapet werden -->
+			<xsl:otherwise>
+				<xsl:value-of select="replace(normalize-space(.), '\*', '{{{*}}}')"/>
+			</xsl:otherwise>
+		</xsl:choose>
 		<xsl:if test="matches(., '\s$')">
 			<xsl:text> </xsl:text>
 		</xsl:if>
