@@ -25,7 +25,22 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../strings.xsl</String>
+                                    <String>../date-time_tests.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_internen_Tests_Saxon_EE</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../internals.logging.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -40,11 +55,11 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>../date-time_tests.xsl</String>
+                                    <String>../numbers.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>Selbstest_mit_internen_Tests</String>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -60,6 +75,21 @@
                                 <field name="scenarioIds">
                                     <list>
                                         <String>Selbstest_mit_internen_Tests</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../strings.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -86,21 +116,6 @@
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>../internals.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../internals.logging.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -270,21 +285,6 @@
                                 <field name="scenarioIds">
                                     <list>
                                         <String>Selbstest_mit_internen_Tests</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XML</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../numbers.xsl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>final_Selbstest_mit_externen_Tests_Saxon_EE</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -596,6 +596,36 @@
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>../../../../../trash/epub_II/lib/tools/Findbuch/trash/Untitled1.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../../svn_editura_stf/trunk/mpdl/stylesheets/trash_2.xsl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>trash</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XML</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>../../../../svn_editura_stf/trunk/mpdl/stylesheets/trash.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -2265,7 +2295,7 @@
                                                 </paramDescriptor>
                                             </field>
                                             <field name="value">
-                                                <String>DEBUG</String>
+                                                <String>ALL</String>
                                             </field>
                                             <field name="hasXPathValue">
                                                 <Boolean>false</Boolean>
