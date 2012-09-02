@@ -1344,10 +1344,12 @@
 		<xsl:param name="is-schema-aware" as="xs:boolean"/>
 		<xsl:param name="warn-if-wrong-input" as="xs:boolean"/>
 		<xsl:choose>
+			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^HE 9.4')">Saxon-HE_9.4</xsl:when>
+			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^PE 9.4')">Saxon-PE_9.4</xsl:when>
+			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE 9.4')">Saxon-EE_9.4</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^PE 9.3')">Saxon-PE_9.3</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE 9.3')">Saxon-EE_9.3</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^HE 9.3')">Saxon-HE_9.3</xsl:when>
-			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^HE 9.4')">Saxon-HE_9.4</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and $java-available">Saxon-PE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and (matches($product-version, '^9.2') ) and not($java-available)">Saxon-HE_9.2</xsl:when>
 			<xsl:when test="($product-name eq 'SAXON') and matches($product-version, '^EE9.2')">Saxon-EE_9.2</xsl:when>

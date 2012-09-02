@@ -709,6 +709,41 @@
 			<intern:normalize-date-string>22.JHD.</intern:normalize-date-string>
 			<xsb:parse-dates>2101-01-01/2200-12-31</xsb:parse-dates>
 		</test>
+		<test>
+			<value>1. Quartal 1955</value>
+			<intern:normalize-date-string>1.QU1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-01-01/1955-03-31</xsb:parse-dates>
+		</test>
+		<test>
+			<value>1./2. Quartal 1955</value>
+			<intern:normalize-date-string>1./2.QU1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-01-01/1955-06-30</xsb:parse-dates>
+		</test>
+		<test>
+			<value>I/1955</value>
+			<intern:normalize-date-string>I/1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-01-01/1955-03-31</xsb:parse-dates>
+		</test>
+		<test>
+			<value>II/1955</value>
+			<intern:normalize-date-string>II/1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-04-01/1955-06-30</xsb:parse-dates>
+		</test>
+		<test>
+			<value>III/1955</value>
+			<intern:normalize-date-string>III/1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-07-01/1955-09-30</xsb:parse-dates>
+		</test>
+		<test>
+			<value>IV/1955</value>
+			<intern:normalize-date-string>IV/1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-10-01/1955-12-31</xsb:parse-dates>
+		</test>
+		<test>
+			<value>III/IV 1955</value>
+			<intern:normalize-date-string>III/IV1955</intern:normalize-date-string>
+			<xsb:parse-dates>1955-07-01/1955-12-31</xsb:parse-dates>
+		</test>
 	</intern:testliste>
 	<!--  -->
 	<!--  -->
@@ -926,7 +961,7 @@
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
 			<xsl:with-param name="caller">intern:date-range('2012-07-28/2012-06-28')</xsl:with-param>
-			<xsl:with-param name="actual-value" select="intern:date-range('2012-06-28/2012-07-28')"/>
+			<xsl:with-param name="actual-value" select="intern:date-range('2012-07-28/2012-06-28')"/>
 			<xsl:with-param name="reference-value" select="'2012-06-28/2012-07-28'"/>
 		</xsl:call-template>
 		<xsl:call-template name="xsb:internals.test.Function">
