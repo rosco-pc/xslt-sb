@@ -35,6 +35,9 @@
 <!ENTITY JHDTokenSearch "&JHDToken;\.">
 <!ENTITY JHDTokenReplace "&JHDToken;.">
 <!ENTITY JHD "&JHDZiffern;JHDToken">
+<!ENTITY QuartalZiffernRoman "(I{1,3}|IV)">
+<!ENTITY QuartalZiffernArab "([1-4])">
+<!ENTITY QuartalZiffern "(&QuartalZiffernRoman;|&QuartalZiffernArab;)">
 <!ENTITY XSL-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb">
 <!ENTITY doc-Base-Directory "http://www.expedimentum.org/example/xslt/xslt-sb/doc">
 ]>
@@ -220,8 +223,60 @@
 				<r>$2$1</r>
 			</p>
 			<p>
-				<s>(&JHDZiffern;)([/;:,\-])(&JHDZiffern;)(&JHDTokenSearch;)</s>
+				<s>(&JHDZiffern;)([/;,\-])(&JHDZiffern;)(&JHDTokenSearch;)</s>
 				<r>$1$4$2$3$4</r>
+			</p>
+			<p>
+				<s>&QuartalZiffernRoman;\.?[/\-]&QuartalZiffernRoman;\.?&Jahre4;</s>
+				<r>$1QU$3#$2QU$3</r>
+			</p>
+			<p>
+				<s>&QuartalZiffernRoman;/&Jahre4;</s>
+				<r>$1QU$2</r>
+			</p>
+			<p>
+				<s>&QuartalZiffern;\.?([/\-])&QuartalZiffern;\.?QU&Jahre4;</s>
+				<r>$1QU$8#$5QU$8</r>
+			</p>
+			<p>
+				<s>&QuartalZiffern;\.?([;,])&QuartalZiffern;\.?QU&Jahre4;</s>
+				<r>$1QU$8$4$5QU$8</r>
+			</p>
+			<p>
+				<s>&QuartalZiffern;\.QU</s>
+				<r>$1QU</r>
+			</p>
+			<p>
+				<s>1QU</s>
+				<r>IQU</r>
+			</p>
+			<p>
+				<s>2QU</s>
+				<r>IIQU</r>
+			</p>
+			<p>
+				<s>3QU</s>
+				<r>IIIQU</r>
+			</p>
+			<p>
+				<s>4QU</s>
+				<r>IVQU</r>
+			</p>
+			<p>
+				<s>IVQU&Jahre4;</s>
+				<r>1OKT$1-31DEZ$1</r>
+			</p>
+			<p>
+				<s>IIIQU&Jahre4;</s>
+				<r>1JUL$1-30SEP$1</r>
+			</p>
+			<p>
+				<s>IIQU&Jahre4;</s>
+				<r>1APR$1-30JUN$1</r>
+			</p>
+			<p>
+				<s>IQU&Jahre4;</s>
+				<r>1JAN$1-31MRZ$1</r>
 			</p>
 			<!-- zum Schluss -->
 			<p>
@@ -242,6 +297,7 @@
 		<xsl:variable name="vorläufiges-ergebnis" as="xs:string*">
 			<xsl:choose>
 				<!-- die billigen Versuche zuerst -->
+				<xsl:when test="not($prepared)"/>
 				<!-- einfache Daten -->
 				<!-- YYYY -->
 				<xsl:when test="matches($input, '^&Jahre4;$')">
@@ -305,6 +361,12 @@
 											'/',
 											substring-after(intern:century-to-normalized-date(substring-after($prepared, '-'), false()), '/')
 										)"/>
+				</xsl:when>
+				<!-- etwas Magie für getrennte Daten, die eigentlich mit "bis" verbunden sind -->
+				<xsl:when test="intern:parse-dates(substring-before($prepared, '#'), false()) and intern:parse-dates(substring-after($prepared, '#'), false())">
+					<xsl:variable name="start" as="xs:string" select="substring-before(tokenize(intern:parse-dates(substring-before($prepared, '#'), false()), ',')[1], '/')"/>
+					<xsl:variable name="end" as="xs:string" select="substring-after(tokenize(intern:parse-dates(substring-after($prepared, '#'), false()), ',')[last()], '/')"/>
+					<xsl:sequence select="concat($start, '/', $end)"/>
 				</xsl:when>
 				<!-- vielleicht hilft Ersetzen von numerischen Monatsnamen durch literale -->
 				<xsl:when test="$input ne intern:replace-month-integers-with-month-names($input) and normalize-space(intern:parse-dates(intern:replace-month-integers-with-month-names($input), false() ) )">
@@ -564,40 +626,19 @@
 	
 	<xsl:function name="xsb:earliest-day" as="xs:string">
 		<xsl:param name="sequence-of-ISO-dates" as="xs:string*"/>
-		<xsl:choose>
-			<xsl:when test="$sequence-of-ISO-dates[2] or contains($sequence-of-ISO-dates, ',')">
-				<xsl:sequence select="string(min( (for $i in $sequence-of-ISO-dates return tokenize($i, '[,/] ?') )[. castable as xs:date] ) )"/>
-			</xsl:when>
-			<xsl:when test="matches($sequence-of-ISO-dates, '^&ISO-Date;/&ISO-Date;$')">
-				<xsl:sequence select="substring-before($sequence-of-ISO-dates, '/')"/>
-			</xsl:when>
-			<xsl:when test="matches($sequence-of-ISO-dates, '^&ISO-Date;$')">
-				<xsl:sequence select="$sequence-of-ISO-dates"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select=" '' "/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:sequence select="string(min( (for $i in ($sequence-of-ISO-dates, '') return tokenize($i, '[,/] ?') )[. castable as xs:date] ) )"/>
 	</xsl:function>
 	
 	
 	
 	<xsl:function name="xsb:latest-day" as="xs:string">
 		<xsl:param name="sequence-of-ISO-dates" as="xs:string*"/>
-		<xsl:choose>
-			<xsl:when test="$sequence-of-ISO-dates[2] or contains($sequence-of-ISO-dates, ',')">
-				<xsl:sequence select="string(max( (for $i in $sequence-of-ISO-dates return tokenize($i, '[,/] ?') )[. castable as xs:date] ) )"/>
-			</xsl:when>
-			<xsl:when test="matches($sequence-of-ISO-dates, '^&ISO-Date;/&ISO-Date;$')">
-				<xsl:sequence select="substring-after($sequence-of-ISO-dates, '/')"/>
-			</xsl:when>
-			<xsl:when test="matches($sequence-of-ISO-dates, '^&ISO-Date;$')">
-				<xsl:sequence select="$sequence-of-ISO-dates"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select=" '' "/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<!--
+			Die einfache, richtige Variante
+			<xsl:sequence select="string(max( (for $i in $sequence-of-ISO-dates return tokenize($i, '[,/] ?') )[. castable as xs:date] ) )"/>
+			erzeugt in Saxon 9.4 einen Fehler, siehe Bugreport unter https://dev.saxonica.com/community/issues/1598
+		-->
+		<xsl:sequence select="string(max( (for $i in ($sequence-of-ISO-dates, '') return tokenize($i, '[,/] ?') )[. castable as xs:date] ) )"/>
 	</xsl:function>
 	
 	<xsl:function name="intern:date-range" as="xs:string">
@@ -711,6 +752,10 @@
 			<p>
 				<s>SEC\.([0-9]+)</s>
 				<r>$1.&JHDTokenReplace;</r>
+			</p>
+			<p>
+				<s>QUARTAL</s>
+				<r>QU</r>
 			</p>
 			<p>
 				<s></s>
